@@ -1,0 +1,87 @@
+public class uno{
+	public void main() {
+		Motor motor = new Motor(1500, 200, 100);
+		Car car = new Car(2024, "RED", motor);
+
+		car.getMotor().addMaitenance();
+		retornar().car.imprimir();
+
+		MotorTurbo motorTurbo = new MotorTurbo(500, 100, 50, 25);
+		motor = motorTurbo;
+		motorTurbo.algo();
+                Nodo penultimo = ultimo.getAnterior();
+		
+         car.getMotor().turbito = new MotorTurbo(algo, algo, algo, algo);
+
+
+
+	 o.car.getMotor().maintenanceCounter;
+	 println(car.getMotor().turbito.turbito.turbito.nn);
+	 println(car.getMotor().turbito.turbito.turbito);
+         car.getMotor().turbito.turbito.turbito.addMaintenance();
+	
+	}
+
+}
+
+public class Car {
+	private int year;
+	private String	 color;
+	private Motor motor;
+	
+	public Car(int year, String color, Motor motor) {
+		this.year = year;
+		this.color = color;
+		this.motor = motor;
+	}
+	
+public Motor getMotor() {
+		return motor;
+	}  	
+}
+
+
+public class Motor {
+	private int cc;
+	private int hp;
+	private int torque;
+	protected int maitenanceCounter;
+	
+	public Motor(int cc, int hp, int torque) {
+		this.cc = cc;
+		this.hp = hp;
+		this.torque = torque;
+		maitenanceCounter = 0;
+	}
+
+	public void addMaitenance() {
+		maitenanceCounter = maitenanceCounter + 1;
+	}
+	
+	public void algo() {
+		maitenanceCounter = maitenanceCounter + 1;
+	}
+
+}
+
+public class MotorTurbo extends Motor {
+	private int nitro;
+	
+	public MotorTurbo(int cc, int hp, int torque, int nitro) {
+		super(cc, hp, torque);
+		this.nitro = nitro;
+	}
+	
+	public void setMaitenance(int newValue) {
+		maitenanceCounter = newValue;
+	}
+	
+	public void addMaitenance() {
+		maitenanceCounter = maitenanceCounter + 1 * nitro;
+	}
+	/*
+	public void addMaitenance() {
+		maitenanceCounter = super.addMaitenance() * nitro;
+	}*/
+
+}

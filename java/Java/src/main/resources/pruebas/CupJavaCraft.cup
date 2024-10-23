@@ -1,0 +1,171 @@
+
+package com.wilsoncys.compi1.javacraft.analizadores;
+
+import com.wilsoncys.compi1.javacraft.analizadores.LexerJavaCraft;
+
+
+
+import java_cup.runtime.*;
+
+
+parser code {:
+    // Connect this parser to a scanner!
+
+private String nombreArchivo; 
+private boolean archivoDentro = false; 
+private String pathEncontrado; 
+
+    public CupJavaCraft(LexerJavaCraft lex, String nombreArchivo) {
+	    super(lex);
+            this.nombreArchivo = nombreArchivo;
+    }
+
+public String getnombreArchivo() {
+    return nombreArchivo;
+}
+public String getpathEncontrado() {
+    return pathEncontrado;
+}
+public void setNombreArchivo(String nombreArchivo){
+    this.nombreArchivo = nombreArchivo;
+}
+
+public boolean getarchivoDentro() {
+    return archivoDentro;
+}
+
+
+public void syntax_error(Symbol cur_token) {
+            System.out.println("Simbolo con error:" + symbl_name_from_id(cur_token.sym));
+            System.out.println("Linea " + cur_token.left);
+            System.out.println("Columna " + cur_token.right);
+            if (expected_token_ids().isEmpty()) {
+                System.out.println("ya no se esperaba ningun simbolo");
+            }
+        }
+/*
+public void unrecovered_syntax_error(Symbol cur_token) {
+            System.out.println("Error irrecuperable sobrecargado");
+        }*/
+:}
+
+/* Terminals (tokens returned by the scanner). */
+
+terminal ID, PRINT, CADENA, TRUE, FALSE, VAR, CONST, INT, DOUBLE, BOOL, CHAR, STRING;
+terminal PAREN_OPEN, PAREN_CLOSE, KEY_OPEN, KEY_CLOSE, SEMICOLON, POINTS;
+terminal MAYOR, MENOR, MAYOR_IGUAL, MENOR_IGUAL, EQUALS;
+terminal PLUS, MINUS, TIMES, DIVIDED, RAISED, MOD;
+terminal XOR, OR, AND, NOT;
+terminal DECIMAL, ENTERO, PLUSPLUS, MINUSMINUS, COMPARA;
+
+
+
+
+/* Non-terminals */
+non terminal go, mutabilidad, declaracion, unario, typeVar, asignacion, valorNum;
+non terminal instruccion, expresion;
+non terminal contentsPrint, elseContent, print, elementos;
+non terminal while, doW, if, for, match;
+    
+/* The grammar */
+
+
+
+start with go;        
+
+go::= instruccion go
+    |expresion go
+    | {: System.out.println("Fin de cadenaaa"); :}
+    ;
+
+instruccion::= print
+        | while
+        | doW
+        | if
+        | for
+        | match
+        | declaracion
+        | asignacion
+        | increaseDecrease
+        ;
+
+
+print::= PRINT PAREN_OPEN contentsPrint elseContent
+        ;
+
+expresion::= elementos expresion 
+            | PAREN_OPEN expresion PAREN_CLOSE
+            | SEMICOLON
+            ;
+
+
+
+contentsPrint::= expresion 
+                |ID
+                |CADENA
+                |valorNum 
+                ;
+
+increaseDecrease::= PLUSPLUS
+                | MINUSMINUSS
+                ;
+
+
+elseContent::= PLUS contentsPrint elseContent
+            |PAREN_CLOSE SEMICOLON
+            ;
+
+
+declaracion::= mutabilidad ID POINTS typeVar asignacion
+        ;
+
+asignacion::= EQUALS expresion
+        |ID EQUALS  expresion 
+        |SEMICOLON
+        ;
+
+
+elementos::= valorNum
+        | ID
+        | CADENA
+        | unario
+        ;
+
+unario::= MINUS valorNum
+        ;
+
+
+valorNum::= ENTERO
+        |DECIMAL
+        ;
+
+
+mutabilidad::= VAR
+        |CONST
+        ;
+
+typeVar::=STRING
+        |INT
+        |DOUBLE
+        |CHAR
+        |BOOL
+        ;
+
+
+
+    
+
+/*
+
+secuencias de escape
+\n
+\\
+\"
+\t
+\'
+
+
+
+
+
+*/

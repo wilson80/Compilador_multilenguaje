@@ -1,0 +1,106 @@
+<INICIO> ::= <InstructionES>
+
+<InstructionES> ::= <InstructionES> <Instruction>
+                  | <Instruction>
+
+<Instruction> ::= <declaracion>
+                | <asignacion>
+                | <print>
+                | <if>
+                | <increaseDecrease>
+                | <for>
+                | <while>
+                | <do>
+                | <match>
+                | <break>
+                | <continue>
+                | error SEMICOLON
+                | error
+
+<EXPRESION> ::= MINUS <EXPRESION>          %prec UMINUS
+              | NOT <EXPRESION>            %prec UNEGATIVE
+              | <EXPRESION> PLUS <EXPRESION>
+              | <EXPRESION> MINUS <EXPRESION>
+              | <EXPRESION> TIMES <EXPRESION>
+              | <EXPRESION> DIVIDED <EXPRESION>
+              | <EXPRESION> MOD <EXPRESION>
+              | <EXPRESION> RAISED <EXPRESION>
+              | <EXPRESION> <operador> <EXPRESION>
+              | <EXPRESION> <logical> <EXPRESION>
+              | PAREN_OPEN <EXPRESION> PAREN_CLOSE
+              | <varCasteo> <EXPRESION>   %prec CAST
+              | ENTERO
+              | DECIMAL
+              | CADENA
+              | CHARAC
+              | BOOL
+              | ID
+
+<operador> ::= GREATER
+             | LESS
+             | G_EQUALS
+             | L_EQUALS
+             | EQUALS
+             | DIFFERENT
+
+<logical> ::= AND
+            | OR
+            | XOR
+
+<varCasteo> ::= PAREN_OPEN INT PAREN_CLOSE
+              | PAREN_OPEN DOUBLE PAREN_CLOSE
+              | PAREN_OPEN CHAR PAREN_CLOSE
+
+<if> ::= IF PAREN_OPEN <EXPRESION> PAREN_CLOSE KEY_OPEN <InstructionES> KEY_CLOSE ELSE <if>
+       | <elsees>
+       | <simpleIf>
+
+<for> ::= FOR PAREN_OPEN <declaraAsigna> <EXPRESION> SEMICOLON <updateVarFor> PAREN_CLOSE KEY_OPEN <InstructionES> KEY_CLOSE
+
+<updateVarFor> ::= ID PLUSPLUS
+                 | ID MINUSMINUS
+                 | ID ASSIGNMENT <EXPRESION>
+
+<while> ::= WHILE PAREN_OPEN <EXPRESION> PAREN_CLOSE KEY_OPEN <InstructionES> KEY_CLOSE
+
+<do> ::= DO KEY_OPEN <InstructionES> KEY_CLOSE WHILE PAREN_OPEN <EXPRESION> PAREN_CLOSE SEMICOLON
+
+<match> ::= MATCH <EXPRESION> KEY_OPEN <listCases> KEY_CLOSE
+
+<listCases> ::= <listCases> <case>
+              | <case>
+
+<case> ::= <EXPRESION> ARROW KEY_OPEN <InstructionES> KEY_CLOSE
+         | DEFAULT ARROW KEY_OPEN <InstructionES> KEY_CLOSE
+
+<declaraAsigna> ::= <declaracion>
+                  | <asignacion>
+
+<cierreElse> ::= ELSE KEY_OPEN <InstructionES> KEY_CLOSE
+
+<simpleIf> ::= IF PAREN_OPEN <EXPRESION> PAREN_CLOSE KEY_OPEN <InstructionES> KEY_CLOSE
+
+<elsees> ::= IF PAREN_OPEN <EXPRESION> PAREN_CLOSE KEY_OPEN <InstructionES> KEY_CLOSE <cierreElse>
+
+<print> ::= PRINT PAREN_OPEN <EXPRESION> PAREN_CLOSE SEMICOLON
+
+<declaracion> ::= <mutabilidad> ID POINTS <typeVar> SEMICOLON
+                | <mutabilidad> ID POINTS <typeVar> ASSIGNMENT <EXPRESION> SEMICOLON
+
+<asignacion> ::= ID ASSIGNMENT <EXPRESION> SEMICOLON
+
+<increaseDecrease> ::= ID PLUSPLUS SEMICOLON
+                      | ID
+
+<mutabilidad> ::= VAR
+                | CONST
+
+<typeVar> ::= STRING
+            | INT
+            | DOUBLE
+            | CHAR
+            | BOOLEAN
+
+<break> ::= BREAK SEMICOLON
+
+<continue> ::= CONTINUE SEMICOLON

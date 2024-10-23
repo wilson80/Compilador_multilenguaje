@@ -1,0 +1,904 @@
+struct {
+  marca: string;
+  modelo: string;
+  anio: int;
+  color: string;
+} Carro;
+
+struct {
+  nombre: string;
+  edad: int;
+  descripcion: string;
+  carro_: Carro;
+} Persona;
+
+
+
+
+void main(){
+  println("-----------------CALIFICACION ARCHIVO 3-----------------\n");
+ println("");
+  MetodoStruct();
+  println("");
+
+
+}
+
+void MetodoStruct(){
+  // creando carros
+  var c1: Carro = { marca: "Toyota", modelo: "Corolla", anio: 2019, color: "Rojo" };
+  var c2: Carro = { marca: "Honda", modelo: "Civic", anio: 2018, color: "Azul" };
+  const c3: Carro = { marca: "Nissan", modelo: "Sentra", anio: 2017, color: "Blanco" };
+  var c4: Carro = { marca: "Chevrolet", modelo: "Spark", anio: 2016, color: "Amarillo" };
+
+  // imprimiendo carros
+  println("========= Carro 1 =========");
+  println("Marca: " + c1.marca);
+  println("Modelo: " + c1.modelo);
+  println("Anio: " + c1.anio);
+  println("Color: " + c1.color);
+
+  println("");
+
+  println("========= Carro 2 =========");
+  println("Marca: " + c2.marca);
+  println("Modelo: " + c2.modelo);
+  println("Anio: " + c2.anio);
+  println("Color: " + c2.color);
+
+  println("");
+
+  println("========= Carro 3 =========");
+  println("Marca: " + c3.marca);
+  println("Modelo: " + c3.modelo);
+  println("Anio: " + c3.anio);
+  println("Color: " + c3.color);
+
+  println("");
+
+  println("========= Carro 4 =========");
+  println("Marca: " + c4.marca);
+  println("Modelo: " + c4.modelo);
+  println("Anio: " + c4.anio);
+  println("Color: " + c4.color);
+
+  println("");
+
+
+    var anios: int[] = [c1.anio, c2.anio, c3.anio, c4.anio];  //error
+  var marcasModelos: string[] = [                     //error
+      c1.marca + " " + c1.modelo,
+      (string)c2.marca + " " +(string) c2.modelo,
+      (string)c3.marca + " " + (string)c3.modelo,
+      (string)c4.marca + " " + c4.modelo];
+
+  var i: int = 0;
+  var max: int = 9999;
+  var j: int = 0;
+  for (i = 0; i < length(anios); i = i + 1) {
+      if (anios[i] < max) {
+          max = anios[i];
+          j = i;
+      }
+  }
+
+  println("El carro mas antiguo es: "+ marcasModelos[j]);           //error
+
+  c1.color = "Verde";
+  c2.color = "Rojo";
+  //c3.color = "Amarillo"; // debe dar error semantico
+  c4.color = "Azul";
+
+  if (c3.color != "Blanco") {
+      println("No validaste la mutabilidad :(");
+  }
+
+  /*
+  Si llegaste hasta aqui, felicidades
+  Aqui tienes la mitad del punteo :D
+  */
+
+
+  // creando personas
+  var p1: Persona = {
+      nombre: "Juan",
+      edad: 20,
+      descripcion: "Quiere ganar compi1",
+      carro_: c1
+  };
+
+  var p2: Persona = {
+      nombre: "Luis",
+      edad: 25,
+      descripcion: "Se piensa pasar a industrial",
+      carro_: {
+          marca: "Chevrolet",
+          modelo: "Spark",
+          anio: 2016,
+          color: "Amarillo"
+      }
+  };
+
+  const p3: Persona = {
+      nombre: "Pedro",
+      edad: 24,
+      descripcion: "Dejo sistemas porque no le gusto",
+      carro_: c3
+  };
+
+  const p4: Persona = {
+      nombre: "Arturo",
+      edad: 23,
+      descripcion: "Sigue luchando por sus sueños",
+      carro_: {
+          marca: "Toyota",
+          modelo: "Corolla",
+          anio: 2019,
+          color: "Rojo"
+      }
+  };
+
+  // Imprimiendo personas
+  println("========= Persona 1 =========");
+  println("Nombre: " + p1.nombre);
+  println("Edad: " + p1.edad);
+  println("Descripcion: " + p1.descripcion);
+  println("Carro: " + p1.carro_.marca + " " + p1.carro_.modelo + " " + p1.carro_.anio + " " + p1.carro_.color);
+
+  println("");
+
+  println("========= Persona 2 =========");
+  println("Nombre: " + p2.nombre);
+  println("Edad: " + p2.edad);
+  println("Descripcion: " + p2.descripcion);
+  println("Carro: " + p2.carro_.marca + " " + p2.carro_.modelo + " " + p2.carro_.anio + " " + p2.carro_.color);
+
+  println("");
+
+  println("========= Persona 3 =========");
+  println("Nombre: " + p3.nombre);
+  println("Edad: " + p3.edad);
+  println("Descripcion: " + p3.descripcion);
+  println("Carro: " + p3.carro_.marca + " " + p3.carro_.modelo + " " + p3.carro_.anio + " " + p3.carro_.color);
+  println("");
+
+  println("========= Persona 4 =========");
+  println("Nombre: " + p4.nombre);
+  println("Edad: " + p4.edad);
+  println("Descripcion: " + p4.descripcion);
+  println("Carro: " + p4.carro_.marca + " " + p4.carro_.modelo + " " + p4.carro_.anio + " " + p4.carro_.color);
+  println("");
+
+  var edades: int[] = [p1.edad, p2.edad, p3.edad, p4.edad];
+  var nombres: string[] = [p1.nombre, p2.nombre, p3.nombre, p4.nombre];
+
+  i = 0;
+  max = 0;
+  j = 0;
+  for (i = 0; i < length(edades); i = i + 1) {
+      if (edades[i] > max) {
+          max = edades[i];
+          j = i;
+      }
+  }
+
+  println("La persona con mayor edad es: " + nombres[j]);
+
+  p1.carro_.anio = 2020;
+
+  if (p1.carro_.anio != 2020) {
+      println("No actualizaste el valor :(");
+  }
+}
+
+
+
+
+
+
+
+START_WITH main();
+
+
+
+
+// MOD
+struct {
+  marca: string;
+  modelo: string;
+  anio: int;
+  color: string;
+} Carro;
+
+struct {
+  nombre: string;
+  edad: int;
+  descripcion: string;
+  carro_: Carro;
+} Persona;
+
+
+
+
+void main(){
+  println("-----------------CALIFICACION ARCHIVO 3-----------------\n");
+ println("");
+  MetodoStruct();
+  println("");
+
+
+}
+
+void MetodoStruct(){
+  // creando carros
+  var c1: Carro = { marca: "Toyota", modelo: "Corolla", anio: 2019, color: "Rojo" };
+  var c2: Carro = { marca: "Honda", modelo: "Civic", anio: 2018, color: "Azul" };
+  const c3: Carro = { marca: "Nissan", modelo: "Sentra", anio: 2017, color: "Blanco" };
+  var c4: Carro = { marca: "Chevrolet", modelo: "Spark", anio: 2016, color: "Amarillo" };
+
+  // imprimiendo carros
+  println("========= Carro 1 =========");
+  println("Marca: " + c1.marca);
+  println("Modelo: " + c1.modelo);
+  println("Anio: " + c1.anio);
+  println("Color: " + c1.color);
+
+  println("");
+
+  println("========= Carro 2 =========");
+  println("Marca: " + c2.marca);
+  println("Modelo: " + c2.modelo);
+  println("Anio: " + c2.anio);
+  println("Color: " + c2.color);
+
+  println("");
+
+  println("========= Carro 3 =========");
+  println("Marca: " + c3.marca);
+  println("Modelo: " + c3.modelo);
+  println("Anio: " + c3.anio);
+  println("Color: " + c3.color);
+
+  println("");
+
+  println("========= Carro 4 =========");
+  println("Marca: " + c4.marca);
+  println("Modelo: " + c4.modelo);
+  println("Anio: " + c4.anio);
+  println("Color: " + c4.color);
+
+  println("");
+
+
+   var anios: int[] = [c1.anio, c2.anio, c3.anio, c4.anio];
+  var marcasModelos: string[] = [
+      (string)c1.marca + " " + (string)c1.modelo,  
+(string)c2.marca + " " +(string) c2.modelo,
+      (string)c3.marca + " " + (string)c3.modelo,
+    
+      (string)c4.marca + " " +(string) c4.modelo];
+
+  var i: int = 0;
+  var max: int = 9999;
+  var j: int = 0;
+  for (i = 0; i < length(anios); i = i + 1) {
+      if (anios[i] < max) {
+          max = anios[i];
+          j = i;
+      }
+  }
+
+  println("El carro mas antiguo es: "+ marcasModelos[j]);
+
+  c1.color = "Verde";
+  c2.color = "Rojo";
+  //c3.color = "Amarillo"; // debe dar error semantico
+  c4.color = "Azul";
+
+  if ((string)c3.color != "Blanco") {
+      println("No validaste la mutabilidad :(");
+  }
+
+  /*
+  Si llegaste hasta aqui, felicidades
+  Aqui tienes la mitad del punteo :D
+  */
+
+
+  // creando personas
+  var p1: Persona = {
+      nombre: "Juan",
+      edad: 20,
+      descripcion: "Quiere ganar compi1",
+      carro_: c1
+  };
+
+  var p2: Persona = {
+      nombre: "Luis",
+      edad: 25,
+      descripcion: "Se piensa pasar a industrial",
+      carro_: {
+          marca: "Chevrolet",
+          modelo: "Spark",
+          anio: 2016,
+          color: "Amarillo"
+      }
+  };
+
+  const p3: Persona = {
+      nombre: "Pedro",
+      edad: 24,
+      descripcion: "Dejo sistemas porque no le gusto",
+      carro_: c3
+  };
+
+  const p4: Persona = {
+      nombre: "Arturo",
+      edad: 23,
+      descripcion: "Sigue luchando por sus sueños",
+      carro_: {
+          marca: "Toyota",
+          modelo: "Corolla",
+          anio: 2019,
+          color: "Rojo"
+      }
+  };
+
+  // Imprimiendo personas
+  println("========= Persona 1 =========");
+  println("Nombre: " + p1.nombre);
+  println("Edad: " + p1.edad);
+  println("Descripcion: " + p1.descripcion);
+  println("Carro: " + p1.carro_.marca + " " + p1.carro_.modelo + " " + p1.carro_.anio + " " + p1.carro_.color);
+
+  println("");
+
+  println("========= Persona 2 =========");
+  println("Nombre: " + p2.nombre);
+  println("Edad: " + p2.edad);
+  println("Descripcion: " + p2.descripcion);
+  println("Carro: " + p2.carro_.marca + " " + p2.carro_.modelo + " " + p2.carro_.anio + " " + p2.carro_.color);
+
+  println("");
+
+  println("========= Persona 3 =========");
+  println("Nombre: " + p3.nombre);
+  println("Edad: " + p3.edad);
+  println("Descripcion: " + p3.descripcion);
+  println("Carro: " + p3.carro_.marca + " " + p3.carro_.modelo + " " + p3.carro_.anio + " " + p3.carro_.color);
+  println("");
+
+  println("========= Persona 4 =========");
+  println("Nombre: " + p4.nombre);
+  println("Edad: " + p4.edad);
+  println("Descripcion: " + p4.descripcion);
+  println("Carro: " + p4.carro_.marca + " " + p4.carro_.modelo + " " + p4.carro_.anio + " " + p4.carro_.color);
+  println("");
+
+  var edades: int[] = [p1.edad, p2.edad, p3.edad, p4.edad];
+  var nombres: string[] = [p1.nombre, p2.nombre, p3.nombre, p4.nombre];
+
+  i = 0;
+  max = 0;
+  j = 0;
+  for (i = 0; i < length(edades); i = i + 1) {
+      if (edades[i] > max) {
+          max = edades[i];
+          j = i;
+      }
+  }
+
+  println("La persona con mayor edad es: " + nombres[j]);
+
+  p1.carro_.anio = 2020;
+
+  if ((int)p1.carro_.anio != 2020) {
+      println("No actualizaste el valor :(");
+  }
+}
+
+
+
+START_WITH main();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+arreglar esto 
+string search(string hola){
+  println(hola);
+   for(var i:int =0; i < 3; i++){
+      for(var j:int =0; j < 2; j++){
+         if(vector5[i][j]== hola){
+      return vector5[i][j];
+    //      return hola;
+         }
+      }
+  }
+}
+
+
+
+
+
+
+
+                                    //error de tipos en parametros de la llamada ++
+START_WITh miFuncion(8/5, "wilson"+ (20+5.5), 5);
+var algo:int;
+
+void miFuncion(double edad, string nombre, int grado){
+    var num:double = edad+grado;
+    var dos:int  = 5;
+    println(num);
+    println(nombre);
+    println(algo);
+    
+    
+  }
+
+
+
+                                    // llamada de metodo dentro de metodos++
+START_WITH tablaMultiplicar(5);
+
+void tablaMultiplicar(int valor){
+println("Inssss: " + valor);
+algo(5);
+println("esto si se imprime");
+
+}
+
+void algo(int valor){
+	println("Impresion desde metodo ALGO");
+  if(true){
+    println("iFFF");
+    return;
+    println("esto no se imprime");
+  }
+	println("esto tampoco");
+}
+
+
+
+
+
+                                                //funcion length (vector, lista o cadena)++
+START_WITH tablaMultiplicar(5);
+
+void tablaMultiplicar(int valor){
+println(valor);
+
+const arreglo2: int[] = [0, 0, 1, 2, 0, 0, 5, 1, 0, 0, 8, 0, 0];
+var cads:string []= ["algo", "nada", "noo", "aaa"];
+List<String> miLista = neW LiSt();
+var cadena: String = "Wilson";
+
+miLista.append("uno");
+miLista.append("dos");
+miLista.append("tres");
+miLista.append("cuatro");
+
+var uno: String =miLista.remove(2);
+var dos:int = 10;
+
+var temporal: int = 0;
+
+println("El arreglo tiene: " + length(arreglo2) + "Elementos");
+
+println("La lista tiene: " + length(miLista) + " Elementos");
+println("La cadddddena tiene: " + length(cadena) + " Elementos");
+println(length(dos));
+
+
+}
+
+
+
+//funcion round   (creo que funciona con Interger (con int no)) ++
+//LISTAS ++
+//vectores 1D y  2D ++
+//metodos+
+//llamadas+
+//funciones+     return (dentro de sentencias de control y sentencias de ciclicas)
+
+//structs 
+//toString(entero, double, bool, caracter y struc a TEXTO)
+
+
+
+
+
+                                            //funcion find (buscar en vector o lista)
+START_WITH tablaMultiplicar(5);
+
+void tablaMultiplicar(int valor){
+println(valor);
+
+const arreglo2: int[] = [0, 0, 1, 2, 0, 0, 5, 1, 0, 0, 8, 0, 0];
+
+var cads:string []= ["algo", "nada", "noo", "aaa"];
+List<String> miLista = neW LiSt();
+var cadena: String = "Wilson";
+
+var arr2D: int [][] = [[1,2,3],[4,5,6],[7,8,9]];
+
+
+miLista.append("uno");
+miLista.append("dos");
+miLista.append("tres");
+miLista.append("cuatro");
+
+var uno: String =miLista.remove(2);
+var dos:int = 10;
+
+var temporal: int = 0;
+
+println("El arreglo tiene: " + length(arreglo2) + "Elementos");
+
+println("La lista tiene: " + length(miLista) + " Elementos");
+println("La cadddddena tiene: " + length(cadena) + " Elementos");
+//println(length(dos));
+
+println(arreglo2.find(7));
+println(miLista.find("a"));
+println(cads.find("a"));
+println(arr2D.find(11));
+
+
+
+
+
+println("END");
+
+}
+
+
+//  Declaración de Listas
+START_WITh miFuncion(8/5, "wilson"+ (20+5.5), 5);
+var algo:int;
+
+void miFuncion(double edad, string nombre, int grado){
+    println(nombre);
+List<int> miLista = new List();
+miLista.append(1); // el método append se explicará más adelante
+miLista.append(3); // el método append se explicará más adelante
+miLista.append(4); // el método append se explicará más adelante
+miLista.append(5); // el método append se explicará más adelante
+
+for(var i:int; i<4; i++){
+println(miLista.remove(1));
+}
+
+
+}
+
+
+
+START_WITh miFuncion(8/5, "wilson"+ (20+5.5), 5);
+var algo:int;
+
+void miFuncion(double edad, string nombre, int grado){
+        println(nombre);
+    List<int> miLista = new List();			//append succes
+    miLista.append(1); // el método append se explicará más adelante
+    miLista.append(3); // el método append se explicará más adelante
+    miLista.append(4); // el método append se explicará más adelante
+    miLista.append(5); // el método append se explicará más adelante
+    miLista.append(6); // el método append se explicará más adelante
+
+    //var uno:int = miLista.remove(4);		//remove succes
+    //println("uno es: " + uno);		
+
+    println(miLIsta[3]); 		//acceso simple
+    var dos:int = miLista[3];   		//acceso 
+    println("dos es: " + dos);		//dos es: 5
+
+    var ultimo:int = miLista[4];   
+    println("ultimo es: " + ultimo);		//ultimo es: 6
+    /*
+    var too:int = miLista[5];   
+    println("fuera es: " + too);		//error indice fuera de rango
+    */
+                                        //asignacion a variable de un valor de lista
+    println("Mi lista indice 3: " + miLIsta[3]);		//5
+    miLIsta[3] = 99;
+    println("Mi lista indice 3 despues: " + miLIsta[3]);		//99
+    //miLIsta[11] = 99;                   //pos fuera de rango    
+
+    for(var i:int; i<5; i++){
+    println("miLista: " + miLIsta[i]);
+    }
+
+
+}
+
+
+//  Asignación de Listas ++
+//  Declaración de Listas ++
+//  Acceso a listas ++ 
+//  Append ++
+//  remove ++
+
+//structs
+
+
+
+
+
+//declaracion vectores 1D
+var cadenas : string [] = ["cad", "cad2", "cad3", "cad4", "cad5"];
+var numeros : int [] = [1,2,3,4,5,6];
+var bools : bool [] = [true, false];
+var doubuu: double[] = [4.0, 7.5];   
+var charr:char[] = ['d', 's']; 
+
+var cadenas : string [] = ["cad", 7, "cad3", "cad4", "cad5"];
+
+//asignacion de valores a vectores 1D
+var numeros : int [] [] = [[1,2,3,4], [5,6,7,8], [9, 10, 11, 12] ];
+var num:int = numeros[0][0];   //no permitir esto
+
+
+//declaracion  vectores 2D
+var numeros : int [] [] = [[1,2,3,4], [5,6,7,8], [9, 10, 11, 12] ];
+println(numeros[0][4]);
+
+//println(numeros[0][3]);
+
+for(var i:int; i<3; i++){
+	for(var j:int; j<4; j++){
+		println(numeros[i][j]);
+	}
+}
+
+var vector1 : string [] [] = [["cad", "cad2"], ["cad3", "cad4"], ["cad5","cad6"]];
+println("No hay Error");
+
+
+
+//asignacion de valores a vectores 2D
+var vector1 : string [] [] =  [["p","b","c"],["d","e","f"],["g","h","i"]];
+
+var vector3 : string [] [] =  [["jj","b","c"],["d","e","f"],["g","h","i"]];
+
+var vector2: int[][] = [[1,2,3],[4,5,6],[7,8,9]];
+
+vector1= vector3;
+
+println(vector1[0][0]);
+
+println("No hay Error");
+
+
+
+var numeros : int [] [] = [[1,2,3,4], [5,6,7,8], [9, 10, 11, 12] ];
+
+numeros[0][0] = 10;
+println(numeros[0][0]);
+
+
++Acceso a vectores prints con ciclo for, while, dowhile 
+
+
+
+
+
+
+
+
+                                    // recuperacion de errores dentro de metodos
+START_WITH tablaMultiplicar(5);
+
+void tablaMultiplicar(int valor){
+println(valor);
+println(valor);
+println(valo);
+println(valor);
+println(valor);
+println(valo);
+println(valo);
+println(valo);
+println(valo);
+println(valo);
+println(valo);
+println(valo);
+println("END");
+
+
+
+}	
+
+
+//de esto solo no funciona el toString() y
+// y agregar el find y el remove como instruccion(solo estan como listas)
+START_WITH tablaMultiplicar(5);
+
+void tablaMultiplicar(int valor){
+println(valor);
+
+const num : int = 0;
+
+List<int> miLista = new List();
+miLista.append(1);
+miLista.append(2);
+miLista.append(1);
+miLista.append(5);
+miLista.append(4);
+
+const vector3 : double [] = [(double)1, 2.0, 3.4, 4.5, 5.2];
+const vector4 : char [] = [(char)97, '2', 'b', (char)10, '\n'];
+var vector1 : string [] = ["Hola", "Mundo"];
+const num : double [] = [(double)1, 2.0, 3.5, 4.5, 5.2]; //error semantico
+
+List<double> decimales = new List();
+decimales.append((double)1);
+decimales.append(2.5);
+decimales.append(6.5);
+decimales.append((double)4);
+var aa:double =decimales.remove(4);//error semantico
+var algo:double =decimales.remove(3);
+
+println(num.find(1.6));// error smantico
+println(decimales.find(6.5)); //true
+println(decimales.find((double)4)); //false
+println(milista.find(5));//true
+
+
+if(milista.find(5)){
+  List<double> miLista = new List();
+  miLista.append((double)1);
+  miLista.append((double)2);
+  miLista.append((double)10);
+  println(milista.find((double)'\n'));
+}
+
+//println(toString(toString(!!!!!!milista.find(5)) + " " + -----1));
+var prueba : string = "Hola Mundo";
+println(length(prueba));
+
+println("\n Bubble Sort \n");
+var bubblesort : int [] = [7, 2, 5, 8, 10, 15, 1, 4, 3, 5, 3, 14];
+
+var i : int = 0;
+var j : int = 0;
+
+
+
+for(i = 0; i< length(bubblesort)-1 ; i++){
+  for(j = 0; j<length(bubblesort)-1; j = j+1){
+    if(bubblesort[j] > bubblesort[j+1]){
+      var temp : int = bubblesort[j];
+      bubblesort[j] = bubblesort[j + 1];
+      bubblesort[j + 1] = temp;
+    }
+  }
+
+}
+
+println("\nVector ordenado:");
+
+println(bubblesort[0]);
+println(bubblesort[1]);
+println(bubblesort[2]);
+println(bubblesort[3]);
+println(bubblesort[4]);
+println(bubblesort[5]);
+println(bubblesort[6]);
+println(bubblesort[7]);
+println(bubblesort[8]);
+println(bubblesort[9]);
+println(bubblesort[10]);
+println(bubblesort[11]);
+println(bubblesort[12]);
+
+
+println("\nFuncion Round:");
+
+println(round(vector3[2]));
+println(round(vector3[3]));
+println(round('\n'));// error semantico
+println(round("Otro error, como tu vida. xD"));// error semantico
+
+
+
+decimales.append(10.49);
+decimales.append(10.50);
+decimales.append(10.51);
+
+println(round(decimales[3]));
+println(round(decimales[4]));
+println(round(decimales[5]));
+
+
+println("-------------------------------");    
+
+for(var i: int; i<length(decimales); i++){
+println("--");
+println(decimales[i] );
+println(round(decimales[i]));
+
+
+
+
+}
+
+println("-------------------------------");    
+
+
+
+
+}
+
+
