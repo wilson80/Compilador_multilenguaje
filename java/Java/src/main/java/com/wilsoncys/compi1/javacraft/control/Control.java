@@ -5,7 +5,7 @@
 package com.wilsoncys.compi1.javacraft.control;
 
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
-import com.wilsoncys.compi1.javacraft.model.simbolo.tablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.javacraft.vistas.VistaGeneral;
 import java.util.LinkedList;
 
@@ -17,7 +17,7 @@ public class Control {
     private VistaGeneral vistaGeneral;
     private LinkedList<Errores> listaErrores = new LinkedList<>();
     private String mconsola = "";
-    private LinkedList<tablaSimbolos> tablaReport = new LinkedList<>();          //par la tabla de simbolos
+    private LinkedList<TablaSimbolos> tablaReport = new LinkedList<>();          //par la tabla de simbolos
 
     
     public Control() {
@@ -50,7 +50,7 @@ public class Control {
         return mconsola;
     }
 
-    public LinkedList<tablaSimbolos> getTablaReport() {
+    public LinkedList<TablaSimbolos> getTablaReport() {
         return tablaReport;
     }
 

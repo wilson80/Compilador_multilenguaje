@@ -9,7 +9,7 @@ import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
-import com.wilsoncys.compi1.javacraft.model.simbolo.tablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.javacraft.model.simbolo.tipoDato;
 
 /**
@@ -27,7 +27,7 @@ public class Casting extends Instruction {
     
 
     @Override
-    public Object interpretar(Arbol arbol, tablaSimbolos tabla) {
+    public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
         var valor = this.exp.interpretar(arbol, tabla);
         if(valor!=null){
             if(valor instanceof Errores){
@@ -114,5 +114,15 @@ public class Casting extends Instruction {
         return "";
     }
     
+    
+        public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+        return null;
+    }
+    
+        
+            @Override
+    public Object createC3D(Arbol arbol, String anterior) {
+        return anterior;
+    }
 }
 

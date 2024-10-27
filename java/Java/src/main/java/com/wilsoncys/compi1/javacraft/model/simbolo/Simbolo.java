@@ -4,6 +4,10 @@
  */
 package com.wilsoncys.compi1.javacraft.model.simbolo;
 
+import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author yoyo
@@ -16,6 +20,20 @@ public class Simbolo {
     private String tipoStruct = "";
     private int linea = 0;
     private int colu = 0;
+    
+    
+    
+    
+    private boolean isDeclared = false;
+    private visib visib;
+    private int numParam = 0;
+    private int dims = 0;
+    private int direccion = 0;
+    private categoria cat;
+    private List<String>  ambito;   //idclase/metodo/params
+    private Instruction instruction;
+    
+    
 
 //    public Simbolo(Tipo tipo, String id) {
 //        this.tipo = tipo;
@@ -27,6 +45,7 @@ public class Simbolo {
         this.id = id;
         this.valor = valor;
         this.isConst = isConst;
+        this.ambito = new ArrayList<>();
     }
 
     public Tipo getTipo() {
@@ -81,6 +100,14 @@ public class Simbolo {
         this.colu = colu;
     }
 
+    public Instruction getInstruction() {
+        return instruction;
+    }
+
+    public void setInstruction(Instruction instruction) {
+        this.instruction = instruction;
+    }
+
     
     
     @Override
@@ -88,8 +115,19 @@ public class Simbolo {
         return "Simbolo{" + "tipo=" + tipo.getTipo().name() + ", id=" + id + ", valor=" + valor.toString() + ", isConst=" + isConst + ", tipoStruct=" + tipoStruct + ", linea=" + linea + ", colu=" + colu + '}';
     }
     
-    
+    public void armarAmbito(String amb){
+        this.ambito.add(amb);
+    }
 
+    public void setCat(categoria cat) {
+        this.cat = cat;
+    }
+
+   
+    public void setDir(int direccion) {
+        this.direccion = direccion;
+    }
+    
     
     
     

@@ -6,7 +6,7 @@ import com.wilsoncys.compi1.javacraft.model.analisis.scanner;
 import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
-import com.wilsoncys.compi1.javacraft.model.simbolo.tablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import java.io.BufferedReader;
 import java.io.StringReader;
 import java.util.LinkedList;
@@ -36,7 +36,7 @@ public class PatronInterprete {
             parser p = new parser(s);
             var resultado = p.parse();
             var ast = new Arbol((LinkedList<Instruction>) resultado.value);
-            var tabla = new tablaSimbolos();
+            var tabla = new TablaSimbolos();
             tabla.setNombre("GLOBAL");
             ast.setConsola("");
             LinkedList<Errores> lista = new LinkedList<>();

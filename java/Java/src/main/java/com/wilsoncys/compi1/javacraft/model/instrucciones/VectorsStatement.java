@@ -9,7 +9,7 @@ import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
-import com.wilsoncys.compi1.javacraft.model.simbolo.tablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import java.util.LinkedList;
 
 /**
@@ -47,7 +47,7 @@ public class VectorsStatement extends Instruction{
     
     
     @Override
-    public Object interpretar(Arbol arbol, tablaSimbolos tabla) {
+    public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
         if(valuesVect2D!=null){
             return this.vectors2D(arbol, tabla);
             }
@@ -88,7 +88,7 @@ public class VectorsStatement extends Instruction{
           }
     }
     
-    public Object vectors2D(Arbol arbol, tablaSimbolos tabla){
+    public Object vectors2D(Arbol arbol, TablaSimbolos tabla){
         //set al tamanno de filas y columnas
         this.sizeFilas = valuesVect2D.size();
         this.sizeCol = valuesVect2D.get(0).size();
@@ -138,5 +138,13 @@ public class VectorsStatement extends Instruction{
     public String generarast(Arbol arbol, String anterior) {
         return "";
     }
+        public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+        return null;
+    }
     
+        
+            @Override
+    public Object createC3D(Arbol arbol, String anterior) {
+        return anterior;
+    }
 }

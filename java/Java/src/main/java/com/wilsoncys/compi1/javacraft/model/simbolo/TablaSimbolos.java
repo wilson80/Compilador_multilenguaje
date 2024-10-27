@@ -11,28 +11,28 @@ import java.util.HashMap;
  *
  * @author yoyo
  */
-public class tablaSimbolos {
+public class TablaSimbolos {
 
-    private tablaSimbolos tablaAnterior;
+    private TablaSimbolos tablaAnterior;
     private HashMap<String, Object> tablaActual;
     private String nombre;
 
-    public tablaSimbolos() {
+    public TablaSimbolos() {
         this.tablaActual = new HashMap<>();
         this.nombre = "";
     }
 
-    public tablaSimbolos(tablaSimbolos tablaAnterior) {
+    public TablaSimbolos(TablaSimbolos tablaAnterior) {
         this.tablaAnterior = tablaAnterior;
         this.tablaActual = new HashMap<>();
         this.nombre = "";
     }
 
-    public tablaSimbolos getTablaAnterior() {
+    public TablaSimbolos getTablaAnterior() {
         return tablaAnterior;
     }
 
-    public void setTablaAnterior(tablaSimbolos tablaAnterior) {
+    public void setTablaAnterior(TablaSimbolos tablaAnterior) {
         this.tablaAnterior = tablaAnterior;
     }
 
@@ -62,12 +62,18 @@ public class tablaSimbolos {
         }
     }
     
+    public void addSsymbolPre(Simbolo newSymbol){
+            tablaActual.put(newSymbol.getId().toLowerCase(), newSymbol);
+            
+    }
+   
+    
     public Simbolo getSsymbol(String id){
 //        Simbolo simboloEcontrado = (Simbolo)this.tablaActual.get(id.toLowerCase());
 //        if(simboloEcontrado!=null){
 //             return simboloEcontrado;
 //        }else{
-        for (tablaSimbolos i = this; i!=null; i = i.tablaAnterior) {
+        for (TablaSimbolos i = this; i!=null; i = i.tablaAnterior) {
             Simbolo simboloEcontrad = (Simbolo)i.tablaActual.get(id.toLowerCase());
             if(simboloEcontrad!=null){
                 return simboloEcontrad;

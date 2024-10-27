@@ -2,14 +2,17 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.wilsoncys.compi1.javacraft.model.instrucciones;
+package com.wilsoncys.compi1.javacraft.model.poo;
 
+import com.wilsoncys.compi1.javacraft.model.poo.Method;
 import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
-import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
+import com.wilsoncys.compi1.javacraft.model.excepciones.Errores; 
+import com.wilsoncys.compi1.javacraft.model.instrucciones.Statement;
+import com.wilsoncys.compi1.javacraft.model.instrucciones.transferReturn;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
-import com.wilsoncys.compi1.javacraft.model.simbolo.tablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.javacraft.model.simbolo.tipoDato;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -18,32 +21,33 @@ import java.util.LinkedList;
  *
  * @author Jonwil
  */
-public class Call extends Instruction{
-    private String identificator;
+public class Reference extends Instruction{
+    private String id;
     private LinkedList<Instruction> parametersExp;
 
-    public Call(String identificator, LinkedList<Instruction> parametros, int linea, int col) {
+    public Reference(String id, LinkedList<Instruction> parametros, int linea, int col) {
         super(new Tipo(tipoDato.VOID), linea, col);
-        this.identificator = identificator;
+        this.id = id;
         this.parametersExp = parametros;
     }
     
     
     
     @Override
-    public Object interpretar(Arbol tree, tablaSimbolos tabla) {
+    public Object interpretar(Arbol tree, TablaSimbolos tabla) {
         LinkedList<HashMap> listParams;      //parametros del metodo o funcion 
 
         //buscar la funcion
-        var functio = tree.getFunction(identificator);
+        var functio = tree.getFunction(id);
         if(functio == null){
             return new Errores("SEMANTIC", "El id ingresado no corresponde a ningun tipo de funcion/metodo/struct", line, col);
         }
         if(functio instanceof Method theMethod){
             listParams = theMethod.parameters;
             //crear el entorno
-            tablaSimbolos newTable = new tablaSimbolos(tree.getTablaGlobal());
-            newTable.setNombre("Metodo: " + identificator);
+                                //            tablaSimbolos newTable = new tablaSimbolos(tree.getTablaGlobal());
+            TablaSimbolos newTable = new TablaSimbolos(tabla);
+            newTable.setNombre("Metodo: " + id);
             tree.addTablaReport(newTable);
             
             
@@ -76,7 +80,7 @@ public class Call extends Instruction{
                 Simbolo symm = newTable.getSsymbol(par.get("id").toString());   //realizar la asignacion                                                              //realizar la asignacion
                 if(symm == null){
                     return new Errores("SEMANTIC", "No se encontro el parametro en funcion: " 
-                                                        + identificator, line, col);
+                                                        + id, line, col);
                 }
                 symm.setValor(valueExp);
                 contador++;
@@ -100,8 +104,9 @@ public class Call extends Instruction{
             
             listParams = function.parameters;
             //crear el entorno
-            tablaSimbolos newTable = new tablaSimbolos(tree.getTablaGlobal());
-            newTable.setNombre("Funcion: " + identificator);
+                        //            tablaSimbolos newTable = new tablaSimbolos(tree.getTablaGlobal());
+            TablaSimbolos newTable = new TablaSimbolos(tabla);
+            newTable.setNombre("Funcion: " + id);
             tree.addTablaReport(newTable);
             
             //validar las cantidades de parametros(en las llamada y en la declaracion del metodo)
@@ -133,7 +138,7 @@ public class Call extends Instruction{
                 Simbolo symm = newTable.getSsymbol(par.get("id").toString());                                                                 //realizar la asignacion
                 if(symm == null){
                     return new Errores("SEMANTIC", "No se encontro el parametro en funcion: " 
-                                                        + identificator, line, col);
+                                                        + id, line, col);
                 }
                 symm.setValor(valueExp);
                 contador++;
@@ -182,4 +187,15 @@ public class Call extends Instruction{
         return "";
     }
     
+        public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+        return null;
+    }
+    
+
+        
+            @Override
+    public Object createC3D(Arbol arbol, String anterior) {
+        return anterior;
+    }
 }
+

@@ -9,7 +9,7 @@ import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
-import com.wilsoncys.compi1.javacraft.model.simbolo.tablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 
 /**
  *
@@ -44,7 +44,7 @@ public class Statement extends Instruction{
 //    \\\\analizar
 
     @Override
-    public Object interpretar(Arbol arbol, tablaSimbolos tabla) {
+    public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
         if(declaracionSimple){
             return declare(arbol, tabla);
         }else{
@@ -52,7 +52,7 @@ public class Statement extends Instruction{
         }
     }
 
-    public Object declare(Arbol arbol, tablaSimbolos tabla) {
+    public Object declare(Arbol arbol, TablaSimbolos tabla) {
             //validando la existencia de la variable
         Simbolo newSymbol = new Simbolo(this.tipo, identificador, darValorDefecto(), isConst);    
         newSymbol.setLinea(line);
@@ -67,7 +67,7 @@ public class Statement extends Instruction{
         
     }
 
-    public Object declareAssign(Arbol arbol, tablaSimbolos tabla) {
+    public Object declareAssign(Arbol arbol, TablaSimbolos tabla) {
         // interpretar para obtener el valor
         var valorInterpretado = this.valor.interpretar(arbol, tabla);
 
@@ -124,6 +124,21 @@ public class Statement extends Instruction{
         return "";
     }
     
+    
+    
+    
+    public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+            
+            
+            
+            
+        return null;
+    }
+ 
+            @Override
+    public Object createC3D(Arbol arbol, String anterior) {
+        return anterior;
+    }
 }
 
 

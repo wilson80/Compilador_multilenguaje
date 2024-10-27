@@ -8,7 +8,7 @@ import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
-import com.wilsoncys.compi1.javacraft.model.simbolo.tablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.javacraft.model.simbolo.tipoDato;
 import java.util.LinkedList;
 
@@ -30,7 +30,7 @@ public class CiclicaWhile extends Instruction{
     }
     
     @Override
-    public Object interpretar(Arbol arbol, tablaSimbolos tabla) {
+    public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
         if(isDoWhile){
             return this.doWhile(arbol, tabla);
         }
@@ -48,7 +48,7 @@ public class CiclicaWhile extends Instruction{
             //execute instructions
             
         while (valorExp.toString().equals("true")) {    
-        var newTable = new tablaSimbolos(tabla);
+        var newTable = new TablaSimbolos(tabla);
             
             for (Instruction instructions : instructionss) {
                 if(instructions==null){     //validacion si la instruccion es nula
@@ -88,9 +88,9 @@ public class CiclicaWhile extends Instruction{
         return null;
     }
     
-public Object doWhile(Arbol arbol, tablaSimbolos tabla){
+public Object doWhile(Arbol arbol, TablaSimbolos tabla){
         // create new block
-        var newTable = new tablaSimbolos(tabla);
+        var newTable = new TablaSimbolos(tabla);
 //        // interpret expression 
         Object valorExp;
 //            verfify type boolean  
@@ -140,6 +140,14 @@ public Object doWhile(Arbol arbol, tablaSimbolos tabla){
     public String generarast(Arbol arbol, String anterior) {
         return "";
     }
+        public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+        return null;
+    }
     
+    
+            @Override
+    public Object createC3D(Arbol arbol, String anterior) {
+        return anterior;
+    }
     
 }

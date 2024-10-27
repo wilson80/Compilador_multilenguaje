@@ -9,7 +9,7 @@ import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
-import com.wilsoncys.compi1.javacraft.model.simbolo.tablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.javacraft.model.simbolo.tipoDato;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +47,7 @@ public class AssignmentVectores extends Instruction{
     
     
     @Override                                                   //       vector1[1] = "World";
-    public Object interpretar(Arbol arbol, tablaSimbolos tabla) {
+    public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
         Object [] vector;
         if(index2!=null){
             return this.assignment2D(arbol, tabla);
@@ -107,7 +107,7 @@ public class AssignmentVectores extends Instruction{
     
     
     
-    public Object assignment2D(Arbol arbol, tablaSimbolos tabla) {
+    public Object assignment2D(Arbol arbol, TablaSimbolos tabla) {
         Object [][] vector;
         int rows = 0;
         int cols = 0;
@@ -183,7 +183,7 @@ public class AssignmentVectores extends Instruction{
     
     
     
-    public Object assignmentLists(Arbol arbol, tablaSimbolos tabla, int index, Simbolo simbolSearch) {
+    public Object assignmentLists(Arbol arbol, TablaSimbolos tabla, int index, Simbolo simbolSearch) {
         List<Object> listaSearched = (List<Object>)simbolSearch.getValor();
 
 //                validar el rango del indice
@@ -219,6 +219,22 @@ public class AssignmentVectores extends Instruction{
         return "";
     }
     
+    public String crearString(Arbol arbol, String anterior) {
+        return "";
+    }
+
+    
+    
+    @Override
+    public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+        return null;
+    }
+    
+    
+        @Override
+    public Object createC3D(Arbol arbol, String anterior) {
+        return anterior;
+    }
     
     
 }

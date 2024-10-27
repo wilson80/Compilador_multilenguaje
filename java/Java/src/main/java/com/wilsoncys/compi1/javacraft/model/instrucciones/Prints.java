@@ -6,36 +6,58 @@ package com.wilsoncys.compi1.javacraft.model.instrucciones;
 
 import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
-import com.wilsoncys.compi1.javacraft.model.simbolo.*;
+import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
+import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
+import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.tipoDato;  
+import java.util.LinkedList;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
  *
  * @author yoyo
  */
-public class Print extends Instruction {
+public class Prints extends Instruction {
 
-    private Instruction expresion;
+    private  LinkedList<Instruction> expresioness;
 
-    public Print(Instruction expresion, int linea, int col) {
+    public Prints(LinkedList<Instruction> expresion, int linea, int col) {
         super(new Tipo(tipoDato.VOID), linea, col);
-        this.expresion = expresion;
+        this.expresioness = expresion;
     }
 
     @Override
-    public Object interpretar(Arbol arbol, tablaSimbolos tabla) {
-        var resultado = this.expresion.interpretar(arbol, tabla);
-        if (resultado instanceof Errores) {
-//            arbol.Print(resultado.toString());
-            return resultado;
+    public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
+        String concatenacion  = "";
+        
+        for (int i = 0; i <= expresioness.size()-1; i++) {
+            var resultado = expresioness.get(i).interpretar(arbol, tabla);
+            
+            if (resultado instanceof Errores) {
+    //            arbol.Print(resultado.toString());
+                return resultado;
+            }
+            if(resultado  == null ){
+                return new Errores("SEMANTIC", "recibiendo valor Null en Print", line, col);
+            }
+            concatenacion += resultado.toString();
+            
         }
-        if(resultado  == null ){
-            return new Errores("SEMANTIC", "recibiendo valor Null en Print", line, col);
-        }
+        
+//        for (Instruction expr : expresioness) {
+            
+//        }
+        
+        
+
 //        arbol.Print(resultado.toString());
-        arbol.Print(StringEscapeUtils.unescapeJava(resultado.toString()));
+        arbol.Print(StringEscapeUtils.unescapeJava(concatenacion));
         return null;
     }
+    
+    
+    
+    
 @Override
     public String generarast(Arbol arbol, String anterior) {        // PRINTT -> PRINT ( EXP ) ;
         String nodoPP = "n" + arbol.getCount();
@@ -60,10 +82,19 @@ public class Print extends Instruction {
         resultado += nodoPP + " -> " + nodoP2 + ";\n";
         resultado += nodoPP + " -> " + nodoPC + ";\n";
 
-        resultado += this.expresion.generarast(arbol, nodoExp);
+//        resultado += this.expresion.generarast(arbol, nodoExp);
 
         return resultado;
     }
+
+    @Override
+    public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+        return null;
+    }
     
+        @Override
+    public Object createC3D(Arbol arbol, String anterior) {
+        return anterior;
+    }
     
 }

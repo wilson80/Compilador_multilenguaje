@@ -6,20 +6,18 @@ package com.wilsoncys.compi1.javacraft.control;
 
 //import com.wilsoncys.compi1.javacraft.analizadores.CupJavaCraft;
 //import com.wilsoncys.compi1.javacraft.analizadores.LexerJavaCraft;
+import com.wilsoncys.compi1.javacraft.Main;
 import com.wilsoncys.compi1.javacraft.model.analisis.parser;
 import com.wilsoncys.compi1.javacraft.model.analisis.scanner;
 import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
-import com.wilsoncys.compi1.javacraft.model.instrucciones.Assignmentt;
-import com.wilsoncys.compi1.javacraft.model.instrucciones.DynamicLists;
-import com.wilsoncys.compi1.javacraft.model.instrucciones.Functionss;
-import com.wilsoncys.compi1.javacraft.model.instrucciones.Method;
-import com.wilsoncys.compi1.javacraft.model.instrucciones.Start_Main;
-import com.wilsoncys.compi1.javacraft.model.instrucciones.Statement;
-import com.wilsoncys.compi1.javacraft.model.instrucciones.Structs;
-import com.wilsoncys.compi1.javacraft.model.instrucciones.VectorsStatement;
+import com.wilsoncys.compi1.javacraft.model.poo.Classs; 
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
-import com.wilsoncys.compi1.javacraft.model.simbolo.tablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.Simbolo;
+import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
+import com.wilsoncys.compi1.javacraft.model.simbolo.categoria;
+import com.wilsoncys.compi1.javacraft.model.simbolo.tipoDato;
 
 import java.io.BufferedReader;
 import java.io.PrintWriter;
@@ -41,7 +39,7 @@ public class IniciarAnalizadores {
                 StringWriter sw = new StringWriter();
                 
     private LinkedList<Errores> listaErrores = new LinkedList<>();
-    private LinkedList<tablaSimbolos> tablaReport = new LinkedList<>();          //par la tabla de simbolos
+    private LinkedList<TablaSimbolos> tablaReport = new LinkedList<>();          //par la tabla de simbolos
 
                 
 
@@ -57,99 +55,110 @@ public class IniciarAnalizadores {
             scanner s = new scanner(new BufferedReader(new StringReader(texto)));
             parser p = new parser(s);
             var resultado = p.parse();
-            if(resultado.value instanceof  LinkedList){ 
-                System.out.println("Siiiiii es lista");
-            }else{
-                System.out.println("Noooooo es lista");
+             
+            var ast = new Arbol((LinkedList<Instruction>) resultado.value);
+
+            TablaSimbolos tabla = new TablaSimbolos();
+                tabla.setNombre("GLOBAL");
+                ast.setConsola("");
+                ast.setTablaGlobal(tabla);
+        
+            listaErrores = new LinkedList<>();
+            listaErrores.addAll(s.listaErrores);       //  lexicos
+            listaErrores.addAll(p.listaErrores);       //  sintacticos
+            
+            
+            //UNA SOLA TABLA DE SIMBOLOS        suponiendo que todo llega sin problemas 
+            for (Instruction ins : ast.getInstrucciones()) {  
+                if(ins ==null){
+                    continue;
+                }
+                if(ins instanceof Classs cl){
+                    Simbolo newSym = new 
+                    Simbolo(new Tipo(tipoDato.VOID), cl.getId(), tabla, true);
+                    newSym.setCat(categoria.CLASE);
+                    newSym.setInstruction(ins);
+                    tabla.addSsymbolPre(newSym);
+                    
+                    
+                    var algo =  cl.createSym(ast, tabla);
+                    if(algo instanceof Errores err){
+                        listaErrores.add(err);
+                    }
+                    
+                }
                 
             }
-//            var arbolAst = new Arbol((LinkedList<Instruction>) resultado.value);
-//            var tabla = new tablaSimbolos();
-//            tabla.setNombre("GLOBAL");
-//            arbolAst.setConsola("");
-//            arbolAst.setTablaGlobal(tabla);
-//            listaErrores = new LinkedList<>();
-            listaErrores.addAll(s.listaErrores);       //errores lexicos
-            listaErrores.addAll(p.listaErrores);       //errores sintacticos
             
             
             
-            //identificate and save the funciones, metodos and struct in the tree
-//                                for (var instruct : arbolAst.getInstrucciones()) {
-//                                                                        if (instruct == null) {
-//                                                                            continue;
-//                                                                        }   
-//                                                                        if(instruct instanceof Method){
-//                                                                            arbolAst.addFunctions(instruct);
-//                                                                        }
-//                                                                        if(instruct instanceof Functionss || instruct instanceof Structs ){
-//                                                                            arbolAst.addFunctions(instruct);
-//                                                                        }
-//
-//                    //                var res = instruct.interpretar(arbolAst, tabla);        //ejecuta el metodo interpretar de cada instruccion en la lista
-//                    //                if (res instanceof Errores errors) {
-//                    //                    listaErrores.add(errors);        //errores semanticos
-//                    //                }   
-//                                }
-        ////            identificar instrucciones de tipo Asignacion y declaracion globales
-        //                        for (var instruct : arbolAst.getInstrucciones()) {
-        //                            if(instruct == null){
-        //                                continue;
-        //                            }
-        //                            if((instruct instanceof Statement )|| (instruct instanceof Assignmentt)){
-        //                                var ress = instruct.interpretar(arbolAst, tabla);
-        //                                if(ress instanceof Errores errors){
-        //                                    listaErrores.add(errors);       //errores semanticos
-        //                                }
-        //                            }
-        //                            if((instruct instanceof VectorsStatement )|| (instruct instanceof DynamicLists)){
-        //                                var ress = instruct.interpretar(arbolAst, tabla);
-        //                                if(ress instanceof Errores errors){
-        //                                    listaErrores.add(errors);   //errores semanticos
-        //                                }
-        //                            }
-        //
-        //                        }
-//                        System.out.println("Despues de guardar las funciones y interpretaas asignaciones");
-//                        Start_Main starrr = null;
-//                        for (var ins : arbolAst.getInstrucciones()) {
-//                            if(ins == null){
-//                                continue;
-//                            }
-//                            if(ins instanceof Start_Main start){    //            identificar la instruccion star_whit
-//                                starrr = start;
-//                            }
+            
+             
+            
+            
+//            //SEMANTIC 
+//            for (Instruction ins : ast.getInstrucciones()) {
+//                if(ins instanceof Classs cl){
+//                    cl.interpretar(ast, tabla);
+//                }
+//            }
+             
+//            Classs mainClass = null;
+//            for (Instruction ins : ast.getInstrucciones()) {   
+//                                                        //buscando el metodomain
+//                if(ins instanceof Classs cl){
+//                    for (Instruction insCl : cl.instrucciones) {
+//                        if(insCl instanceof Mainn ma){
+//                            cl.setMain(ma);
+//                            mainClass = cl;
 //                        }
-//            
-//                                if(starrr!=null){                               //validacion si no se encuentra la sentencia start
-//                                    var main = starrr.interpretar(arbolAst, tabla);     //interpretar la instruccion Start
-//                                    if(main instanceof Errores errors){
-//                                        listaErrores.add(errors);
-//                                    }
-//                                }else{
-//                                    Errores err = new Errores("SEMANTIC", "No se encontro la sentencia que indica cual "
-//                                            + "es el metodo que inicia el programa", 0, 0);
-//                                    listaErrores.add(err);
-//                                    
-//                                }
-//                                                                                //agregar  los errores dentro de los metodos 
-//                                listaErrores.addAll(arbolAst.getListaErrores());
-        
+//                        
+//                    }
+//                }
+//                
+//            }
             
-//            //GENERATE AST
+            
+            
+//            TablaSimbolos tablaClass = new TablaSimbolos();
+//            var algo =  mainClass.interpretar(ast, tablaClass);
+//            if(algo instanceof Errores err){
+//                listaErrores.add(err);
+//            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+             
+            
+            
+            
+            
+            //GENERATE AST
 //            String cadena = "digraph ast{\n";
 //            cadena += "nINICIO[label=\"INICIO\"];\n";
 //            cadena += "nINSTRUCCIONES[label=\"INSTRUCCIONES\"];\n";
 //            cadena += "nINICIO -> nINSTRUCCIONES;\n";
 //
-//            for (var i : arbolAst.getInstrucciones()) {
+//            for (var i : ast.getInstrucciones()) {
 //                if (i == null) {
 //                    continue;
 //                }
-//                String nodoAux = "n" + arbolAst.getCount();
-//                cadena += nodoAux + "[label=\"INSTRUCCION\"];\n";
-//                cadena += "nINSTRUCCIONES -> " + nodoAux + ";\n";
-//                cadena += i.generarast(arbolAst, nodoAux);
+//                if(i instanceof Classs cl){
+//                    String nodoAux = "n" + ast.getCount();
+//                    cadena += nodoAux + "[label=\"INSTRUCCION\"];\n";
+//                    cadena += "nINSTRUCCIONES -> " + nodoAux + ";\n";
+//                    cadena += cl.generarast(ast, nodoAux);
+//                    
+//                }
 //            }
 //
 //            cadena += "\n}";
@@ -159,8 +168,8 @@ public class IniciarAnalizadores {
             
             
             
-            //            System.out.println(ast.getConsola());
-//                                            mensajeEjecucion = arbolAst.getConsola();
+                        System.out.println(ast.getConsola());
+                                            mensajeEjecucion = ast.getConsola();
             for (var i : listaErrores) {
                 mensajeErrores += i + "\n";
                 //                System.out.println(i);
@@ -195,7 +204,7 @@ public class IniciarAnalizadores {
         return mensajeEjecucion;
     }
 
-    public LinkedList<tablaSimbolos> getTablaReport() {
+    public LinkedList<TablaSimbolos> getTablaReport() {
         return tablaReport;
     }
 

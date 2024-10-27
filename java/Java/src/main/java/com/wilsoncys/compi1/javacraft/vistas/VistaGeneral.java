@@ -7,7 +7,7 @@ package com.wilsoncys.compi1.javacraft.vistas;
 import com.wilsoncys.compi1.javacraft.control.Control;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Simbolo;
-import com.wilsoncys.compi1.javacraft.model.simbolo.tablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -62,7 +62,7 @@ public class VistaGeneral extends javax.swing.JFrame {
     private Control control;
     private FrameReportes reportes;
     private LinkedList<Errores> listaErrores;
-    private LinkedList<tablaSimbolos> tablaReport = new LinkedList<>();          //par la tabla de simbolos
+    private LinkedList<TablaSimbolos> tablaReport = new LinkedList<>();          //par la tabla de simbolos
 
     public VistaGeneral(Control control) {
         this.control = control;
@@ -266,7 +266,7 @@ public class VistaGeneral extends javax.swing.JFrame {
         
         List<List<String>> listSim = new ArrayList<>();
         int contador = 0;
-        for (tablaSimbolos simbolos : tablaReport) {
+        for (TablaSimbolos simbolos : tablaReport) {
              HashMap<String, Object> hashSecond =simbolos.getTablaActual() ;
             for (Map.Entry<String, Object> AE : hashSecond.entrySet()) {
                 contador++;

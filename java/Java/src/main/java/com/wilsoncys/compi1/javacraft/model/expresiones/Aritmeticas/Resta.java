@@ -9,7 +9,7 @@ import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
 import com.wilsoncys.compi1.javacraft.model.expresiones.Enums.OperadoresAritmeticos;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
-import com.wilsoncys.compi1.javacraft.model.simbolo.tablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.javacraft.model.simbolo.tipoDato;
 
 /**
@@ -33,7 +33,7 @@ public class Resta extends Instruction {
     }
 
     @Override
-    public Object interpretar(Arbol arbol, tablaSimbolos tabla) {
+    public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
         Object opIzq = null;
         Object opDer = null; 
         opIzq = this.operando1.interpretar(arbol, tabla);
@@ -149,5 +149,15 @@ public class Resta extends Instruction {
         return strinRes;
     }
     
+    
+    
+        public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+        return null;
+    }
+        
+            @Override
+    public Object createC3D(Arbol arbol, String anterior) {
+        return anterior;
+    }
     
 }

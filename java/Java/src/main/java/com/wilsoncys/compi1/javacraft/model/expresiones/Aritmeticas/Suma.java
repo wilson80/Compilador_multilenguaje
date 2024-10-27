@@ -9,7 +9,7 @@ import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
 import com.wilsoncys.compi1.javacraft.model.expresiones.Enums.OperadoresAritmeticos;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
-import com.wilsoncys.compi1.javacraft.model.simbolo.tablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.javacraft.model.simbolo.tipoDato;
 
 /**
@@ -33,7 +33,7 @@ public class Suma extends Instruction {
     }
 
     @Override
-    public Object interpretar(Arbol arbol, tablaSimbolos tabla) {
+    public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
         Object opIzq = null;
         Object opDer = null; 
  
@@ -180,22 +180,37 @@ public class Suma extends Instruction {
 //        }
 
         //exp op exp
-        String nodoExp1 = "n" + arbol.getCount();
-        String nodoOp = "n" + arbol.getCount();
-        String nodoExp2 = "n" + arbol.getCount();
+//                String nodoExp1 = "n" + arbol.getCount();
+//                String nodoOp = "n" + arbol.getCount();
+//                String nodoExp2 = "n" + arbol.getCount();
+//
+//                String strinRes = anterior + " -> " + nodoExp1 + ";\n";
+//                strinRes += anterior + " ->" + nodoOp + ";\n";
+//                strinRes += anterior + " ->" + nodoExp2 + ";\n";
+//
+//                strinRes += nodoExp1 + "[label=\"EXP\"];\n";
+//                strinRes += nodoOp + "[label=\"+\"];\n";
+//                strinRes += nodoExp2 + "[label=\"EXP\"];\n";
+                String algo = anterior;
+                String op = "+";
+                String op1 = this.operando1.generarast(arbol, "");
+                String op2 = this.operando2.generarast(arbol, "");
+                algo+= op1 + op + op2;
+                
 
-        String strinRes = anterior + " -> " + nodoExp1 + ";\n";
-        strinRes += anterior + " ->" + nodoOp + ";\n";
-        strinRes += anterior + " ->" + nodoExp2 + ";\n";
-
-        strinRes += nodoExp1 + "[label=\"EXP\"];\n";
-        strinRes += nodoOp + "[label=\"+\"];\n";
-        strinRes += nodoExp2 + "[label=\"EXP\"];\n";
-        strinRes += this.operando1.generarast(arbol, nodoExp1);
-        strinRes += this.operando2.generarast(arbol, nodoExp2);
-        return strinRes;
+                return algo;
     }
     
     
-
+    
+    
+    public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+        return null;
+    }
+    
+    
+        @Override
+    public Object createC3D(Arbol arbol, String anterior) {
+        return anterior;
+    }
 }

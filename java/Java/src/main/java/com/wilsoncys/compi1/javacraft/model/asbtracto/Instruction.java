@@ -6,7 +6,7 @@ package com.wilsoncys.compi1.javacraft.model.asbtracto;
 
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
-import com.wilsoncys.compi1.javacraft.model.simbolo.tablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 
 /**
  *
@@ -25,7 +25,15 @@ public abstract class Instruction {
         this.col = col;
     }
 
-    public abstract Object interpretar(Arbol arbol, tablaSimbolos tabla);
+    public abstract Object interpretar(Arbol arbol, TablaSimbolos tabla);
+    
+    public abstract Object createSym(Arbol arbol, TablaSimbolos tabla);
+    
+    public abstract Object createC3D(Arbol arbol, String anterior);
+   
+    
+    
+    
     public abstract String generarast(Arbol arbol, String anterior);
 
 }

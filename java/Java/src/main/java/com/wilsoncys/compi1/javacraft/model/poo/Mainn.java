@@ -2,13 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.wilsoncys.compi1.javacraft.model.instrucciones;
+package com.wilsoncys.compi1.javacraft.model.poo;
 
 import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
+import com.wilsoncys.compi1.javacraft.model.instrucciones.transferReturn;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
-import com.wilsoncys.compi1.javacraft.model.simbolo.tablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -16,12 +17,12 @@ import java.util.LinkedList;
  *
  * @author Jonwil
  */
-public class Method extends Instruction{
+public class Mainn extends Instruction{
     public String id;
     public LinkedList<HashMap> parameters;
     public LinkedList<Instruction> instrucciones;
 
-    public Method(String id, LinkedList<HashMap> parametros, LinkedList<Instruction> instrucciones, Tipo tipo, int linea, int col) {
+    public Mainn(String id, LinkedList<HashMap> parametros, LinkedList<Instruction> instrucciones, Tipo tipo, int linea, int col) {
         super(tipo, linea, col);
         this.id = id;
         this.parameters = parametros;
@@ -29,7 +30,7 @@ public class Method extends Instruction{
     }
 
     @Override
-    public Object interpretar(Arbol arbol, tablaSimbolos table) {
+    public Object interpretar(Arbol arbol, TablaSimbolos table) {
         for (var instruct : this.instrucciones) {
              if (instruct == null) {
                     continue;
@@ -71,6 +72,17 @@ public class Method extends Instruction{
     @Override
     public String generarast(Arbol arbol, String anterior) {
         return "";
+    }
+    
+    
+    public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+        
+        return null;
+    }
+        
+            @Override
+    public Object createC3D(Arbol arbol, String anterior) {
+        return anterior;
     }
     
     

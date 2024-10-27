@@ -9,7 +9,7 @@ import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
-import com.wilsoncys.compi1.javacraft.model.simbolo.tablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.javacraft.model.simbolo.tipoDato;
 import java.util.HashMap;
 
@@ -51,7 +51,7 @@ public class Assignmentt extends Instruction{
 //    num1 = 5;
     
     @Override
-    public Object interpretar(Arbol arbol, tablaSimbolos tabla) {
+    public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
         if(idField!=null){
             return structAssignment(arbol, tabla);
         }
@@ -97,7 +97,7 @@ public class Assignmentt extends Instruction{
 //        }
 //    }
 
-        public Object structAssignment(Arbol arbol, tablaSimbolos tabla) {
+        public Object structAssignment(Arbol arbol, TablaSimbolos tabla) {
             Simbolo symStruc = tabla.getSsymbol(id);        //buscar el simbolo
             if(symStruc ==  null){
                 mensErr = "No se encontro la variable con ID: " + id+ " ";
@@ -167,10 +167,22 @@ public class Assignmentt extends Instruction{
         
         @Override
     public String generarast(Arbol arbol, String anterior) {
-        return "";
+        String algo = anterior;
+        algo = expression.generarast(arbol, anterior);
+        
+        
+        return algo;
     }
     
+        public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+        return null;
+    }
     
+        
+            @Override
+    public Object createC3D(Arbol arbol, String anterior) {
+        return anterior;
+    }
 }
 
 

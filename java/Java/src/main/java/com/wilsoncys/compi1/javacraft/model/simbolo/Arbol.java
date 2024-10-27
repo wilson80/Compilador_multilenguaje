@@ -6,10 +6,12 @@ package com.wilsoncys.compi1.javacraft.model.simbolo;
 
 //import abstracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
-import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
-import com.wilsoncys.compi1.javacraft.model.instrucciones.Functionss;
-import com.wilsoncys.compi1.javacraft.model.instrucciones.Method;
+import com.wilsoncys.compi1.javacraft.model.excepciones.Errores; 
+import com.wilsoncys.compi1.javacraft.model.poo.Method;
 import com.wilsoncys.compi1.javacraft.model.instrucciones.Structs;
+import com.wilsoncys.compi1.javacraft.model.poo.Classs;
+import com.wilsoncys.compi1.javacraft.model.poo.Functionss;
+import com.wilsoncys.compi1.javacraft.model.poo.Mainn;
 import java.util.LinkedList;
 
 /**
@@ -19,12 +21,19 @@ import java.util.LinkedList;
 public class Arbol {
 
     private String consola;     //contiene el texto de las salidas de la funcion println
-    private tablaSimbolos tablaGlobal;              //contiene las variables declaradas globalmente
+    
+    private TablaSimbolos tablaGlobal;              //contiene las variables declaradas globalmente
+
+//    private LinkedList<TablaSimbolos> tablaGlobal;              //contiene las variables declaradas globalmente
+
+    
     private LinkedList<Errores> errores;
     private LinkedList<Instruction> instrucciones;      //contiene todas las intrucciones (funciones, metodos,asignaciones, declaraciones)
     private LinkedList<Instruction> functions;          //list of methods, functions and Structs
-    private LinkedList<tablaSimbolos> tablaReport = new LinkedList<>();          //par la tabla de simbolos
+    private LinkedList<TablaSimbolos> tablaReport = new LinkedList<>();          //par la tabla de simbolos
     
+    private Classs classMain; 
+    private Mainn methodMain; 
     
     public int count;
 
@@ -35,7 +44,7 @@ public class Arbol {
     public Arbol(LinkedList<Instruction> instrucciones) {
         this.instrucciones = instrucciones;
         this.consola = "";
-        this.tablaGlobal = new tablaSimbolos();
+        this.tablaGlobal = new TablaSimbolos();
         this.errores = new LinkedList<>();
         this.functions = new LinkedList<>();     
         this.count = 0;
@@ -58,11 +67,13 @@ public class Arbol {
         this.consola = consola;
     }
 
-    public tablaSimbolos getTablaGlobal() {
+//    public tablaSimbolos getTablaGlobal() {
+    public TablaSimbolos getTablaGlobal() {
         return tablaGlobal;
     }
 
-    public void setTablaGlobal(tablaSimbolos tablaGlobal) {
+    public void setTablaGlobal(TablaSimbolos tablaGlobal) {
+//    public void addTabla(TablaSimbolos tablaGlobal) {
         this.tablaGlobal = tablaGlobal;
     }
 
@@ -119,11 +130,11 @@ public class Arbol {
         return listaErrores;
     }
 
-    public void addTablaReport(tablaSimbolos tablaReport) {
+    public void addTablaReport(TablaSimbolos tablaReport) {
         this.tablaReport.add(tablaReport);
     }
 
-    public LinkedList<tablaSimbolos> getTablaReport() {
+    public LinkedList<TablaSimbolos> getTablaReport() {
         return tablaReport;
     }
     
@@ -131,6 +142,23 @@ public class Arbol {
         this.count++;
         return this.count;
 
+    }
+
+    public void setClassMain(Classs classMain) {
+        this.classMain = classMain;
+    }
+
+    public Classs getClassMain() {
+        return classMain;
+    }
+    
+
+    public void setMethodMain(Mainn methodMain) {
+        this.methodMain = methodMain;
+    }
+
+    public Mainn getMethodMain() {
+        return methodMain;
     }
     
     

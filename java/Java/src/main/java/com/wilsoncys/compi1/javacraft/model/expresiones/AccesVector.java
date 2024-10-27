@@ -9,7 +9,7 @@ import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
-import com.wilsoncys.compi1.javacraft.model.simbolo.tablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.javacraft.model.simbolo.tipoDato;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,7 @@ public class AccesVector extends Instruction{
     
     
     @Override
-    public Object interpretar(Arbol arbol, tablaSimbolos tabla) {
+    public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
         Object vector [] = null;
         if(requestIndex2!= null){
             return this.acceso2D(arbol, tabla);
@@ -83,7 +83,7 @@ public class AccesVector extends Instruction{
     }
 
     
-        public Object acceso2D(Arbol arbol, tablaSimbolos tabla) {
+        public Object acceso2D(Arbol arbol, TablaSimbolos tabla) {
             Object vector [] []= null;
             //buscar el simbolo
             var simbolSearch = tabla.getSsymbol(identificador);          //buscar el simbolo en la tabla
@@ -136,7 +136,7 @@ public class AccesVector extends Instruction{
             }
         }        
         
-        public Object accesDynamicList(Arbol arbol, tablaSimbolos tabla, int index, Simbolo symSearched) {
+        public Object accesDynamicList(Arbol arbol, TablaSimbolos tabla, int index, Simbolo symSearched) {
             List<Object> listSearched = (List<Object>)symSearched.getValor();
             //validar el rango del indice
             if(index<0 || index>=listSearched.size()){
@@ -153,6 +153,16 @@ public class AccesVector extends Instruction{
     public String generarast(Arbol arbol, String anterior) {
         return "";
     }
+    
+        public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+        return null;
+    }
+
+    @Override
+    public Object createC3D(Arbol arbol, String anterior) {
+        return anterior;
+    }
+    
     
     
     

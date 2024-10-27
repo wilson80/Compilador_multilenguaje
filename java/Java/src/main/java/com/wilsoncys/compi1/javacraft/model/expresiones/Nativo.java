@@ -8,7 +8,7 @@ import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
-import com.wilsoncys.compi1.javacraft.model.simbolo.tablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.javacraft.model.simbolo.tipoDato;
 
 /**
@@ -24,23 +24,34 @@ public class Nativo extends Instruction{
     }
 
     @Override
-    public Object interpretar(Arbol arbol, tablaSimbolos tabla) {
+    public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
         return this.valor;
     }
     
     @Override
     public String generarast(Arbol arbol, String anterior) {      
-        String nodoNativo = "n" + arbol.getCount();//n1
-        String nodoValor = "n" + arbol.getCount();//n2
-
-        String resultado = anterior + " -> " + nodoNativo+";\n";
-
-        resultado += nodoNativo + "[label=\"NATIVO\"];\n";
-        resultado += nodoValor + "[label=\""
-                + this.valor.toString() + "\"];\n";
-
-        resultado += nodoNativo + " -> " + nodoValor+";\n";
-        return resultado;
+//        String nodoNativo = "n" + arbol.getCount();//n1
+//        String nodoValor = "n" + arbol.getCount();//n2
+//
+//        String resultado = anterior + " -> " + nodoNativo+";\n";
+//
+//        resultado += nodoNativo + "[label=\"NATIVO\"];\n";
+//        resultado += nodoValor + "[label=\""
+//                + this.valor.toString() + "\"];\n";
+//
+//        resultado += nodoNativo + " -> " + nodoValor+";\n";
+//        return resultado;
+        return valor.toString();
+    }
+    
+        public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+        return null;
+    }
+ 
+        
+            @Override
+    public Object createC3D(Arbol arbol, String anterior) {
+        return anterior;
     }
     
 }

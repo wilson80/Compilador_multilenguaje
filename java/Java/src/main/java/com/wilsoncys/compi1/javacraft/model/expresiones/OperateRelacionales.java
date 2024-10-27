@@ -9,7 +9,7 @@ import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
-import com.wilsoncys.compi1.javacraft.model.simbolo.tablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.javacraft.model.simbolo.tipoDato;
 /**
  *
@@ -34,7 +34,7 @@ public class OperateRelacionales extends Instruction {
     }
 
     @Override
-    public Object interpretar(Arbol arbol, tablaSimbolos tabla) {
+    public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
         opIzq = this.operando1.interpretar(arbol, tabla);
         if (opIzq instanceof Errores) {
             return opIzq;
@@ -480,5 +480,13 @@ public class OperateRelacionales extends Instruction {
         return "";
     }
 
-
+    public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+        return null;
+    }
+    
+        @Override
+    public Object createC3D(Arbol arbol, String anterior) {
+        return anterior;
+    }
+    
 }

@@ -8,7 +8,7 @@ import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
-import com.wilsoncys.compi1.javacraft.model.simbolo.tablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.javacraft.model.simbolo.tipoDato;
 import java.util.LinkedList;
 
@@ -33,10 +33,10 @@ public class CiclicaFor extends Instruction {
     }
 
     @Override
-    public Object interpretar(Arbol arbol, tablaSimbolos tabla) {
+    public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
         System.out.println("Ejecutando un ciclo");
         //crear el entorno
-        var newTabla = new tablaSimbolos(tabla);
+        var newTabla = new TablaSimbolos(tabla);
         
         // asignacion/declaracion
         var res1 = this.assignment.interpretar(arbol, newTabla);
@@ -58,7 +58,7 @@ public class CiclicaFor extends Instruction {
 
         while ((boolean) this.condicion.interpretar(arbol, newTabla)) {
             //nuevo entorno
-            var newTabla2 = new tablaSimbolos(newTabla);
+            var newTabla2 = new TablaSimbolos(newTabla);
 
             //ejecutar instrucciones
             for (var i : this.instrucciones) {
@@ -110,4 +110,15 @@ public class CiclicaFor extends Instruction {
     public String generarast(Arbol arbol, String anterior) {
         return "";
     }
+    
+    
+    
+        public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+        return null;
+    }
+            @Override
+    public Object createC3D(Arbol arbol, String anterior) {
+        return anterior;
+    }
+    
 }

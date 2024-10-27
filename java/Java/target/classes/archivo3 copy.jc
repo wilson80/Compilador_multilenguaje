@@ -1,0 +1,54 @@
+public class base{
+	int num1;
+	int num2;
+	int total;
+
+	public void Main() {
+        Sumar sumar = new Car(4,6 );
+		sumar.calcular();
+		this.total = sumar.getTotal;
+		print(total);
+	}
+}
+
+
+public class Sumar {
+	private int num1;
+	private int num2;
+	private int total;
+	
+	public Sumar(int num1, int num2) {
+		this.num1 = num1;
+		this.num2 = num2;
+	}
+	
+    public int calcular() {
+		total = num1 + nunm2;
+	}  	
+    public int getTotal() {
+		return total;
+	}  	
+
+	public int sumar() {
+		return  num1 + num2;
+	}
+	
+}
+
+
+
+
+public class Motor {
+	private int llanta;
+	private int puertas;
+	
+	public Motor(int llanta, String puertas) {
+		this.llanta = llanta;
+		this.puertas = puertas;
+	}
+	
+    public int getPuertas() {
+		return puertas;
+	}  	
+}
+ 
