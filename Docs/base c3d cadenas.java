@@ -41,10 +41,11 @@ void suma(){
 
 }
 
+
 int main(){
 // bajo nivel
     int t1;
-    int t2;
+    int t2; 
     int t3;
     int t4;
     int t5;

@@ -132,7 +132,7 @@ public class Method extends Instruction{
         arbol.setConsola(armed);
                 System.out.println("Ejecutando el metodo sumarrrr");
         
-        return "/nAqui va un metodo\n";
+        return ">>Methos<<";
     }
 
      

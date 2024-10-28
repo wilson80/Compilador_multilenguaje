@@ -204,15 +204,19 @@ public class Call extends Instruction{
         Simbolo sym = arbol.getSym(id);
         if(sym.getCat().equals(categoria.FUNCTION) ){
             if(sym.getAmbito().get(0).equals(arbol.getClassMain().getId())){
+                arbol.setPosReturn(0);
                 posIni = 1;
             }else{
+                arbol.setPosReturn(2);
                 posIni = 3;
                 
             }
         }else if(sym.getCat().equals(categoria.METHOD)){
             if(sym.getAmbito().get(0).equals(arbol.getClassMain().getId())){
+                arbol.setPosReturn(0);
                 posIni = 0;
             }else{
+                arbol.setPosReturn(0);
                 posIni = 2;
             }
         }
@@ -227,7 +231,7 @@ public class Call extends Instruction{
             armed+=c.c3d_asignVar(id, posIni);
             posIni++;
         }
-        c.setPtrTemp();
+        c.clearPtrTemp();
                                             //ejecutar el metodo
         armed+=c.c3d_moveToStack(true, arbol.getSizeStack());
         armed+= id+"();\n";
@@ -238,6 +242,10 @@ public class Call extends Instruction{
         
         return armed;
     }
+    
+
+
+    
     
     
 }

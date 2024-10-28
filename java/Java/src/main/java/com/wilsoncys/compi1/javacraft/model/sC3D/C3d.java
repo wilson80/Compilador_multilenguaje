@@ -50,9 +50,9 @@ public class C3d {
     
  
     public String c3d_operation(String val, int dir){
-        String armed = c3d_newVar() + ASSIG + varsParams.get(0)+varsParams.get(1) + SEMIC+saltoLinea;
+        String armed = c3d_newVar() + ASSIG + varsParams.get(0)+MAS+varsParams.get(1) + SEMIC+saltoLinea;
         varsParams = new ArrayList<>();
-        varsParams.add("w"+(contador-1));
+        varsParams.add("w"+(contador-1));  //guarda el id de la var q contiene el resultado
         return  armed;
     }
     public String c3d_acces(String val, int dir){
@@ -61,14 +61,22 @@ public class C3d {
         varsParams.add("w" + (contador-1));
         return  armed;
     }
+    public String c3d_accesTemp(String val, int dir){
+                                                    //    t28 = t27 + 0;
+                                                    //    t29 = stack[t28];
+        String armed = c3d_newVar() + ASSIG + ptrTemp +MAS+dir + SEMIC+saltoLinea;
+        armed += c3d_newVar() + ASSIG + c3d_stack("w" + (contador-2))  + SEMIC+saltoLinea;
+        varsParams.add("w" + (contador-1));
+        return  armed;
+    }
     
-    public String c3d_asignVal(String val, int dir){
+    public String c3d_asignVal(String val, int dir){    //asignacion de nativos
         String armed = c3d_newVar() + ASSIG + PTR +MAS+dir + SEMIC+saltoLinea;
         armed += c3d_stack("w" + (contador-1)) + ASSIG + val + SEMIC+saltoLinea;
         return  armed;
     }   
 //    t26 = t25 + 1;    
-//    stack[t26] = t22;
+//    stack[t26] = t22; 
     public String c3d_asignVar(String val, int dir){
         String armed = c3d_newVar() + ASSIG +  ptrTemp +MAS+dir + SEMIC+saltoLinea;
         armed += c3d_stack("w" + (contador-1)) + ASSIG + varsParams.get(0) + SEMIC+saltoLinea;
@@ -136,7 +144,15 @@ public class C3d {
         contador = 0;
     }
 
-    public void setPtrTemp() {
+    public void setPtrTemp(String s) {
+        this.ptrTemp = s;
+    }
+
+    public String getPtrTemp() {
+        return ptrTemp;
+    }
+    
+    public void clearPtrTemp() {
         this.ptrTemp = "";
     }
     

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class Statement extends Instruction{
 
     public String id;
-    public Instruction exp;
+        public Instruction exp;
     private boolean declaracionSimple;
     private boolean isConst;
     private int whatConstruct = 0;
@@ -155,15 +155,13 @@ public class Statement extends Instruction{
         if(whatConstruct == 1){
             Simbolo sym = arbol.getSym(id);
             armed+=this.exp.createC3D(arbol, anterior); //create exp
-            c.c3d_asignVal(c.varsParams.get(0), sym.getDir());
+                                                        //asignacion
+            armed+=c.c3d_asignVal(c.varsParams.get(0), sym.getDir());
             c.varsParams = new ArrayList<>();
             
-//    tr6 = ptr + 3;
-//    stack[tr6] = tr5;
+            
         }
-        
-//    t1 = ptr + 0;
-//    stack[t1] = 0;
+         
         return armed;
     }
 }

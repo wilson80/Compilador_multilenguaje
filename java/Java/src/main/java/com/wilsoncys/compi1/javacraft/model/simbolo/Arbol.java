@@ -37,6 +37,7 @@ public class Arbol {
     private Mainn methodMain; 
     public C3d c3d;
     public int sizeStack = 0;
+    private int posReturn = 0;
     
     
     
@@ -183,6 +184,14 @@ public class Arbol {
 
     public int getSizeStack() {
         return sizeStack;
+    }
+
+    public void setPosReturn(int posReturn) {
+        this.posReturn = posReturn;
+    }
+
+    public int getPosReturn() {
+        return posReturn;
     }
     
     

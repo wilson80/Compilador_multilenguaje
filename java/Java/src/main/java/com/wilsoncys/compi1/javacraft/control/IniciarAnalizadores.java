@@ -176,7 +176,7 @@ public class IniciarAnalizadores {
             
             
             
-                        System.out.println(ast.getConsola());
+//                        System.out.println(ast.getConsola());
                                             mensajeEjecucion = ast.getConsola();
             for (var i : listaErrores) {
                 mensajeErrores += i + "\n";
@@ -216,41 +216,7 @@ public class IniciarAnalizadores {
         return tablaReport;
     }
 
-    
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-//        StringReader reader = new StringReader(texto);
-//        LexerJavaCraft lexer = new LexerJavaCraft(reader);
-//        
-//        
-//        CupJavaCraft cup = new CupJavaCraft(lexer);
-//        
-//        try {
-//            var algo = cup.parse();
-//            
-//        } catch (Exception e) {
-//              
-//            System.out.println("Try Catch en CupJavaCraft");
-//            e.printStackTrace();
-//        }
-        
-        
-//        consulta.imprimirconsulta();
-//        instruccionCorrecta = consulta.isInstruccionCorrecta();
-        
-//        char algo = lexer.yycharat(4);
-//        System.out.println("yycharart: " + algo);
+ 
 
     public LinkedList<Errores> getListaErrores() {
         return listaErrores;

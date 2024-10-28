@@ -220,7 +220,7 @@ public class Suma extends Instruction {
         c.varsParams = new ArrayList<>();
         armed+=operando1.createC3D(arbol, anterior);
         armed+=operando2.createC3D(arbol, anterior);
-        
+        armed+=c.c3d_operation("-", 99);
         return armed;
     }
 }
