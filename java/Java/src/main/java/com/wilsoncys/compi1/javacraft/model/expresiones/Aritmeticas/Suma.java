@@ -7,10 +7,14 @@ package com.wilsoncys.compi1.javacraft.model.expresiones.Aritmeticas;
 import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
 import com.wilsoncys.compi1.javacraft.model.expresiones.Enums.OperadoresAritmeticos;
+import com.wilsoncys.compi1.javacraft.model.sC3D.C3d;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
+import com.wilsoncys.compi1.javacraft.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.javacraft.model.simbolo.tipoDato;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  *
@@ -211,6 +215,12 @@ public class Suma extends Instruction {
     
         @Override
     public Object createC3D(Arbol arbol, String anterior) {
-        return anterior;
+        String armed = "";
+        C3d c=  arbol.getC3d();
+        c.varsParams = new ArrayList<>();
+        armed+=operando1.createC3D(arbol, anterior);
+        armed+=operando2.createC3D(arbol, anterior);
+        
+        return armed;
     }
 }

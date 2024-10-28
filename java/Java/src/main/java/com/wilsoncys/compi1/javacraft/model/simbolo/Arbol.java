@@ -12,6 +12,7 @@ import com.wilsoncys.compi1.javacraft.model.instrucciones.Structs;
 import com.wilsoncys.compi1.javacraft.model.poo.Classs;
 import com.wilsoncys.compi1.javacraft.model.poo.Functionss;
 import com.wilsoncys.compi1.javacraft.model.poo.Mainn;
+import com.wilsoncys.compi1.javacraft.model.sC3D.C3d;
 import java.util.LinkedList;
 
 /**
@@ -34,8 +35,14 @@ public class Arbol {
     
     private Classs classMain; 
     private Mainn methodMain; 
+    public C3d c3d;
+    public int sizeStack = 0;
+    
+    
     
     public int count;
+    
+    
 
     
     private LinkedList<Errores> listaErrores = new LinkedList<>();
@@ -48,6 +55,7 @@ public class Arbol {
         this.errores = new LinkedList<>();
         this.functions = new LinkedList<>();     
         this.count = 0;
+        c3d = new C3d();
 
     }
 
@@ -161,7 +169,24 @@ public class Arbol {
         return methodMain;
     }
     
+    public Simbolo getSym(String id){
+        return  tablaGlobal.getSsymbol(id);
+    }
+
+    public C3d getC3d() {
+        return c3d;
+    }
+
+    public void setSizeStack(int sizeStack) {
+        this.sizeStack = sizeStack;
+    }
+
+    public int getSizeStack() {
+        return sizeStack;
+    }
     
     
 
+    
+    
 }

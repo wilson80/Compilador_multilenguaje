@@ -6,6 +6,7 @@ package com.wilsoncys.compi1.javacraft.model.expresiones;
 
 import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
+import com.wilsoncys.compi1.javacraft.model.sC3D.C3d;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
@@ -123,13 +124,18 @@ public class Access extends Instruction{
         return "";
     }
  
-        public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+    public Object createSym(Arbol arbol, TablaSimbolos tabla) {
         return null;
     }
     
         
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
-        return anterior;
+        String armed = "";
+        C3d c3d =  arbol.getC3d();
+        int dir = arbol.getSym(id).getDir();
+        armed = c3d.c3d_acces(id, dir);
+        
+        return armed;
     }
 }

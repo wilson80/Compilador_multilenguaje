@@ -23,7 +23,33 @@ public class Tipo {
         this.tipo = tipo;
     }
 
-
+    public String getTypeString(){
+        switch (tipo) {
+            case ENTERO:
+                return "int";
+            case DECIMAL:
+                return "double";    //podria ser real
+                
+            case CARACTER:
+                return "char";
+                
+            case BOOLEANO:
+                return "boolean";
+                
+            case CADENA:
+                return "String";
+            case VOID:
+                return "nombreClase";
+                
+            default:
+                System.out.println("Error(al crear la tabla(clase tipos))");
+                return "";
+                    
+        }
+        
+    } 
+    
+    
 
     
 }

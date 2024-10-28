@@ -12,6 +12,7 @@ import com.wilsoncys.compi1.javacraft.model.analisis.scanner;
 import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
 import com.wilsoncys.compi1.javacraft.model.poo.Classs; 
+import com.wilsoncys.compi1.javacraft.model.poo.Mainn;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
@@ -90,10 +91,22 @@ public class IniciarAnalizadores {
                 
             }
             
+            //Generate C3D
+            Classs mainnC = ast.getClassMain();
+            Mainn mainnMet = ast.getMethodMain();
+                mainnC.setMain(true);
+            String c3d_Main = "";
+            String bodyMain = (String)mainnC.createC3D(ast, "") ;
+            bodyMain += (String)mainnMet.createC3D(ast, "");
+            
+            c3d_Main = ast.c3d.c3d_metodo(mainnC.getId(), bodyMain);
+            
+            System.out.println("c3d:\n" + c3d_Main);
+            //hacer el statement
+            
+            System.out.println("/n/n>>>\n" + ast.getConsola());
             
             
-            
-             
             
             
 //            //SEMANTIC 
@@ -117,9 +130,7 @@ public class IniciarAnalizadores {
 //                }
 //                
 //            }
-            
-            
-            
+       
 //            TablaSimbolos tablaClass = new TablaSimbolos();
 //            var algo =  mainClass.interpretar(ast, tablaClass);
 //            if(algo instanceof Errores err){
@@ -127,19 +138,16 @@ public class IniciarAnalizadores {
 //            }
             
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
              
-            
-            
+
+
+
+
+
+
+
+
+
             
             
             //GENERATE AST

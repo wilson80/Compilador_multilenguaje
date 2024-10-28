@@ -8,6 +8,7 @@ import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
 import com.wilsoncys.compi1.javacraft.model.instrucciones.Statement;
 import com.wilsoncys.compi1.javacraft.model.instrucciones.transferReturn;
+import com.wilsoncys.compi1.javacraft.model.sC3D.C3d;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
@@ -15,6 +16,7 @@ import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.javacraft.model.simbolo.categoria;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -24,6 +26,11 @@ public class Functionss extends Instruction{
     public String id;
     public LinkedList<HashMap> parameters;
     public LinkedList<Instruction> instrucciones;
+    
+    private List<String>  ambito;   //idclase/metodo/params
+    private int cantParams = 0;
+    private int cantSyms = 0;
+
 
     public Functionss(String identificator, LinkedList<HashMap> parameters, LinkedList<Instruction> instrucciones, Tipo tipo, int linea, int col) {
         super(tipo, linea, col);
@@ -78,28 +85,60 @@ public class Functionss extends Instruction{
         //dir ref
         //retorno
         //dir dir ret
-         
-        int contador = 0;
+        //desde la clase se le hace set a la cantidad de params
         for (Instruction ins : instrucciones) {
- 
             if(ins instanceof Statement st){
                 //ambito
-                Simbolo sym = new Simbolo(tipo, id, tabla, true);
+                Simbolo sym = new Simbolo(tipo, st.id, tabla, true);
                 sym.setCat(categoria.VARL);
-                sym.setDir(contador);
+                sym.setDir(cantParams);
                 sym.setInstruction(ins);
-                tabla.addSsymbol(sym);
-                
+                sym.setAmbito(ambito);
+                tabla.addSsymbolPre(sym);
+                cantParams++;
             }
-  
-        }
+        } 
         
         return null;
     }
         
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
-        return anterior;
+        String armed = "";
+        C3d c = new C3d();
+        String bodyMet = "";
+        for (Instruction ins : instrucciones) {
+            if(ins ==null){
+                continue;
+            }
+            bodyMet += (String)ins.createC3D(arbol, anterior);
+        }
+        armed+=c.c3d_metodo(id, bodyMet);
+            
+        arbol.setConsola(armed);
+        
+        return "";
     }
+
+    public void setCantParams(int cantParams) {
+        this.cantParams = cantParams;
+    }
+
+    public int getCantParams() {
+        return cantParams;
+    }
+
+    public void setAmbito(List<String> ambito) {
+        this.ambito = ambito;
+    }
+
+    public List<String> getAmbito() {
+        return ambito;
+    }
+    
+        
+    
+    
+    
     
 }

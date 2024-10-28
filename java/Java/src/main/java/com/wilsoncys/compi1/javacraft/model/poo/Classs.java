@@ -14,7 +14,10 @@ import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.javacraft.model.simbolo.categoria;
 import com.wilsoncys.compi1.javacraft.model.simbolo.tipoDato;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -23,9 +26,13 @@ import java.util.LinkedList;
   public class Classs extends Instruction{
     String id;
     String idPadre;
-    private Mainn Main;
+    int cantAttb = 0;
     
     public LinkedList<Instruction> instrucciones;
+    
+    private boolean main;
+    Mainn mainMethod;
+    
     
     
     
@@ -104,16 +111,17 @@ import java.util.LinkedList;
             }
             if(ins instanceof Statement st){
                 //ambito
-                Simbolo sym = new Simbolo(tipo, id, tabla, true);
+                Simbolo sym = new Simbolo(tipo, st.id, tabla, true);
                 sym.setCat(categoria.ATRIBUTO);
                 sym.setDir(contador);
                 sym.setInstruction(ins);
                 sym.armarAmbito(this.id);
-                tabla.addSsymbol(sym);
+                tabla.addSsymbolPre(sym);
                 contador++;
                 
             }
         }
+        cantAttb = contador;
         contador = 0;
         
         //Main
@@ -121,21 +129,33 @@ import java.util.LinkedList;
             if(ins ==null){
                 continue;
             }
-            if(ins instanceof Mainn mainn){
-                Simbolo sym = new Simbolo(tipo, id, tabla, true);
-                sym.setCat(categoria.METODO);
+            
+            if(ins instanceof  Mainn mainn){
+                contador = 0;
+                Simbolo sym = new Simbolo(tipo, mainn.id, tabla, true);
+                sym.setCat(categoria.METHOD);
                 sym.setDir(contador);
                 sym.setInstruction(ins);
                 sym.armarAmbito(this.id);
                 sym.armarAmbito(mainn.id);
-                tabla.addSsymbol(sym);
-                contador++;
+                List<String> typeParam = new ArrayList<>();
+                for (HashMap hash : mainn.parameters) {
+                    hash.get("tipo");
+                    typeParam.add(id);
+                }
+                
+                sym.getAmbito().addAll(typeParam);                 //Car_Car_int_String_Motor
+                tabla.addSsymbolPre(sym);
+                    mainn.setCantParams(cantAttb);
+                    mainn.setAmbito(sym.getAmbito());
+                    mainn.createSym(arbol, tabla);          //create syms
                 arbol.setClassMain(this);
                 arbol.setMethodMain(mainn);
-                    mainn.createSym(arbol, tabla);
-            }   
-        }    
-        contador = 0;
+                arbol.setSizeStack(mainn.getCantParams());
+                
+            }
+        }
+        
 
         //methods
         for (Instruction ins : instrucciones) {
@@ -144,38 +164,79 @@ import java.util.LinkedList;
             }
             
             if(ins instanceof  Method met){
-                Simbolo sym = new Simbolo(tipo, id, tabla, true);
-                sym.setCat(categoria.METODO);
+                contador = 0;
+                Simbolo sym = new Simbolo(tipo, met.id, tabla, true);
+                sym.setCat(categoria.METHOD);
                 sym.setDir(contador);
                 sym.setInstruction(ins);
                 sym.armarAmbito(this.id);
                 sym.armarAmbito(met.id);
-                tabla.addSsymbol(sym);
+                List<String> typeParam = new ArrayList<>();
+                for (HashMap hash : met.parameters) {
+//                    hash.get("id");
+                    Tipo tipo = (Tipo)hash.get("tipo");
+                    typeParam.add(tipo.getTypeString());
+                }    
+                //syms de c/param
+                
+                sym.getAmbito().addAll(typeParam);                 //Car_Car_int_String_Motor
+                tabla.addSsymbolPre(sym);
                 contador++;
-                met.createSym(arbol, tabla);
+                    met.setCantParams(contador);
+                    met.setAmbito(sym.getAmbito());
+                    met.createSym(arbol, tabla);
+                
             }
         }
-        contador = 0;
+        
+        
 
         //functions
         for (Instruction ins : instrucciones) {
             if(ins ==null){
                 continue;
             }
-            if(ins instanceof  Functionss met){
-                Simbolo sym = new Simbolo(tipo, id, tabla, true);
-                sym.setCat(categoria.METODO);
+            if(ins instanceof  Functionss fun){
+                contador = 0;
+                Simbolo sym = new Simbolo(tipo, fun.id, null, true);
+                sym.setCat(categoria.FUNCTION);
                 sym.setDir(contador);
                 sym.setInstruction(ins);
                 sym.armarAmbito(this.id);
-                sym.armarAmbito(met.id);
-                tabla.addSsymbol(sym);
-                contador++;
-                met.createSym(arbol, tabla);
+                sym.armarAmbito(fun.id);
+                List<String> typeParam = new ArrayList<>();
+                for (HashMap hash : fun.parameters) {
+//                    hash.get("id");
+                    Tipo tipo = (Tipo)hash.get("tipo");
+                    typeParam.add(tipo.getTypeString());
+                }
+                
+                sym.getAmbito().addAll(typeParam);                 //Car_Car_int_String_Motor
+                tabla.addSsymbolPre(sym);
+                fun.setAmbito(sym.getAmbito());
+                //add dir(ref,retorno,dir_retorno)
+                contador++; //retorno
+                for (HashMap param : fun.parameters) {          //syms de params
+                    String idparam = (String)param.get("id");
+                    Simbolo symPar = new Simbolo(fun.tipo, idparam, null, true);
+                    symPar.setCat(categoria.PARAM);
+                    symPar.setDir(contador);
+                    symPar.setAmbito(fun.getAmbito());
+                    tabla.addSsymbolPre(symPar);
+//                    sym.setInstruction(ins);
+                    contador++;
+                }
+                fun.setCantParams(contador);
+                fun.createSym(arbol, tabla);
             }
         }
         contador = 0;
- 
+
+//        constructor
+        
+        
+        
+        
             
         return null; 
     }
@@ -191,13 +252,47 @@ import java.util.LinkedList;
         return idPadre;
     }
 
-    public void setMain(Mainn Main) {
-        this.Main = Main;
-    }
+    
+    
     
     @Override
     public Object createC3D(Arbol arbol, String anterior) {
-        return anterior;
+        String armed = ""; 
+        if(isMain()){
+            for (Instruction ins : instrucciones) {
+                if(ins instanceof Statement st){
+                    armed += (String)st.createC3D(arbol, anterior);
+                }
+            }
+        }
+        return armed;
+    }
+    
+    
+    
+
+    public void setCantAttb(int cantAttb) {
+        this.cantAttb = cantAttb;
+    }
+
+    public int getCantAttb() {
+        return cantAttb;
+    }
+
+    public boolean isMain() {
+        return main;
+    }
+
+    public void setMain(boolean main) {
+        this.main = main;
+    }
+
+    public void setMainMethod(Mainn mainMethod) {
+        this.mainMethod = mainMethod;
+    }
+
+    public Mainn getMainMethod() {
+        return mainMethod;
     }
     
     

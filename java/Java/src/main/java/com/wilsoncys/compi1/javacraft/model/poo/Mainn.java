@@ -6,12 +6,17 @@ package com.wilsoncys.compi1.javacraft.model.poo;
 
 import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
+import com.wilsoncys.compi1.javacraft.model.instrucciones.Statement;
 import com.wilsoncys.compi1.javacraft.model.instrucciones.transferReturn;
+import com.wilsoncys.compi1.javacraft.model.sC3D.C3d;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
+import com.wilsoncys.compi1.javacraft.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.categoria;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -21,6 +26,10 @@ public class Mainn extends Instruction{
     public String id;
     public LinkedList<HashMap> parameters;
     public LinkedList<Instruction> instrucciones;
+    private int cantParams = 0;
+    private List<String>  ambito;   //idclase/metodo/params
+
+    
 
     public Mainn(String id, LinkedList<HashMap> parametros, LinkedList<Instruction> instrucciones, Tipo tipo, int linea, int col) {
         super(tipo, linea, col);
@@ -76,14 +85,68 @@ public class Mainn extends Instruction{
     
     
     public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+                //dir ref
+        //retorno
+        //dir dir ret
+        //desde la clase se le hace set a la cantidad de params
+        for (Instruction ins : instrucciones) {
+            if(ins instanceof Statement st){
+                //ambito
+                Simbolo sym = new Simbolo(tipo, st.id, tabla, true);
+                sym.setCat(categoria.VARL);
+                sym.setDir(cantParams);
+                sym.setInstruction(ins);
+                sym.setAmbito(ambito);
+                tabla.addSsymbolPre(sym);
+                cantParams++;
+            }
+        } 
+        
+        
+        
         
         return null;
     }
         
+    
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
-        return anterior;
+        String armed = "";
+            C3d c3d = new C3d();
+                for (Instruction ins : instrucciones) {
+                    if(ins ==null){
+                        continue;
+                    }
+                    armed += (String)ins.createC3D(arbol, anterior);
+                }
+      
+        return armed;
     }
+
     
+    
+    
+    
+    
+    
+    
+    
+    
+    public void setCantParams(int cantParams) {
+        this.cantParams = cantParams;
+    }
+
+    public int getCantParams() {
+        return cantParams;
+    }
+
+    public List<String> getAmbito() {
+        return ambito;
+    }
+
+    public void setAmbito(List<String> ambito) {
+        this.ambito = ambito;
+    }
+     
     
 }

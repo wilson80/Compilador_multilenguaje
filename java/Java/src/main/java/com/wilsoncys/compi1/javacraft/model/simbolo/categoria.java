@@ -9,7 +9,8 @@ package com.wilsoncys.compi1.javacraft.model.simbolo;
  * @author yoyo
  */
 public enum categoria {
-    METODO,
+    METHOD,
+    FUNCTION,
     CLASE,
     ATRIBUTO,
     REFERENCIA,

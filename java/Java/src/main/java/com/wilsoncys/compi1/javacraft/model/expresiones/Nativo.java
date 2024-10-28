@@ -51,7 +51,7 @@ public class Nativo extends Instruction{
         
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
-        return anterior;
+        return valor.toString();
     }
     
 }

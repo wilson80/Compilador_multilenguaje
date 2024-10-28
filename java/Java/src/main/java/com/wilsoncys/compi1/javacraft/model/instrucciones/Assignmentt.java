@@ -6,11 +6,15 @@ package com.wilsoncys.compi1.javacraft.model.instrucciones;
 
 import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
+import com.wilsoncys.compi1.javacraft.model.expresiones.Nativo;
+import com.wilsoncys.compi1.javacraft.model.poo.Call;
+import com.wilsoncys.compi1.javacraft.model.sC3D.C3d;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.javacraft.model.simbolo.tipoDato;
+import java.lang.annotation.Native;
 import java.util.HashMap;
 
 /**
@@ -21,27 +25,32 @@ public class Assignmentt extends Instruction{
     private String id;
     private String idField = null;
     private String elseField = null;
-    private Instruction expression;
+    private Instruction expr;
+    private int whatConstruct = 0;
+
 
     public Assignmentt(String id, Instruction exp, int linea, int col) {
         super(new Tipo(tipoDato.VOID), linea, col);
         this.id = id;
-        this.expression = exp;
+        this.expr = exp;
+        this.whatConstruct = 0;
     }
 
     public Assignmentt(String id,  String idField, Instruction expression, int linea, int col) {
         super(new Tipo(tipoDato.VOID), linea, col);
         this.id = id;
-        this.expression = expression;
+        this.expr = expression;
         this.idField = idField;
+        this.whatConstruct = 1;
     }
     
     public Assignmentt(String id,  String idField, String elseField, Instruction expression, int linea, int col) {
         super(new Tipo(tipoDato.VOID), linea, col);
         this.id = id;
-        this.expression = expression;
+        this.expr = expression;
         this.idField = idField;
         this.elseField = elseField;
+        this.whatConstruct = 2;
     }
 
 
@@ -65,7 +74,7 @@ public class Assignmentt extends Instruction{
         }
         
         // interpretar el nuevo valor a asignar
-        var newValor = this.expression.interpretar(arbol, tabla);
+        var newValor = this.expr.interpretar(arbol, tabla);
         if (newValor instanceof Errores) {
             return newValor;
         }
@@ -77,10 +86,10 @@ public class Assignmentt extends Instruction{
         }else{
             //validar tipos del valor a asignar y de la variable existente
 //            var tipo1
-            if (simboloExistente.getTipo().getTipo() != this.expression.tipo.getTipo()) {
+            if (simboloExistente.getTipo().getTipo() != this.expr.tipo.getTipo()) {
                 String mensajeError = "Tipos erroneos al asignar a la variable: " + id;
                 return new Errores("SEMANTICO",mensajeError,
-                        this.expression.line, this.expression.col);
+                        this.expr.line, this.expr.col);
             }
             simboloExistente.setValor(newValor);
             return null;
@@ -114,7 +123,7 @@ public class Assignmentt extends Instruction{
                 HashMap elseMap = (HashMap)hassym.get(idField);
                 Simbolo sym3 = (Simbolo)elseMap.get(elseField);
                 //interpretar la exp
-                    var valueExp = this.expression.interpretar(arbol, tabla);
+                    var valueExp = this.expr.interpretar(arbol, tabla);
                     if(valueExp instanceof  Errores){
                         return valueExp;
                     }
@@ -123,10 +132,10 @@ public class Assignmentt extends Instruction{
                         return  new Errores("SEMANTIC", "Struct instanciado como const (Al asignar)", line, col);
                     }else{
                         //validar tipos 
-                        if (sym3.getTipo().getTipo() != this.expression.tipo.getTipo()) {
+                        if (sym3.getTipo().getTipo() != this.expr.tipo.getTipo()) {
                             mensErr = "Tipos erroneos al asignar a un campo de Struct " + id + " ";
                             return new Errores("SEMANTICO",mensErr,
-                                    this.expression.line, this.expression.col);
+                                    this.expr.line, this.expr.col);
                         }
                         sym3.setValor(valueExp);
                         return null;
@@ -141,7 +150,7 @@ public class Assignmentt extends Instruction{
                     }
 
                     //interpretar la exp
-                    var valueExp = this.expression.interpretar(arbol, tabla);
+                    var valueExp = this.expr.interpretar(arbol, tabla);
                     if(valueExp instanceof  Errores){
                         return valueExp;
                     }
@@ -151,10 +160,10 @@ public class Assignmentt extends Instruction{
                         return  new Errores("SEMANTIC", "Struct instanciado como const (Al asignar)", line, col);
                     }else{
                         //validar tipos 
-                        if (fieldSymbol.getTipo().getTipo() != this.expression.tipo.getTipo()) {
+                        if (fieldSymbol.getTipo().getTipo() != this.expr.tipo.getTipo()) {
                             mensErr = "Tipos erroneos al asignar a un campo de Struct " + id + " ";
                             return new Errores("SEMANTICO",mensErr,
-                                    this.expression.line, this.expression.col);
+                                    this.expr.line, this.expr.col);
                         }
                         fieldSymbol.setValor(valueExp);
                         return null;
@@ -168,7 +177,7 @@ public class Assignmentt extends Instruction{
         @Override
     public String generarast(Arbol arbol, String anterior) {
         String algo = anterior;
-        algo = expression.generarast(arbol, anterior);
+        algo = expr.generarast(arbol, anterior);
         
         
         return algo;
@@ -181,7 +190,27 @@ public class Assignmentt extends Instruction{
         
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
-        return anterior;
+        String armed = "";
+        C3d c3d =  arbol.getC3d();
+        if(this.expr instanceof Nativo){
+            int dir = arbol.getSym(id).getDir();
+            String valNat = (String)this.expr.createC3D(arbol, anterior);
+            armed = c3d.c3d_asignVal(valNat, dir);
+        }
+        if(this.expr instanceof Call call){
+            //create
+            //ejecutarel metodo
+            armed+= call.createC3D(arbol, anterior);
+        }
+        
+        
+//        //assig 
+//    tr6 = ptr + dir;
+//    stack[tr6] = var;
+        
+        
+        
+        return armed;
     }
 }
 

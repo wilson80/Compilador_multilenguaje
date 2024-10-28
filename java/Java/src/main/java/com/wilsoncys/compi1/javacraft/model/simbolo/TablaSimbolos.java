@@ -63,7 +63,7 @@ public class TablaSimbolos {
     }
     
     public void addSsymbolPre(Simbolo newSymbol){
-            tablaActual.put(newSymbol.getId().toLowerCase(), newSymbol);
+            tablaActual.put(newSymbol.getId(), newSymbol);
             
     }
    

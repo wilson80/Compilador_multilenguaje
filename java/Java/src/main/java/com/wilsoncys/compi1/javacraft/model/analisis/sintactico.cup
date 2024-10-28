@@ -259,14 +259,14 @@ EXPRESION::= MINUS EXPRESION:a             {:   RESULT = new Negacion(a, Operado
         | modPriv VOID:a MAIN:b PAR_OP parametersFuncts:p PAR_CL K_OP methodIns:c K_CL    {:   RESULT= new Method("Main", p, c, new Tipo(tipoDato.VOID), aleft, aright );   :}
       
         | modPriv VOID:a MAIN:b PAR_OP PAR_CL K_OP methodIns:c K_CL   
-         {:   RESULT= new Method("Main", new LinkedList<HashMap>(), c, new Tipo(tipoDato.VOID), aleft, aright );   :}
+         {:   RESULT= new Mainn("Main", new LinkedList<HashMap>(), c, new Tipo(tipoDato.VOID), aleft, aright );   :}
       
         |  VOID:a MAIN:b PAR_OP parametersFuncts:p PAR_CL K_OP methodIns:c K_CL    {:   RESULT= new Method("MAIN", p, c, new Tipo(tipoDato.VOID), aleft, aright );   :}
         |  VOID:a MAIN:b PAR_OP PAR_CL K_OP methodIns:c K_CL    {:   RESULT= new Method("Main", new LinkedList<HashMap>(), c, new Tipo(tipoDato.VOID), aleft, aright );   :}
         | constructor
 ;
 
-parametersFuncts ::= parametersFuncts:a COLON typeVar:b ID:id   {:  
+parametersFuncts::= parametersFuncts:a COLON typeVar:b ID:id   {:  
                                             RESULT = a;
                                             var elseParam= new HashMap<String, Object>();
                                             elseParam.put("id", id);
@@ -291,7 +291,8 @@ paramss::= callsParameters:c {:RESULT = c; :}
 
 callEXP::= ID:a DOT callEXP2   
         | ID:a PAR_OP paramss PAR_CL  DOT callEXP2
-        | ID:a PAR_OP paramss PAR_CL  
+        | ID:a PAR_OP paramss:p PAR_CL 
+        {:RESULT = new Call(a, p, aleft, aright); :}
 ;
 // getA() . call2
 callEXP2::=  
@@ -303,9 +304,10 @@ callEXP2::=
 ;
 
 
-call::= ID DOT call2
+call::= ID DOT call2 
         | ID:a PAR_OP paramss PAR_CL DOT call2
-        | ID:a PAR_OP paramss PAR_CL SEMIC
+        | ID:a PAR_OP paramss:p PAR_CL SEMIC 
+        {:RESULT = new Call(a, p, aleft, aright); :}
 ;
 call2::= ID PAR_OP paramss PAR_CL DOT call
         |  ID DOT call
@@ -412,6 +414,10 @@ declaracion::=   typeVar:t ID:string   SEMIC                     {: RESULT = new
 globalDec::=  modPriv  typeVar:t ID:string   SEMIC               
                {: RESULT = new Statement(string, t, tleft, tright, false); :}
             | modPriv  typeVar:t ID:string   ASSIGNMENT EXPRESION:exp SEMIC 
+                {: RESULT = new Statement(string, exp, t, tleft, tright, false); :}    
+            |    typeVar:t ID:string   SEMIC               
+               {: RESULT = new Statement(string, t, tleft, tright, false); :}
+            |    typeVar:t ID:string   ASSIGNMENT EXPRESION:exp SEMIC 
                 {: RESULT = new Statement(string, exp, t, tleft, tright, false); :}    
      
         ;

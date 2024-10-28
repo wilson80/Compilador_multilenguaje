@@ -1,18 +1,20 @@
-public class{
+public class uno{
 	int num1;
 	int num2;
 	int resultado;
-	public void Main(){
+	public void Main(){ 
 		num1 = 10;
 		num2 = 5;
 		resultado = sumar(num1, num2 );
-	}
-	public void sumar(int x, int y){
-		int total = x+y;
+	} 
+	public int sumar(int x, int y){
+		int total = x+y; 
 		return total;
 	}
 
 } 
+
+
 	
  
 

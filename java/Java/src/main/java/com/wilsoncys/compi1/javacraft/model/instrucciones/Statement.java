@@ -6,10 +6,12 @@ package com.wilsoncys.compi1.javacraft.model.instrucciones;
 
 import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
+import com.wilsoncys.compi1.javacraft.model.sC3D.C3d;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,27 +21,30 @@ import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 
 public class Statement extends Instruction{
 
-    public String identificador;
-    public Instruction valor;
+    public String id;
+    public Instruction exp;
     private boolean declaracionSimple;
     private boolean isConst;
+    private int whatConstruct = 0;
 
                                                     //    var num1:int;
     //constructor sin asignacion (declaracion simple)
     public Statement(String identificador, Tipo tipo, int linea, int col, boolean isMutable) {
         super(tipo, linea, col);
-        this.identificador = identificador;
+        this.id = identificador;
         this.declaracionSimple = true;
         this.isConst = isMutable;
+        this.whatConstruct = 0;
     }
                                                    //    var num1:int = 5;
     //constructor con asignacion
-    public Statement(String identificador, Instruction valorVariable_exp, Tipo tipo, int linea, int col, boolean isMutable) {
+    public Statement(String identificador, Instruction exp, Tipo tipo, int linea, int col, boolean isMutable) {
         super(tipo, linea, col);
-        this.identificador = identificador;
-        this.valor = valorVariable_exp;
+        this.id = identificador;
+        this.exp = exp;
         this.declaracionSimple = false;
         this.isConst = isMutable;
+        this.whatConstruct = 1;
     }
 //    \\\\analizar
 
@@ -54,7 +59,7 @@ public class Statement extends Instruction{
 
     public Object declare(Arbol arbol, TablaSimbolos tabla) {
             //validando la existencia de la variable
-        Simbolo newSymbol = new Simbolo(this.tipo, identificador, darValorDefecto(), isConst);    
+        Simbolo newSymbol = new Simbolo(this.tipo, id, darValorDefecto(), isConst);    
         newSymbol.setLinea(line);
         newSymbol.setLinea(col);
         boolean isCreacion = tabla.addSsymbol(newSymbol);
@@ -69,7 +74,7 @@ public class Statement extends Instruction{
 
     public Object declareAssign(Arbol arbol, TablaSimbolos tabla) {
         // interpretar para obtener el valor
-        var valorInterpretado = this.valor.interpretar(arbol, tabla);
+        var valorInterpretado = this.exp.interpretar(arbol, tabla);
 
         //validar posible error
         if (valorInterpretado instanceof Errores) {
@@ -77,11 +82,11 @@ public class Statement extends Instruction{
         }
 
         //validar el tipo de la variable a asignar con el tipo declarado
-                    if (this.valor.tipo.getTipo() != this.tipo.getTipo()) {
+                    if (this.exp.tipo.getTipo() != this.tipo.getTipo()) {
                         return new Errores("SEMANTICO", "Tipos erroneos", this.line, this.col);
                     }
 
-        Simbolo newSsimbol = new Simbolo(this.tipo, this.identificador, valorInterpretado, isConst);
+        Simbolo newSsimbol = new Simbolo(this.tipo, this.id, valorInterpretado, isConst);
         newSsimbol.setLinea(line);
         newSsimbol.setLinea(col);
         boolean creacion = tabla.addSsymbol(newSsimbol);
@@ -137,7 +142,29 @@ public class Statement extends Instruction{
  
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
-        return anterior;
+        String armed = "";
+        C3d c =  arbol.getC3d();
+        
+        if(whatConstruct == 0){
+            int dir  = arbol.getSym(this.id).getDir();
+            String val = "0";
+            //si el valor es un nativo
+            armed = c.c3d_asignVal(val, dir);
+            
+        }
+        if(whatConstruct == 1){
+            Simbolo sym = arbol.getSym(id);
+            armed+=this.exp.createC3D(arbol, anterior); //create exp
+            c.c3d_asignVal(c.varsParams.get(0), sym.getDir());
+            c.varsParams = new ArrayList<>();
+            
+//    tr6 = ptr + 3;
+//    stack[tr6] = tr5;
+        }
+        
+//    t1 = ptr + 0;
+//    stack[t1] = 0;
+        return armed;
     }
 }
 

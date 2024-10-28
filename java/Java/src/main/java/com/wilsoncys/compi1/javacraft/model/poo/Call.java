@@ -9,10 +9,12 @@ import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores; 
 import com.wilsoncys.compi1.javacraft.model.instrucciones.Statement;
 import com.wilsoncys.compi1.javacraft.model.instrucciones.transferReturn;
+import com.wilsoncys.compi1.javacraft.model.sC3D.C3d;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
+import com.wilsoncys.compi1.javacraft.model.simbolo.categoria;
 import com.wilsoncys.compi1.javacraft.model.simbolo.tipoDato;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -22,12 +24,12 @@ import java.util.LinkedList;
  * @author Jonwil
  */
 public class Call extends Instruction{
-    private String identificator;
+    private String id;
     private LinkedList<Instruction> parametersExp;
 
     public Call(String identificator, LinkedList<Instruction> parametros, int linea, int col) {
         super(new Tipo(tipoDato.VOID), linea, col);
-        this.identificator = identificator;
+        this.id = identificator;
         this.parametersExp = parametros;
     }
     
@@ -38,7 +40,7 @@ public class Call extends Instruction{
         LinkedList<HashMap> listParams;      //parametros del metodo o funcion 
 
         //buscar la funcion
-        var functio = tree.getFunction(identificator);
+        var functio = tree.getFunction(id);
         if(functio == null){
             return new Errores("SEMANTIC", "El id ingresado no corresponde a ningun tipo de funcion/metodo/struct", line, col);
         }
@@ -47,7 +49,7 @@ public class Call extends Instruction{
             //crear el entorno
                                 //            tablaSimbolos newTable = new tablaSimbolos(tree.getTablaGlobal());
             TablaSimbolos newTable = new TablaSimbolos(tabla);
-            newTable.setNombre("Metodo: " + identificator);
+            newTable.setNombre("Metodo: " + id);
             tree.addTablaReport(newTable);
             
             
@@ -80,7 +82,7 @@ public class Call extends Instruction{
                 Simbolo symm = newTable.getSsymbol(par.get("id").toString());   //realizar la asignacion                                                              //realizar la asignacion
                 if(symm == null){
                     return new Errores("SEMANTIC", "No se encontro el parametro en funcion: " 
-                                                        + identificator, line, col);
+                                                        + id, line, col);
                 }
                 symm.setValor(valueExp);
                 contador++;
@@ -106,7 +108,7 @@ public class Call extends Instruction{
             //crear el entorno
                         //            tablaSimbolos newTable = new tablaSimbolos(tree.getTablaGlobal());
             TablaSimbolos newTable = new TablaSimbolos(tabla);
-            newTable.setNombre("Funcion: " + identificator);
+            newTable.setNombre("Funcion: " + id);
             tree.addTablaReport(newTable);
             
             //validar las cantidades de parametros(en las llamada y en la declaracion del metodo)
@@ -138,7 +140,7 @@ public class Call extends Instruction{
                 Simbolo symm = newTable.getSsymbol(par.get("id").toString());                                                                 //realizar la asignacion
                 if(symm == null){
                     return new Errores("SEMANTIC", "No se encontro el parametro en funcion: " 
-                                                        + identificator, line, col);
+                                                        + id, line, col);
                 }
                 symm.setValor(valueExp);
                 contador++;
@@ -187,13 +189,54 @@ public class Call extends Instruction{
         return "";
     }
     
-        public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+    
+    
+    
+    public Object createSym(Arbol arbol, TablaSimbolos tabla) {
         return null;
     }
         
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
-        return anterior;
+        String armed = "";
+        C3d c =  arbol.getC3d();
+        int posIni = 1;
+        Simbolo sym = arbol.getSym(id);
+        if(sym.getCat().equals(categoria.FUNCTION) ){
+            if(sym.getAmbito().get(0).equals(arbol.getClassMain().getId())){
+                posIni = 1;
+            }else{
+                posIni = 3;
+                
+            }
+        }else if(sym.getCat().equals(categoria.METHOD)){
+            if(sym.getAmbito().get(0).equals(arbol.getClassMain().getId())){
+                posIni = 0;
+            }else{
+                posIni = 2;
+            }
+        }
+                                            //extrayendo los params
+        for (Instruction exps : parametersExp) {
+            armed+=exps.createC3D(arbol, anterior);
+        }
+                                            //stack temp
+        armed+=c.c3d_ptrTemp(arbol.getSizeStack());
+                                            //preparando params en el stack
+        for (Instruction exps : parametersExp) {
+            armed+=c.c3d_asignVar(id, posIni);
+            posIni++;
+        }
+        c.setPtrTemp();
+                                            //ejecutar el metodo
+        armed+=c.c3d_moveToStack(true, arbol.getSizeStack());
+        armed+= id+"();\n";
+        armed+=c.c3d_moveToStack(false, arbol.getSizeStack());
+        
+                            //create al metodo/funcion
+        sym.getInstruction().createC3D(arbol, anterior);
+        
+        return armed;
     }
     
     

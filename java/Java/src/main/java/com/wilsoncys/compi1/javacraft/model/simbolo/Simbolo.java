@@ -127,7 +127,22 @@ public class Simbolo {
     public void setDir(int direccion) {
         this.direccion = direccion;
     }
-    
+
+    public List<String> getAmbito() {
+        return ambito;
+    }
+
+    public void setAmbito(List<String> ambito) {
+        this.ambito = ambito;
+    }
+
+    public int getDir() {
+        return direccion;
+    }
+
+    public categoria getCat() {
+        return cat;
+    }
     
     
     
