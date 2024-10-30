@@ -111,17 +111,22 @@ public class Prints extends Instruction {
                     //		println(sumar(num1, num2));
             if(exp instanceof Call){
                 armed+= exp.createC3D(arbol, anterior);
-                armed+=c.c3d_printVar(ln);
+                armed+=c.c3d_printVar();
             }else if(exp instanceof Nativo){
                 String val= (String)exp.createC3D(arbol, anterior);
-                armed+=c.c3d_printNativo(val, ln);
+                armed+=c.c3d_printNativo(val);
                 c.clearVarParams();
             }else{
                 armed+= exp.createC3D(arbol, anterior);
-                armed+=c.c3d_printVar(ln);
+                armed+=c.c3d_printVar();
                 c.clearVarParams();
             }
         }   
+        
+        if(ln){
+            armed+= "cout<<endl;";
+        }
+        
         return armed;
     }
     

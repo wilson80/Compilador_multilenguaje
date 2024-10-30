@@ -98,27 +98,15 @@ public class C3d {
 //        return  armed;
 //    }
     
-    public String c3d_printVar(boolean  ln){
+    public String c3d_printVar(){
         String armed = "";  
-        if(ln){
-            armed = "cout<<" + varsParams.get(0) +"<<endl"+ SEMIC ;
-        }else{
             armed = "cout<<" + varsParams.get(0) + SEMIC ;
-        }
         return armed; 
     }
     
-    public String c3d_printNativo(String val, boolean  ln){
+    public String c3d_printNativo(String val){
         String armed = "";  
-
-
-
-
-        if(ln){
-            armed = "cout<<" + "\"" + val +"\" " +"<<endl"+ SEMIC ;
-        }else{
             armed = "cout<<" + "\""+val + "\"" + SEMIC ;
-        }
         return armed; 
     }
     
