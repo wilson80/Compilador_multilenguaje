@@ -6,6 +6,7 @@ package com.wilsoncys.compi1.javacraft.model.instrucciones;
 
 import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
+import com.wilsoncys.compi1.javacraft.model.expresiones.Input;
 import com.wilsoncys.compi1.javacraft.model.expresiones.Nativo;
 import com.wilsoncys.compi1.javacraft.model.poo.Call;
 import com.wilsoncys.compi1.javacraft.model.sC3D.C3d;
@@ -16,6 +17,7 @@ import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.javacraft.model.simbolo.tipoDato;
 import java.lang.annotation.Native;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 /**
  *
@@ -191,27 +193,39 @@ public class Assignmentt extends Instruction{
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
         String armed = "";
-        C3d c3d =  arbol.getC3d();
-        if(this.expr instanceof Nativo){    //declaracion con valor vativo
-            int dir = arbol.getSym(id).getDir();
-            this.expr.createC3D(arbol, anterior);
-            armed = c3d.c3d_asignVal("", dir);
-        }else if(this.expr instanceof Call call){                          //declaracion y asignacion
-            int dir = arbol.getSym(id).getDir();
-                //pndte
-                                                //create a la llamada
-            armed+= call.createC3D(arbol, anterior);
-                                            //asignacion
-//            //mover el ptr temporal
-//            armed+=c3d.c3d_ptrTemp(arbol.getSizeStack());
-//            //obtener valor del return
-//            armed+=c3d.c3d_accesTemp(id, arbol.getPosReturn());
-            //asignar
-            c3d.setPtrTemp("ptr");
-            armed+=c3d.c3d_asignVar(id, dir);
-            c3d.clearPtrTemp();
-            
-        }
+        C3d c =  arbol.getC3d();
+        int dir = arbol.getSym(id).getDir();
+
+         if(expr instanceof Input inp){
+                inp.createC3D(arbol, anterior);
+                armed+= c.c3d_Input();          //new var  
+                armed+=c.c3d_asignVal("", dir);     //Entrada cin
+                c.varsParams = new LinkedList<>();  //limpiar despues de agregar
+             
+         }else{
+            if(this.expr instanceof Nativo){    //declaracion con valor vativo
+
+              this.expr.createC3D(arbol, anterior);
+              armed = c.c3d_asignVal("", dir);
+          }else if(this.expr instanceof Call call){                          //declaracion y asignacion
+                  //pndte
+                                                  //create a la llamada
+              armed+= call.createC3D(arbol, anterior);
+                                              //asignacion
+  //            //mover el ptr temporal
+  //            armed+=c3d.c3d_ptrTemp(arbol.getSizeStack());
+  //            //obtener valor del return
+  //            armed+=c3d.c3d_accesTemp(id, arbol.getPosReturn());
+              //asignar
+              c.setPtrTemp("ptr");
+              armed+=c.c3d_asignVar(id, dir);
+              c.clearPtrTemp();
+
+          }   
+         }
+         
+        
+        
         
         
         

@@ -10,7 +10,8 @@ package com.wilsoncys.compi1.javacraft.model.simbolo;
  */
 public class Tipo {
     private tipoDato tipo;
-
+    private String idObjeto;
+    
     public Tipo(tipoDato tipo) {
         this.tipo = tipo;
     }
@@ -48,6 +49,17 @@ public class Tipo {
         }
         
     } 
+
+    public void setIdObjeto(String idObjeto) {
+        this.idObjeto = idObjeto;
+    }
+
+    public String getIdObjeto() {
+        return idObjeto;
+    }
+    
+    
+    
     
     
 

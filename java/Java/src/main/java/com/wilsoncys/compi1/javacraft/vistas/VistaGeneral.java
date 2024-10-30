@@ -308,7 +308,8 @@ public class VistaGeneral extends javax.swing.JFrame {
     }//GEN-LAST:event_menuArchivoMouseClicked
 
     private void botonEjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEjecutarActionPerformed
-         identificarPestanaSelected();
+        setCajonConsola("-----");
+        identificarPestanaSelected();
 //        String textoNotEsc =  textoActual.replace("\\n", "\n")
 //                .replace("\\t", "\t")
 ////                .replace("\\\"", "\"");

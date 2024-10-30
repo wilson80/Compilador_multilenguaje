@@ -6,6 +6,7 @@ package com.wilsoncys.compi1.javacraft.model.instrucciones;
 
 import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
+import com.wilsoncys.compi1.javacraft.model.expresiones.Input;
 import com.wilsoncys.compi1.javacraft.model.sC3D.C3d;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Simbolo;
@@ -13,6 +14,7 @@ import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -145,20 +147,29 @@ public class Statement extends Instruction{
     public Object createC3D(Arbol arbol, String anterior) {
         String armed = "";
         C3d c =  arbol.getC3d();
+        int dir  = arbol.getSym(this.id).getDir();
         
         if(whatConstruct == 0){
-            int dir  = arbol.getSym(this.id).getDir();
             c.varsParams.add("0");
             //si el valor es un nativo
             armed = c.c3d_asignVal("", dir);
             
         }
         if(whatConstruct == 1){
-            Simbolo sym = arbol.getSym(id);
-            armed+=this.exp.createC3D(arbol, anterior); //create exp
-                                                        //asignacion
-            armed+=c.c3d_asignVal(c.varsParams.get(0), sym.getDir());
-            c.varsParams = new LinkedList<>();
+            
+            if(exp instanceof Input inp){
+                    inp.createC3D(arbol, anterior);
+                    armed+= c.c3d_Input();  
+                    armed+=c.c3d_asignVal("", dir);
+                    c.varsParams = new LinkedList<>();
+                
+                
+            }else{
+                armed+=this.exp.createC3D(arbol, anterior); //create exp
+                                                            //asignacion
+                armed+=c.c3d_asignVal(c.varsParams.get(0), dir);
+                c.varsParams = new LinkedList<>();
+            }
             
             
         }

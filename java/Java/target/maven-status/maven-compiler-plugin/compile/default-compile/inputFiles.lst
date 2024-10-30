@@ -20,6 +20,7 @@
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/javacraft/model/expresiones/Enums/OperadoresAritmeticos.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/javacraft/model/expresiones/Enums/Relational_LogicalOperations.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/javacraft/model/expresiones/Enums/TypeVar.java
+/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/javacraft/model/expresiones/Input.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/javacraft/model/expresiones/InstanceStruct.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/javacraft/model/expresiones/LogicalOperations.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/javacraft/model/expresiones/Nativo.java

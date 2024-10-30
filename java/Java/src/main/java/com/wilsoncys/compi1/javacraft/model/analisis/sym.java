@@ -16,6 +16,7 @@ public class sym {
   public static final int CONST = 56;
   public static final int PAR_CL = 48;
   public static final int PAR_OP = 47;
+  public static final int INP_INT = 79;
   public static final int G_EQUALS = 16;
   public static final int ASSIGNMENT = 20;
   public static final int CHARAC = 4;
@@ -84,8 +85,10 @@ public class sym {
   public static final int POINTS = 52;
   public static final int UMINUS = 36;
   public static final int REMOVE = 63;
+  public static final int INP_F = 80;
   public static final int XOR = 33;
   public static final int EQUALS = 18;
+  public static final int INP_C = 78;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -164,7 +167,10 @@ public class sym {
   "THIS",
   "MAIN",
   "CLASS",
-  "PRINTLN"
+  "PRINTLN",
+  "INP_C",
+  "INP_INT",
+  "INP_F"
   };
 }
 

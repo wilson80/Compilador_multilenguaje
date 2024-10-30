@@ -35,7 +35,7 @@ public class C3d {
     String OPRT = " + ";
     String MAS = " + ";
     String MENOS = " - ";
-    String SEMIC = ";";
+    String SEMIC = ";\n";
     String PAR_L = "(";
     String PAR_R = ")";
     String KEY_L = "{";
@@ -53,15 +53,13 @@ public class C3d {
     }
     
  
-    public String c3d_operation(String val, int dir){
-        String armed = c3d_newVar() + ASSIG + varsParams.get(0)+OPRT+varsParams.get(1) + SEMIC+saltoLinea;
-        varsParams = new LinkedList<>();
-        varsParams.add("w"+(contador-1));  //guarda el id de la var q contiene el resultado
+    public String c3d_operation(String val1, String val2){
+        String armed = c3d_newVar() + ASSIG + val1+OPRT+val2 + SEMIC;
         return  armed;
     }
     public String c3d_acces(String val, int dir){
         String armed = c3d_newVar() + ASSIG + PTR +MAS+dir + SEMIC+saltoLinea;
-        armed += c3d_newVar() + ASSIG + c3d_stack("w" + (contador-2))  + SEMIC+saltoLinea;
+        armed += c3d_newVar() + ASSIG + c3d_stack("w" + (contador-2))  + SEMIC;
         varsParams.add("w" + (contador-1));
         return  armed;
     }
@@ -69,14 +67,14 @@ public class C3d {
                                                     //    t28 = t27 + 0;
                                                     //    t29 = stack[t28];
         String armed = c3d_newVar() + ASSIG + ptrTemp +MAS+dir + SEMIC+saltoLinea;
-        armed += c3d_newVar() + ASSIG + c3d_stack("w" + (contador-2))  + SEMIC+saltoLinea;
+        armed += c3d_newVar() + ASSIG + c3d_stack("w" + (contador-2))  + SEMIC;
         varsParams.add("w" + (contador-1));
         return  armed;
     }
     
     public String c3d_asignVal(String val, int dir){    //asignacion de nativos
         String armed = c3d_newVar() + ASSIG + PTR +MAS+dir + SEMIC+saltoLinea;
-        armed += c3d_stack("w" + (contador-1)) + ASSIG + varsParams.get(0) + SEMIC+saltoLinea;
+        armed += c3d_stack("w" + (contador-1)) + ASSIG + varsParams.get(0) + SEMIC;
         varsParams.removeFirst();
         return  armed;
     }   
@@ -84,8 +82,13 @@ public class C3d {
 //    stack[t26] = t22; 
     public String c3d_asignVar(String val, int dir){
         String armed = c3d_newVar() + ASSIG +  ptrTemp +MAS+dir + SEMIC+saltoLinea;
-        armed += c3d_stack("w" + (contador-1)) + ASSIG + varsParams.get(0) + SEMIC+saltoLinea;
+        armed += c3d_stack("w" + (contador-1)) + ASSIG + varsParams.get(0) + SEMIC;
         varsParams.removeFirst();
+        return  armed;
+    }
+    public String c3d_asignAlone(String val){
+        String armed = c3d_newVar() + ASSIG +  val+ SEMIC+saltoLinea;
+        varsParams.add("w"+(contador-1));
         return  armed;
     }
 //    public String c3d_asignVarNat(String val, int dir){
@@ -98,9 +101,9 @@ public class C3d {
     public String c3d_printVar(boolean  ln){
         String armed = "";  
         if(ln){
-            armed = "cout<<" + varsParams.get(0) +"<<endl"+ SEMIC + saltoLinea;
+            armed = "cout<<" + varsParams.get(0) +"<<endl"+ SEMIC ;
         }else{
-            armed = "cout<<" + varsParams.get(0) + SEMIC + saltoLinea;
+            armed = "cout<<" + varsParams.get(0) + SEMIC ;
         }
         return armed; 
     }
@@ -112,9 +115,9 @@ public class C3d {
 
 
         if(ln){
-            armed = "cout<<" + "\"" + val +"\" " +"<<endl"+ SEMIC + saltoLinea;
+            armed = "cout<<" + "\"" + val +"\" " +"<<endl"+ SEMIC ;
         }else{
-            armed = "cout<<" + "\""+val + "\"" + SEMIC + saltoLinea;
+            armed = "cout<<" + "\""+val + "\"" + SEMIC ;
         }
         return armed; 
     }
@@ -146,9 +149,9 @@ public class C3d {
                         //preparar, al ejecutar un metodo
         String arm = "";
         if(go_Back){
-            arm = PTR + ASSIG  + PTR + MAS +size + SEMIC+saltoLinea ;
+            arm = PTR + ASSIG  + PTR + MAS +size + SEMIC ;
         }else{
-            arm = PTR + ASSIG  + PTR + MENOS +size + SEMIC+saltoLinea ;
+            arm = PTR + ASSIG  + PTR + MENOS +size + SEMIC ;
         }
         return arm; 
     }
@@ -158,7 +161,7 @@ public class C3d {
             arm+="\n";
         ptrTemp = "";
         ptrTemp += "w" + contador;
-            arm = c3d_newVar() + ASSIG  + PTR + MAS +size + SEMIC +saltoLinea   ;
+            arm = c3d_newVar() + ASSIG  + PTR + MAS +size + SEMIC;
             arm+="\n";
         return arm; 
     }
@@ -180,6 +183,13 @@ public class C3d {
         
         return  armed;
     }
+    public String c3d_Input(){
+        String armed = c3d_newVar() + SEMIC  + saltoLinea;
+        armed += "cin>>" + "w" + (contador-1)  + SEMIC;
+        varsParams.add("w"+(contador-1));
+        return  armed;
+    }
+     
         
     
      
@@ -206,6 +216,10 @@ public class C3d {
 
     public void clearVarParams(){
         varsParams =  new LinkedList<>();
+    }
+
+    public int getContador() {
+        return contador;
     }
     
     

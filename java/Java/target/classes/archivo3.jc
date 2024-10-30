@@ -3,11 +3,8 @@ public class uno{
 	int num2;
 	int resultado;
 	public void Main(){ 
-		num1 = 5;
-		num2 = 5;
-		resultado = sumar(7, num2);
-
-		println("El resultado es", resultado);	
+		
+		println("El resultado es:", sumar(5,6));	
 		 
 	} 
 

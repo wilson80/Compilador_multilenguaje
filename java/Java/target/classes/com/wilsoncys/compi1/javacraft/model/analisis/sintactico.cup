@@ -77,7 +77,7 @@ terminal VAR, CONST, COLON, START_W, LIST, NEW, DOT, APPEND, REMOVE, LENGTH, FIN
 terminal RETURN, STRUCT, TUSTRIN;
 terminal PROTECTED, PRIVATE, PUBLIC;
 terminal EXTENDS, THIS, MAIN, CLASS, PRINTLN;
-
+terminal INP_C,INP_INT, INP_F;
 
 
 //no terminales
@@ -402,7 +402,14 @@ print::= PRINT PAR_OP paramss:a PAR_CL SEMIC   {:   RESULT = new Prints(a, false
 
  
 declaracion::=   typeVar:t ID:string   SEMIC                     {: RESULT = new Statement(string, t, tleft, tright, false); :}
-            |    typeVar:t ID:string   ASSIGNMENT EXPRESION:exp SEMIC {: RESULT = new Statement(string, exp, t, tleft, tright, false); :}    
+            |    typeVar:t ID:string   ASSIGNMENT EXPRESION:exp SEMIC  {: RESULT = new Statement(string, exp, t, tleft, tright, false); :}    
+            | typeVar:t ID:id ASSIGNMENT INP_INT PAR_OP PAR_CL SEMIC
+{:  RESULT = new Statement(id, new Input(new Tipo(tipoDato.ENTERO), idleft, idright), t, idleft, idright, false);  :}
+             | typeVar:t ID:id ASSIGNMENT INP_C PAR_OP PAR_CL SEMIC
+{:  RESULT = new Statement(id, new Input(new Tipo(tipoDato.CARACTER), idleft, idright), t, idleft, idright, false);  :}
+             | typeVar:t ID:id ASSIGNMENT INP_F PAR_OP PAR_CL SEMIC
+{:  RESULT = new Statement(id, new Input(new Tipo(tipoDato.DECIMAL), idleft, idright), t, idleft, idright, false);  :}
+
 ;
 
 // reference::=  NEW typeVar:t  PAR_OP callsParameters PAR_CL 
@@ -464,7 +471,13 @@ asignacion::= THIS DOT ID:id ASSIGNMENT EXPRESION:exp SEMIC {:  RESULT = new Ass
              | ID:id BRACK_L EXPRESION:index1 BRACK_R ASSIGNMENT EXPRESION:exp  SEMIC 
                 {: RESULT = new AssignmentVectores(id, index1, exp, idleft, idright); :}
              | ID:id BRACK_L EXPRESION:index1 BRACK_R BRACK_L EXPRESION:index2 BRACK_R ASSIGNMENT EXPRESION:exp  SEMIC
-              {: RESULT = new AssignmentVectores(id, index1, index2, exp, idleft, idright); :} 
+              {: RESULT = new AssignmentVectores(id, index1, index2, exp, idleft, idright); :}
+             | ID:id ASSIGNMENT INP_INT PAR_OP PAR_CL SEMIC
+{:  RESULT = new Assignmentt(id, new Input(new Tipo(tipoDato.ENTERO), idleft, idright), idleft, idright);  :}
+             | ID:id ASSIGNMENT INP_C PAR_OP PAR_CL SEMIC
+{:  RESULT = new Assignmentt(id, new Input(new Tipo(tipoDato.CARACTER), idleft, idright), idleft, idright);  :}
+             | ID:id ASSIGNMENT INP_F PAR_OP PAR_CL SEMIC
+{:  RESULT = new Assignmentt(id, new Input(new Tipo(tipoDato.DECIMAL), idleft, idright), idleft, idright);  :}
         ; 
 
         // numeros[0][0] = 10;

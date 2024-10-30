@@ -100,20 +100,14 @@ Rbrack = \]
         <YYINITIAL>"match"            { return symbol(sym.MATCH, yytext());}
         <YYINITIAL>"continue"            { return symbol(sym.CONTINUE, yytext());}
 
-                <YYINITIAL>"START_WITH"            { return symbol(sym.START_W, yytext());}
 
 
         <YYINITIAL>"void"            { return symbol(sym.VOID, yytext());}
-            <YYINITIAL>"append"            { return symbol(sym.APPEND, yytext());}
         <YYINITIAL>"new"            { return symbol(sym.NEW, yytext());}
-        <YYINITIAL>"list"            { return symbol(sym.LIST, yytext());}
-        <YYINITIAL>"remove"            { return symbol(sym.REMOVE, yytext());}
-        <YYINITIAL>"length"            { return symbol(sym.LENGTH, yytext());}
-        <YYINITIAL>"find"            { return symbol(sym.FIND, yytext());}
-        <YYINITIAL>"round"            { return symbol(sym.ROUND, yytext());}
         <YYINITIAL>"return"            { return symbol(sym.RETURN, yytext());}
-        <YYINITIAL>"struct"            { return symbol(sym.STRUCT, yytext());}
-        <YYINITIAL>"toString"            { return symbol(sym.TUSTRIN, yytext());}
+        <YYINITIAL>"intinput"            { return symbol(sym.INP_INT, yytext());}
+        <YYINITIAL>"floatinput"            { return symbol(sym.INP_F, yytext());}
+        <YYINITIAL>"charinput"            { return symbol(sym.INP_C, yytext());}
 
 
 
