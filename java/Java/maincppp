@@ -1,12 +1,18 @@
-//cabecera
+//LISTAS ENLAZADAS
+
 #include<iostream>
 using namespace std;
 int ptr = 0;
 int stack[100];
 
+//Usar los ejemplos 2 y 3 para crear codigo final en C++. Adjuntar archivos con codigo C++.
+//- No se deben usar temporales, sino un stack de temporales
+//- Se deben usar etiquetas para activar subprogramas.
+
+ 
 
 
-void suma(){
+void resta(){
     int tr1;
     int tr2;
     int tr3;
@@ -16,36 +22,31 @@ void suma(){
     int tr7;
     int tr8;
     int tr9;
-
-// ins Statement
-    //expSuma 
-//acces x
+    // codigo resta
     tr1 = ptr + 1;
     tr2 = stack[tr1];
 
-//acces y
     tr3 = ptr + 2;
     tr4 = stack[tr3];
-//op
+
     tr5 = tr2 - tr4;
-//assig a total
+
     tr6 = ptr + 3;
     stack[tr6] = tr5;
 
-//return
     tr7 = ptr + 3;
     tr8 = stack[tr7];
 
     tr9 = ptr + 0;
     stack[tr9] = tr8;
 
-}
 
+}
 
 int main(){
 // bajo nivel
     int t1;
-    int t2; 
+    int t2;
     int t3;
     int t4;
     int t5;
@@ -76,7 +77,8 @@ int main(){
     int t30;
     int t31;
 
-________________________________________________________
+    ptr = 0;
+
     t1 = ptr + 0;
     stack[t1] = 0;
 
@@ -97,7 +99,7 @@ ________________________________________________________
 
 
     //scan_int t6;
-    cin >> t6;
+            cin >> t6;
     t7 = ptr + 1;
     stack[t7] = t6;
 
@@ -124,9 +126,8 @@ ________________________________________________________
     stack[t27] = t24;
 
     ptr = ptr + 3;
-    suma();
+    resta();
     ptr = ptr - 3;
-
 
     // movemos temporalmente al stack de resta
     t27 = ptr + 3;
@@ -141,7 +142,7 @@ ________________________________________________________
 
     t30 = ptr + 2;
     t31 = stack[t30];
-    cout<<t31;
+    cout<<">>"<<t31;
 
 
 

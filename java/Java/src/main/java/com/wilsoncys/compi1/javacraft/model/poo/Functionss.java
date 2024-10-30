@@ -115,7 +115,7 @@ public class Functionss extends Instruction{
         }
         armed+=c.c3d_metodo(id, bodyMet);
             
-        arbol.setConsola(armed);
+        arbol.Print(armed);
         
         return "";
     }

@@ -39,8 +39,7 @@ public class Arbol {
     public int sizeStack = 0;
     private int posReturn = 0;
     
-    
-    
+   
     public int count;
     
     

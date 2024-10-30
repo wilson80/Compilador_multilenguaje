@@ -28,8 +28,8 @@ public class Control {
     
     public void configurarVentana(){
         vistaGeneral = new VistaGeneral(this);
-//        vistaGeneral.setExtendedState(vistaGeneral.MAXIMIZED_BOTH);
-        vistaGeneral.setBounds(0, 0, 1500, 830);
+        vistaGeneral.setExtendedState(vistaGeneral.MAXIMIZED_BOTH);
+//        vistaGeneral.setBounds(0, 0, 1500, 830);
         vistaGeneral.setVisible(true);
         
     }

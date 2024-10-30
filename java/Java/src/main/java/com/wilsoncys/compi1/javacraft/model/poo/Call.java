@@ -7,6 +7,7 @@ package com.wilsoncys.compi1.javacraft.model.poo;
 import com.wilsoncys.compi1.javacraft.model.poo.Method;
 import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores; 
+import com.wilsoncys.compi1.javacraft.model.expresiones.Nativo;
 import com.wilsoncys.compi1.javacraft.model.instrucciones.Statement;
 import com.wilsoncys.compi1.javacraft.model.instrucciones.transferReturn;
 import com.wilsoncys.compi1.javacraft.model.sC3D.C3d;
@@ -203,7 +204,8 @@ public class Call extends Instruction{
         int posIni = 1;
         Simbolo sym = arbol.getSym(id);
         if(sym.getCat().equals(categoria.FUNCTION) ){
-            if(sym.getAmbito().get(0).equals(arbol.getClassMain().getId())){
+            if(sym.getAmbito().get(0).equals(arbol.getClassMain().getId())){        
+                                    //config pos de retorno
                 arbol.setPosReturn(0);
                 posIni = 1;
             }else{
@@ -212,6 +214,7 @@ public class Call extends Instruction{
                 
             }
         }else if(sym.getCat().equals(categoria.METHOD)){
+                                    //config pos de retorno
             if(sym.getAmbito().get(0).equals(arbol.getClassMain().getId())){
                 arbol.setPosReturn(0);
                 posIni = 0;
@@ -222,16 +225,23 @@ public class Call extends Instruction{
         }
                                             //extrayendo los params
         for (Instruction exps : parametersExp) {
-            armed+=exps.createC3D(arbol, anterior);
+            if(exps instanceof Nativo){
+                exps.createC3D(arbol, anterior);
+            }else{
+                armed+=exps.createC3D(arbol, anterior);
+            }
+            
         }
                                             //stack temp
         armed+=c.c3d_ptrTemp(arbol.getSizeStack());
-                                            //preparando params en el stack
+                                            //PREPARED params en el stack
         for (Instruction exps : parametersExp) {
-            armed+=c.c3d_asignVar(id, posIni);
-            posIni++;
+//            if(exps instanceof Nativo){
+                armed+=c.c3d_asignVar("", posIni);
+                posIni++;
+//            }
         }
-        c.clearPtrTemp();
+        c.clearPtrTemp();   
                                             //ejecutar el metodo
         armed+=c.c3d_moveToStack(true, arbol.getSizeStack());
         armed+= id+"();\n";
@@ -239,6 +249,11 @@ public class Call extends Instruction{
         
                             //create al metodo/funcion
         sym.getInstruction().createC3D(arbol, anterior);
+        
+//                    mover el ptr temporal
+            armed+=c.c3d_ptrTemp(arbol.getSizeStack());
+            //obtener valor del return
+            armed+=c.c3d_accesTemp(id, arbol.getPosReturn());
         
         return armed;
     }

@@ -396,12 +396,11 @@ elsees::=  IF PAR_OP EXPRESION:exp PAR_CL  K_OP InstructionES:ins K_CL cierreEls
 ;
 
 
-print::= PRINT PAR_OP paramss:a PAR_CL SEMIC   {:   RESULT = new Prints(a, aleft, aright);   :}
-        |PRINTLN PAR_OP paramss:a PAR_CL SEMIC   {:   RESULT = new Prints(a, aleft, aright);   :}
+print::= PRINT PAR_OP paramss:a PAR_CL SEMIC   {:   RESULT = new Prints(a, false, aleft, aright);   :}
+        |PRINTLN PAR_OP paramss:a PAR_CL SEMIC   {:   RESULT = new Prints(a, true, aleft, aright);   :}
 ;
 
  
-
 declaracion::=   typeVar:t ID:string   SEMIC                     {: RESULT = new Statement(string, t, tleft, tright, false); :}
             |    typeVar:t ID:string   ASSIGNMENT EXPRESION:exp SEMIC {: RESULT = new Statement(string, exp, t, tleft, tright, false); :}    
 ;

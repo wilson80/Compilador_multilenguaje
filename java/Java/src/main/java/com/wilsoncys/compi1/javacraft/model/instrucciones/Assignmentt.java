@@ -194,18 +194,18 @@ public class Assignmentt extends Instruction{
         C3d c3d =  arbol.getC3d();
         if(this.expr instanceof Nativo){    //declaracion con valor vativo
             int dir = arbol.getSym(id).getDir();
-            String valNat = (String)this.expr.createC3D(arbol, anterior);
-            armed = c3d.c3d_asignVal(valNat, dir);
+            this.expr.createC3D(arbol, anterior);
+            armed = c3d.c3d_asignVal("", dir);
         }else if(this.expr instanceof Call call){                          //declaracion y asignacion
             int dir = arbol.getSym(id).getDir();
                 //pndte
                                                 //create a la llamada
             armed+= call.createC3D(arbol, anterior);
                                             //asignacion
-            //mover el ptr temporal
-            armed+=c3d.c3d_ptrTemp(arbol.getSizeStack());
-            //obtener valor del return
-            armed+=c3d.c3d_accesTemp(id, arbol.getPosReturn());
+//            //mover el ptr temporal
+//            armed+=c3d.c3d_ptrTemp(arbol.getSizeStack());
+//            //obtener valor del return
+//            armed+=c3d.c3d_accesTemp(id, arbol.getPosReturn());
             //asignar
             c3d.setPtrTemp("ptr");
             armed+=c3d.c3d_asignVar(id, dir);
@@ -221,7 +221,7 @@ public class Assignmentt extends Instruction{
 //    stack[tr6] = var;
         
         
-        
+            armed +="\n";
         return armed;
     }
 }

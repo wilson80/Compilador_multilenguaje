@@ -117,7 +117,7 @@ public class Mainn extends Instruction{
                     if(ins ==null){
                         continue;
                     }
-                    armed += (String)ins.createC3D(arbol, anterior);
+                    armed += ins.createC3D(arbol, anterior);
                 }
       
         return armed;

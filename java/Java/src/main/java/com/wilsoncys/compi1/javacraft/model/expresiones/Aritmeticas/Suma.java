@@ -217,9 +217,10 @@ public class Suma extends Instruction {
     public Object createC3D(Arbol arbol, String anterior) {
         String armed = "";
         C3d c=  arbol.getC3d();
-        c.varsParams = new ArrayList<>();
+        c.varsParams = new LinkedList<>();
         armed+=operando1.createC3D(arbol, anterior);
         armed+=operando2.createC3D(arbol, anterior);
+        c.setOPRT("+");
         armed+=c.c3d_operation("-", 99);
         return armed;
     }

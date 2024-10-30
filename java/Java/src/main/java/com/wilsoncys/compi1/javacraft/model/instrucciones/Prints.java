@@ -6,10 +6,15 @@ package com.wilsoncys.compi1.javacraft.model.instrucciones;
 
 import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
+import com.wilsoncys.compi1.javacraft.model.expresiones.Access;
+import com.wilsoncys.compi1.javacraft.model.expresiones.Nativo;
+import com.wilsoncys.compi1.javacraft.model.poo.Call;
+import com.wilsoncys.compi1.javacraft.model.sC3D.C3d;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.javacraft.model.simbolo.tipoDato;  
+import java.util.ArrayList;
 import java.util.LinkedList;
 import org.apache.commons.lang3.StringEscapeUtils;
 
@@ -18,11 +23,12 @@ import org.apache.commons.lang3.StringEscapeUtils;
  * @author yoyo
  */
 public class Prints extends Instruction {
-
+    private boolean ln;
     private  LinkedList<Instruction> expresioness;
 
-    public Prints(LinkedList<Instruction> expresion, int linea, int col) {
+    public Prints(LinkedList<Instruction> expresion, boolean ln, int linea, int col) {
         super(new Tipo(tipoDato.VOID), linea, col);
+        this.ln = ln;
         this.expresioness = expresion;
     }
 
@@ -91,10 +97,32 @@ public class Prints extends Instruction {
     public Object createSym(Arbol arbol, TablaSimbolos tabla) {
         return null;
     }
+        
+    
+    
+    
     
         @Override
-    public Object createC3D(Arbol arbol, String anterior) {
-        return anterior;
+    public Object createC3D(Arbol arbol, String anterior) {        
+        String armed = "";
+        C3d c = arbol.getC3d();
+        
+        for (Instruction exp : expresioness) {
+                    //		println(sumar(num1, num2));
+            if(exp instanceof Call){
+                armed+= exp.createC3D(arbol, anterior);
+                armed+=c.c3d_printVar(ln);
+            }else if(exp instanceof Nativo){
+                String val= (String)exp.createC3D(arbol, anterior);
+                armed+=c.c3d_printNativo(val, ln);
+                c.clearVarParams();
+            }else{
+                armed+= exp.createC3D(arbol, anterior);
+                armed+=c.c3d_printVar(ln);
+                c.clearVarParams();
+            }
+        }   
+        return armed;
     }
     
 }

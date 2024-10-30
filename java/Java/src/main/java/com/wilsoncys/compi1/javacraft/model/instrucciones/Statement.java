@@ -12,6 +12,7 @@ import com.wilsoncys.compi1.javacraft.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  *
@@ -147,9 +148,9 @@ public class Statement extends Instruction{
         
         if(whatConstruct == 0){
             int dir  = arbol.getSym(this.id).getDir();
-            String val = "0";
+            c.varsParams.add("0");
             //si el valor es un nativo
-            armed = c.c3d_asignVal(val, dir);
+            armed = c.c3d_asignVal("", dir);
             
         }
         if(whatConstruct == 1){
@@ -157,7 +158,7 @@ public class Statement extends Instruction{
             armed+=this.exp.createC3D(arbol, anterior); //create exp
                                                         //asignacion
             armed+=c.c3d_asignVal(c.varsParams.get(0), sym.getDir());
-            c.varsParams = new ArrayList<>();
+            c.varsParams = new LinkedList<>();
             
             
         }

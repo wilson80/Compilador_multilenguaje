@@ -3,16 +3,72 @@ public class uno{
 	int num2;
 	int resultado;
 	public void Main(){ 
-		num1 = 10;
+		num1 = 5;
 		num2 = 5;
-		resultado = sumar(num1, num2 );
+		resultado = sumar(7, num2);
+
+		println("El resultado es", resultado);	
+		 
 	} 
+
+
 	public int sumar(int x, int y){
 		int total = x+y; 
 		return total;
+	} 
+
+}  
+
+
+	
+ 
+
+ 
+ 
+
+
+
+
+
+
+/*public class uno{
+	int num1;
+	int num2;
+	int num3;
+	int resultado;
+	public void Main(){ 
+		num1 = 5;
+		num2 = 5;
+		num3 = 5;
+		resultado = sumar(num1, num2, num3);
+		println("El resultado es", num1);	
+		 resultado = restar(num1, num2 );
+		 println(resultado);
+		 resultado = multiplicar(num1, num2 );
+		 println(resultado);
+		 resultado = dividir(num1, num2 );
+		 println(resultado);
+	} 
+
+
+	public int sumar(int x, int y, int z){
+		int total = x+y+z; 
+		return total;
+	}
+	public int restar(int x, int y){
+		int total = x-y; 
+		return total;
+	}
+	public int multiplicar(int x, int y){
+		int total = x*y; 
+		return total;
+	}
+	public int dividir(int x, int y){
+		int total = x/y; 
+		return total;
 	}
 
-} 
+} */
 
 
 	

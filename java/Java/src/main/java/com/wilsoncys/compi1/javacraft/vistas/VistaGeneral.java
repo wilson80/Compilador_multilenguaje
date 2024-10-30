@@ -5,6 +5,7 @@
 package com.wilsoncys.compi1.javacraft.vistas;
 
 import com.wilsoncys.compi1.javacraft.control.Control;
+import com.wilsoncys.compi1.javacraft.control.CppRunn;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
@@ -82,14 +83,23 @@ public class VistaGeneral extends javax.swing.JFrame {
     private void initComponents() {
 
         panelCajonTexto = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        cajonConsola = new javax.swing.JTextArea();
         botonEjecutar = new javax.swing.JButton();
         botonNuevoArchivo = new javax.swing.JButton();
         botonNuevoArchivo1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         labelLine = new javax.swing.JLabel();
         labelCol = new javax.swing.JLabel();
+        botonc = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        cajonConsola = new javax.swing.JTextArea();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        panelReportes = new javax.swing.JPanel();
+        panelSimbolo = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
         menuReportes = new javax.swing.JMenu();
@@ -100,15 +110,7 @@ public class VistaGeneral extends javax.swing.JFrame {
         panelCajonTexto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 255)));
         panelCajonTexto.setLayout(new java.awt.BorderLayout());
         getContentPane().add(panelCajonTexto);
-        panelCajonTexto.setBounds(10, 60, 660, 710);
-
-        cajonConsola.setEditable(false);
-        cajonConsola.setColumns(20);
-        cajonConsola.setRows(5);
-        jScrollPane1.setViewportView(cajonConsola);
-
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(690, 62, 750, 710);
+        panelCajonTexto.setBounds(10, 60, 650, 860);
 
         botonEjecutar.setBackground(new java.awt.Color(0, 102, 255));
         botonEjecutar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -120,7 +122,7 @@ public class VistaGeneral extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botonEjecutar);
-        botonEjecutar.setBounds(1120, 10, 80, 40);
+        botonEjecutar.setBounds(1150, 10, 80, 40);
 
         botonNuevoArchivo.setBackground(new java.awt.Color(0, 102, 255));
         botonNuevoArchivo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -138,7 +140,7 @@ public class VistaGeneral extends javax.swing.JFrame {
         botonNuevoArchivo1.setBackground(new java.awt.Color(0, 102, 255));
         botonNuevoArchivo1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         botonNuevoArchivo1.setForeground(new java.awt.Color(255, 255, 255));
-        botonNuevoArchivo1.setText("Crear AST");
+        botonNuevoArchivo1.setText("otra cosa");
         botonNuevoArchivo1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botonNuevoArchivo1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,6 +162,68 @@ public class VistaGeneral extends javax.swing.JFrame {
         labelCol.setText("Col: 0");
         getContentPane().add(labelCol);
         labelCol.setBounds(340, 20, 90, 30);
+
+        botonc.setBackground(new java.awt.Color(0, 102, 255));
+        botonc.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        botonc.setForeground(new java.awt.Color(255, 255, 255));
+        botonc.setText("Run c++");
+        botonc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botoncActionPerformed(evt);
+            }
+        });
+        getContentPane().add(botonc);
+        botonc.setBounds(770, 10, 110, 40);
+
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
+
+        jPanel2.setLayout(null);
+
+        cajonConsola.setColumns(20);
+        cajonConsola.setRows(5);
+        jScrollPane1.setViewportView(cajonConsola);
+
+        jPanel2.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 10, 760, 800);
+
+        jTabbedPane1.addTab("C3d", jPanel2);
+
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel1MouseClicked(evt);
+            }
+        });
+        jPanel1.setLayout(null);
+
+        jLabel2.setText("Reportes Errores");
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(0, 6, 520, 25);
+
+        panelReportes.setBackground(new java.awt.Color(102, 102, 102));
+        panelReportes.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelReportes.setLayout(new java.awt.GridLayout(0, 1));
+        jPanel1.add(panelReportes);
+        panelReportes.setBounds(6, 49, 1220, 270);
+
+        panelSimbolo.setBackground(new java.awt.Color(102, 102, 102));
+        panelSimbolo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        panelSimbolo.setLayout(new java.awt.BorderLayout());
+        jPanel1.add(panelSimbolo);
+        panelSimbolo.setBounds(10, 400, 1210, 390);
+
+        jLabel3.setText("Reporta Tabla de simbolos");
+        jPanel1.add(jLabel3);
+        jLabel3.setBounds(10, 360, 520, 25);
+
+        jTabbedPane1.addTab("Errores", jPanel1);
+        jTabbedPane1.addTab("algo", jPanel3);
+
+        getContentPane().add(jTabbedPane1);
+        jTabbedPane1.setBounds(670, 60, 1230, 840);
 
         jMenuBar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
@@ -260,6 +324,11 @@ public class VistaGeneral extends javax.swing.JFrame {
         
         tablaReport = this.control.getTablaReport();
 
+        panelSimbolo.removeAll();
+        panelReportes.removeAll();
+        llenandoJtable();
+        panelReportes.updateUI();
+        panelSimbolo.updateUI();
     }//GEN-LAST:event_botonEjecutarActionPerformed
 
     public void llenarTablaSimbolos(){
@@ -363,8 +432,8 @@ public class VistaGeneral extends javax.swing.JFrame {
         JScrollPane scrollErrores = new JScrollPane(tabla);
         
         
-        reportes.getPanelSimbolo().add(scrollErrores);
-        reportes.getPanelSimbolo().updateUI();
+        panelSimbolo.add(scrollErrores);
+        panelSimbolo.updateUI();
         
         
         
@@ -432,8 +501,8 @@ public class VistaGeneral extends javax.swing.JFrame {
         JScrollPane scrollErrores = new JScrollPane(tabla);
         
         
-        reportes.getPanelReportes().add(scrollErrores);
-        reportes.getPanelReportes().updateUI();
+        panelReportes.add(scrollErrores);
+        panelReportes.updateUI();
         
         llenarTablaSimbolos();
     }
@@ -455,18 +524,14 @@ public class VistaGeneral extends javax.swing.JFrame {
     }
     
     private void menuReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuReportesActionPerformed
-        System.out.println("Reportess");
+         System.out.println("Reportess");
     }//GEN-LAST:event_menuReportesActionPerformed
 
     private void menuReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuReportesMouseClicked
-         System.out.println("Reportess");
-         llenandoJtable();
-         setDefaultCloseOperation(HIDE_ON_CLOSE);
-        reportes.setVisible(true);
-        
-                
-        
-        
+//         System.out.println("Reportess");
+//         llenandoJtable();
+//         setDefaultCloseOperation(HIDE_ON_CLOSE);
+//        reportes.setVisible(true);
         
 // TODO add your handling code here:
     }//GEN-LAST:event_menuReportesMouseClicked
@@ -474,6 +539,20 @@ public class VistaGeneral extends javax.swing.JFrame {
     private void botonNuevoArchivo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoArchivo1ActionPerformed
         
     }//GEN-LAST:event_botonNuevoArchivo1ActionPerformed
+
+    private void botoncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botoncActionPerformed
+        CppRunn run = new CppRunn();
+        run.crearYEjecutarCpp(control.getMconsola());
+    }//GEN-LAST:event_botoncActionPerformed
+
+    private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+//        llenandoJtable();
+    }//GEN-LAST:event_jPanel1MouseClicked
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        panelReportes.removeAll();
+        llenandoJtable();
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     
     public void setCajonConsola(String resultados){
@@ -652,14 +731,23 @@ public class VistaGeneral extends javax.swing.JFrame {
     private javax.swing.JButton botonEjecutar;
     private javax.swing.JButton botonNuevoArchivo;
     private javax.swing.JButton botonNuevoArchivo1;
+    private javax.swing.JButton botonc;
     private javax.swing.JTextArea cajonConsola;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel labelCol;
     private javax.swing.JLabel labelLine;
     private javax.swing.JMenu menuArchivo;
     private javax.swing.JMenu menuReportes;
     private javax.swing.JPanel panelCajonTexto;
+    private javax.swing.JPanel panelReportes;
+    private javax.swing.JPanel panelSimbolo;
     // End of variables declaration//GEN-END:variables
 }

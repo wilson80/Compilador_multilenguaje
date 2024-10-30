@@ -99,8 +99,7 @@ import java.util.List;
 
         return  algo;
     }
-    
-    
+        
         
     public Object createSym(Arbol arbol, TablaSimbolos tabla) {
         //attb 

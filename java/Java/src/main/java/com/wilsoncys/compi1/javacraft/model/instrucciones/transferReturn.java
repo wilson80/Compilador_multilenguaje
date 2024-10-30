@@ -12,6 +12,7 @@ import com.wilsoncys.compi1.javacraft.model.simbolo.Tipo;
 import com.wilsoncys.compi1.javacraft.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.javacraft.model.simbolo.tipoDato;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  *
@@ -64,7 +65,7 @@ public class transferReturn extends Instruction{
                 //preparar en la pos de retorno
         c.setPtrTemp("ptr");
         armed+=c.c3d_asignVar(c.varsParams.get(0), arbol.getPosReturn());
-        c.varsParams = new ArrayList<>();
+        c.varsParams = new LinkedList<>();
         c.clearPtrTemp();
         
         return armed;

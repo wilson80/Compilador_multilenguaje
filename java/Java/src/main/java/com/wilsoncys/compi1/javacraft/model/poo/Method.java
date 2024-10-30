@@ -129,8 +129,7 @@ public class Method extends Instruction{
         }
         armed+=c.c3d_metodo(id, bodyMet);
             
-        arbol.setConsola(armed);
-                System.out.println("Ejecutando el metodo sumarrrr");
+        arbol.Print(armed);
         
         return ">>Methos<<";
     }

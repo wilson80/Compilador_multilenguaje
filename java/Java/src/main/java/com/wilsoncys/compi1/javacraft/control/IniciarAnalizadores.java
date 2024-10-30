@@ -94,20 +94,33 @@ public class IniciarAnalizadores {
             //Generate C3D
             Classs mainnC = ast.getClassMain();
             Mainn mainnMet = ast.getMethodMain();
+            
+            //valid si no se encuentra el Main
                 mainnC.setMain(true);
             String c3d_Main = "";
-            String bodyMain = (String)mainnC.createC3D(ast, "") ;
+            c3d_Main = "#include<iostream>\n" +
+                        "using namespace std;\n" +
+                        "int ptr = 0;\n" +
+                        "int stack[100];\n\n";
+            String bodyMain;
+             bodyMain = (String)mainnC.createC3D(ast, "") ;
             bodyMain += (String)mainnMet.createC3D(ast, "");
             
-            c3d_Main = ast.c3d.c3d_metodo(mainnC.getId(), bodyMain);
+            c3d_Main += ast.getConsola();
+            c3d_Main += ast.c3d.c3d_main("main", bodyMain);
             
-            System.out.println("c3d:\n" + c3d_Main);
+            ast.setConsola(c3d_Main);
+            
+            
+            
+            
+            
+            
+            
+            
+//            System.out.println("\n\n\n" + ast.getConsola());
+//            System.out.println("\n\n\n" + c3d_Main);
             //hacer el statement
-            
-            System.out.println("/n/n>>>\n" + ast.getConsola());
-            
-            
-            
             
 //            //SEMANTIC 
 //            for (Instruction ins : ast.getInstrucciones()) {
@@ -196,8 +209,10 @@ public class IniciarAnalizadores {
         
         String errorMessage = sw.toString();
             
-        mensajeErrores+="\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n" +mensaExp+"\n"  + errorMessage;
-        mensajeEjecucion += "\n_________________________________________________\n" + mensajeErrores;
+//        mensajeErrores+="\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n" +mensaExp+"\n"  + errorMessage;
+//        mensajeEjecucion += "\n_________________________________________________\n" + mensajeErrores;
+        mensajeErrores+="\n//n!!!!!!!!!!!!!!!!!!!! !!!!\n" +mensaExp+"\n"  + errorMessage;
+        mensajeEjecucion += "//________________\n" + mensajeErrores;
         
 //        if(this.ex!=null){
 //            this.ex.printStackTrace();
