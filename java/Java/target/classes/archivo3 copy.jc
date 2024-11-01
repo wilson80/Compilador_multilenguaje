@@ -3,8 +3,8 @@ public class base{
 	int num2;
 	int total;
 
-	public void Main() {
-        Sumar sumar = new Car(4,6 );
+	public void main() {
+        Sumar sumar = new Sumar(4,6 );
 		sumar.calcular();
 		this.total = sumar.getTotal;
 		print(total);

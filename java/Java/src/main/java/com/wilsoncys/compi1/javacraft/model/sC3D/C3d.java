@@ -58,31 +58,31 @@ public class C3d {
         return  armed;
     }
     public String c3d_acces(String val, int dir){
-        String armed = c3d_newVar() + ASSIG + PTR +MAS+dir + SEMIC+saltoLinea;
-        armed += c3d_newVar() + ASSIG + c3d_stack("w" + (contador-2))  + SEMIC;
+        String armed = c3d_newVar() + ASSIG + PTR +MAS+dir + SEMIC;
+        armed += c3d_newVar() + ASSIG + c3d_stack("w" + (contador-2))  + SEMIC +saltoLinea;
         varsParams.add("w" + (contador-1));
         return  armed;
     }
     public String c3d_accesTemp(String val, int dir){
                                                     //    t28 = t27 + 0;
                                                     //    t29 = stack[t28];
-        String armed = c3d_newVar() + ASSIG + ptrTemp +MAS+dir + SEMIC+saltoLinea;
-        armed += c3d_newVar() + ASSIG + c3d_stack("w" + (contador-2))  + SEMIC;
+        String armed = c3d_newVar() + ASSIG + ptrTemp +MAS+dir + SEMIC;
+        armed += c3d_newVar() + ASSIG + c3d_stack("w" + (contador-2))  + SEMIC+saltoLinea;
         varsParams.add("w" + (contador-1));
         return  armed;
     }
     
     public String c3d_asignVal(String val, int dir){    //asignacion de nativos
-        String armed = c3d_newVar() + ASSIG + PTR +MAS+dir + SEMIC+saltoLinea;
-        armed += c3d_stack("w" + (contador-1)) + ASSIG + varsParams.get(0) + SEMIC;
+        String armed = c3d_newVar() + ASSIG + PTR +MAS+dir + SEMIC;
+        armed += c3d_stack("w" + (contador-1)) + ASSIG + varsParams.get(0) + SEMIC+saltoLinea;
         varsParams.removeFirst();
         return  armed;
     }   
 //    t26 = t25 + 1;    
 //    stack[t26] = t22; 
     public String c3d_asignVar(String val, int dir){
-        String armed = c3d_newVar() + ASSIG +  ptrTemp +MAS+dir + SEMIC+saltoLinea;
-        armed += c3d_stack("w" + (contador-1)) + ASSIG + varsParams.get(0) + SEMIC;
+        String armed = c3d_newVar() + ASSIG +  ptrTemp +MAS+dir + SEMIC;
+        armed += c3d_stack("w" + (contador-1)) + ASSIG + varsParams.get(0) + SEMIC+saltoLinea;
         varsParams.removeFirst();
         return  armed;
     }
@@ -172,8 +172,8 @@ public class C3d {
         return  armed;
     }
     public String c3d_Input(){
-        String armed = c3d_newVar() + SEMIC  + saltoLinea;
-        armed += "cin>>" + "w" + (contador-1)  + SEMIC;
+        String armed = c3d_newVar() + SEMIC  ;
+        armed += "cin>>" + "w" + (contador-1)  + SEMIC +saltoLinea;
         varsParams.add("w"+(contador-1));
         return  armed;
     }

@@ -276,6 +276,7 @@ public class VistaGeneral extends javax.swing.JFrame {
     }
  
     
+    
     public void identificarPestanaSelected(){
                 int selectedIndex = tabbedPane.getSelectedIndex();
                 if (selectedIndex != -1) {
@@ -293,7 +294,7 @@ public class VistaGeneral extends javax.swing.JFrame {
             
     private void menuArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuArchivoMouseClicked
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileFilter(new FileNameExtensionFilter("Archivos de texto", "jc"));
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Archivos de texto", "mlg"));
 
         int returnValue = fileChooser.showOpenDialog(this);
         if (returnValue == JFileChooser.APPROVE_OPTION) {

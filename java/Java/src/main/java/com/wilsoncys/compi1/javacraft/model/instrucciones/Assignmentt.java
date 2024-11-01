@@ -207,6 +207,7 @@ public class Assignmentt extends Instruction{
 
               this.expr.createC3D(arbol, anterior);
               armed = c.c3d_asignVal("", dir);
+              
           }else if(this.expr instanceof Call call){                          //declaracion y asignacion
                   //pndte
                                                   //create a la llamada

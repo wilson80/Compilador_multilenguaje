@@ -38,8 +38,7 @@ import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
 %full
 //%debug
 // %ignorecase
-
-//simbolos del sistema
+ 
 
 
 BLANCOS=[\ \r\t\f\n]+
@@ -61,10 +60,7 @@ Rbrack = \]
 %eofval}
 
 %%
-
-
-
-
+ 
 
        <YYINITIAL> "protected"            { return  symbol(sym.PROTECTED, yytext());}
        <YYINITIAL> "private"            { return  symbol(sym.PRIVATE, yytext());}

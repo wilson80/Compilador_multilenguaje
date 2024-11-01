@@ -7,6 +7,7 @@ package com.wilsoncys.compi1.javacraft.model.instrucciones;
 import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
 import com.wilsoncys.compi1.javacraft.model.expresiones.Input;
+import com.wilsoncys.compi1.javacraft.model.expresiones.Nativo;
 import com.wilsoncys.compi1.javacraft.model.sC3D.C3d;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Arbol;
 import com.wilsoncys.compi1.javacraft.model.simbolo.Simbolo;
@@ -162,6 +163,12 @@ public class Statement extends Instruction{
                     armed+= c.c3d_Input();  
                     armed+=c.c3d_asignVal("", dir);
                     c.varsParams = new LinkedList<>();
+                
+            }else if(exp instanceof Nativo n){
+                 n.createC3D(arbol, anterior); //create exp
+                                                            //asignacion
+                armed+=c.c3d_asignVal(c.varsParams.get(0), dir);
+                c.varsParams = new LinkedList<>();
                 
                 
             }else{

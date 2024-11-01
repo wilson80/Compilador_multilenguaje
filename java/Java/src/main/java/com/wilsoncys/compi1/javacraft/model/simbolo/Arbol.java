@@ -35,11 +35,13 @@ public class Arbol {
     
     private Classs classMain; 
     private Mainn methodMain; 
+    
     public C3d c3d;
-    public int sizeStack = 0;
+    
+    public int attbClass = 0;
     private int posReturn = 0;
     
-   
+    
     public int count;
     
     
@@ -178,11 +180,11 @@ public class Arbol {
     }
 
     public void setSizeStack(int sizeStack) {
-        this.sizeStack = sizeStack;
+        this.attbClass = sizeStack;
     }
 
     public int getSizeStack() {
-        return sizeStack;
+        return attbClass;
     }
 
     public void setPosReturn(int posReturn) {

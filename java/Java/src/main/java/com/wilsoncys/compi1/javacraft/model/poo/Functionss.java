@@ -86,6 +86,8 @@ public class Functionss extends Instruction{
         //retorno
         //dir dir ret
         //desde la clase se le hace set a la cantidad de params
+        cantParams++;       //pte analisis
+
         for (Instruction ins : instrucciones) {
             if(ins instanceof Statement st){
                 //ambito

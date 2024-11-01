@@ -1,3 +1,39 @@
+public class NewClass {
+    public  NewClass() {
+        int num1 = 4;
+        int num2 = 6;
+		print("num1:", );
+        
+    }
+    
+    public int sumar(int x, int y){
+        int total = x+y;
+        return total;
+    }
+            
+    
+}
+
+/*
+
+buscar  el constructor (tiene exactamente el mismo nombre q la clase)
+	el construct es la llamada	
+	
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+/*
+ 
 public class uno{
 	int num1;
 	int num2;
@@ -16,17 +52,11 @@ public class uno{
 
 }  
 
-
-	
  
-
- 
- 
+ */
 
 
-
-
-
+	 
 
 /*public class uno{
 	int num1;
