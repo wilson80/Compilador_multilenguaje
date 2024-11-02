@@ -1,6 +1,6 @@
 
 /* codigo de usuario */
-package com.wilsoncys.compi1.javacraft.analizadores;
+package com.wilsoncys.compi1.java.analizadores;
 
 
 

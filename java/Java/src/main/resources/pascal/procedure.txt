@@ -1,0 +1,37 @@
+  procedure imprimirSaludo(uno, dos, tres:integer; nombre, apellido: string);
+type
+    my_type, ddd = integer; 
+    subrangeId1, subRangeId2, sub3, sub4 ='a' ...'e';  
+
+var 
+    total: integer; 
+    idd: string;
+nueva:ddd;
+
+begin  
+idd:=45;
+writeln('desde un procccc: ' );
+writeln(idd);
+writeln(uno , dos, tres);
+writeln(nombre, ' ', apellido);
+writeln('ddddd');
+
+end;  procedure imprimirSaludo(uno, dos, tres:integer; nombre, apellido: string);
+type
+    my_type, ddd = integer; 
+    subrangeId1, subRangeId2, sub3, sub4 ='a' ...'e';  
+
+var 
+    total: integer; 
+    idd: string;
+nueva:ddd;
+
+begin  
+idd:=45;
+writeln('desde un procccc: ' );
+writeln(idd);
+writeln(uno , dos, tres);
+writeln(nombre, ' ', apellido);
+writeln('ddddd');
+
+end;

@@ -1,105 +1,49 @@
-public class NewClass {
-    public  NewClass() {
-        int num1 = 4;
-        int num2 = 6;
-		print("num1:", );
-        
+%%PASCAL
+ 
+%%JAVA
+public class sumar {
+	int num1;
+	int num2;
+	// int total;
+    public sumar(int uno, int dos) {
+		println("Constrrr sumar");
+		 this.num1 = uno;
+		 this.num2 = dos;
+		//  int total = sumar(num1, num2);			
+        println("NUmmmmm: ", this.num1);
+        println("Constru:finnnnn" );
     }
+
     
     public int sumar(int x, int y){
         int total = x+y;
         return total;
-    }
-            
+    }	
+	// public int getTotal(){
+	// 	return total;		
+	// }
     
+} 
+
+%%PROGRAMA
+#include "PASCAL"
+#include "PASCAL.nombre_suprograma"
+
+#include "JAVA.*"
+#include "JAVA.nombre"  
+
+
+int x = 4;
+int y = 6;
+int tatal = 0;
+
+
+void main()
+{ 
+	JAVA.sumar      call1(x, y), call2(5,3);
+	tatal = JAVA.call1.getTotal();
+	JAVA.call1.imprimirTotal();
+
+
 }
 
-/*
-
-buscar  el constructor (tiene exactamente el mismo nombre q la clase)
-	el construct es la llamada	
-	
-
-
-*/
-
-
-
-
-
-
-
-
-
-
-/*
- 
-public class uno{
-	int num1;
-	int num2;
-	int resultado;
-	public void Main(){ 
-		
-		println("El resultado es:", sumar(5,6));	
-		 
-	} 
-
-
-	public int sumar(int x, int y){
-		int total = x+y; 
-		return total;
-	} 
-
-}  
-
- 
- */
-
-
-	 
-
-/*public class uno{
-	int num1;
-	int num2;
-	int num3;
-	int resultado;
-	public void Main(){ 
-		num1 = 5;
-		num2 = 5;
-		num3 = 5;
-		resultado = sumar(num1, num2, num3);
-		println("El resultado es", num1);	
-		 resultado = restar(num1, num2 );
-		 println(resultado);
-		 resultado = multiplicar(num1, num2 );
-		 println(resultado);
-		 resultado = dividir(num1, num2 );
-		 println(resultado);
-	} 
-
-
-	public int sumar(int x, int y, int z){
-		int total = x+y+z; 
-		return total;
-	}
-	public int restar(int x, int y){
-		int total = x-y; 
-		return total;
-	}
-	public int multiplicar(int x, int y){
-		int total = x*y; 
-		return total;
-	}
-	public int dividir(int x, int y){
-		int total = x/y; 
-		return total;
-	}
-
-} */
-
-
-	
- 
-
- 
- 

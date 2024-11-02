@@ -1,0 +1,42 @@
+%%PASCAL
+procedure imprimirSaludo();
+ 
+begin  
+
+writeln('desde un procccc: ' );
+
+end;
+
+%%JAVA
+public class sumar {
+	int num1;
+	int num2;
+    public sumar(int uno, int dos) {
+		println("Constrrr sumar");
+		 this.num1 = uno;
+		 this.num2 = dos;
+		//  int total = sumar(num1, num2);			
+        println("NUmmmmm: ", this.num1);
+        println("Constru:finnnnn" );
+    }
+            
+    
+}
+ 
+
+%%PROGRAMA
+#include “PASCAL”
+#include “PASCAL.nombre_suprograma”
+#include “JAVA.*”
+#include “JAVA.nombre”  
+
+
+
+Sección declaración de Constantes
+Sección de Variables Globales
+
+
+void main()
+{
+// Programa principal
+}
