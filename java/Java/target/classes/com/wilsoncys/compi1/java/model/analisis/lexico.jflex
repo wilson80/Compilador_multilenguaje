@@ -1,10 +1,10 @@
-package com.wilsoncys.compi1.javacraft.model.analisis;
+package com.wilsoncys.compi1.java.model.analisis;
 
 
 // importaciones
 import java_cup.runtime.Symbol;
 import java.util.LinkedList;
-import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
+import com.wilsoncys.compi1.java.model.excepciones.Errores;
 
 
 %%
@@ -70,7 +70,7 @@ Rbrack = \]
 
 %%
     
-        <YYINITIAL>{
+        <YYINITIAL>{    
             "procedure"            { return  symbol(sym.PROCEDURE, yytext());}
             
             "%%PASCAL"            {yybegin(YYINITIAL);}
@@ -188,9 +188,9 @@ Rbrack = \]
  
 
         <PROGRAMA>{
+            "#include"        {return symbol(sym.INCLUDE, yytext());}           
             "PASCAL"        {return symbol(sym.PASCAL, yytext());}
             "JAVA"        {return symbol(sym.JAVA, yytext());}
-            "#include"        {return symbol(sym.INCLUDE, yytext());}           
             {JAVASIMP}            { return  symbol(sym.JAVATODO, yytext());}
             {JAVAUNO}            { return  symbol(sym.JAVAUNO, yytext());}
 
@@ -225,8 +225,9 @@ Rbrack = \]
         "%s"        {return symbol(sym.MASK_S, yytext());}
 
 
+        "getch"        {return symbol(sym.GETCH, yytext());}
         "printf"        {return symbol(sym.PRINT, yytext());}
-        "clrscr"        {return symbol(sym.PRINT, yytext());}
+        "clrscr"        {return symbol(sym.CLRSCR, yytext());}
         "main"            { return  symbol(sym.MAIN, yytext());}
 
 

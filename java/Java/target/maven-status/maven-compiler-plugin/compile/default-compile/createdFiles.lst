@@ -3,12 +3,14 @@ com/wilsoncys/compi1/java/vistas/prueba$1.class
 com/wilsoncys/compi1/java/model/expresiones/Casting$1.class
 com/wilsoncys/compi1/java/model/simbolo/Tipo$1.class
 com/wilsoncys/compi1/java/vistas/VistaGeneral$5.class
+com/wilsoncys/compi1/java/vistas/TipoT.class
 com/wilsoncys/compi1/java/model/instrucciones/Statement$1.class
 com/wilsoncys/compi1/java/vistas/VistaGeneral$ClosableTabComponent$1.class
 com/wilsoncys/compi1/java/vistas/VistaGeneral$2.class
 com/wilsoncys/compi1/java/model/expresiones/Aritmeticas/Raised$1.class
 com/wilsoncys/compi1/java/vistas/VistaGeneral$6.class
 com/wilsoncys/compi1/java/model/expresiones/OperateRelacionales$1.class
+com/wilsoncys/compi1/java/vistas/SetColor.class
 com/wilsoncys/compi1/java/vistas/VistaGeneral$7.class
 com/wilsoncys/compi1/java/vistas/prueba$2.class
 com/wilsoncys/compi1/java/model/expresiones/Aritmeticas/Suma$1.class
@@ -17,6 +19,8 @@ com/wilsoncys/compi1/java/model/expresiones/Aritmeticas/Resta$1.class
 com/wilsoncys/compi1/cPrincipal/model/programa/Programa.class
 com/wilsoncys/compi1/java/model/expresiones/Negacion$1.class
 com/wilsoncys/compi1/java/vistas/VistaGeneral$1.class
+com/wilsoncys/compi1/java/model/analisis/colorear2.class
+com/wilsoncys/compi1/java/vistas/colorInfo.class
 com/wilsoncys/compi1/java/model/instrucciones/IncreaseDecrease$1.class
 com/wilsoncys/compi1/java/model/expresiones/Aritmeticas/Division$1.class
 com/wilsoncys/compi1/java/vistas/prueba$3.class

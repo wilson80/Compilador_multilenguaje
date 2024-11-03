@@ -4,6 +4,8 @@
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/control/CppRunn.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/control/IniciarAnalizadores.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/analisis/NewClass.java
+/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/analisis/colorear2.java
+/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/analisis/colorerarr.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/analisis/parser.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/analisis/scanner.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/analisis/sym.java
@@ -62,8 +64,11 @@
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/visib.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/FrameReportes.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/PatronInterprete.java
+/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/SetColor.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/TextLineNumber.java
+/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/TipoT.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/VistaGeneral.java
+/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/colorInfo.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/prueba.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/prueba2.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/pascal/model/PascalIns.java

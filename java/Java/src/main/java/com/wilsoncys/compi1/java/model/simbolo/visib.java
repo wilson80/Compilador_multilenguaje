@@ -4,6 +4,8 @@
  */
 package com.wilsoncys.compi1.java.model.simbolo;
 
+
+
 /**
  *
  * @author yoyo
@@ -14,4 +16,6 @@ public enum visib {
     PROTECTED,
     EMPTY,
     
+ 
+   
 }

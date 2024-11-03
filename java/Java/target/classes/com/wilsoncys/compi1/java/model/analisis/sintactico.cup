@@ -1,19 +1,19 @@
-package com.wilsoncys.compi1.javacraft.model.analisis;
+package com.wilsoncys.compi1.java.model.analisis;
 
 //importaciones
 import java_cup.runtime.Symbol;
 import java.util.LinkedList;
 
-import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
-import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
+import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
+import com.wilsoncys.compi1.java.model.excepciones.Errores;
 
-import com.wilsoncys.compi1.javacraft.model.simbolo.*;
-import com.wilsoncys.compi1.javacraft.model.instrucciones.*;
-import com.wilsoncys.compi1.javacraft.model.poo.*;
-import com.wilsoncys.compi1.javacraft.model.expresiones.*;
+import com.wilsoncys.compi1.java.model.simbolo.*;
+import com.wilsoncys.compi1.java.model.instrucciones.*;
+import com.wilsoncys.compi1.java.model.poo.*;
+import com.wilsoncys.compi1.java.model.expresiones.*;
 
-import com.wilsoncys.compi1.javacraft.model.expresiones.Aritmeticas.*;
-import com.wilsoncys.compi1.javacraft.model.expresiones.Enums.*;
+import com.wilsoncys.compi1.java.model.expresiones.Aritmeticas.*;
+import com.wilsoncys.compi1.java.model.expresiones.Enums.*;
 import java.util.HashMap;
 
 
@@ -80,14 +80,14 @@ terminal PROTECTED, PRIVATE, PUBLIC;
 terminal EXTENDS, THIS, MAIN, CLASS, PRINTLN;
 terminal INP_C,INP_INT, INP_F;
 
-terminal PASCAL, JAVA, CASE;
 
 //PASCAL
 terminal PROCEDURE;
 
 //C
+terminal PASCAL, JAVA, CASE, GETCH;
 terminal PASCALUNO, JAVAUNO, PASCALSIMP, JAVATODO, INCLUDE;
-terminal MASK_D, MASK_C, MASK_F, MASK_S, SCAN, ANDSIMPLE;
+terminal MASK_D, MASK_C, MASK_F, MASK_S, SCAN, ANDSIMPLE, CLRSCR;
 
 
 
@@ -121,10 +121,14 @@ nonterminal LinkedList<Instruction> paramss;
 
 nonterminal Instruction Oneclaass, constructor;
 
-nonterminal LinkedList<Instruction> pascal, c, otherInclude, include, typeC;
+nonterminal LinkedList<Instruction> pascal, c, otherInclude,
+ include, typeC, java_C, instructionsC, cPrincipal, insC;
+
 nonterminal includes, decConstC, decVarsC, mainC, declaracionC;
-nonterminal insC, cPrincipal;
-nonterminal LinkedList<Instruction> java_C, instructionsC;
+
+
+
+nonterminal LinkedList<Instruction> pascalCode;
 
 precedence left OR;
 precedence left AND;
@@ -152,25 +156,45 @@ start with INICIO;
 INICIO::= pascal:a      {:   RESULT = a; :}
 ;
 
-
-pascal::= PROCEDURE java_C {: RESULT = new LinkedList<>(); :}
+pascal::=  pascalCode:p java_C:c_J {: RESULT = new LinkedList<>();
+        if(p!=null){
+                RESULT.addAll(p);
+        }
+        if(c_J!=null){
+                RESULT.addAll(c_J);
+        }
+                                 :}
 |java_C:c {: RESULT = c; :}
 ;
 
-java_C::= claass:c cPrincipal {: RESULT = new LinkedList<>(); :}
+java_C::= claass:j cPrincipal:c {: RESULT = new LinkedList<>(); 
+        if(j!=null){
+                RESULT.addAll(j);
+        }
+        if(c!=null){
+                 RESULT.addAll(c); 
+        } 
+                 :}
 |cPrincipal:c {: RESULT = new LinkedList<>(); :}
 ;
 
 
+//GRAMATICA PROGRAMA PASCAL
+pascalCode::= PROCEDURE {:RESULT = new LinkedList<>(); :}
+;
+
+
+
 //GRAMATICA PROGRAMA PRINCIPAL
-cPrincipal::= includes declaracionC mainC
+cPrincipal::= includes declaracionC mainC {: RESULT = new LinkedList<>(); :}
+| {: RESULT = new LinkedList<>(); :}
 ;
 
 includes::= include otherInclude
-        |
 ;
+
 otherInclude::= include otherInclude
-        |include
+        |
 ;
 include::= INCLUDE PASCALUNO:id 
         |INCLUDE JAVAUNO:id
@@ -178,21 +202,26 @@ include::= INCLUDE PASCALUNO:id
         |INCLUDE JAVATODO:id 
 ;
 
-decConstC::= CONST typeC ID ASSIGNMENT EXPRESION
-;
-decVarsC::= typeC ID ASSIGNMENT EXPRESION
+decConstC::= CONST typeC ID ASSIGNMENT EXPRESION SEMIC
 ;
 
-mainC::= VOID MAIN PAR_OP PAR_CL K_OP insC K_CL
+//cambiar la expr
+decVarsC::= typeC ID ASSIGNMENT EXPRESION SEMIC
+        | typeC ID SEMIC
+;
+
+mainC::= VOID MAIN PAR_OP PAR_CL K_OP  instructionsC  K_CL
 ;
 
 declaracionC::= decConstC declaracionC
         | decVarsC declaracionC
         |
 ;
+
 instructionsC::= insC instructionsC
-                |insC 
+                | 
 ;
+
 
 insC::= PRINT PAR_OP PAR_CL SEMIC
 ;
@@ -203,6 +232,59 @@ typeC::= INT
 |DOUBLE
 |STRING
 ;
+	// JAVA.sumar      call1(x, y), call2(5,3);
+	// tatal = JAVA.call1.getTotal();
+	// JAVA.call1.imprimirTotal();
+instanceJ::= JAVA 
+        |JAVA DOT ID
+        |JAVA DOT
+;
+
+//exp
+expInstancePascal::= PASCAL DOT  callPrincipal
+;
+instancePascal::= PASCAL DOT  callPrincipal
+;
+
+callPrincipal::= 
+;
+
+
+EXPRESIONCC::= MINUS EXPRESIONCC:a             {:   RESULT = new Negacion(a, OperadoresAritmeticos.NEGACION, aleft, aright);   :} %prec UMINUS
+            | NOT EXPRESIONCC:a  {:   RESULT = new LogicalOperations(a, Relational_LogicalOperations.NOT, aleft, aright);   :}              %prec UNEGATIVE
+            | EXPRESIONCC:a PLUS EXPRESIONCC:b   {:   RESULT = new Suma(a, b, OperadoresAritmeticos.SUMA, aleft, aright);   :}
+            | EXPRESIONCC:a MINUS EXPRESIONCC:b   {:   RESULT = new Resta(a, b, OperadoresAritmeticos.RESTA, aleft, aright);   :}
+            | EXPRESIONCC:a DIVIDED EXPRESIONCC:b   {:   RESULT = new Division(a, b, OperadoresAritmeticos.DIVISION, aleft, aright);   :}
+            | EXPRESIONCC:a TIMES EXPRESIONCC:b   {:   RESULT = new Multiplicacion(a, b, OperadoresAritmeticos.MULTIPLICACION, aleft, aright);   :}
+            | EXPRESIONCC:a MOD EXPRESIONCC:b   {:   RESULT = new Modulee(a, b, OperadoresAritmeticos.MODULO, aleft, aright);   :}
+            | EXPRESIONCC:a RAISED EXPRESIONCC:b   {:   RESULT = new Raised(a, b, OperadoresAritmeticos.POTENCIA, aleft, aright);   :}
+            
+            | EXPRESIONCC:a EQUALS:op EXPRESIONCC:b   {:   RESULT = new OperateRelacionales(a, b, Relational_LogicalOperations.IGUALA, aleft, aright);   :}
+            | EXPRESIONCC:a DIFFERENT:op EXPRESIONCC:b   {:   RESULT = new OperateRelacionales(a, b, Relational_LogicalOperations.DIFERENTEQUE, aleft, aright);   :}
+            | EXPRESIONCC:a LESS:op EXPRESIONCC:b   {:   RESULT = new OperateRelacionales(a, b, Relational_LogicalOperations.MENOR, aleft, aright);   :}
+            | EXPRESIONCC:a L_EQUALS:op EXPRESIONCC:b   {:   RESULT = new OperateRelacionales(a, b, Relational_LogicalOperations.MENOR_IGUAL, aleft, aright);   :}
+            | EXPRESIONCC:a GREATER:op EXPRESIONCC:b   {:   RESULT = new OperateRelacionales(a, b, Relational_LogicalOperations.MAYOR, aleft, aright);   :}
+            | EXPRESIONCC:a G_EQUALS:op EXPRESIONCC:b   {:   RESULT = new OperateRelacionales(a, b, Relational_LogicalOperations.MAYOR_IGUAL, aleft, aright);   :}
+            
+            | EXPRESIONCC:a AND:log EXPRESIONCC:b   {:   RESULT = new LogicalOperations(a, b, Relational_LogicalOperations.AND, aleft, aright);   :}
+            | EXPRESIONCC:a OR:log EXPRESIONCC:b   {:   RESULT = new LogicalOperations(a, b, Relational_LogicalOperations.OR, aleft, aright);   :}
+            | PAR_OP EXPRESIONCC:a PAR_CL    {:   RESULT = a;   :}  
+
+            | ENTERO:a      {:   RESULT = new Nativo(Integer.parseInt(a), new Tipo(tipoDato.ENTERO), aleft, aright );   :}
+            | CHARAC:a      {:   RESULT = new Nativo(a, new Tipo(tipoDato.CARACTER), aleft, aright );   :}
+//float
+            | DECIMAL:a     {:   RESULT = new Nativo(new Double(a), new Tipo(tipoDato.DECIMAL), aleft, aright );   :}   
+            | CADENA:a      {:   RESULT = new Nativo(a, new Tipo(tipoDato.CADENA), aleft, aright );   :}
+            
+            | ID:a      {:   RESULT = new Access(a, aleft, aright);   :}
+//arrs
+            | ID:a BRACK_L EXPRESIONCC:indx BRACK_R      {:   RESULT = new AccesVector(a, indx, aleft, aright);   :}
+            | ID:a BRACK_L EXPRESIONCC:indx1 BRACK_R BRACK_L  EXPRESIONCC:indx2 BRACK_R      {:   RESULT = new AccesVector(a, indx1, indx2, aleft, aright);   :}
+
+                    | callEXP:a {: RESULT = a; :}    
+                    | NEW ID:t  PAR_OP callsParameters:p PAR_CL 
+                {:RESULT = new Reference(t, p, tleft, tright); :}
+;
 
 
 
@@ -211,6 +293,43 @@ typeC::= INT
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//GRAMATICA PROGRAMA JAVA
 InstructionES ::= InstructionES:a Instruction:b     {: RESULT = a; RESULT.add(b); :}
                 | Instruction:a                   {: RESULT = new LinkedList<>(); RESULT.add(a); :}
 ;

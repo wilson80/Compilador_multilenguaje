@@ -1,10 +1,10 @@
-package com.wilsoncys.compi1.javacraft.model.analisis;
+package com.wilsoncys.compi1.java.model.analisis;
 
 
 // importaciones
 import java_cup.runtime.Symbol;
 import java.util.LinkedList;
-import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
+import com.wilsoncys.compi1.java.model.excepciones.Errores;
 
 
 %%

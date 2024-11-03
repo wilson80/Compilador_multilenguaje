@@ -281,14 +281,9 @@ EXPRESIONCC::= MINUS EXPRESIONCC:a             {:   RESULT = new Negacion(a, Ope
             | ID:a BRACK_L EXPRESIONCC:indx BRACK_R      {:   RESULT = new AccesVector(a, indx, aleft, aright);   :}
             | ID:a BRACK_L EXPRESIONCC:indx1 BRACK_R BRACK_L  EXPRESIONCC:indx2 BRACK_R      {:   RESULT = new AccesVector(a, indx1, indx2, aleft, aright);   :}
 
-            | callEXP:a {: RESULT = a; :}    
-            | NEW ID:t  PAR_OP callsParameters:p PAR_CL 
+                    | callEXP:a {: RESULT = a; :}    
+                    | NEW ID:t  PAR_OP callsParameters:p PAR_CL 
                 {:RESULT = new Reference(t, p, tleft, tright); :}
-            | NEW ID:t  PAR_OP PAR_CL  
-                {:RESULT = new Reference(t, new LinkedList<>(), tleft, tright); :}
-        //     | ID:idStruct DOT ID:field {: RESULT = new Access(idStruct, field, idStructright, idStructleft); :} 
-        //     | ID:idStruct DOT ID:field DOT ID:elseID {: RESULT = new Access(idStruct, field, elseID, idStructright, idStructleft); :} 
-        //     | K_OP:a valuesStruct:valuess K_CL {: RESULT = new Structs(null, valuess, aleft, aright); :}
 ;
 
 

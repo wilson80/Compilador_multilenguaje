@@ -6,9 +6,11 @@ package com.wilsoncys.compi1.java.vistas;
 
 import com.wilsoncys.compi1.java.control.Control;
 import com.wilsoncys.compi1.java.control.CppRunn;
+import com.wilsoncys.compi1.java.model.analisis.colorear2;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
+import com.wilsoncys.compi1.java.vistas.colorInfo;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -25,6 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -46,11 +49,23 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.JViewport;
+import javax.swing.Timer;
 import javax.swing.border.Border;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableModel; 
+
+//colores
+import javax.swing.text.Style; 
+import javax.swing.text.StyleContext;
+import javax.swing.text.StyledDocument;
+
+
+
+
 
 /**
  *
@@ -64,7 +79,10 @@ public class VistaGeneral extends javax.swing.JFrame {
     private FrameReportes reportes;
     private LinkedList<Errores> listaErrores;
     private LinkedList<TablaSimbolos> tablaReport = new LinkedList<>();          //par la tabla de simbolos
-
+    private JTextPane paneActual;
+    
+    
+    
     public VistaGeneral(Control control) {
         this.control = control;
         tabbedPane = new JTabbedPane();
@@ -256,42 +274,117 @@ public class VistaGeneral extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    public JScrollPane configurarLineas(String texto){
-        JTextPane textPane = new JTextPane();
-        textPane.setText(texto);
-        
-        JScrollPane scrollPane = new JScrollPane(textPane);
-        
-        TextLineNumber lineNumber = new TextLineNumber(textPane, 3);
-        lineNumber.setLabelLine(labelLine);
-        lineNumber.setLabelCol(labelCol);
-        
-        lineNumber.setUpdateFont(false);
-        float fontSize = textPane.getFont().getSize() - 6;
-        Font font = textPane.getFont().deriveFont( fontSize );
-        lineNumber.setForeground(Color.BLUE);
-        scrollPane.setRowHeaderView( lineNumber );
-        
-        return scrollPane;
-    }
+//    public JScrollPane configurarLineas(String texto){
+//        JTextPane textPane = new JTextPane();
+//        textPane.setText(texto);
+//        
+//        JScrollPane scrollPane = new JScrollPane(textPane);
+//        
+//        TextLineNumber lineNumber = new TextLineNumber(textPane, 3);
+//        lineNumber.setLabelLine(labelLine);
+//        lineNumber.setLabelCol(labelCol);
+//        
+//        lineNumber.setUpdateFont(false);
+//        float fontSize = textPane.getFont().getSize() - 6;
+//        Font font = textPane.getFont().deriveFont( fontSize );
+//        lineNumber.setForeground(Color.BLUE);
+//        scrollPane.setRowHeaderView( lineNumber );
+//        
+//          return scrollPane;
+//    }
  
     
     
+    
+    public JScrollPane configurarLineas(String texto) {
+    JTextPane textPane = new JTextPane();
+    textPane.setText(texto);
+  
+        Timer timer = new Timer(500, e -> {
+        SetColor setColorThread = new SetColor(textPane);
+        setColorThread.start();
+    });
+    timer.setRepeats(false); // Asegúrate de que el temporizador no repita
+
+    // Agrega el DocumentListener para colorear el texto al escribir
+    textPane.getDocument().addDocumentListener(new DocumentListener() {
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+            timer.restart(); // Reinicia el temporizador en cada inserción
+        }
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+            timer.restart(); // Reinicia el temporizador en cada eliminación
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent e) {
+            // No se necesita implementar en este caso
+        }
+    });
+    
+//    // Agrega el DocumentListener para colorear el texto al escribir
+//    textPane.getDocument().addDocumentListener(new DocumentListener() {
+//        @Override
+//        public void insertUpdate(DocumentEvent e) {
+//            SetColor setColorThread = new SetColor(textPane);
+//            setColorThread.start();
+////            colorearTexto(textPane);
+////            panelCajonTexto.updateUI();
+//        }
+//
+//        @Override
+//        public void removeUpdate(DocumentEvent e) {
+//            SetColor setColorThread = new SetColor(textPane);
+//            setColorThread.start();
+////            colorearTexto(textPane);
+//        }
+//
+//        @Override
+//        public void changedUpdate(DocumentEvent e) {
+////            colorearTexto(textPane);
+//        }
+//    });
+    
+    JScrollPane scrollPane = new JScrollPane(textPane);
+    
+    // Configuración del número de líneas
+    TextLineNumber lineNumber = new TextLineNumber(textPane, 3);
+    lineNumber.setLabelLine(labelLine);
+    lineNumber.setLabelCol(labelCol);
+    lineNumber.setUpdateFont(false);
+    float fontSize = textPane.getFont().getSize() - 6;
+    Font font = textPane.getFont().deriveFont(fontSize);
+    lineNumber.setForeground(Color.BLUE);
+    scrollPane.setRowHeaderView(lineNumber);
+    
+    return scrollPane;
+}
+
+// Método para aplicar colores usando JFlex
+ 
+
+    
+    
+    
+    
     public void identificarPestanaSelected(){
+         
                 int selectedIndex = tabbedPane.getSelectedIndex();
                 if (selectedIndex != -1) {
-//                    JScrollPane scrollPane = (JScrollPane) tabbedPane.getComponentAt(selectedIndex);
                     JScrollPane scrollPane = (JScrollPane) tabbedPane.getComponentAt(selectedIndex);
                     JViewport viewport = scrollPane.getViewport();
-//                    JTextArea textArea = (JTextArea) viewport.getView();
                     JTextPane cajonText = (JTextPane) viewport.getView();
+                    this.paneActual = cajonText; 
+                    
                     String content = cajonText.getText();
                     textoActual = content;
-//                    System.out.println("una pestana:   ");
-//                    System.out.println(content);
                 }
     }
             
+    
+    
     private void menuArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuArchivoMouseClicked
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new FileNameExtensionFilter("Archivos de texto", "mlg"));
@@ -576,70 +669,6 @@ public class VistaGeneral extends javax.swing.JFrame {
         tabbedPane.addTab(title, scrollPane);
         int tabIndex = tabbedPane.indexOfComponent(scrollPane);
                                     tabbedPane.setTabComponentAt(tabIndex, new ClosableTabComponent(title));
-
-
-
-
-//  // Etiquetas globales para mostrar la línea y columna  
-//    JTextArea textArea = new JTextArea(content);
-//    
-//    // Agregar el CaretListener para cada JTextArea
-//    textArea.addCaretListener(new CaretListener() {
-//        public void caretUpdate(CaretEvent e) {
-//            int caretPos = textArea.getCaretPosition();
-//            try {
-//                int line = textArea.getLineOfOffset(caretPos) + 1;
-//                int col = caretPos - textArea.getLineStartOffset(line - 1) + 1;
-//                
-//                // Actualizar los JLabel globales con la información de línea y columna
-//                labelLine.setText("Line: " + line);
-//                labelCol.setText("Col: " + col);
-//            } catch (Exception ex) {
-//                ex.printStackTrace();
-//            }
-//        }
-//    });
-//    
-//    textArea.setLineWrap(true);
-//    textArea.setWrapStyleWord(true);
-//    textArea.setCaretColor(new java.awt.Color(255, 51, 0));
-//    textArea.setEditable(true);
-//    
-//    // Crear JScrollPane y agregar el área de texto
-//    JScrollPane scrollPane = new JScrollPane(textArea);
-//    
-//    // Agregar la pestaña al JTabbedPane
-//    tabbedPane.addTab(title, scrollPane);
-//    int tabIndex = tabbedPane.indexOfComponent(scrollPane);
-//    tabbedPane.setTabComponentAt(tabIndex, new ClosableTabComponent(title));
-//    
-//    // Detectar cuando una pestaña es seleccionada
-//    tabbedPane.addChangeListener(e -> {
-//        // Solo actualizamos si la pestaña seleccionada es esta
-//        if (tabbedPane.getSelectedComponent() == scrollPane) {
-//            int caretPos = textArea.getCaretPosition();
-//            try {
-//                int line = textArea.getLineOfOffset(caretPos) + 1;
-//                int col = caretPos - textArea.getLineStartOffset(line - 1) + 1;
-//                
-//                // Actualizar las etiquetas con la posición actual del cursor
-//                labelLine.setText("Line: " + line);
-//                labelCol.setText("Col: " + col);
-//            } catch (Exception ex) {
-//                ex.printStackTrace();
-//            }
-//        }
-//    });
-
- 
-
-
-
-
-//        tabbedPane.addTab(title, scrollPane);
-//        int tabIndex = tabbedPane.indexOfComponent(scrollPane);
-//                                    tabbedPane.setTabComponentAt(tabIndex, new ClosableTabComponent(title));
- 
  
     }
 

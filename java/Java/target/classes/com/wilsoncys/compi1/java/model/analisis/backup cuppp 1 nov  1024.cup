@@ -1,19 +1,19 @@
-package com.wilsoncys.compi1.javacraft.model.analisis;
+package com.wilsoncys.compi1.java.model.analisis;
 
 //importaciones
 import java_cup.runtime.Symbol;
 import java.util.LinkedList;
 
-import com.wilsoncys.compi1.javacraft.model.asbtracto.Instruction;
-import com.wilsoncys.compi1.javacraft.model.excepciones.Errores;
+import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
+import com.wilsoncys.compi1.java.model.excepciones.Errores;
 
-import com.wilsoncys.compi1.javacraft.model.simbolo.*;
-import com.wilsoncys.compi1.javacraft.model.instrucciones.*;
-import com.wilsoncys.compi1.javacraft.model.poo.*;
-import com.wilsoncys.compi1.javacraft.model.expresiones.*;
+import com.wilsoncys.compi1.java.model.simbolo.*;
+import com.wilsoncys.compi1.java.model.instrucciones.*;
+import com.wilsoncys.compi1.java.model.poo.*;
+import com.wilsoncys.compi1.java.model.expresiones.*;
 
-import com.wilsoncys.compi1.javacraft.model.expresiones.Aritmeticas.*;
-import com.wilsoncys.compi1.javacraft.model.expresiones.Enums.*;
+import com.wilsoncys.compi1.java.model.expresiones.Aritmeticas.*;
+import com.wilsoncys.compi1.java.model.expresiones.Enums.*;
 import java.util.HashMap;
 
 
