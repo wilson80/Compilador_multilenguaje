@@ -136,35 +136,35 @@ Rbrack = \]
 
 
 
-        "void"            { return colorr(TipoT.TODOO);}
-        "new"            { return colorr(TipoT.TODOO);}
-        "return"            { return colorr(TipoT.TODOO);}
-        "intinput"            { return colorr(TipoT.TODOO);}
-        "floatinput"            { return colorr(TipoT.TODOO);}
-        "charinput"            { return colorr(TipoT.TODOO);}
+        "void"            { return colorr(TipoT.RESERV);}
+        "new"            { return colorr(TipoT.RESERV);}
+        "return"            { return colorr(TipoT.RESERV);}
+        "intinput"            { return colorr(TipoT.RESERV);}
+        "floatinput"            { return colorr(TipoT.RESERV);}
+        "charinput"            { return colorr(TipoT.RESERV);}
 
 
 
-        ">="            { return colorr(TipoT.TODOO);}
-        "<="            { return colorr(TipoT.TODOO);}
-        ">"            { return colorr(TipoT.TODOO);}
-        "<"            { return colorr(TipoT.TODOO);}
-        "=="            { return colorr(TipoT.TODOO);}
+        ">="            { return colorr(TipoT.SYMSS);}
+        "<="            { return colorr(TipoT.SYMSS);}
+        ">"            { return colorr(TipoT.SYMSS);}
+        "<"            { return colorr(TipoT.SYMSS);}
+        "=="            { return colorr(TipoT.SYMSS);}
 
-        "="            { return colorr(TipoT.TODOO);}
-        "++"            { return colorr(TipoT.TODOO);}
-        "--"            { return colorr(TipoT.TODOO);}
+        "="            { return colorr(TipoT.SYMSS);}
+        "++"            { return colorr(TipoT.SYMSS);}
+        "--"            { return colorr(TipoT.SYMSS);}
 
-        "+"            { return colorr(TipoT.SECTION);}
-         "-"            { return colorr(TipoT.SECTION);}
-         "*"            { return colorr(TipoT.SECTION);}
-         "/"            { return colorr(TipoT.SECTION);}
-        "^"            { return colorr(TipoT.SECTION);}
-        "%"            { return colorr(TipoT.SECTION);}
+        "+"            { return colorr(TipoT.SYMSS);}
+         "-"            { return colorr(TipoT.SYMSS);}
+         "*"            { return colorr(TipoT.SYMSS);}
+         "/"            { return colorr(TipoT.SYMSS);}
+        "^"            { return colorr(TipoT.SYMSS);}
+        "%"            { return colorr(TipoT.SYMSS);}
 
 
-        {comment}                 { }
-        {commentMultiLine}        { }
+        {comment}                 {return colorr(TipoT.COMMENT); }
+        {commentMultiLine}        { return colorr(TipoT.COMMENT);}
 
 
         "||"            { return colorr(TipoT.SYMSS);}
@@ -188,16 +188,14 @@ Rbrack = \]
 
 
 
-        {entero}            { return colorr(TipoT.TODOO);}
-        {decimal}             { return colorr(TipoT.TODOO);}
+        {entero}            { return colorr(TipoT.VAL);}
+        {decimal}             { return colorr(TipoT.VAL);}
 
-
-
-        {id}            { return colorr(TipoT.TODOO);}
+        {id}            { return colorr(TipoT.VAL);}
         {characc}         { 
-                        return colorr(TipoT.TODOO);  }
+                        return colorr(TipoT.VAL);  }
 
-        {cadena}       {  return colorr(TipoT.TODOO);}
+        {cadena}       {  return colorr(TipoT.VAL);}
 
 
         }
@@ -216,94 +214,93 @@ Rbrack = \]
             {PASCALUNO}            { return colorr(TipoT.TODOO);}
 
 
-        "int"            { return colorr(TipoT.TODOO);}
-        "char"            { return colorr(TipoT.TODOO);}
-        "float"            { return colorr(TipoT.TODOO);}
-        "string"            { return colorr(TipoT.TODOO);}
+        "int"            { return colorr(TipoT.RESERV);}
+        "char"            { return colorr(TipoT.RESERV);}
+        "float"            { return colorr(TipoT.RESERV);}
+        "string"            { return colorr(TipoT.RESERV);}
 
-        "const"            { return colorr(TipoT.TODOO);}
+        "const"            { return colorr(TipoT.RESERV);}
 
-        "if"            { return colorr(TipoT.TODOO);}
-        "else"            { return colorr(TipoT.TODOO);}
-        "for"            { return colorr(TipoT.TODOO);}
-        "do"            { return colorr(TipoT.TODOO);}
-        "while"            { return colorr(TipoT.TODOO);}
-        "Break"            { return colorr(TipoT.TODOO);}
-        "continue"            { return colorr(TipoT.TODOO);}
-        "void"            { return colorr(TipoT.TODOO);}
-        "switch"            { return colorr(TipoT.TODOO);}
-        "case"            { return colorr(TipoT.TODOO);}
-        "default"            { return colorr(TipoT.TODOO);}
+        "if"            { return colorr(TipoT.RESERV);}
+        "else"            { return colorr(TipoT.RESERV);}
+        "for"            { return colorr(TipoT.RESERV);}
+        "do"            { return colorr(TipoT.RESERV);}
+        "while"            { return colorr(TipoT.RESERV);}
+        "Break"            { return colorr(TipoT.RESERV);}
+        "continue"            { return colorr(TipoT.RESERV);}
+        "void"            { return colorr(TipoT.RESERV);}
+        "switch"            { return colorr(TipoT.RESERV);}
+        "case"            { return colorr(TipoT.RESERV);}
+        "default"            { return colorr(TipoT.RESERV);}
 
+        "scanf"        {return colorr(TipoT.RESERV);}
 
-        "scanf"        {return colorr(TipoT.TODOO);}
-        "%d"        {return colorr(TipoT.TODOO);}
-        "%c"        {return colorr(TipoT.TODOO);}
-        "%f"        {return colorr(TipoT.TODOO);}
-        "%s"        {return colorr(TipoT.TODOO);}
-
-
-        "getch"        {return colorr(TipoT.TODOO);}
-        "printf"        {return colorr(TipoT.TODOO);}
-        "clrscr"        {return colorr(TipoT.TODOO);}
-        "main"            { return colorr(TipoT.TODOO);}
+        "%d"        {return colorr(TipoT.SYMSS);}
+        "%c"        {return colorr(TipoT.SYMSS);}
+        "%f"        {return colorr(TipoT.SYMSS);}
+        "%s"        {return colorr(TipoT.SYMSS);}
 
 
-
-        ">="            { return colorr(TipoT.TODOO);}
-        "<="            { return colorr(TipoT.TODOO);}
-        ">"            { return colorr(TipoT.TODOO);}
-        "<"            { return colorr(TipoT.TODOO);}
-        "=="            { return colorr(TipoT.TODOO);}
-
-        "="            { return colorr(TipoT.TODOO);}
-        "++"            { return colorr(TipoT.TODOO);}
-        "--"            { return colorr(TipoT.TODOO);}
-
-        "+"            { return colorr(TipoT.TODOO);}
-         "-"            { return colorr(TipoT.TODOO);}
-         "*"            { return colorr(TipoT.TODOO);}
-         "/"            { return colorr(TipoT.TODOO);}
-        "%"            { return colorr(TipoT.TODOO);}
-        "^"            { return colorr(TipoT.TODOO);}
-
-
-        {comment}                 { }
-        {commentMultiLine}        { }
-
-
-        "||"            { return colorr(TipoT.TODOO);}
-        "&&"            { return colorr(TipoT.TODOO);}
-        "&"            { return colorr(TipoT.TODOO);}
-         "!="           {return colorr(TipoT.TODOO);}
-
-         "!"            { return colorr(TipoT.TODOO);}
-
-         "("            { return colorr(TipoT.TODOO);}
-         ")"            { return colorr(TipoT.TODOO);}
-
-        "{"            { return colorr(TipoT.TODOO);}
-       "}"            { return colorr(TipoT.TODOO);}
-        ";"            { return colorr(TipoT.TODOO);}
-        ":"            { return colorr(TipoT.TODOO);}
-        "_"            { return colorr(TipoT.TODOO);}
-        {Lbrack}            { return colorr(TipoT.TODOO);}
-        {Rbrack}            { return colorr(TipoT.TODOO);}
-        ","            { return colorr(TipoT.TODOO);}
-        "."            { return colorr(TipoT.TODOO);}
+        "getch"        {return colorr(TipoT.RESERV);}
+        "printf"        {return colorr(TipoT.RESERV);}
+        "clrscr"        {return colorr(TipoT.RESERV);}
+        "main"            { return colorr(TipoT.RESERV);}
 
 
 
+        ">="            { return colorr(TipoT.SYMSS);}
+        "<="            { return colorr(TipoT.SYMSS);}
+        ">"            { return colorr(TipoT.SYMSS);}
+        "<"            { return colorr(TipoT.SYMSS);}
+        "=="            { return colorr(TipoT.SYMSS);}
 
-        {entero}            { return colorr(TipoT.TODOO);}
-        {decimal}             { return colorr(TipoT.TODOO);}
+        "="            { return colorr(TipoT.SYMSS);}
+        "++"            { return colorr(TipoT.SYMSS);}
+        "--"            { return colorr(TipoT.SYMSS);}
+
+        "+"            { return colorr(TipoT.SYMSS);}
+         "-"            { return colorr(TipoT.SYMSS);}
+         "*"            { return colorr(TipoT.SYMSS);}
+         "/"            { return colorr(TipoT.SYMSS);}
+        "%"            { return colorr(TipoT.SYMSS);} 
+        "^"            { return colorr(TipoT.SYMSS);}
+
+
+        {comment}                 { return colorr(TipoT.COMMENT);}
+        {commentMultiLine}        {return colorr(TipoT.COMMENT); }
+
+
+        "||"            { return colorr(TipoT.SYMSS);}
+        "&&"            { return colorr(TipoT.SYMSS);}
+        "&"            { return colorr(TipoT.SYMSS);}
+         "!="           {return colorr(TipoT.SYMSS);}
+
+         "!"            { return colorr(TipoT.SYMSS);}
+
+         "("            { return colorr(TipoT.SYMSS);}
+         ")"            { return colorr(TipoT.SYMSS);}
+
+        "{"            { return colorr(TipoT.SYMSS);}
+       "}"            { return colorr(TipoT.SYMSS);}
+        ";"            { return colorr(TipoT.SYMSS);}
+        ":"            { return colorr(TipoT.SYMSS);}
+        {Lbrack}            { return colorr(TipoT.SYMSS);}
+        {Rbrack}            { return colorr(TipoT.SYMSS);}
+        ","            { return colorr(TipoT.SYMSS);}
+        "."            { return colorr(TipoT.SYMSS);}
 
 
 
-        {id}            { return colorr(TipoT.TODOO);}
-        {characc}         { return colorr(TipoT.TODOO); }
 
-        {cadena}       {  return colorr(TipoT.TODOO);}
+        {entero}            { return colorr(TipoT.VAL);}
+        {decimal}             { return colorr(TipoT.VAL);}
+
+
+
+        {id}            { return colorr(TipoT.VAL);}
+        {characc}         { return colorr(TipoT.VAL); }
+
+        {cadena}       {  return colorr(TipoT.VAL);}
 
         }
 

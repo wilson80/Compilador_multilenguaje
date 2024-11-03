@@ -88,13 +88,21 @@ public class IniciarAnalizadores {
             
             //valid si no se encuentra el Main
             String c3d_Main = "";
-            c3d_Main = "#include<iostream>\n" +
+            c3d_Main = "#include <iostream>\n" +
+                        "\n" +
                         "using namespace std;\n" +
+                        "\n" +
+                        "int stack[100];\n" +
+                        "int heap[100];\n" +
                         "int ptr = 0;\n" +
-                        "int stack[100];\n\n";
+                        "int h = 0;\n\n";
+            
             String bodyMain ="";
             
             for (Instruction ins : ast.getInstrucciones()) {
+                if(ins ==null){
+                    continue;
+                }
                 if(ins instanceof  Classs cl){
                     bodyMain += (String)cl.createC3D(ast, "");
                     
@@ -106,11 +114,19 @@ public class IniciarAnalizadores {
             ast.setConsola(c3d_Main);
             
             
+
             
             
+          
             
-            
-            
+            switch (4) {
+                case 1:
+                    
+                    break;
+                    
+                default:
+                    break;
+            }
             
             
 //            System.out.println("\n\n\n" + ast.getConsola());

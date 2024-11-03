@@ -17,11 +17,12 @@ public enum TipoT {
     
     SECTION(Color.GREEN),
     ERROR(Color.RED),
-    RESERV(Color.MAGENTA),
+    RESERV(new Color(128, 0, 128)),
     INT(Color.MAGENTA),
-    VAL(Color.MAGENTA),
-    SYMSS(Color.CYAN),
+    VAL(new Color(255, 140, 0)),
+    SYMSS(new Color(0, 128, 64)),
     TODOO(Color.BLACK),
+    COMMENT(Color.BLUE),
     ;
     
     

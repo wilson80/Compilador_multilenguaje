@@ -12,7 +12,9 @@ import com.formdev.flatlaf.intellijthemes.FlatCobalt2IJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatGradiantoDeepOceanIJTheme;
 import com.formdev.flatlaf.intellijthemes.FlatGradiantoMidnightBlueIJTheme;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatLightOwlIJTheme;
+import com.formdev.flatlaf.themes.FlatMacDarkLaf;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.formdev.flatlaf.ui.FlatNativeMacLibrary;
 import com.wilsoncys.compi1.java.control.Control;
 
 /**
@@ -30,7 +32,9 @@ public class Main {
 //            FlatHighContrastIJTheme.setup();
 //              FlatGradiantoDeepOceanIJTheme.setup();
 //              FlatDarkPurpleIJTheme.setup();
-                FlatMacLightLaf.setup();
+//                FlatMacLightLaf.setup();
+//                FlatNativeMacLibrary.setup();
+                FlatMacDarkLaf.setup();
 //                FlatArcOrangeIJTheme.setup();
 //                                                          FlatCobalt2IJTheme.setup();
         } catch (Exception e) {

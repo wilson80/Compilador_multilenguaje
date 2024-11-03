@@ -24,7 +24,6 @@ public class sumar {
 	// }
     
 } 
-
 %%PROGRAMA
 #include "PASCAL"
 #include "PASCAL.nombre_suprograma"
@@ -32,18 +31,32 @@ public class sumar {
 #include "JAVA.*"
 #include "JAVA.nombre"  
 
+const float pi = 3.14159;
+const char c = 'X'; // X es una constante tipo char
+const int X = 10; // X es un tipo int
 
 int x = 4;
 int y = 6;
 int tatal = 0;
 
+	JAVA.sumar      call1(x, y), call2(5,3);
 
 void main()
 { 
-	JAVA.sumar      call1(x, y), call2(5,3);
+
 	tatal = JAVA.call1.getTotal();
 	JAVA.call1.imprimirTotal();
+ 
+	printf("Integer: %d, Character: %c, Float: %.2f", a, b, c); 
 
+	scanf("%d", &var);
+ 
+	
 
+	
+	
+	 
+
+ 
 }
 

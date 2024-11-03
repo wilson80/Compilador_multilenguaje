@@ -34,8 +34,10 @@ public class Arbol {
     private LinkedList<Instruction> functions;          //list of methods, functions and Structs
     private LinkedList<TablaSimbolos> tablaReport = new LinkedList<>();          //par la tabla de simbolos
     
-    private Classs classMain; 
-    private Mainn methodMain; 
+    private LinkedList<String> claseJava;
+    private LinkedList<String> subPPascal;
+    
+    
     
     public C3d pascal;
     public C3d_Java java;
@@ -157,22 +159,8 @@ public class Arbol {
 
     }
 
-    public void setClassMain(Classs classMain) {
-        this.classMain = classMain;
-    }
-
-    public Classs getClassMain() {
-        return classMain;
-    }
-    
-
-    public void setMethodMain(Mainn methodMain) {
-        this.methodMain = methodMain;
-    }
-
-    public Mainn getMethodMain() {
-        return methodMain;
-    }
+ 
+ 
     
     public Simbolo getSym(String id){
         return  tablaGlobal.getSsymbol(id);

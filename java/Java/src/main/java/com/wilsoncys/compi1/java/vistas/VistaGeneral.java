@@ -80,7 +80,7 @@ public class VistaGeneral extends javax.swing.JFrame {
     private LinkedList<Errores> listaErrores;
     private LinkedList<TablaSimbolos> tablaReport = new LinkedList<>();          //par la tabla de simbolos
     private JTextPane paneActual;
-    
+    private boolean colores = false;
     
     
     public VistaGeneral(Control control) {
@@ -118,6 +118,7 @@ public class VistaGeneral extends javax.swing.JFrame {
         panelSimbolo = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jCheckBox1 = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
         menuReportes = new javax.swing.JMenu();
@@ -140,7 +141,7 @@ public class VistaGeneral extends javax.swing.JFrame {
             }
         });
         getContentPane().add(botonEjecutar);
-        botonEjecutar.setBounds(1150, 10, 80, 40);
+        botonEjecutar.setBounds(1170, 10, 80, 40);
 
         botonNuevoArchivo.setBackground(new java.awt.Color(0, 102, 255));
         botonNuevoArchivo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -243,6 +244,17 @@ public class VistaGeneral extends javax.swing.JFrame {
         getContentPane().add(jTabbedPane1);
         jTabbedPane1.setBounds(670, 60, 1230, 840);
 
+        jCheckBox1.setBackground(new java.awt.Color(0, 102, 204));
+        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox1.setText("Colores on/of");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jCheckBox1);
+        jCheckBox1.setBounds(1290, 10, 150, 40);
+
         jMenuBar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         menuArchivo.setText("Archivo");
@@ -299,54 +311,36 @@ public class VistaGeneral extends javax.swing.JFrame {
     public JScrollPane configurarLineas(String texto) {
     JTextPane textPane = new JTextPane();
     textPane.setText(texto);
-  
-        Timer timer = new Timer(500, e -> {
-        SetColor setColorThread = new SetColor(textPane);
-        setColorThread.start();
-    });
-    timer.setRepeats(false); // Asegúrate de que el temporizador no repita
 
-    // Agrega el DocumentListener para colorear el texto al escribir
-    textPane.getDocument().addDocumentListener(new DocumentListener() {
-        @Override
-        public void insertUpdate(DocumentEvent e) {
-            timer.restart(); // Reinicia el temporizador en cada inserción
-        }
+   
+            Timer timer = new Timer(1300, e -> {
+                    if(colores){
+                        SetColor setColorThread = new SetColor(textPane);
+                        setColorThread.start();
+                    }
+            });
+            timer.setRepeats(false); // Asegúrate de que el temporizador no repita
 
-        @Override
-        public void removeUpdate(DocumentEvent e) {
-            timer.restart(); // Reinicia el temporizador en cada eliminación
-        }
+            // Agrega el DocumentListener para colorear el texto al escribir
+            textPane.getDocument().addDocumentListener(new DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    timer.restart(); // Reinicia el temporizador en cada inserción
+                }
 
-        @Override
-        public void changedUpdate(DocumentEvent e) {
-            // No se necesita implementar en este caso
-        }
-    });
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    timer.restart(); // Reinicia el temporizador en cada eliminación
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    // No se necesita implementar en este caso
+                }
+            });
     
-//    // Agrega el DocumentListener para colorear el texto al escribir
-//    textPane.getDocument().addDocumentListener(new DocumentListener() {
-//        @Override
-//        public void insertUpdate(DocumentEvent e) {
-//            SetColor setColorThread = new SetColor(textPane);
-//            setColorThread.start();
-////            colorearTexto(textPane);
-////            panelCajonTexto.updateUI();
-//        }
-//
-//        @Override
-//        public void removeUpdate(DocumentEvent e) {
-//            SetColor setColorThread = new SetColor(textPane);
-//            setColorThread.start();
-////            colorearTexto(textPane);
-//        }
-//
-//        @Override
-//        public void changedUpdate(DocumentEvent e) {
-////            colorearTexto(textPane);
-//        }
-//    });
-    
+
+ 
     JScrollPane scrollPane = new JScrollPane(textPane);
     
     // Configuración del número de líneas
@@ -363,11 +357,11 @@ public class VistaGeneral extends javax.swing.JFrame {
 }
 
 // Método para aplicar colores usando JFlex
- 
+ public void setColores(){
+     
+ }
 
-    
-    
-    
+ 
     
     public void identificarPestanaSelected(){
          
@@ -380,9 +374,13 @@ public class VistaGeneral extends javax.swing.JFrame {
                     
                     String content = cajonText.getText();
                     textoActual = content;
+        
                 }
     }
             
+    
+    
+    
     
     
     private void menuArchivoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuArchivoMouseClicked
@@ -649,6 +647,17 @@ public class VistaGeneral extends javax.swing.JFrame {
         llenandoJtable();
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        coloresONOF();
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    public void coloresONOF(){
+        JOptionPane.showMessageDialog(null, "colores onnn");
+        if(colores){
+            this.colores = false;
+        }else{
+            this.colores = true;
+        }
+    }
     
     public void setCajonConsola(String resultados){
         cajonConsola.setText(resultados);
@@ -764,6 +773,7 @@ public class VistaGeneral extends javax.swing.JFrame {
     private javax.swing.JButton botonNuevoArchivo1;
     private javax.swing.JButton botonc;
     private javax.swing.JTextArea cajonConsola;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

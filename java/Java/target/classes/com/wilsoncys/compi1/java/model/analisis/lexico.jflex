@@ -60,6 +60,13 @@ PASCALSIMP = \"PASCAL\"
 
 JAVAUNO = \"JAVA\.{id}\"
 PASCALUNO = \"PASCAL\.{id}\"
+
+SCANd = \"%d\"
+SCANc = \"%c\"
+SCANf = \"%f\"
+SCANs = \"%s\"
+
+
 Lbrack = \[
 Rbrack = \]
 
@@ -106,7 +113,7 @@ Rbrack = \]
         "while"            { return symbol(sym.WHILE, yytext());}
         "do"            { return symbol(sym.DO, yytext());}
         "continue"            { return symbol(sym.CONTINUE, yytext());}
-        "Break"            { return symbol(sym.BREAK, yytext());}
+        "break"            { return symbol(sym.BREAK, yytext());}
         "if"            { return symbol(sym.IF, yytext());}
         "else"            { return symbol(sym.ELSE, yytext());}
         "switch"            { return symbol(sym.SWITCH, yytext());}
@@ -192,10 +199,19 @@ Rbrack = \]
             "PASCAL"        {return symbol(sym.PASCAL, yytext());}
             "JAVA"        {return symbol(sym.JAVA, yytext());}
             {JAVASIMP}            { return  symbol(sym.JAVATODO, yytext());}
-            {JAVAUNO}            { return  symbol(sym.JAVAUNO, yytext());}
-
             {PASCALSIMP}            { return  symbol(sym.PASCALSIMP, yytext());}
-            {PASCALUNO}            { return  symbol(sym.PASCALUNO, yytext());}
+            
+            // {JAVAUNO}            { return  symbol(sym.JAVAUNO, yytext());}
+            {JAVAUNO} { 
+                String id = yytext().substring(6, yytext().length() - 1); // extrae el id
+                return symbol(sym.JAVAUNO, id); 
+            }
+
+            // {PASCALUNO}            { return  symbol(sym.PASCALUNO, yytext());}
+            {PASCALUNO}            { 
+                String id = yytext().substring(8, yytext().length() - 1); // extrae el id
+                return symbol(sym.PASCALUNO, id); 
+            }
 
 
         "int"            { return symbol(sym.INT, yytext());}
@@ -210,7 +226,7 @@ Rbrack = \]
         "for"            { return symbol(sym.FOR, yytext());}
         "do"            { return symbol(sym.DO, yytext());}
         "while"            { return symbol(sym.WHILE, yytext());}
-        "Break"            { return symbol(sym.BREAK, yytext());}
+        "break"            { return symbol(sym.BREAK, yytext());}
         "continue"            { return symbol(sym.CONTINUE, yytext());}
         "void"            { return symbol(sym.VOID, yytext());}
         "switch"            { return symbol(sym.SWITCH, yytext());}
@@ -219,11 +235,15 @@ Rbrack = \]
 
 
         "scanf"        {return symbol(sym.SCAN, yytext());}
-        "%d"        {return symbol(sym.MASK_D, yytext());}
-        "%c"        {return symbol(sym.MASK_C, yytext());}
-        "%f"        {return symbol(sym.MASK_F, yytext());}
-        "%s"        {return symbol(sym.MASK_S, yytext());}
-
+        {SCANd}        { String idd = "d";
+            return symbol(sym.MASK_D, idd); }
+        {SCANc}        { String idd = "c";
+            return symbol(sym.MASK_C, idd);}
+        {SCANf}        { String idd = "f";
+            return symbol(sym.MASK_F, idd);}
+        {SCANs}        { String idd = "s";
+            return symbol(sym.MASK_S, idd);}
+ 
 
         "getch"        {return symbol(sym.GETCH, yytext());}
         "printf"        {return symbol(sym.PRINT, yytext());}
@@ -268,7 +288,7 @@ Rbrack = \]
        "}"            { return symbol(sym.K_CL, yytext());}
         ";"            { return symbol(sym.SEMIC, yytext());}
         ":"            { return symbol(sym.POINTS, yytext());}
-        "_"            { return symbol(sym.DEFAULT, yytext());}
+        "default"            { return symbol(sym.DEFAULT, yytext());}
         {Lbrack}            { return symbol(sym.BRACK_L, yytext());}
         {Rbrack}            { return symbol(sym.BRACK_R, yytext());}
         ","            { return symbol(sym.COLON, yytext());}

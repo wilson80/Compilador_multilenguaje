@@ -1,11 +1,9 @@
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/Main.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/NewClass.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/control/Control.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/control/CppRunn.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/control/IniciarAnalizadores.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/analisis/NewClass.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/analisis/colorear2.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/analisis/colorerarr.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/analisis/parser.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/analisis/scanner.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/analisis/sym.java
@@ -46,12 +44,16 @@
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/transferContinue.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/transferReturn.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/poo/Call.java
+/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/poo/ClasesJava.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/poo/Classs.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/poo/Functionss.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/poo/Mainn.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/poo/Method.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/poo/Reference.java
+/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/AssignmenttC.java
+/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/Includes.java
+/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/Mainn.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/Programa.java
+/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/StatementC.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/sC3D/C3d.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/sC3D/C3d_Java.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/Arbol.java
@@ -62,6 +64,7 @@
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/categoria.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/tipoDato.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/visib.java
+/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/ColorWorker.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/FrameReportes.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/PatronInterprete.java
 /media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/SetColor.java

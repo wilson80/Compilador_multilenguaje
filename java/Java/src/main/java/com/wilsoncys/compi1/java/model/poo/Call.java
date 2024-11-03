@@ -204,24 +204,24 @@ public class Call extends Instruction{
         int posIni = 1;
         Simbolo sym = arbol.getSym(id);
         if(sym.getCat().equals(categoria.FUNCTION) ){
-            if(sym.getAmbito().get(0).equals(arbol.getClassMain().getId())){        
+//            if(sym.getAmbito().get(0).equals(arbol.getClassMain().getId())){        
                                     //config pos de retorno
-                arbol.setPosReturn(0);
-                posIni = 1;
-            }else{
-                arbol.setPosReturn(2);
-                posIni = 3;
-                
-            }
+//                arbol.setPosReturn(0);
+//                posIni = 1;
+//            }else{
+//                arbol.setPosReturn(2);
+//                posIni = 3;
+//                
+//            }
         }else if(sym.getCat().equals(categoria.METHOD)){
                                     //config pos de retorno
-            if(sym.getAmbito().get(0).equals(arbol.getClassMain().getId())){
-                arbol.setPosReturn(0);
-                posIni = 0;
-            }else{
-                arbol.setPosReturn(0);
-                posIni = 2;
-            }
+//            if(sym.getAmbito().get(0).equals(arbol.getClassMain().getId())){
+//                arbol.setPosReturn(0);
+//                posIni = 0;
+//            }else{
+//                arbol.setPosReturn(0);
+//                posIni = 2;
+//            }
         }
                                             //extrayendo los params
         for (Instruction exps : parametersExp) {

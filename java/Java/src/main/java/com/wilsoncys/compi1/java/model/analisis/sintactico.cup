@@ -14,6 +14,8 @@ import com.wilsoncys.compi1.java.model.expresiones.*;
 
 import com.wilsoncys.compi1.java.model.expresiones.Aritmeticas.*;
 import com.wilsoncys.compi1.java.model.expresiones.Enums.*;
+import com.wilsoncys.compi1.java.model.programa.*;
+
 import java.util.HashMap;
 
 
@@ -69,13 +71,13 @@ terminal ASSIGNMENT;
 terminal DO, IF, ELSE, FOR, BREAK, SWITCH, WHILE, CONTINUE, DEFAULT, ARROW;
 
 terminal OR, AND, XOR, NOT;
-terminal UNEGATIVE, UMINUS, CAST;
+terminal UNEGATIVE, UMINUS;
 terminal PLUSPLUS, MINUSMINUS;
 
 terminal PRINT, INT, DOUBLE, BOOLEAN, CHAR, STRING, VOID;
 terminal PAR_OP, PAR_CL, K_OP, K_CL, SEMIC, POINTS, BRACK_L, BRACK_R;
-terminal VAR, CONST, COLON, START_W, LIST, NEW, DOT, APPEND, REMOVE, LENGTH, FIND, ROUND;
-terminal RETURN, STRUCT, TUSTRIN;
+terminal VAR, CONST, COLON,  NEW, DOT;
+terminal RETURN;
 terminal PROTECTED, PRIVATE, PUBLIC;
 terminal EXTENDS, THIS, MAIN, CLASS, PRINTLN;
 terminal INP_C,INP_INT, INP_F;
@@ -106,29 +108,43 @@ nonterminal Instruction if, simpleIf, elsees, declaraAsigna, updateVarFor;
 nonterminal LinkedList<Instruction> cierreElse, valoresVectorAlone;
 nonterminal LinkedList<CaseMatch>  listCases;
 nonterminal CaseMatch case;
-nonterminal Instruction continue, break, start_whit, methodd;
+nonterminal Instruction continue, break,  methodd;
 nonterminal Instruction declaracionEstructuraD;
 nonterminal LinkedList<LinkedList<Instruction>>  valoresVector2D;
-nonterminal LinkedList<HashMap>  parametersFuncts, paramsStructs, valuesStruct;
+nonterminal LinkedList<HashMap>  parametersFuncts;
 nonterminal LinkedList<Instruction>  callsParameters;
-nonterminal Instruction append, call, returnn, callEXP, struct;
-nonterminal structsTypes;
+nonterminal Instruction call, returnn, callEXP;
 nonterminal modPriv;
 nonterminal Instruction gIns, declaracion, call2;
 nonterminal Instruction callEXP2, assig_to_acces;
-nonterminal LinkedList<Instruction> claass, gInstructionss, insClass, methodIns;
-nonterminal LinkedList<Instruction> paramss;
-
+nonterminal LinkedList<Instruction> gInstructionss, insClass, methodIns;
+nonterminal LinkedList<Instruction> paramss, claass;
 nonterminal Instruction Oneclaass, constructor;
 
-nonterminal LinkedList<Instruction> pascal, c, otherInclude,
- include, typeC, java_C, instructionsC, cPrincipal, insC;
 
-nonterminal includes, decConstC, decVarsC, mainC, declaracionC;
+nonterminal LinkedList<Instruction> pascal, 
+         java_C, instructionsC;
+
+//CPRINCIPAL
+nonterminal Instruction cPrincipal, decConstC, decVarsC, mainC;
+nonterminal Instruction EXPRESIONCC, printf, scanf, asignacionC,
+        whileC, forC, DOC, ifC, switchC, callC
+        ,decObjetos, elseesC, simpleIfC
+        , declaraAsignaC, updateVarForC
+        , callExpC, pascalCode, inSwC, insC;
+
+nonterminal LinkedList<Instruction>  callsParametersC
+        ,instancesC, cierreElseC, paramssC, insSwC
+        , declaracionC;
+nonterminal LinkedList<CaseMatch>  listCasesC;
+nonterminal CaseMatch  caseC;
+nonterminal Tipo typeC;
 
 
-
-nonterminal LinkedList<Instruction> pascalCode;
+nonterminal Includes includes;
+nonterminal String includeJ, includeP;
+nonterminal varsPrintf;
+// nonterminal LinkedList<Instruction> pascalCode;
 
 precedence left OR;
 precedence left AND;
@@ -147,7 +163,6 @@ precedence nonassoc RAISED;
 // precedence left ID;
 
 precedence right UMINUS;
-precedence right CAST;
 
 start with INICIO;
 
@@ -158,98 +173,318 @@ INICIO::= pascal:a      {:   RESULT = a; :}
 
 pascal::=  pascalCode:p java_C:c_J {: RESULT = new LinkedList<>();
         if(p!=null){
-                RESULT.addAll(p);
+                RESULT.add(p);
         }
         if(c_J!=null){
                 RESULT.addAll(c_J);
         }
-                                 :}
+                                :}
 |java_C:c {: RESULT = c; :}
 ;
 
-java_C::= claass:j cPrincipal:c {: RESULT = new LinkedList<>(); 
+
+java_C::= claass:j cPrincipal:c {: 
+        RESULT = new LinkedList<>(); 
         if(j!=null){
-                RESULT.addAll(j);
+        ClasesJava cl = new ClasesJava(j, jleft, jright);
+                RESULT.add(cl);
         }
         if(c!=null){
-                 RESULT.addAll(c); 
+                 RESULT.add(c); 
         } 
                  :}
-|cPrincipal:c {: RESULT = new LinkedList<>(); :}
+| cPrincipal:c {: RESULT = new LinkedList<>(); 
+        if(c!=null){
+                RESULT.add(c); 
+        }:}
 ;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //GRAMATICA PROGRAMA PASCAL
-pascalCode::= PROCEDURE {:RESULT = new LinkedList<>(); :}
+pascalCode::= PROCEDURE {:  :}
 ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 //GRAMATICA PROGRAMA PRINCIPAL
-cPrincipal::= includes declaracionC mainC {: RESULT = new LinkedList<>(); :}
-| {: RESULT = new LinkedList<>(); :}
+cPrincipal::= includes:in declaracionC:ins mainC:main  
+        {: RESULT = new Programa(in, ins, main, inleft, inright); :}
+| {: RESULT = null; :}
+;
+ 
+ 
+
+
+
+includes::= includeP:in  includes:ins
+          {: RESULT = ins;
+           RESULT.addSubPPascal(in); :}
+|includeJ:in  includes:ins
+         {: RESULT = ins;
+         RESULT.addClaseJava(in); :}
+|        {: RESULT = new Includes(); :}
+;
+includeP::= INCLUDE PASCALUNO:id {: RESULT = id.toString(); :} 
+        |INCLUDE PASCALSIMP:id  {: RESULT = id.toString(); :} 
+;
+includeJ::= INCLUDE JAVAUNO:id {: RESULT = id.toString(); :} 
+        |INCLUDE JAVATODO:id  {: RESULT = id.toString(); :} 
 ;
 
-includes::= include otherInclude
+
+
+decConstC::= CONST typeC:t ID:id ASSIGNMENT EXPRESIONCC:exp SEMIC
+  {: RESULT = new Statement(id, exp, t, idleft, idright, false); :}    
+;
+ 
+decVarsC::= typeC:t ID:id ASSIGNMENT EXPRESIONCC:exp SEMIC
+  {: RESULT = new Statement(id, exp, t, idleft, idright, false); :}    
+        | typeC:t ID:id SEMIC
+  {: RESULT = new Statement(id, t, idleft, idright, false); :}
 ;
 
-otherInclude::= include otherInclude
-        |
-;
-include::= INCLUDE PASCALUNO:id 
-        |INCLUDE JAVAUNO:id
-        |INCLUDE PASCALSIMP:id 
-        |INCLUDE JAVATODO:id 
+
+
+
+//vectores
+mainC::= VOID MAIN:a PAR_OP PAR_CL K_OP  instructionsC:ins  K_CL
+        {:RESULT = new MainnC("MAIN", ins, aleft, aright); :}
 ;
 
-decConstC::= CONST typeC ID ASSIGNMENT EXPRESION SEMIC
-;
 
-//cambiar la expr
-decVarsC::= typeC ID ASSIGNMENT EXPRESION SEMIC
-        | typeC ID SEMIC
-;
-
-mainC::= VOID MAIN PAR_OP PAR_CL K_OP  instructionsC  K_CL
-;
-
-declaracionC::= decConstC declaracionC
-        | decVarsC declaracionC
-        |
+declaracionC::= decConstC:dec declaracionC:decs
+        {: RESULT = decs; RESULT.add(dec);  :}
+| decVarsC:dec declaracionC:decs
+        {: RESULT = decs; RESULT.add(dec);  :}
+| decObjetos:dec declaracionC:decs
+        {: RESULT = decs; RESULT.add(dec);  :}
+| {:RESULT = new LinkedList<>(); :}
 ;
 
 instructionsC::= insC instructionsC
+                | error SEMIC
                 | 
 ;
 
 
+typeC::= INT {: new Tipo(tipoDato.ENTERO); :}
+|CHAR   {: RESULT = new Tipo(tipoDato.CARACTER); :}
+|DOUBLE  {: RESULT = new Tipo(tipoDato.DECIMAL); :}
+|STRING  {: RESULT = new Tipo(tipoDato.CADENA); :}
+;
+ 
+
+  
+
+printf::= PRINT PAR_OP CADENA PAR_CL SEMIC
+        | PRINT PAR_OP CADENA varsPrintf PAR_CL SEMIC
+;
+//scanf   printf("Integer: %d, Character: %c, Float: %.2f", 10, 'B', 2.718);
+varsPrintf::= COLON ID 
+        | COLON ID varsPrintf
+;
+
+
+scanf::= SCAN PAR_OP MASK_D:s COLON ANDSIMPLE ID PAR_CL SEMIC
+        |SCAN PAR_OP MASK_C COLON ANDSIMPLE ID PAR_CL SEMIC
+        |SCAN PAR_OP MASK_F COLON ANDSIMPLE ID PAR_CL SEMIC
+        |SCAN PAR_OP MASK_S COLON ANDSIMPLE ID PAR_CL SEMIC
+;
+
+asignacionC::= ID ASSIGNMENT EXPRESIONCC SEMIC
+;
+
+
 insC::= PRINT PAR_OP PAR_CL SEMIC
+|CLRSCR PAR_OP  PAR_CL SEMIC
+|GETCH PAR_OP PAR_CL SEMIC
+| scanf
+| asignacionC
+| printf
+|whileC
+|forC
+|DOC
+|BREAK SEMIC
+|CONTINUE SEMIC
+|ifC
+|switchC
+|callC
 ;
 
 
-typeC::= INT 
-|CHAR
-|DOUBLE
-|STRING
-;
-	// JAVA.sumar      call1(x, y), call2(5,3);
-	// tatal = JAVA.call1.getTotal();
-	// JAVA.call1.imprimirTotal();
-instanceJ::= JAVA 
-        |JAVA DOT ID
-        |JAVA DOT
-;
-
-//exp
-expInstancePascal::= PASCAL DOT  callPrincipal
-;
-instancePascal::= PASCAL DOT  callPrincipal
+inSwC::= PRINT PAR_OP PAR_CL SEMIC
+|CLRSCR PAR_OP  PAR_CL SEMIC
+|GETCH PAR_OP PAR_CL SEMIC
+| scanf
+| asignacionC
+| printf
+|whileC
+|forC
+|DOC
+|ifC
+|switchC
+|callC
+|error SEMIC
 ;
 
-callPrincipal::= 
+insSwC::= inSwC insSwC
+|
 ;
 
 
+
+
+//OBJETOS
+decObjetos::= JAVA DOT ID:cl instancesC:ins 
+        {:
+            RESULT = new ReferenceC(cl,ins, clleft, clright);    
+        :}
+ ;
+
+//inciiar con llenar la tabla de simbolos del pr Principal
+
+
+instancesC::= ID:id PAR_OP paramssC:p PAR_CL COLON  instancesC:ins
+        {: RESULT = ins;
+        CallJavaC cl = new CallJavaC(id, p, idleft, idright); 
+        RESULT.add(cl);
+
+        :}
+        | ID:id PAR_OP paramssC:p PAR_CL SEMIC
+        {: RESULT = new LinkedList<>();
+          CallJavaC cl = new CallJavaC(id, p, idleft, idright); 
+          RESULT.add(cl);
+        :}
+;
+
+
+ 
+
+whileC::= WHILE PAR_OP EXPRESIONCC PAR_CL
+        K_OP  instructionsC K_CL
+;
+
+
+DOC::= DO K_OP  instructionsC K_CL
+        WHILE PAR_OP EXPRESIONCC PAR_CL SEMIC
+;
+ 
+ifC::=   IF PAR_OP EXPRESIONCC:exp PAR_CL  K_OP instructionsC:ins K_CL ELSE  ifC:elif {: RESULT = new IF(exp, ins, elif, expleft, expright);    :}
+        |elseesC:w {: RESULT = w; :}
+        |simpleIfC:w {: RESULT = w; :}
+; 
+
+cierreElseC::= ELSE K_OP instructionsC:ins {: RESULT = ins;  :} K_CL 
+;
+
+simpleIfC::=  IF PAR_OP EXPRESIONCC:a PAR_CL  K_OP instructionsC:ins K_CL   
+                                {: RESULT = new IF(a, ins, aleft, aright); :}
+; 
+
+//     public IF(Instruction expression, LinkedList<Instruction> instructionss, LinkedList<Instruction> instructionsElse, int linea, int col) {
+elseesC::=  IF PAR_OP EXPRESIONCC:exp PAR_CL  K_OP instructionsC:ins K_CL cierreElseC:insEls   
+                {: RESULT = new IF(exp, ins, insEls, expleft, expright); :}
+;
+
+
+
+forC::= FOR PAR_OP declaraAsignaC:a  EXPRESIONCC:b SEMIC     updateVarForC:c PAR_CL K_OP  instructionsC:ins K_CL
+                {: RESULT = new CiclicaFor(a, b, c, ins, aleft, aright); :}
+;
+
+
+//     public CiclicaFor(Instruction asignacion, Instruction condicion, Instruction actualizacion, LinkedList<Instruction> instrucciones, int linea, int col) {
+updateVarForC::=  ID:id PLUSPLUS  {: RESULT = new IncreaseDecrease(id, true, idleft, idright); :}
+        |ID:id  MINUSMINUS  {: RESULT = new IncreaseDecrease(id, false, idleft, idright); :}
+        |ID:id ASSIGNMENT EXPRESIONCC:exp {:  RESULT = new Assignmentt(id, exp, idleft, idright);  :}
+        ;
+
+declaraAsignaC::= asignacionC
+                | typeC ID ASSIGNMENT EXPRESIONCC SEMIC
+;
+
+
+switchC::= SWITCH PAR_OP ID PAR_CL K_OP  listCasesC:cazzoz K_CL
+                // {: RESULT = new Match(exp, cazzoz, expleft, expright); :}
+;
+
+listCasesC::=  listCasesC:b  caseC:a {: RESULT = b; RESULT.add(a); :}
+        | caseC:a {:  RESULT = new LinkedList<>();   RESULT.add(a); :}
+        ;
+
+
+caseC::=  CASE  EXPRESIONCC:a POINTS insSwC:ins BREAK SEMIC
+        {: RESULT = new CaseMatch(a, ins, false, aleft, aright); :}
+        | DEFAULT:a  POINTS insSwC:ins BREAK SEMIC
+        {: RESULT = new CaseMatch(null, ins, true, aleft, aright); :}
+;
+
+callsParametersC ::= callsParametersC:a COLON EXPRESIONCC:e    {:  RESULT = a;
+                                                    RESULT.add(e);
+                                                :}
+            | EXPRESIONCC:a                       {:  RESULT = new LinkedList<Instruction>(); 
+                                                    RESULT.add(a);
+                                                :}
+            
+;
+paramssC::= callsParametersC:c {:RESULT = c; :}
+        | {:RESULT = new LinkedList<>(); :}
+;
+
+
+callC::= PASCAL DOT ID PAR_OP paramssC PAR_CL SEMIC
+        | JAVA DOT ID:id DOT ID:id1 PAR_OP paramssC:p PAR_CL SEMIC
+        // {: RESULT = new CallJavaC(id, id1, p, idleft, idright ); :}
+;
+
+
+callExpC::= PASCAL DOT ID PAR_OP paramssC PAR_CL  
+        | JAVA DOT ID DOT ID PAR_OP paramssC PAR_CL  
+;
+
+
+ 
+
+
+
+
+
+
+
+
+
+// PASCAL.nombre_funcion(parámetro);
 EXPRESIONCC::= MINUS EXPRESIONCC:a             {:   RESULT = new Negacion(a, OperadoresAritmeticos.NEGACION, aleft, aright);   :} %prec UMINUS
             | NOT EXPRESIONCC:a  {:   RESULT = new LogicalOperations(a, Relational_LogicalOperations.NOT, aleft, aright);   :}              %prec UNEGATIVE
             | EXPRESIONCC:a PLUS EXPRESIONCC:b   {:   RESULT = new Suma(a, b, OperadoresAritmeticos.SUMA, aleft, aright);   :}
@@ -281,10 +516,11 @@ EXPRESIONCC::= MINUS EXPRESIONCC:a             {:   RESULT = new Negacion(a, Ope
             | ID:a BRACK_L EXPRESIONCC:indx BRACK_R      {:   RESULT = new AccesVector(a, indx, aleft, aright);   :}
             | ID:a BRACK_L EXPRESIONCC:indx1 BRACK_R BRACK_L  EXPRESIONCC:indx2 BRACK_R      {:   RESULT = new AccesVector(a, indx1, indx2, aleft, aright);   :}
 
-                    | callEXP:a {: RESULT = a; :}    
-                    | NEW ID:t  PAR_OP callsParameters:p PAR_CL 
-                {:RESULT = new Reference(t, p, tleft, tright); :}
+
+            | GETCH PAR_OP PAR_CL SEMIC    
+            | callExpC
 ;
+
 
 
 
@@ -330,6 +566,12 @@ EXPRESIONCC::= MINUS EXPRESIONCC:a             {:   RESULT = new Negacion(a, Ope
 
 
 //GRAMATICA PROGRAMA JAVA
+claass::= Oneclaass:c {: RESULT = new LinkedList<>(); RESULT.add(c); :} 
+        | claass:cls Oneclaass:c  {: RESULT = cls; RESULT.add(c); :}
+;
+
+
+
 InstructionES ::= InstructionES:a Instruction:b     {: RESULT = a; RESULT.add(b); :}
                 | Instruction:a                   {: RESULT = new LinkedList<>(); RESULT.add(a); :}
 ;
@@ -349,10 +591,7 @@ modPriv::= PUBLIC
         |PRIVATE
 ;
 
-
-claass::= Oneclaass:c {: RESULT = new LinkedList<>(); RESULT.add(c); :} 
-        | claass:cls Oneclaass:c  {: RESULT = cls; RESULT.add(c); :}
-;
+ 
 
 Oneclaass::=  CLASS ID K_OP gInstructionss K_CL 
         | PUBLIC CLASS ID:id K_OP insClass:ins K_CL 
@@ -388,9 +627,7 @@ Instruction ::= declaracion:w {: RESULT = w; :}
         | returnn:w {: RESULT = w; :}
         | continue:w {: RESULT = w;:}
         | declaracionEstructuraD:w {: RESULT = w; :}
-        | struct:w {: RESULT = w; :}
         // | methodd:w {: RESULT = w; :}
-        // | start_whit:w {: RESULT = w; :}
         | call:w {: RESULT = w; :} 
         | error SEMIC
         | error
@@ -427,7 +664,6 @@ EXPRESION::= MINUS EXPRESION:a             {:   RESULT = new Negacion(a, Operado
 
             | ID:a BRACK_L EXPRESION:indx BRACK_R      {:   RESULT = new AccesVector(a, indx, aleft, aright);   :}
             | ID:a BRACK_L EXPRESION:indx1 BRACK_R BRACK_L  EXPRESION:indx2 BRACK_R      {:   RESULT = new AccesVector(a, indx1, indx2, aleft, aright);   :}
-            | TUSTRIN PAR_OP EXPRESION:a PAR_CL {: RESULT = new FunctionToString(a, aleft, aright); :}
             | callEXP:a {: RESULT = a; :}    
             | NEW ID:t  PAR_OP callsParameters:p PAR_CL 
                 {:RESULT = new Reference(t, p, tleft, tright); :}
@@ -506,9 +742,7 @@ call2::= ID PAR_OP paramss PAR_CL DOT call
 ;
  
  
-// start_whit::=  START_W ID:a PAR_OP callsParameters:b PAR_CL SEMIC     {:   RESULT = new Start_Main(a, b, aleft, aright );   :}
-//             | START_W ID:a PAR_OP PAR_CL SEMIC                  {:   RESULT = new Start_Main(a, new LinkedList<Instruction>(), aleft, aright );   :}
-// ;
+ 
 
 callsParameters ::= callsParameters:a COLON EXPRESION:e    {:  RESULT = a;
                                                     RESULT.add(e);
