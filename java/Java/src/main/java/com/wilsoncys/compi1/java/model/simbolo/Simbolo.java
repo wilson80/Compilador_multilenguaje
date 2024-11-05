@@ -117,6 +117,7 @@ public class Simbolo {
     
     public void armarAmbito(String amb){
         this.ambito.add(amb);
+        
     }
 
     public void setCat(categoria cat) {
@@ -140,7 +141,9 @@ public class Simbolo {
     }
 
     public void setAmbito(List<String> ambito) {
-        this.ambito = ambito;
+        for (String id : ambito) {
+            this.ambito.add(id);
+        }
     }
 
     public int getDir() {

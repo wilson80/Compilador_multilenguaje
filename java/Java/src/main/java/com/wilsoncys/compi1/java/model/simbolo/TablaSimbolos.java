@@ -52,7 +52,7 @@ public class TablaSimbolos {
         this.nombre = nombre;
     }
     
-    public boolean addSsymbol(Simbolo newSymbol){
+    public boolean aquiNoo(Simbolo newSymbol){
         Simbolo find = (Simbolo)this.tablaActual.get(newSymbol.getId().toLowerCase());
         if(find==null){
             tablaActual.put(newSymbol.getId().toLowerCase(), newSymbol);
@@ -62,9 +62,17 @@ public class TablaSimbolos {
         }
     }
     
-    public void addSsymbolPre(Simbolo newSymbol){
+    public boolean addSsymbolPre(Simbolo newSymbol){
+//        Simbolo find = (Simbolo)this.tablaActual.get(newSymbol.getId());
+        Simbolo find = (Simbolo)this.tablaActual.get(newSymbol.getAmbito_enID());
+        if(find==null){
+//            tablaActual.put(newSymbol.getId(), newSymbol);
+            tablaActual.put(newSymbol.getAmbito_enID(), newSymbol);
+            return true;
+        }else{
+            return false;
+        }
 //            tablaActual.put(newSymbol.getAmbito_enID(), newSymbol);
-            tablaActual.put(newSymbol.getId(), newSymbol);
             
     }
    

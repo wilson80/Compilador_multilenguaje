@@ -79,7 +79,7 @@ public class VectorsStatement extends Instruction{
           newSimbol.setLinea(line);
           newSimbol.setLinea(col);
 //        insertar el simbolo en la tabla
-          boolean insetarSimbol = tabla.addSsymbol(newSimbol);
+          boolean insetarSimbol = tabla.aquiNoo(newSimbol);
           if(insetarSimbol){
               return null;
           }else{
@@ -124,7 +124,7 @@ public class VectorsStatement extends Instruction{
         Simbolo newSimboll = new Simbolo(this.tipo, identificador, vectorzito2D, isConst);
         newSimboll.setLinea(line);
         newSimboll.setLinea(col);
-        if(tabla.addSsymbol(newSimboll)){
+        if(tabla.aquiNoo(newSimboll)){
             return null;
         }else{
             mensErr = String.format("La variable con id: %s ya existe", identificador);

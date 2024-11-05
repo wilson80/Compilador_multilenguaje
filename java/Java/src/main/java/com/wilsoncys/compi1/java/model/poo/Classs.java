@@ -33,11 +33,8 @@ import java.util.List;
     public LinkedList<Instruction> instrucciones;
     
     private boolean main;
-    Mainn mainMethod;
-    
-    
-    
-    
+
+
     
    // private TablaSimbolos tablaGlobal;              //contiene las variables declaradas globalmente
    
@@ -86,22 +83,7 @@ import java.util.List;
 
     
     
-    
-    @Override
-    public String generarast(Arbol arbol, String anterior) {
-//    public String generarast(Arbol arbol, int direccion) {
-//    public String generarast(Arbol arbol, simbolo ) {
-        String algo = anterior;
-        for (Instruction instruccione : instrucciones) {
-            if(instruccione instanceof Method){
-                algo = instruccione.generarast(arbol, algo); 
-            }
-        }
-
-
-        return  algo;
-    }
-        
+ 
         
     public Object createSym(Arbol arbol, TablaSimbolos tabla) {
         //attb 
@@ -112,12 +94,17 @@ import java.util.List;
             }
             if(ins instanceof Statement st){
                 //ambito
-                Simbolo sym = new Simbolo(tipo, st.id, tabla, true);
+                Simbolo sym = new Simbolo(tipo, st.id, tabla, false);
                 sym.setCat(categoria.ATRIBUTO);
                 sym.setDir(contador);
                 sym.setInstruction(ins);
+                sym.armarAmbito("java");
                 sym.armarAmbito(this.id);
-                tabla.addSsymbolPre(sym);
+                sym.armarAmbito(st.id);
+                if(!(tabla.addSsymbolPre(sym))){
+                    arbol.addError(new Errores("SEMANTIC", "El simbolo ya existe: " + st.id , st.line, st.col));
+                }
+                
                 contador++;
                 
             }
@@ -133,10 +120,11 @@ import java.util.List;
             
             if(ins instanceof  Mainn mainn){
                 contador = 0;
-                Simbolo sym = new Simbolo(tipo, mainn.id, tabla, true);
+                Simbolo sym = new Simbolo(tipo, mainn.id, tabla, false);
                 sym.setCat(categoria.CONSTRUCTOR);
                             //                sym.setDir(contador);
                 sym.setInstruction(ins);
+                sym.armarAmbito("java");
                 sym.armarAmbito(this.id);
                 sym.armarAmbito(mainn.id);
                 List<String> typeParam = new ArrayList<>();
@@ -145,13 +133,15 @@ import java.util.List;
                     typeParam.add(tipo.getTypeString());
                 }
                     
-                sym.getAmbito().addAll(typeParam);                 //Car_Car_int_String_Motor
-                tabla.addSsymbolPre(sym);
+                sym.getAmbito().addAll(typeParam);          //Car_Car_int_String_Motor
+                if(!(tabla.addSsymbolPre(sym))){
+                    arbol.addError(new Errores("SEMANTIC", "El simbolo ya existe: " + mainn.id , mainn.line, mainn.col));
+                }
                 mainn.setAmbito(sym.getAmbito());
                 contador = 2;
                 for (HashMap param : mainn.parameters) {          //syms de params
                     String idparam = (String)param.get("id");
-                    Simbolo symPar = new Simbolo(mainn.tipo, idparam, null, true);
+                    Simbolo symPar = new Simbolo(mainn.tipo, idparam, null, false);
                     symPar.setCat(categoria.PARAM);
                     symPar.setDir(contador);
                     symPar.setAmbito(mainn.getAmbito());
@@ -161,13 +151,9 @@ import java.util.List;
                     contador++;
                 }
                 
-                
                     mainn.setCantParams(cantAttb);
-                    mainn.setAmbito(sym.getAmbito());
                     mainn.createSym(arbol, tabla);          //create syms
-//                arbol.setClassMain(this);
-//                arbol.setMethodMain(mainn);
-//                arbol.setSizeStack(mainn.getCantParams());
+                    arbol.setSizeStack(mainn.getCantParams());
                 
             }
         }
@@ -196,7 +182,9 @@ import java.util.List;
                 //syms de c/param
                 
                 sym.getAmbito().addAll(typeParam);                 //Car_Car_int_String_Motor
-                tabla.addSsymbolPre(sym);
+                if(!(tabla.addSsymbolPre(sym))){
+                    arbol.addError(new Errores("SEMANTIC", "El simbolo ya existe: " + met.id , met.line, met.col));
+                }
                 
                 
                 
@@ -265,13 +253,6 @@ import java.util.List;
     
     
 
-    public String getId() {
-        return id;
-    }
-
-    public String getIdPadre() {
-        return idPadre;
-    }
 
     
     
@@ -298,6 +279,15 @@ import java.util.List;
     
     
     
+    
+    public String getId() {
+        return id;
+    }
+
+    public String getIdPadre() {
+        return idPadre;
+    }
+
 
     public void setCantAttb(int cantAttb) {
         this.cantAttb = cantAttb;
@@ -310,19 +300,30 @@ import java.util.List;
     public boolean isMain() {
         return main;
     }
-
-    public void setMain(boolean main) {
-        this.main = main;
-    }
-
-    public void setMainMethod(Mainn mainMethod) {
-        this.mainMethod = mainMethod;
-    }
-
-    public Mainn getMainMethod() {
-        return mainMethod;
-    }
+ 
     
+    
+    
+    
+    
+    
+    
+        
+    @Override
+    public String generarast(Arbol arbol, String anterior) {
+//    public String generarast(Arbol arbol, int direccion) {
+//    public String generarast(Arbol arbol, simbolo ) {
+        String algo = anterior;
+        for (Instruction instruccione : instrucciones) {
+            if(instruccione instanceof Method){
+                algo = instruccione.generarast(arbol, algo); 
+            }
+        }
+
+
+        return  algo;
+    }
+       
     
     
     

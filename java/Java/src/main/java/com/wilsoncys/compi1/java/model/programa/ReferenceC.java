@@ -14,6 +14,7 @@ import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
+import com.wilsoncys.compi1.java.model.simbolo.categoria;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -183,20 +184,45 @@ public class ReferenceC extends Instruction{
     
     
     
+ 
+    public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+        int contador = arbol.getSizeStack();
+        for (Instruction call : calls ) {
+             if(call instanceof CallJavaC cl){
+                 ((CallJavaC) call).setIdClase(this.id);
+                 Tipo tipo = new Tipo(tipoDato.VOID);
+                 tipo.setIdObjeto(this.id);
+                 Simbolo sym = new Simbolo(tipo, cl.id, cl, true);
+                 sym.setCat(categoria.REFERENCIA);
+                 sym.setDir(contador);
+                 sym.armarAmbito("PROGRAMA");
+                 sym.armarAmbito(this.id);
+                 sym.armarAmbito(cl.id);
+                 if(!(tabla.addSsymbolPre(sym))){
+                    arbol.addError(new Errores("SEMANTIC", "El simbolo ya existe: " + cl.id , cl.line, cl.col));
+                 }
+                 
+             }
+             contador++;
+             
+        }
+        arbol.attbClassPrincipal = contador;
+             
+        return null;
+    }
+
+
+
+    
+            @Override
+    public Object createC3D(Arbol arbol, String anterior) {
+        return anterior;
+    }   
+    
     @Override
     public String generarast(Arbol arbol, String anterior) {
         return "";
     }
     
-        public Object createSym(Arbol arbol, TablaSimbolos tabla) {
-        return null;
-    }
-    
-
-        
-            @Override
-    public Object createC3D(Arbol arbol, String anterior) {
-        return anterior;
-    }
 }
 

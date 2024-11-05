@@ -2,9 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.wilsoncys.compi1.java.model.poo;
+package com.wilsoncys.compi1.java.model.programa;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
+import com.wilsoncys.compi1.java.model.poo.Classs;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
@@ -25,25 +26,43 @@ public class ClasesJava extends Instruction{
     }
             
     
-    
-    @Override
-    public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
-        return null;
-    }
 
     @Override
     public Object createSym(Arbol arbol, TablaSimbolos tabla) {
-        return null;
+      return null;
     }
+    
+     
 
     @Override
     public Object createC3D(Arbol arbol, String anterior) {
         return null;
-    }
-
+    } 
+    
+    
+    
     @Override
     public String generarast(Arbol arbol, String anterior) {
         return "";
+    }
+     @Override
+    public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
+        return null;
+    }
+    
+ 
+    public Classs getclase(String id){
+        Classs clase = null;
+        for (Instruction cl : clasesJava) {
+            if(cl instanceof Classs c){
+                clase = c;
+            }
+        }
+        return clase;
+    }
+
+    public LinkedList<Instruction> getClasesJava() {
+        return clasesJava;
     }
     
     

@@ -10,7 +10,7 @@ package com.wilsoncys.compi1.java.model.simbolo;
  */
 public class Tipo {
     private tipoDato tipo;
-    private String idObjeto;
+    private String idObjeto = "";
     
     public Tipo(tipoDato tipo) {
         this.tipo = tipo;
@@ -38,9 +38,9 @@ public class Tipo {
                 return "boolean";
                 
             case CADENA:
-                return "String";
+                return "string";
             case VOID:
-                return "nombreClase";
+                return idObjeto;
                 
             default:
                 System.out.println("Error(al crear la tabla(clase tipos))");

@@ -19,6 +19,7 @@ import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -82,7 +83,7 @@ public class Mainn extends Instruction{
     @Override
     public String generarast(Arbol arbol, String anterior) {
         return "";
-    }
+    }   
     
     
     public Object createSym(Arbol arbol, TablaSimbolos tabla) {
@@ -95,12 +96,16 @@ public class Mainn extends Instruction{
         for (Instruction ins : instrucciones) {
             if(ins instanceof Statement st){
                 //ambito
-                Simbolo sym = new Simbolo(tipo, st.id, tabla, true);
+                Simbolo sym = new Simbolo(st.tipo, st.id, "empy", false);
                 sym.setCat(categoria.VARL);
                 sym.setDir(cantParams);
                 sym.setInstruction(ins);
                 sym.setAmbito(ambito);
-                tabla.addSsymbolPre(sym);
+                sym.armarAmbito(st.id);
+                if(!(tabla.addSsymbolPre(sym))){
+                    arbol.addError(new Errores("SEMANTIC", "El simbolo ya existe: " + st.id , st.line, st.col));
+                }
+                
                 cantParams++;
             }
         } 

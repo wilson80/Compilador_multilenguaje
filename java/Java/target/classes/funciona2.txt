@@ -1,0 +1,47 @@
+ %%PASCAL
+ 
+%%JAVA
+public class sumar {
+	public int num1;
+	public int num2;
+               public int total;
+public sumar(int uno, int dos) {
+		println("Constrrr sumar");
+		 this.num1 = uno;
+		 this.num2 = dos;
+		  int total = num1 + num2;			
+        println("NUmmmmm: ", this.num1);
+        println("Constru:finnnnn" );
+	}
+public int getTotal(){
+        return this.num1;
+}
+public void imprimirTotal(){
+println("total:  " + total);
+
+} 
+}
+%%PROGRAMA
+#include "JAVA.sumar"  
+
+int x = 4;
+int y = 6;
+int tatal = 0;
+
+	JAVA.sumar      call1(x, y);
+
+void main()
+{ 
+
+	tatal = JAVA.call1.getTotal();
+	JAVA.call1.imprimirTotal();
+ 
+	println("Hello word%d"); 
+
+	scanf("%d", &tatal);
+
+ 
+
+ 
+}
+

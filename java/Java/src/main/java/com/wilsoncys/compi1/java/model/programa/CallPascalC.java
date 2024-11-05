@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.wilsoncys.compi1.java.model.simbolo;
+package com.wilsoncys.compi1.java.model.programa;
 
 import com.wilsoncys.compi1.java.model.poo.*;
 import com.wilsoncys.compi1.java.model.poo.Method;
@@ -13,10 +13,16 @@ import com.wilsoncys.compi1.java.model.instrucciones.Statement;
 import com.wilsoncys.compi1.java.model.instrucciones.transferReturn;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
+import com.wilsoncys.compi1.java.model.simbolo.Arbol;
+import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
+import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
+import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.categoria;
+import com.wilsoncys.compi1.java.model.simbolo.categoria;
+import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -25,12 +31,11 @@ import java.util.LinkedList;
  *
  * @author Jonwil
  */
-public class CallJavaC extends Instruction{
+public class CallPascalC extends Instruction{
     private String id;
-    private String idClase;
     private LinkedList<Instruction> parametersExp;
 
-    public CallJavaC(String identificator,LinkedList<Instruction> parametros, int linea, int col) {
+    public CallPascalC(String identificator, LinkedList<Instruction> parametros, int linea, int col) {
         super(new Tipo(tipoDato.VOID), linea, col);
         this.id = identificator;
         this.parametersExp = parametros;
@@ -258,10 +263,6 @@ public class CallJavaC extends Instruction{
             armed+=c.c3d_accesTemp(id, arbol.getPosReturn());
         
         return armed;
-    }
-
-    public void setIdClase(String idClase) {
-        this.idClase = idClase;
     }
     
 

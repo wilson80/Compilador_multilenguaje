@@ -425,7 +425,7 @@ public class VistaGeneral extends javax.swing.JFrame {
     }//GEN-LAST:event_botonEjecutarActionPerformed
 
     public void llenarTablaSimbolos(){
-        
+//        System.out.println("");
         List<List<String>> listSim = new ArrayList<>();
         int contador = 0;
         for (TablaSimbolos simbolos : tablaReport) {
@@ -437,11 +437,14 @@ public class VistaGeneral extends javax.swing.JFrame {
                 Simbolo sim = (Simbolo)value2;
                 List <String> listInd = new ArrayList<>();
                             listInd.add(String.valueOf(contador));
-                            listInd.add(sim.getId());
+//                            listInd.add(sim.getId());
+                            listInd.add(sim.getAmbito_enID());
                             listInd.add(String.valueOf(sim.isConst()));
-                            listInd.add(sim.getTipo().getTipo().toString());
+//                            listInd.add(sim.getTipo().getTipo().toString());
+                            listInd.add("");
                             listInd.add(simbolos.getNombre());
-                            listInd.add(sim.getValor().toString());
+//                            listInd.add(sim.getValor().toString());
+                            listInd.add("");
                             listInd.add(String.valueOf(sim.getLinea()));
                             listInd.add(String.valueOf(sim.getColu()));
                 listSim.add(listInd);
@@ -517,7 +520,8 @@ public class VistaGeneral extends javax.swing.JFrame {
         
         DefaultTableModel model = new DefaultTableModel(listSim.size(), 8); //modelo con la cantidad de columnas y filas resultantes
         tabla = new JTable(model);
-        tabla.setEnabled(false);
+        
+        tabla.setEnabled(true);
         model.setDataVector(datosTabla, columnasCabecerasTAblas);             //set a los datos de la tabla e ID de las columnas
         tabla.setBackground(new Color(51,51,51));
         tabla.setForeground(Color.WHITE);
@@ -622,7 +626,7 @@ public class VistaGeneral extends javax.swing.JFrame {
 
     private void menuReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuReportesMouseClicked
 //         System.out.println("Reportess");
-//         llenandoJtable();
+         llenandoJtable();
 //         setDefaultCloseOperation(HIDE_ON_CLOSE);
 //        reportes.setVisible(true);
         

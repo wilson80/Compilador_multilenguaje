@@ -21,11 +21,7 @@ public class Includes {
         subPPascal = new LinkedList<>();
     }
 
-    public String getClaseJava(String id) {
-        return "";
-    }
-
-     
+      
     
     public void addSubPPascal(String subPPascal) {
         this.subPPascal.add(subPPascal);
@@ -33,6 +29,26 @@ public class Includes {
     public void addClaseJava(String subPPascal) {
         this.claseJava.add(subPPascal);
     }
+
+    public LinkedList<String> getClaseJava() {
+        return claseJava;
+    }
+
+    public LinkedList<String> getSubPPascal() {
+        return subPPascal;
+    }
+
+    public boolean isJavaTodo() {
+        return javaTodo;
+    }
+
+    public boolean isPascalTodo() {
+        return pascalTodo;
+    }
+    
+    
+    
+    
  
     
 }

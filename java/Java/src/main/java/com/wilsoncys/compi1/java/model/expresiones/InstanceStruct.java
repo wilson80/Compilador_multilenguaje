@@ -156,7 +156,7 @@ public class InstanceStruct extends Instruction{
 //               //        crear el simbolo del struct
                Simbolo symStruc = new Simbolo(this.tipo, id, hashSym, isConst);
                symStruc.setTipoStruct(idStruct);
-               if(!(tabla.addSsymbol(symStruc))){
+               if(!(tabla.aquiNoo(symStruc))){
                    return new Errores("SEMANTIC", "Ya existe la variable(al instanciar un struct): " + id, line, col);
                }
                

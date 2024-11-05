@@ -265,13 +265,13 @@ includeJ::= INCLUDE JAVAUNO:id {: RESULT = id.toString(); :}
 
 
 decConstC::= CONST typeC:t ID:id ASSIGNMENT EXPRESIONCC:exp SEMIC
-  {: RESULT = new Statement(id, exp, t, idleft, idright, false); :}    
+  {: RESULT = new StatementC(id, exp, t, idleft, idright, false); :}    
 ;
  
 decVarsC::= typeC:t ID:id ASSIGNMENT EXPRESIONCC:exp SEMIC
-  {: RESULT = new Statement(id, exp, t, idleft, idright, false); :}    
+  {: RESULT = new StatementC(id, exp, t, idleft, idright, false); :}    
         | typeC:t ID:id SEMIC
-  {: RESULT = new Statement(id, t, idleft, idright, false); :}
+  {: RESULT = new StatementC(id, t, idleft, idright, false); :}
 ;
 
 
@@ -283,11 +283,11 @@ mainC::= VOID MAIN:a PAR_OP PAR_CL K_OP  instructionsC:ins  K_CL
 ;
 
 
-declaracionC::= decConstC:dec declaracionC:decs
+declaracionC::= declaracionC:decs decConstC:dec 
         {: RESULT = decs; RESULT.add(dec);  :}
-| decVarsC:dec declaracionC:decs
+| declaracionC:decs decVarsC:dec 
         {: RESULT = decs; RESULT.add(dec);  :}
-| decObjetos:dec declaracionC:decs
+| declaracionC:decs decObjetos:dec 
         {: RESULT = decs; RESULT.add(dec);  :}
 | {:RESULT = new LinkedList<>(); :}
 ;

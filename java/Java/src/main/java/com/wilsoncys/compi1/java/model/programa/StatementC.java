@@ -30,7 +30,7 @@ public class StatementC extends Instruction{
     public String id;
         public Instruction exp;
     private boolean declaracionSimple;
-    private boolean isConst;
+    public boolean isConst;
     private int whatConstruct = 0;
 
                                                     //    var num1:int;
@@ -68,7 +68,7 @@ public class StatementC extends Instruction{
         Simbolo newSymbol = new Simbolo(this.tipo, id, darValorDefecto(), isConst);    
         newSymbol.setLinea(line);
         newSymbol.setLinea(col);
-        boolean isCreacion = tabla.addSsymbol(newSymbol);
+        boolean isCreacion = tabla.aquiNoo(newSymbol);
         
         if(isCreacion){
             return null;
@@ -95,7 +95,7 @@ public class StatementC extends Instruction{
         Simbolo newSsimbol = new Simbolo(this.tipo, this.id, valorInterpretado, isConst);
         newSsimbol.setLinea(line);
         newSsimbol.setLinea(col);
-        boolean creacion = tabla.addSsymbol(newSsimbol);
+        boolean creacion = tabla.aquiNoo(newSsimbol);
         if (creacion) {
             return null; 
         }else{      //si creacion es false(significa que la variable existe) se devuelve un error

@@ -12,6 +12,7 @@ import com.wilsoncys.compi1.java.model.instrucciones.Structs;
 import com.wilsoncys.compi1.java.model.poo.Classs;
 import com.wilsoncys.compi1.java.model.poo.Functionss;
 import com.wilsoncys.compi1.java.model.poo.Mainn;
+import com.wilsoncys.compi1.java.model.programa.ClasesJava;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
 import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import java.util.LinkedList;
@@ -31,18 +32,15 @@ public class Arbol {
     
     private LinkedList<Errores> errores;
     private LinkedList<Instruction> instrucciones;      //contiene todas las intrucciones (funciones, metodos,asignaciones, declaraciones)
-    private LinkedList<Instruction> functions;          //list of methods, functions and Structs
+    private LinkedList<Instruction> functionsPascal;          //list of methods, functions and Structs
     private LinkedList<TablaSimbolos> tablaReport = new LinkedList<>();          //par la tabla de simbolos
-    
-    private LinkedList<String> claseJava;
-    private LinkedList<String> subPPascal;
-    
-    
-    
+ 
+      
     public C3d pascal;
     public C3d_Java java;
     
-    public int attbClass = 0;
+    
+    public int attbClassPrincipal = 0;
     private int posReturn = 0;
     
     
@@ -59,7 +57,7 @@ public class Arbol {
         this.consola = "";
         this.tablaGlobal = new TablaSimbolos();
         this.errores = new LinkedList<>();
-        this.functions = new LinkedList<>();     
+        this.functionsPascal = new LinkedList<>();     
         this.count = 0;
         pascal = new C3d();
         java = new C3d_Java();
@@ -105,18 +103,18 @@ public class Arbol {
     }
 
     public LinkedList<Instruction> getListFunctions() {
-        return functions;
+        return functionsPascal;
     }
 
     public void setFunctions(LinkedList<Instruction> functions) {
-        this.functions = functions;
+        this.functionsPascal = functions;
     }
     public void addFunctions(Instruction functions) {
-        this.functions.add(functions);
+        this.functionsPascal.add(functions);
     }
     
     public Instruction getFunction(String id){
-        for (Instruction fun :  functions) {
+        for (Instruction fun :  functionsPascal) {
             if(fun instanceof Method method){       //identifica metodos
                 if(method.id.equalsIgnoreCase(id)){     //identifica el metodo con el id solicitado
                     return fun;
@@ -171,11 +169,11 @@ public class Arbol {
     }
 
     public void setSizeStack(int sizeStack) {
-        this.attbClass = sizeStack;
+        this.attbClassPrincipal = sizeStack;
     }
 
     public int getSizeStack() {
-        return attbClass;
+        return attbClassPrincipal;
     }
 
     public void setPosReturn(int posReturn) {
@@ -189,9 +187,27 @@ public class Arbol {
     public C3d_Java getJava() {
         return java;
     }
+    public ClasesJava getClasesJava(){
+        ClasesJava clases = null;
+        for (Instruction ins : instrucciones) {
+            if(ins instanceof ClasesJava cl){
+                clases = cl;
+            }
+        }
+        
+        return clases;
+    } 
+    
+    
+    
     
     
 
+    
+    
+    
+    
+    
     
     
 }

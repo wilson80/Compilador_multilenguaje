@@ -4,42 +4,24 @@
 public class sumar {
 	int num1;
 	int num2;
-	// int total;
-    public sumar(int uno, int dos) {
+	public sumar(int uno, int dos) {
 		println("Constrrr sumar");
 		 this.num1 = uno;
 		 this.num2 = dos;
-		//  int total = sumar(num1, num2);			
+		//  int varConstruct = sumar(num1, num2);			
         println("NUmmmmm: ", this.num1);
         println("Constru:finnnnn" );
-    }
-
-    
-    public int sumar(int x, int y){
-        int total = x+y;
-        return total;
-    }	
-	// public int getTotal(){
-	// 	return total;		
-	// }
-    
+	}
 } 
+
 %%PROGRAMA
-#include "PASCAL"
-#include "PASCAL.nombre_suprograma"
-
-#include "JAVA.*"
-#include "JAVA.nombre"  
-
-const float pi = 3.14159;
-const char c = 'X'; // X es una constante tipo char
-const int X = 10; // X es un tipo int
+#include "JAVA.sumar"  
 
 int x = 4;
 int y = 6;
 int tatal = 0;
 
-	JAVA.sumar      call1(x, y), call2(5,3);
+	JAVA.sumar      call1(x, y);
 
 void main()
 { 
@@ -50,7 +32,8 @@ void main()
 	printf("Integer: %d, Character: %c, Float: %.2f", a, b, c); 
 
 	scanf("%d", &var);
- 
+
+
 	
 
 	
