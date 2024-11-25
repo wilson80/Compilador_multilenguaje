@@ -255,8 +255,9 @@ public class CallJavaC extends Instruction{
         }
                                             //extrayendo los params
         for (Instruction exps : parametersExp) {
-            if(exps instanceof NativoC n){
-                armed+=n.createC3D(arbol, anterior);
+            if(exps instanceof NativoC n){              //falla cuando se mandan nativos como parametros
+//                armed+=n.createC3D(arbol, anterior);
+                n.createC3D(arbol, anterior);
             }else{
                 if(exps instanceof AccessC cs){
                     armed+=cs.createC3D(arbol, anterior);
@@ -268,7 +269,7 @@ public class CallJavaC extends Instruction{
         arbol.attbPrincipal += 1;
                 
             //stack temp
-        armed+=c.c3d_ptrTemp(arbol.attbPrincipal);
+        armed+=c.c3d_ptrTemp(arbol.attbPrincipal + 1);
         
         
                                             //PREPARED params en el stack

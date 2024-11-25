@@ -148,7 +148,7 @@ public class AccessC extends Instruction{
         
 
         if(sym.getCat()==categoria.ATRIBUTO){
-                armed+= c.c3d_acces("", 0);
+                armed+= c.c3d_acces("", dir);
 //                armed+= c.c3d_asignVar("", dir);
                 
         } 

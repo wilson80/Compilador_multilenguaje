@@ -4,12 +4,15 @@
 public class sumar {
 	int num1;
 	int num2;
-	public sumar(int uno, int dos) {
+	int num3;
+	public sumar(int uno, int dos, int tres) {
 		println("Constrrr sumar");
 		 this.num1 = uno;
 		 this.num2 = dos;
+		 this.num3 = tres;
         println("NUm1: ", this.num1);
         println("NUm2: ", this.num2);
+        println("NUm3: ", this.num3);
         println("Constru:finnnnn" );
 	}
 } 
@@ -20,9 +23,9 @@ public class sumar {
 
 int x = 4;
 int y = 6;
-int tatal = 0;
+int z = 9;
 
-	JAVA.sumar      call1(x, y);
+	JAVA.sumar      call1(x, y, z);
 
 void main()
 { 
