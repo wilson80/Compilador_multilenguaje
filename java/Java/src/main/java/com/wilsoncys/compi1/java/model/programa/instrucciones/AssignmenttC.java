@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.wilsoncys.compi1.java.model.programa;
+package com.wilsoncys.compi1.java.model.programa.instrucciones;
 
 import com.wilsoncys.compi1.java.model.instrucciones.*;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
@@ -196,15 +196,13 @@ public class AssignmenttC extends Instruction{
         
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
+        
+        
         String armed = "";
         C3d_Java c =  arbol.getJava();
         int dir = arbol.getSym(id).getDir();            //pdt
         String varr = "";
-        if(isThis){
-//            buscar el sym solo en el ambito global
-        }else{
-//            buscar el sym en abmos ambitos
-        }
+  
         
          if(expr instanceof Input inp){
                 inp.createC3D(arbol, anterior);

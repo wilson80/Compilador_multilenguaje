@@ -139,10 +139,18 @@ public class Access extends Instruction{
 
         String armed = "";
         C3d_Java c =  arbol.getJava();
-        Simbolo sym = arbol.getSym(id);
+        Simbolo sym = null;
+        
+        
         if(this.isThis){//vali
+            String armedId = arbol.getCurrentAmbit().get(0);
+             armedId += arbol.getCurrentAmbit().get(1) + id;
+            sym = arbol.getSym(armedId);
+
 
         }else{
+            String armedId = arbol.getAmbito_asID() + id;
+            sym = arbol.getSym(armedId);
 
         }
         

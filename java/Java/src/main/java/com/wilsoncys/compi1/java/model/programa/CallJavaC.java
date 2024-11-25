@@ -11,6 +11,8 @@ import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.expresiones.Nativo;
 import com.wilsoncys.compi1.java.model.instrucciones.Statement;
 import com.wilsoncys.compi1.java.model.instrucciones.transferReturn;
+import com.wilsoncys.compi1.java.model.programa.expresiones.AccessC;
+import com.wilsoncys.compi1.java.model.programa.expresiones.NativoC;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
@@ -26,6 +28,7 @@ import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import java.util.HashMap;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -202,15 +205,34 @@ public class CallJavaC extends Instruction{
     
     
     public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+        
+        
+        
+        
+        
+        
+        
         return null;
     }
         
+    
+    
+    
+    
+    
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
         String armed = "";
         C3d c =  arbol.getC3d();
+        
+        
         int posIni = 1;
-        Simbolo sym = arbol.getSym(id);
+        String idSimm = "PROGRAMA"+idClase+id;
+        Simbolo sym = arbol.getSym(idSimm);
+        if(sym == null){
+            return new Errores("SEMANTIC", "id no definido: " + id, line, col);
+        }
+        
         if(sym.getCat().equals(categoria.FUNCTION) ){
 //            if(sym.getAmbito().get(0).equals(arbol.getClassMain().getId())){        
                                     //config pos de retorno
@@ -233,46 +255,61 @@ public class CallJavaC extends Instruction{
         }
                                             //extrayendo los params
         for (Instruction exps : parametersExp) {
-            if(exps instanceof Nativo){
-                exps.createC3D(arbol, anterior);
+            if(exps instanceof NativoC n){
+                armed+=n.createC3D(arbol, anterior);
             }else{
-                armed+=exps.createC3D(arbol, anterior);
+                if(exps instanceof AccessC cs){
+                    armed+=cs.createC3D(arbol, anterior);
+                }
             }
             
         }
-                                            //stack temp
-        armed+=c.c3d_ptrTemp(arbol.getSizeStack());
+        
+        arbol.attbPrincipal += 1;
+                
+            //stack temp
+        armed+=c.c3d_ptrTemp(arbol.attbPrincipal);
+        
+        
                                             //PREPARED params en el stack
         for (Instruction exps : parametersExp) {
-//            if(exps instanceof Nativo){
-                armed+=c.c3d_asignVar("", posIni);
+                armed += c.c3d_asignVar("", posIni);
                 posIni++;
-//            }
         }
         c.clearPtrTemp();   
                                             //ejecutar el metodo
-        armed+=c.c3d_moveToStack(true, arbol.getSizeStack());
-        armed+= id+"();\n";
-        armed+=c.c3d_moveToStack(false, arbol.getSizeStack());
+        armed+=c.c3d_moveToStack(true, arbol.attbPrincipal);
+//        armed+= id+"();\n";
+        armed+= c.callJava(idClase);
+        armed+=c.c3d_moveToStack(false, arbol.attbPrincipal);
+        
         
                             //create al metodo/funcion
-        sym.getInstruction().createC3D(arbol, anterior);
-        
+//        sym.getInstruction().createC3D(arbol, anterior);
 //                    mover el ptr temporal
-            armed+=c.c3d_ptrTemp(arbol.getSizeStack());
-            //obtener valor del return
-            armed+=c.c3d_accesTemp(id, arbol.getPosReturn());
+            armed+=c.c3d_ptrTemp(arbol.attbPrincipal);
+            //obtener valor de la referencia
+            armed+=c.c3d_accesTemp(id, 0);
+            
+            
+            
+            
+            
+            
+            
         
         return armed;
     }
+    
 
+    
+    
+    
+    
     public void setIdClase(String idClase) {
         this.idClase = idClase;
     }
     
-
-
-    
-    
+ 
     
 }

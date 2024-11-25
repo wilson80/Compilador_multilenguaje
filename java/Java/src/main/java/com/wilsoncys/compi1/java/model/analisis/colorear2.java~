@@ -10,9 +10,7 @@ import java_cup.runtime.Symbol;
 import java.util.LinkedList;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.vistas.colorInfo;
-import com.wilsoncys.compi1.java.vistas.TipoT;
-import java.io.StringReader;
-import java.io.Reader;
+import com.wilsoncys.compi1.java.vistas.TipoT; 
 
 
 
@@ -492,21 +490,16 @@ public class colorear2 {
   private boolean zzEOFDone;
 
   /* user code: */
-     private Reader yyreader;
+    //  private Reader yyreader;
 
-    public colorear2(String input) {
-        this.yyreader = new StringReader(input); 
-            }
+    // public colorear2(String input) {
+    //     this.yyreader = new StringReader(input); 
+    //         }
 
-
-    public LinkedList<Errores> listaErrores = new LinkedList<>();    
+                    //linea que provocaba el sobre elvado uso del procesador 
+    // public LinkedList<Errores> listaErrores = new LinkedList<>();   
     
-    private Symbol symbol(int type){
-		return new Symbol(type, yyline, yycolumn);
-	}
-	private Symbol symbol(int type, Object value){
-		return new Symbol(type, yyline, yycolumn, value);
-	}
+ 
         StringBuilder string;
     private colorInfo colorr(TipoT type){
         return new  colorInfo(type, yychar, yylength());
@@ -514,7 +507,7 @@ public class colorear2 {
     private colorInfo colorSTR(TipoT type){
         return new  colorInfo(type, yychar-string.toString().length()-1,  string.toString().length()+1); 
     }
-
+ 
 
 
 
@@ -525,7 +518,8 @@ public class colorear2 {
    * @param   in  the java.io.Reader to read input from.
    */
   public colorear2(java.io.Reader in) {
-       
+      string = new StringBuilder();
+     
  
     this.zzReader = in;
   }
@@ -872,9 +866,7 @@ public class colorear2 {
 
       if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
         zzAtEOF = true;
-          { 	// return symbol(sym.EOF);
-
- }
+        return null;
       }
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {

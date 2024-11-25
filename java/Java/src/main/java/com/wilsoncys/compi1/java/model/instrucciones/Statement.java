@@ -16,6 +16,7 @@ import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -31,7 +32,10 @@ public class Statement extends Instruction{
     private boolean declaracionSimple;
     private boolean isConst;
     private int whatConstruct = 0;
+    private List<String>  ambito;   //idclase/metodo/params
 
+    
+    
                                                     //    var num1:int;
     //constructor sin asignacion (declaracion simple)
     public Statement(String identificador, Tipo tipo, int linea, int col, boolean isMutable) {
@@ -149,7 +153,11 @@ public class Statement extends Instruction{
     public Object createC3D(Arbol arbol, String anterior) {
         String armed = "";
         C3d_Java c =  arbol.getJava();
-        int dir  = arbol.getSym(this.id).getDir();
+//        int dir  = arbol.getSym(this.getAmbito_asID()).getDir();
+        int dir  = arbol.getSym(arbol.getAmbito_asID()+ id) .getDir();
+
+        
+        
         
         if(whatConstruct == 0){
             //dep el tipo dar el valor por defecto
@@ -157,13 +165,15 @@ public class Statement extends Instruction{
             //si el valor es un nativo
             //-1 si es un objeto para marcar que esta nulo
             //halar la ref
-                                            //dif ref
-            armed += c.c3d_acces("ptr", 0);
+                                            //dir ref
+            armed += c.c3d_acces("ptr", dir);
             
-            armed += c.c3d_asignHeap("0", 0);
+            armed += c.c3d_asignHeap("0", dir);
+            
             
             
         }
+        
         if(whatConstruct == 1){
             
             if(exp instanceof Input inp){
@@ -191,6 +201,29 @@ public class Statement extends Instruction{
          
         return armed;
     }
+
+    
+    
+        public void setAmbito(List<String> ambito) {
+            this.ambito = new LinkedList<>();
+            for (String st : ambito) {
+                this.ambito.add(st);
+            }
+        }
+
+    
+    public String getAmbito_asID(){
+        String ambi = "";
+        for (String st : ambito) {
+            ambi +=st;
+        }
+        return ambi; 
+                
+    }
+    
+    
+    
+    
 }
 
 

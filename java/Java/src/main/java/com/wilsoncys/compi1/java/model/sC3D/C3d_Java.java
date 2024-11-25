@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -123,7 +124,7 @@ public class C3d_Java {
     }
     public String c3d_reserveHeap(int stackSize){
         String armed = c3d_newVar() + ASSIG +  H+ SEMIC;
-        armed += HEAP + ASSIG +  "w" + (countCreateVar -1)+MAS +stackSize+ SEMIC+saltoLinea;
+        armed += H + ASSIG +  "w" + (countCreateVar -1)+MAS +stackSize+ SEMIC+saltoLinea;
         varsParams.add("w"+(countCreateVar-1));
         return  armed;
     }

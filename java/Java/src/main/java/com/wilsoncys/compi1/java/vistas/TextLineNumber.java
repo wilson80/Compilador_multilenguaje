@@ -13,10 +13,12 @@ import java.awt.*;
 import java.awt.event.*;
 import java.beans.*;
 import java.util.HashMap;
+import java.util.TimerTask;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
 import javax.swing.text.*;
+import java.util.Timer;
 
 /**
  *  This class will display line numbers for a related text component. The text
@@ -56,6 +58,11 @@ public class TextLineNumber extends JPanel
     private int lastDigits;
     private int lastHeight;
     private int lastLine;
+    private static Timer timer;
+//    private  Timer timer;
+
+    
+    
 
 	private HashMap<String, FontMetrics> fonts;
 
@@ -91,6 +98,7 @@ public class TextLineNumber extends JPanel
 		component.getDocument().addDocumentListener(this);
 		component.addCaretListener( this );
 		component.addPropertyChangeListener("font", this);
+
 	}
 
 	/**
@@ -430,7 +438,9 @@ public class TextLineNumber extends JPanel
 			public void run()
 			{
 				try
-				{
+				{   
+                                   
+                                        
 					int endPos = component.getDocument().getLength();
 					Rectangle rect = component.modelToView(endPos);
 
@@ -530,7 +540,11 @@ public void updateCaretPositionLabels(JLabel lineLabel, JLabel columnLabel) {
 }
 
         
-        
+
+
+
+
+ 
         
         
         

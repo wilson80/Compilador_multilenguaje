@@ -8,6 +8,7 @@ package com.wilsoncys.compi1.java.model.programa;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.poo.Classs;
+import com.wilsoncys.compi1.java.model.programa.instrucciones.StatementC;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
@@ -16,6 +17,7 @@ import com.wilsoncys.compi1.java.model.simbolo.categoria;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import java.util.LinkedList;
 import java_cup.runtime.Symbol;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,15 +48,50 @@ public class Programa extends Instruction{
 
     @Override
     public Object createSym(Arbol arbol, TablaSimbolos tabla) {
-                                                                    //includes
+           //includes
+        
+        for (String ids : includes.getClaseJava()) {
+            if(ids.equals("\"JAVA.*\"")){
+                includes.setJavaTodo(true);
+            }
+        }
+        
+
+           
          ClasesJava clasesJ = arbol.getClasesJava();
          if(includes.isJavaTodo()){
-             for (Instruction ins : instrucciones) {
-                 
+             for (Instruction clss : clasesJ.getClasesJava()) {
+                  var algo = clss.createSym(arbol, tabla);
+                  if(algo instanceof  Errores){
+                      return algo;
+                  }
              }
+             
+             for (String idClase : includes.getClaseJava()) {
+                 if(idClase.equals("\"JAVA.*\"") || idClase.equals("PASCAL")){
+                      continue;
+                  }
+                  Classs claseEncontrada = clasesJ.getclase(idClase);
+                  if(claseEncontrada==null){
+                      return new Errores("SEMANTIC", "NO se ha encotrado el include: " + idClase, line, col);
+                  } 
+                   var algo = claseEncontrada.createSym(arbol, tabla);
+                  if(algo instanceof  Errores){
+                      return algo;
+                  }
+             }
+            
+             
+             
          }else{
               for (String idClase : includes.getClaseJava()) {
+                  if(idClase.equals("\"JAVA.*\"") || idClase.equals("PASCAL")){
+                      continue;
+                  }
                   Classs claseEncontrada = clasesJ.getclase(idClase);
+                  if(claseEncontrada==null){
+                      return new Errores("SEMANTIC", "NO se ha encotrado el include: " + idClase, line, col);
+                  } 
                   claseEncontrada.createSym(arbol, tabla);
                    
                    
@@ -63,10 +100,10 @@ public class Programa extends Instruction{
          }
          
           
-         
-        
+
+        //sttm
         int contador = 0;
-        for (Instruction ins : instrucciones) {
+        for (Instruction ins : instrucciones) { 
             if(ins==null){
                 continue;
             }
@@ -79,20 +116,26 @@ public class Programa extends Instruction{
                 sym.armarAmbito("PROGRAMA");
                 sym.armarAmbito(as.id);
                 if(!(tabla.addSsymbolPre(sym))){
-                    arbol.addError(new Errores("SEMANTIC", "El simbolo ya existe: " + as.id , as.line, as.col));
+                    return new Errores("SEMANTIC", "El simbolo ya existe: " + as.id , as.line, as.col);
                 }
                 
                 contador++;
             } 
         }
-        arbol.attbClassPrincipal+=contador;
+        
+        arbol.attbPrincipal+=contador;
+        
+        
         
         for (Instruction ins : instrucciones) {
              if(ins==null){
                 continue;
             }
             if(ins instanceof ReferenceC ref){
-                ref.createSym(arbol, tabla);    
+                var algo = ref.createSym(arbol, tabla);
+                if(algo instanceof Errores){
+                    return algo;
+                }
             }
         }
         
@@ -108,21 +151,48 @@ public class Programa extends Instruction{
     
        @Override
     public Object createC3D(Arbol arbol, String anterior) {
-        String ArmedTodo = "";
-         
-        
-        ClasesJava clasesJ = arbol.getClasesJava();
+        String ArmedPrincipal = "";
+        String ArmedJavas = "";
+
+         ClasesJava clasesJ = arbol.getClasesJava();
+//         if(includes.isJavaTodo()){
          if(includes.isJavaTodo()){
-             for (Instruction ins : instrucciones) {
-                 
+             for (Instruction clss : clasesJ.getClasesJava()) {
+                 if(clss instanceof Classs cl){
+                  ArmedJavas+=  "\n\n\n"+ cl.createC3D(arbol, anterior);
+                 }
              }
+             
+             
+//             for (String idClase : includes.getClaseJava()) {
+//                 if(idClase.equals("\"JAVA.*\"") || idClase.equals("PASCAL")){
+//                      continue;
+//                  }
+//                  Classs claseEncontrada = clasesJ.getclase(idClase);
+//                  if(claseEncontrada==null){
+//                      return new Errores("SEMANTIC", "NO se ha encotrado el include: " + idClase, line, col);
+//                  } 
+//                   var algo = claseEncontrada.createSym(arbol, tabla);
+//                  if(algo instanceof  Errores){
+//                      return algo;
+//                  }
+//             }
+            
+             arbol.Print(ArmedJavas);
+             
          }else{
-              for (String idClase : includes.getClaseJava()) {
-                  Classs claseEncontrada = clasesJ.getclase(idClase);
-                  claseEncontrada.createC3D(arbol, anterior);
-                   
-                   
-             }
+//              for (String idClase : includes.getClaseJava()) {
+//                  if(idClase.equals("\"JAVA.*\"") || idClase.equals("PASCAL")){
+//                      continue;
+//                  }
+//                  Classs claseEncontrada = clasesJ.getclase(idClase);
+//                  if(claseEncontrada==null){
+//                      return new Errores("SEMANTIC", "NO se ha encotrado el include: " + idClase, line, col);
+//                  } 
+//                  claseEncontrada.createSym(arbol, tabla);
+//                   
+//                   
+//             }
              
          }
         
@@ -137,20 +207,33 @@ public class Programa extends Instruction{
         
         
         
-//           for (Instruction instruccione : instrucciones) {
-//               if(ins instanceof StatementC as){
-//                   
-//               }
-//           }
+        
+        
+        
+        for (Instruction ins : instrucciones) {
+               if(ins instanceof StatementC stt){
+                   ArmedPrincipal+= stt.createC3D(arbol, anterior);
+               }
+        }
+       for (Instruction ins : instrucciones) {
+           if(ins instanceof ReferenceC ref){
+               ArmedPrincipal+= ref.createC3D(arbol, anterior);
+           } 
+       }
+        
+        
+       
         
         
         
         
+       
+       
+       
         
         
         
-        
-        return "";
+        return ArmedPrincipal;
     }
 
     @Override

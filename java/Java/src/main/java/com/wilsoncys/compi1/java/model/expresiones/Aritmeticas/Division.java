@@ -226,7 +226,7 @@ import java.util.LinkedList;
         
         c.setOPRT("/");
         armed+=c.c3d_operation(op1, op2);
-        c.varsParams.add("w"+(arbol.pascal.getContador()-1));  //guarda el id de la var q contiene el resultado
+        c.varsParams.add("w"+(arbol.cMain.getContador()-1));  //guarda el id de la var q contiene el resultado
 
         return armed;
     }

@@ -6,6 +6,7 @@ package com.wilsoncys.compi1.java.model.simbolo;
 
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 /**
  *
@@ -16,10 +17,13 @@ public class TablaSimbolos {
     private TablaSimbolos tablaAnterior;
     private HashMap<String, Object> tablaActual;
     private String nombre;
-
+    private LinkedList<Simbolo> nuevaTabla;
+    
+    
     public TablaSimbolos() {
         this.tablaActual = new HashMap<>();
         this.nombre = "";
+        this.nuevaTabla = new LinkedList<>();
     }
 
     public TablaSimbolos(TablaSimbolos tablaAnterior) {
@@ -39,7 +43,7 @@ public class TablaSimbolos {
     public HashMap<String, Object> getTablaActual() {
         return tablaActual;
     }
-
+//
     public void setTablaActual(HashMap<String, Object> tablaActual) {
         this.tablaActual = tablaActual;
     }
@@ -62,6 +66,18 @@ public class TablaSimbolos {
         }
     }
     
+//    public boolean addSsymbolPre(Simbolo newSymbol){
+//        Simbolo find = getSsymbol(newSymbol.getAmbito_enID());
+//
+//          if(find==null){
+//              nuevaTabla.add(newSymbol);
+//              return true;
+//          }else{
+//              return false;
+//          }
+//          
+//              
+//    }
     public boolean addSsymbolPre(Simbolo newSymbol){
 //        Simbolo find = (Simbolo)this.tablaActual.get(newSymbol.getId());
         Simbolo find = (Simbolo)this.tablaActual.get(newSymbol.getAmbito_enID());
@@ -77,17 +93,40 @@ public class TablaSimbolos {
     }
    
     
+//    public Simbolo getSsymbol(String id){
+//        Simbolo simboloEcontrad = null;
+//        for (Simbolo simbolo : nuevaTabla) {
+//            if(simbolo.getAmbito_enID().equals(id)){
+//                simboloEcontrad = simbolo;
+//            }
+//        }
+//        
+//        if(simboloEcontrad!=null){
+//            return simboloEcontrad;
+//        }
+//        
+//        
+//        return null;
+////        }
+//        
+//    }
     public Simbolo getSsymbol(String id){
 //        Simbolo simboloEcontrado = (Simbolo)this.tablaActual.get(id.toLowerCase());
 //        if(simboloEcontrado!=null){
 //             return simboloEcontrado;
 //        }else{
-        for (TablaSimbolos i = this; i!=null; i = i.tablaAnterior) {
-            Simbolo simboloEcontrad = (Simbolo)i.tablaActual.get(id.toLowerCase());
+
+
+//        for (TablaSimbolos i = this; i!=null; i = i.tablaAnterior) {
+//            Simbolo simboloEcontrad = (Simbolo)i.tablaActual.get(id);
+//            if(simboloEcontrad!=null){
+//                return simboloEcontrad;
+//            }
+//        }
+            Simbolo simboloEcontrad = (Simbolo)tablaActual.get(id);
             if(simboloEcontrad!=null){
                 return simboloEcontrad;
-            }
-        }
+                }
         
         return null;
 //        }

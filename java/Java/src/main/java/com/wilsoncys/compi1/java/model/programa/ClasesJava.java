@@ -54,8 +54,10 @@ public class ClasesJava extends Instruction{
     public Classs getclase(String id){
         Classs clase = null;
         for (Instruction cl : clasesJava) {
-            if(cl instanceof Classs c){
-                clase = c;
+            if(cl instanceof Classs cla){
+                if(cla.id.equals(id)){
+                    clase = cla;
+                }
             }
         }
         return clase;

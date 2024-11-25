@@ -20,6 +20,7 @@ import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import java.lang.annotation.Native;
 import java.util.HashMap;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -39,7 +40,7 @@ public class Assignmentt extends Instruction{
         this.expr = exp;
         this.whatConstruct = 0;
     }
-
+//isthis
     public Assignmentt(boolean isThis, String id, Instruction expression, int linea, int col) {
         super(new Tipo(tipoDato.VOID), linea, col);
         this.id = id;
@@ -193,16 +194,40 @@ public class Assignmentt extends Instruction{
     }
     
         
+        
+        
+        
+        
+        
+        
+        
+        
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
         String armed = "";
         C3d_Java c =  arbol.getJava();
-        int dir = arbol.getSym(id).getDir();            //pdt
+        int dir = 0;
         String varr = "";
+        
         if(isThis){
+            String armedId = arbol.getCurrentAmbit().get(0);
+             armedId += arbol.getCurrentAmbit().get(1)+id;
+                dir = arbol.getSym(armedId).getDir();            
+            
 //            buscar el sym solo en el ambito global
+
+
         }else{
+            Simbolo encontrado = null;
+            String armedId = arbol.getAmbito_asID() + id;
+            encontrado = arbol.getSym(armedId);
 //            buscar el sym en abmos ambitos
+               if(encontrado == null){
+                   
+               }else{
+               
+               }
+
         }
         
          if(expr instanceof Input inp){

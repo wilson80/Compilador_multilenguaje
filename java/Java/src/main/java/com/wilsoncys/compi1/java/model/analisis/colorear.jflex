@@ -6,30 +6,23 @@ import java_cup.runtime.Symbol;
 import java.util.LinkedList;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.vistas.colorInfo;
-import com.wilsoncys.compi1.java.vistas.TipoT;
-import java.io.StringReader;
-import java.io.Reader;
+import com.wilsoncys.compi1.java.vistas.TipoT; 
 
 
 %%
 
 //codigo de usuario
 %{
-     private Reader yyreader;
+    //  private Reader yyreader;
 
-    public colorear2(String input) {
-        this.yyreader = new StringReader(input); 
-            }
+    // public colorear2(String input) {
+    //     this.yyreader = new StringReader(input); 
+    //         }
 
-
-    public LinkedList<Errores> listaErrores = new LinkedList<>();    
+                    //linea que provocaba el sobre elvado uso del procesador 
+    // public LinkedList<Errores> listaErrores = new LinkedList<>();   
     
-    private Symbol symbol(int type){
-		return new Symbol(type, yyline, yycolumn);
-	}
-	private Symbol symbol(int type, Object value){
-		return new Symbol(type, yyline, yycolumn, value);
-	}
+ 
         StringBuilder string;
     private colorInfo colorr(TipoT type){
         return new  colorInfo(type, yychar, yylength());
@@ -37,7 +30,7 @@ import java.io.Reader;
     private colorInfo colorSTR(TipoT type){
         return new  colorInfo(type, yychar-string.toString().length()-1,  string.toString().length()+1); 
     }
-
+ 
 
 
 %}  
@@ -45,6 +38,7 @@ import java.io.Reader;
  
 
 %init{
+    string = new StringBuilder();
      
  
 %init}
@@ -82,10 +76,7 @@ Lbrack = \[
 Rbrack = \]
 
 
-%eofval{
-	// return symbol(sym.EOF);
 
-%eofval}
 
 %%
 

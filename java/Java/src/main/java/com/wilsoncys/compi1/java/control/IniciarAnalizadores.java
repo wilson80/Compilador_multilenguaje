@@ -18,6 +18,7 @@ import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -61,7 +62,7 @@ public class IniciarAnalizadores {
             
             
             
-            
+
              
             
             //UNA SOLA TABLA DE SIMBOLOS        suponiendo que todo llega sin problemas 
@@ -78,39 +79,47 @@ public class IniciarAnalizadores {
                     tabla.addSsymbolPre(newSym);
                     
                     var algo =  pp.createSym(ast, tabla);
+                    if(algo instanceof  Errores err){
+                        listaErrores.add(err);
+                    }
                 }
                 
               
-            }      
+            } 
+
+            
              
             
 //            Generate C3D             
 //            valid si no se encuentra el programa Principan y el Main
-                            String c3d_Main = "";
-                            c3d_Main = "#include <iostream>\n" +
-                                        "\n" +
-                                        "using namespace std;\n" +
-                                        "\n" +
-                                        "int stack[100];\n" +
-                                        "int heap[100];\n" +
-                                        "int ptr = 0;\n" +
-                                        "int h = 0;\n\n";
-                            
-                            String bodyMain ="";
-                            
-                            for (Instruction ins : ast.getInstrucciones()) {
-                                if(ins ==null){
-                                    continue;
-                                }
-                                if(ins instanceof  Programa cl){
-                                    bodyMain += (String)cl.createC3D(ast, "");
-                                    
-                                }
+                String c3d_Main = "";
+                c3d_Main = "#include <iostream>\n" +
+                            "\n" +
+                            "using namespace std;\n" +
+                            "\n" +
+                            "int stack[100];\n" +
+                            "int heap[100];\n" +
+                            "int ptr = 0;\n" +
+                            "int h = 0;\n\n";
+                ast.Print(c3d_Main);
                 
-                                
-                            }
-                            c3d_Main += ast.java.c3d_main("main", bodyMain);
-                            ast.setConsola(c3d_Main);
+                
+                
+
+                String bodyMain ="";
+                for (Instruction ins : ast.getInstrucciones()) {
+                    if(ins ==null){
+                        continue;
+                    }
+                    if(ins instanceof  Programa cl){
+                        bodyMain += (String)cl.createC3D(ast, "");
+
+                    }
+
+
+                }
+                bodyMain= ast.java.c3d_main("main", bodyMain);
+                ast.Print(bodyMain);
             
             
 

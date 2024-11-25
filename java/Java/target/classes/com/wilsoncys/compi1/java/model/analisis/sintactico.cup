@@ -5,6 +5,8 @@ import java_cup.runtime.Symbol;
 import java.util.LinkedList;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
+import com.wilsoncys.compi1.java.model.programa.*;
+ 
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
 
 import com.wilsoncys.compi1.java.model.simbolo.*;
@@ -15,6 +17,9 @@ import com.wilsoncys.compi1.java.model.expresiones.*;
 import com.wilsoncys.compi1.java.model.expresiones.Aritmeticas.*;
 import com.wilsoncys.compi1.java.model.expresiones.Enums.*;
 import com.wilsoncys.compi1.java.model.programa.*;
+import com.wilsoncys.compi1.java.model.programa.expresiones.*;
+import com.wilsoncys.compi1.java.model.programa.instrucciones.*;
+
 
 import java.util.HashMap;
 
@@ -294,7 +299,7 @@ declaracionC::= declaracionC:decs decConstC:dec
 
 instructionsC::= insC instructionsC
                 | error SEMIC
-                | 
+                | {:RESULT = new LinkedList<>(); :}
 ;
 
 
@@ -400,7 +405,7 @@ DOC::= DO K_OP  instructionsC K_CL
         WHILE PAR_OP EXPRESIONCC PAR_CL SEMIC
 ;
  
-ifC::=   IF PAR_OP EXPRESIONCC:exp PAR_CL  K_OP instructionsC:ins K_CL ELSE  ifC:elif {: RESULT = new IF(exp, ins, elif, expleft, expright);    :}
+ifC::=   IF PAR_OP EXPRESIONCC:exp PAR_CL  K_OP instructionsC:ins K_CL ELSE  ifC:elif {: RESULT = new IFC(exp, ins, elif, expleft, expright);    :}
         |elseesC:w {: RESULT = w; :}
         |simpleIfC:w {: RESULT = w; :}
 ; 
@@ -505,13 +510,13 @@ EXPRESIONCC::= MINUS EXPRESIONCC:a             {:   RESULT = new Negacion(a, Ope
             | EXPRESIONCC:a OR:log EXPRESIONCC:b   {:   RESULT = new LogicalOperations(a, b, Relational_LogicalOperations.OR, aleft, aright);   :}
             | PAR_OP EXPRESIONCC:a PAR_CL    {:   RESULT = a;   :}  
 
-            | ENTERO:a      {:   RESULT = new Nativo(Integer.parseInt(a), new Tipo(tipoDato.ENTERO), aleft, aright );   :}
-            | CHARAC:a      {:   RESULT = new Nativo(a, new Tipo(tipoDato.CARACTER), aleft, aright );   :}
+            | ENTERO:a      {:   RESULT = new NativoC(Integer.parseInt(a), new Tipo(tipoDato.ENTERO), aleft, aright );   :}
+            | CHARAC:a      {:   RESULT = new NativoC(a, new Tipo(tipoDato.CARACTER), aleft, aright );   :}
 //float
-            | DECIMAL:a     {:   RESULT = new Nativo(new Double(a), new Tipo(tipoDato.DECIMAL), aleft, aright );   :}   
-            | CADENA:a      {:   RESULT = new Nativo(a, new Tipo(tipoDato.CADENA), aleft, aright );   :}
+            | DECIMAL:a     {:   RESULT = new NativoC(new Double(a), new Tipo(tipoDato.DECIMAL), aleft, aright );   :}   
+            | CADENA:a      {:   RESULT = new NativoC(a, new Tipo(tipoDato.CADENA), aleft, aright );   :}
             
-            | ID:a      {:   RESULT = new Access(a, aleft, aright);   :}
+            | ID:a      {:   RESULT = new AccessC(a, aleft, aright);   :}
 //arrs
             | ID:a BRACK_L EXPRESIONCC:indx BRACK_R      {:   RESULT = new AccesVector(a, indx, aleft, aright);   :}
             | ID:a BRACK_L EXPRESIONCC:indx1 BRACK_R BRACK_L  EXPRESIONCC:indx2 BRACK_R      {:   RESULT = new AccesVector(a, indx1, indx2, aleft, aright);   :}
@@ -523,10 +528,7 @@ EXPRESIONCC::= MINUS EXPRESIONCC:a             {:   RESULT = new Negacion(a, Ope
 
 
 
-
-
-
-
+ 
 
 
 

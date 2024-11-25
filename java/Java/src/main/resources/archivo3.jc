@@ -8,14 +8,15 @@ public class sumar {
 		println("Constrrr sumar");
 		 this.num1 = uno;
 		 this.num2 = dos;
-		//  int varConstruct = sumar(num1, num2);			
-        println("NUmmmmm: ", this.num1);
+        println("NUm1: ", this.num1);
+        println("NUm2: ", this.num2);
         println("Constru:finnnnn" );
 	}
 } 
 
 %%PROGRAMA
-#include "JAVA.sumar"  
+#include "JAVA.*"  
+ 
 
 int x = 4;
 int y = 6;
@@ -25,19 +26,8 @@ int tatal = 0;
 
 void main()
 { 
-
-	tatal = JAVA.call1.getTotal();
-	JAVA.call1.imprimirTotal();
  
-	printf("Integer: %d, Character: %c, Float: %.2f", a, b, c); 
-
-	scanf("%d", &var);
-
-
-	
-
-	
-	
+	   
 	 
 
  

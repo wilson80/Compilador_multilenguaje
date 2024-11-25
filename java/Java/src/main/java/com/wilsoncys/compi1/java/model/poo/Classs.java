@@ -26,9 +26,12 @@ import java.util.List;
  * @author jonwilson
  */
   public class Classs extends Instruction{
-    String id;
+    public  String id;
     String idPadre;
     int cantAttb = 0;
+    private List<String>  ambito;   //idclase/metodo/params
+
+    
     
     public LinkedList<Instruction> instrucciones;
     
@@ -86,6 +89,10 @@ import java.util.List;
  
         
     public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+        this.ambito = new LinkedList<>();
+        ambito.add("java");
+        ambito.add(this.id);
+        
         //attb 
         int contador = 0;
         for (Instruction ins : instrucciones) {
@@ -98,18 +105,18 @@ import java.util.List;
                 sym.setCat(categoria.ATRIBUTO);
                 sym.setDir(contador);
                 sym.setInstruction(ins);
-                sym.armarAmbito("java");
-                sym.armarAmbito(this.id);
+                sym.armarAmbito(this.getAmbito_asID());
                 sym.armarAmbito(st.id);
+                                        st.setAmbito(sym.getAmbito());//ambito a la instruccion
                 if(!(tabla.addSsymbolPre(sym))){
-                    arbol.addError(new Errores("SEMANTIC", "El simbolo ya existe: " + st.id , st.line, st.col));
+                    return new Errores("SEMANTIC", "El simbolo ya existe: " + st.id , st.line, st.col);
                 }
                 
                 contador++;
                 
             }
         }
-        cantAttb = contador;
+        arbol.attbClassJava = cantAttb ;
         contador = 0;
         
         //Main
@@ -135,7 +142,7 @@ import java.util.List;
                     
                 sym.getAmbito().addAll(typeParam);          //Car_Car_int_String_Motor
                 if(!(tabla.addSsymbolPre(sym))){
-                    arbol.addError(new Errores("SEMANTIC", "El simbolo ya existe: " + mainn.id , mainn.line, mainn.col));
+                    return new Errores("SEMANTIC", "El simbolo ya existe: " + mainn.id , mainn.line, mainn.col);
                 }
                 mainn.setAmbito(sym.getAmbito());
                 contador = 2;
@@ -183,7 +190,7 @@ import java.util.List;
                 
                 sym.getAmbito().addAll(typeParam);                 //Car_Car_int_String_Motor
                 if(!(tabla.addSsymbolPre(sym))){
-                    arbol.addError(new Errores("SEMANTIC", "El simbolo ya existe: " + met.id , met.line, met.col));
+                    return new Errores("SEMANTIC", "El simbolo ya existe: " + met.id , met.line, met.col);
                 }
                 
                 
@@ -220,7 +227,9 @@ import java.util.List;
                 }
                 
                 sym.getAmbito().addAll(typeParam);                 //Car_Car_int_String_Motor
-                tabla.addSsymbolPre(sym);               //add sym
+                if(!(tabla.addSsymbolPre(sym))){
+                    return new Errores("SEMANTIC", "El simbolo ya existe: " + fun.id , fun.line, fun.col);
+                }
                 fun.setAmbito(sym.getAmbito());
                                 //add dir(ref,retorno,dir_retorno)
                 contador=3; 
@@ -261,21 +270,55 @@ import java.util.List;
     public Object createC3D(Arbol arbol, String anterior) {
         String armed = ""; 
         C3d_Java c = arbol.getJava(); 
+        
+        
+        //reservar el espacio en el  heap
+        armed+= c.c3d_reserveHeap(arbol.attbClassJava);
+        
+        //set a la referencia (stack[0])
+        armed+= c.c3d_asignVal("", 0);
+        
+        
         for (Instruction ins : instrucciones) {
+            arbol.setCurrentAmbit(this.getAmbito());
             if(ins instanceof Statement st){
                 armed += (String)st.createC3D(arbol, anterior);
             }
         }
+        
 //        buscar su constructor     pte
         for (Instruction ins : instrucciones) {
-            if(ins instanceof Mainn){
-                armed+=ins.createC3D(arbol, anterior);
+            if(ins instanceof Mainn mn){
+                arbol.setCurrentAmbit(mn.getAmbito());
+                armed+=mn.createC3D(arbol, anterior);
             }
         }
         
         
-        return armed;
+        
+        
+        return c.c3d_metodo("java_"+id, armed);
     }
+
+    
+    
+    
+    
+    
+    
+    public String getAmbito_asID() {
+        String algo = "";
+        for (String st : ambito) {
+            algo+=st;
+        }
+        
+        return algo;
+    }
+    
+    
+    
+    
+    
     
     
     
@@ -300,7 +343,20 @@ import java.util.List;
     public boolean isMain() {
         return main;
     }
+
+    public List<String> getAmbito() {
+        return ambito;
+    }
  
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

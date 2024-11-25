@@ -8,13 +8,14 @@ import com.wilsoncys.compi1.java.model.analisis.colorear2;
 import java.io.IOException;
 import java.io.StringReader;
 import javax.swing.JTextPane;
-import javax.swing.text.Style;
 import javax.swing.text.StyledDocument;
 
 /**
  *
  * @author jonwilson
  */
+
+
 public class SetColor extends Thread{
     private JTextPane pane;
 
@@ -22,6 +23,17 @@ public class SetColor extends Thread{
         this.pane = pane;
     }
     
+    
+    
+//        private void pintar(Coloreado coloreado){
+//        StyledDocument doc = this.pane.getStyledDocument();
+//        doc.setCharacterAttributes(
+//                (int) coloreado.getInitPos(), 
+//                coloreado.getLength(), 
+//                coloreado.getType().getAttributeSet(), 
+//                false
+//        );
+//    } 
     
     private void pintar(colorInfo color){
         StyledDocument doc = this.pane.getStyledDocument();
@@ -31,32 +43,48 @@ public class SetColor extends Thread{
         
     }
     
-    public void run(){
-        StringReader reader = new StringReader(pane.getText());
-        colorear2 lex = new colorear2(reader);
-        
-        
-        try {
-            while (!lex.yyatEOF()) {
-                colorInfo colorr = lex.yylex();
-                pintar(colorr);
-
-
-                if (colorr != null) {
-                        pintar(colorr); // Aplicar el color al JTextPane
-                }
-
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }catch (NullPointerException ext){
-            ext.printStackTrace();
-        }
-        
-        
-    }
     
+    
+    
+    
+    @Override
+       public void run(){
+        StringReader reader = new StringReader(pane.getText());
+        colorear2 lexer = new colorear2(reader);
+        
+//        StringReader reader = new StringReader(pane.getText());
+//        PintorLexer lexer = new PintorLexer(reader);
+
+
+        while (!lexer.yyatEOF()) {
+            try {
+                   
+                colorInfo coloreado = lexer.yylex();
+                if(coloreado != null){
+                    pintar(coloreado);
+                }
+//                Coloreado coloreado = lexer.yylex();
+//                    pintar(coloreado);
+//                if(coloreado != null){
+//                }
+                
+                
+ 
+
+              
+            }catch (IOException e) {
+                        e.printStackTrace();
+            }catch (NullPointerException ext){
+                ext.printStackTrace();
+            }
+        }
+      
+    } 
+        
+        
+    
+    
+ 
     
         
     

@@ -6,11 +6,9 @@ package com.wilsoncys.compi1.java.vistas;
 
 import com.wilsoncys.compi1.java.control.Control;
 import com.wilsoncys.compi1.java.control.CppRunn;
-import com.wilsoncys.compi1.java.model.analisis.colorear2;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
-import com.wilsoncys.compi1.java.vistas.colorInfo;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -20,15 +18,11 @@ import java.awt.Insets;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringReader;
-import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -46,23 +40,18 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.JViewport;
-import javax.swing.Timer;
-import javax.swing.border.Border;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
-import javax.swing.event.DocumentEvent;
+import java.util.Timer; 
+import java.util.TimerTask;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel; 
-
-//colores
-import javax.swing.text.Style; 
-import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
+import java.util.Timer;
+import javax.swing.event.DocumentEvent;
+//colores 
 
 
 
@@ -79,8 +68,9 @@ public class VistaGeneral extends javax.swing.JFrame {
     private FrameReportes reportes;
     private LinkedList<Errores> listaErrores;
     private LinkedList<TablaSimbolos> tablaReport = new LinkedList<>();          //par la tabla de simbolos
-    private JTextPane paneActual;
     private boolean colores = false;
+    private static Timer timer;
+
     
     
     public VistaGeneral(Control control) {
@@ -90,6 +80,8 @@ public class VistaGeneral extends javax.swing.JFrame {
         panelCajonTexto.add(tabbedPane, BorderLayout.CENTER);
 //        identificarPestana();
         ininicializarPestañas();
+        
+        
 
 
 
@@ -118,7 +110,6 @@ public class VistaGeneral extends javax.swing.JFrame {
         panelSimbolo = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
         menuReportes = new javax.swing.JMenu();
@@ -244,17 +235,6 @@ public class VistaGeneral extends javax.swing.JFrame {
         getContentPane().add(jTabbedPane1);
         jTabbedPane1.setBounds(670, 60, 1230, 840);
 
-        jCheckBox1.setBackground(new java.awt.Color(0, 102, 204));
-        jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
-        jCheckBox1.setText("Colores on/of");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jCheckBox1);
-        jCheckBox1.setBounds(1290, 10, 150, 40);
-
         jMenuBar1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         menuArchivo.setText("Archivo");
@@ -309,68 +289,75 @@ public class VistaGeneral extends javax.swing.JFrame {
     
     
     public JScrollPane configurarLineas(String texto) {
-    JTextPane textPane = new JTextPane();
-    textPane.setText(texto);
+        JTextPane textPane = new JTextPane();
+        textPane.setText(texto);
 
-   
-            Timer timer = new Timer(1300, e -> {
-                    if(colores){
-                        SetColor setColorThread = new SetColor(textPane);
-                        setColorThread.start();
-                    }
-            });
-            timer.setRepeats(false); // Asegúrate de que el temporizador no repita
+        //configurar el listener para los colores
+        StyledDocument doc = textPane.getStyledDocument();
+        // Agrega el DocumentListener para colorear el texto al escribir
+        doc.addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                setColores(textPane);
+            }
 
-            // Agrega el DocumentListener para colorear el texto al escribir
-            textPane.getDocument().addDocumentListener(new DocumentListener() {
-                @Override
-                public void insertUpdate(DocumentEvent e) {
-                    timer.restart(); // Reinicia el temporizador en cada inserción
-                }
+            @Override
+            public void removeUpdate(DocumentEvent e) { 
+                setColores(textPane);
+            }
 
-                @Override
-                public void removeUpdate(DocumentEvent e) {
-                    timer.restart(); // Reinicia el temporizador en cada eliminación
-                }
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
 
-                @Override
-                public void changedUpdate(DocumentEvent e) {
-                    // No se necesita implementar en este caso
-                }
-            });
-    
 
- 
-    JScrollPane scrollPane = new JScrollPane(textPane);
-    
-    // Configuración del número de líneas
-    TextLineNumber lineNumber = new TextLineNumber(textPane, 3);
-    lineNumber.setLabelLine(labelLine);
-    lineNumber.setLabelCol(labelCol);
-    lineNumber.setUpdateFont(false);
-    float fontSize = textPane.getFont().getSize() - 6;
-    Font font = textPane.getFont().deriveFont(fontSize);
-    lineNumber.setForeground(Color.BLUE);
-    scrollPane.setRowHeaderView(lineNumber);
-    
-    return scrollPane;
+
+        JScrollPane scrollPane = new JScrollPane(textPane);
+
+        // Configuración del número de líneas
+        TextLineNumber lineNumber = new TextLineNumber(textPane, 3);
+        lineNumber.setLabelLine(labelLine);
+        lineNumber.setLabelCol(labelCol);
+        lineNumber.setUpdateFont(false);
+        float fontSize = textPane.getFont().getSize() - 6;
+        Font font = textPane.getFont().deriveFont(fontSize);
+        lineNumber.setForeground(Color.BLUE);
+        scrollPane.setRowHeaderView(lineNumber);
+
+        return scrollPane;
 }
 
-// Método para aplicar colores usando JFlex
- public void setColores(){
-     
- }
+    
+     private void setColores(JTextPane pane) {
+        if (timer != null) {
+            timer.cancel(); 
+        }
+        
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                SetColor setColorThread = new SetColor(pane);
+                setColorThread.start();
+            }
+        }, 500); 
+    }
+ 
+ 
+ 
+ 
 
  
     
     public void identificarPestanaSelected(){
-         
+        
                 int selectedIndex = tabbedPane.getSelectedIndex();
                 if (selectedIndex != -1) {
                     JScrollPane scrollPane = (JScrollPane) tabbedPane.getComponentAt(selectedIndex);
                     JViewport viewport = scrollPane.getViewport();
                     JTextPane cajonText = (JTextPane) viewport.getView();
-                    this.paneActual = cajonText; 
+//                    this.textPane = cajonText; 
                     
                     String content = cajonText.getText();
                     textoActual = content;
@@ -542,6 +529,9 @@ public class VistaGeneral extends javax.swing.JFrame {
     
     public void llenandoJtable(){
         
+        if(listaErrores == null){
+            this.listaErrores = new LinkedList<>();
+        }
         reportes = new FrameReportes();
         int filas = listaErrores.size();
         System.out.println("LISSSS:    " + filas );
@@ -650,10 +640,6 @@ public class VistaGeneral extends javax.swing.JFrame {
         panelReportes.removeAll();
         llenandoJtable();
     }//GEN-LAST:event_jTabbedPane1MouseClicked
-
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        coloresONOF();
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
     public void coloresONOF(){
         JOptionPane.showMessageDialog(null, "colores onnn");
         if(colores){
@@ -669,14 +655,14 @@ public class VistaGeneral extends javax.swing.JFrame {
             
             
     private void addTab(String title, String content) {
-        JTextArea textArea = new JTextArea(content);
-         
-                                        textArea.setLineWrap(true);
-                                        textArea.setWrapStyleWord(true);
-        textArea.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        textArea.setCaretColor(new java.awt.Color(255, 51, 0));
-
-        textArea.setEditable(true);
+//        JTextArea textArea = new JTextArea(content);
+//         
+//                                        textArea.setLineWrap(true);
+//                                        textArea.setWrapStyleWord(true);
+//        textArea.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+//        textArea.setCaretColor(new java.awt.Color(255, 51, 0));
+//
+//        textArea.setEditable(true);
         JScrollPane scrollPane;
         scrollPane = configurarLineas(content);
         tabbedPane.addTab(title, scrollPane);
@@ -692,8 +678,8 @@ public class VistaGeneral extends javax.swing.JFrame {
         String uno = readResourceFile("archivo1.jc");
         String dos = readResourceFile("archivo2.jc");
         addTabbb(tres);
-        addTabbb(uno);
-        addTabbb(dos);
+//        addTabbb(uno);
+//        addTabbb(dos);
         
         
     }
@@ -777,7 +763,6 @@ public class VistaGeneral extends javax.swing.JFrame {
     private javax.swing.JButton botonNuevoArchivo1;
     private javax.swing.JButton botonc;
     private javax.swing.JTextArea cajonConsola;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

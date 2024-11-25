@@ -104,7 +104,7 @@ Rbrack = \]
 
 
         "int"            { return symbol(sym.INT, yytext());}
-        "float"            { return symbol(sym.DOUBLE, yytext());}
+        "double"            { return symbol(sym.DOUBLE, yytext());}
         "boolean"            { return symbol(sym.BOOLEAN, yytext());}
         "char"            { return symbol(sym.CHAR, yytext());}
         "String"            { return symbol(sym.STRING, yytext());}

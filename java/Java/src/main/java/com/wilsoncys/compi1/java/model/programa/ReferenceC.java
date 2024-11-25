@@ -18,6 +18,7 @@ import com.wilsoncys.compi1.java.model.simbolo.categoria;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import java.util.HashMap;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -186,7 +187,8 @@ public class ReferenceC extends Instruction{
     
  
     public Object createSym(Arbol arbol, TablaSimbolos tabla) {
-        int contador = arbol.getSizeStack();
+
+        int contador = 0;
         for (Instruction call : calls ) {
              if(call instanceof CallJavaC cl){
                  ((CallJavaC) call).setIdClase(this.id);
@@ -199,14 +201,14 @@ public class ReferenceC extends Instruction{
                  sym.armarAmbito(this.id);
                  sym.armarAmbito(cl.id);
                  if(!(tabla.addSsymbolPre(sym))){
-                    arbol.addError(new Errores("SEMANTIC", "El simbolo ya existe: " + cl.id , cl.line, cl.col));
+                    return new Errores("SEMANTIC", "El simbolo ya existe: " + cl.id , cl.line, cl.col);
                  }
                  
              }
              contador++;
              
         }
-        arbol.attbClassPrincipal = contador;
+        arbol.attbPrincipal += contador;
              
         return null;
     }
@@ -216,8 +218,25 @@ public class ReferenceC extends Instruction{
     
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
-        return anterior;
+        String armed = "";
+        
+        for (Instruction call : calls) {
+            if(call instanceof CallJavaC cll){
+                cll.setIdClase(this.id);
+                armed += cll.createC3D(arbol, anterior);
+            }
+            
+        }
+        
+        
+        
+        return armed;
     }   
+    
+    
+    
+    
+    
     
     @Override
     public String generarast(Arbol arbol, String anterior) {

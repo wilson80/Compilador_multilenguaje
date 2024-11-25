@@ -2,13 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.wilsoncys.compi1.java.model.programa;
+package com.wilsoncys.compi1.java.model.programa.instrucciones;
 
+import com.wilsoncys.compi1.java.model.programa.*;
 import com.wilsoncys.compi1.java.model.instrucciones.*;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.expresiones.Input;
 import com.wilsoncys.compi1.java.model.expresiones.Nativo;
+import com.wilsoncys.compi1.java.model.programa.expresiones.NativoC;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
 import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
@@ -149,19 +151,19 @@ public class StatementC extends Instruction{
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
         String armed = "";
-        C3d_Java c =  arbol.getJava();
-        int dir  = arbol.getSym(this.id).getDir();
+        C3d c =  arbol.getC3d();
+        String idArmed = "PROGRAMA"+ this.id;
+        
+        
+        int dir  = arbol.getSym(idArmed).getDir();
+        
         
         if(whatConstruct == 0){
             //dep el tipo dar el valor por defecto
-//            c.varsParams.add("0");
-            //si el valor es un nativo
-            //-1 si es un objeto para marcar que esta nulo
-            //halar la ref
                                             //dif ref
             armed += c.c3d_acces("ptr", 0);
             
-            armed += c.c3d_asignHeap("0", 0);
+//            armed += c.c3d_asignHeap("0", 0);
             
             
         }
@@ -173,9 +175,9 @@ public class StatementC extends Instruction{
                     armed+=c.c3d_asignVal("", dir);
                     c.varsParams = new LinkedList<>();
                 
-            }else if(exp instanceof Nativo n){
+            }else if(exp instanceof NativoC n){
                  n.createC3D(arbol, anterior); //create exp
-                                                            //asignacion
+//                                                            //asignacion
                 armed+=c.c3d_asignVal(c.varsParams.get(0), dir);
                 c.varsParams = new LinkedList<>();
                 
@@ -190,6 +192,8 @@ public class StatementC extends Instruction{
             
         }
          
+        
+        
         return armed;
     }
 }

@@ -16,6 +16,7 @@ import com.wilsoncys.compi1.java.model.programa.ClasesJava;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
 import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -34,14 +35,17 @@ public class Arbol {
     private LinkedList<Instruction> instrucciones;      //contiene todas las intrucciones (funciones, metodos,asignaciones, declaraciones)
     private LinkedList<Instruction> functionsPascal;          //list of methods, functions and Structs
     private LinkedList<TablaSimbolos> tablaReport = new LinkedList<>();          //par la tabla de simbolos
- 
-      
-    public C3d pascal;
+    
+    
+    public C3d cMain;
     public C3d_Java java;
+    private List<String>  currentAmbit;   //idclase/metodo/params
+
+
     
-    
-    public int attbClassPrincipal = 0;
-    private int posReturn = 0;
+    public int attbClassJava = 0;
+    public int attbPrincipal = 0;
+    private int posReturn = 1;
     
     
     public int count;
@@ -57,9 +61,9 @@ public class Arbol {
         this.consola = "";
         this.tablaGlobal = new TablaSimbolos();
         this.errores = new LinkedList<>();
-        this.functionsPascal = new LinkedList<>();     
+        this.functionsPascal = new LinkedList<>();      
         this.count = 0;
-        pascal = new C3d();
+        cMain = new C3d();
         java = new C3d_Java();
 
     }
@@ -159,21 +163,21 @@ public class Arbol {
 
  
  
-    
+ 
     public Simbolo getSym(String id){
         return  tablaGlobal.getSsymbol(id);
     }
 
     public C3d getC3d() {
-        return pascal;
+        return cMain;
     }
 
     public void setSizeStack(int sizeStack) {
-        this.attbClassPrincipal = sizeStack;
+        this.attbClassJava = sizeStack;
     }
 
     public int getSizeStack() {
-        return attbClassPrincipal;
+        return attbClassJava;
     }
 
     public void setPosReturn(int posReturn) {
@@ -197,6 +201,35 @@ public class Arbol {
         
         return clases;
     } 
+
+    
+    
+    
+    
+        public void setAmbito(List<String> ambito) {
+            this.currentAmbit = new LinkedList<>();
+            for (String st : ambito) {
+                this.currentAmbit.add(st);
+            }
+        }
+
+    
+    public String getAmbito_asID(){
+        String ambi = "";
+        for (String st : currentAmbit) {
+            ambi +=st;
+        }
+        return ambi; 
+                
+    }
+    
+    public List<String> getCurrentAmbit() {
+        return currentAmbit;
+    }
+
+    public void setCurrentAmbit(List<String> currentAmbit) {
+        this.currentAmbit = currentAmbit;
+    }
     
     
     

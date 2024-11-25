@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -53,6 +54,10 @@ public class C3d {
     }
     
  
+    public String callJava(String id){
+        return  "java_" + id + "()" +  SEMIC;
+    }
+    
     public String c3d_operation(String val1, String val2){
         String armed = c3d_newVar() + ASSIG + val1+OPRT+val2 + SEMIC;
         return  armed;

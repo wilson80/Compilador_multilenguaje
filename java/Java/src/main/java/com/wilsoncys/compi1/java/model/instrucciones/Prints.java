@@ -126,7 +126,7 @@ public class Prints extends Instruction {
         }   
         
         if(ln){
-            armed+= "cout<<endl;";
+            armed+= "cout<<endl;\n";
         }
         
         return armed;

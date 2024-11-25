@@ -119,13 +119,9 @@ public class Mainn extends Instruction{
     public Object createC3D(Arbol arbol, String anterior) {
         String armed = "";
         C3d_Java c = arbol.getJava();
-        arbol.setPosReturn(1);
-        
-        //reservar el espacio en el  heap
-        armed+= c.c3d_reserveHeap(this.cantParams);
-        
-        //set a la referencia (stack[0])
-        armed+= c.c3d_asignVal("", 0);
+//        arbol.setPosReturn(1);
+         
+
 
         
         for (Instruction ins : instrucciones) {
@@ -159,9 +155,24 @@ public class Mainn extends Instruction{
         return ambito;
     }
 
+ 
+    
+    
     public void setAmbito(List<String> ambito) {
-        this.ambito = ambito;
+        this.ambito = new LinkedList<>();
+        for (String st : ambito) {
+            this.ambito.add(st);
+        }
     }
-     
+    
+    public String getAmbito_asID(){
+        String ambi = "";
+        for (String st : ambito) {
+            ambi +=st;
+        }
+        return ambi; 
+                
+    }
+    
     
 }

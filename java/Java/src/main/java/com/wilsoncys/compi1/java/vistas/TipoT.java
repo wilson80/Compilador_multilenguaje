@@ -5,6 +5,7 @@
 package com.wilsoncys.compi1.java.vistas;
 
 import java.awt.Color;
+import java.awt.color.ColorSpace;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyleContext;
@@ -14,16 +15,18 @@ import javax.swing.text.StyleContext;
  * @author jonwilson
  */
 public enum TipoT {
+    SECTION(Color.GREEN),   // Azul claro (coincide con palabras clave específicas como secciones)
+    ERROR(new Color(240, 80, 80)),     // Rojo brillante (para errores)
+    RESERV(Color.BLUE),  // Morado claro (para palabras reservadas)
+    INT(new Color(181, 206, 168)),     // Verde pastel (para valores numéricos o constantes)
+    VAL(Color.CYAN),     // Amarillo claro (para valores específicos o variables)
+    SYMSS(new Color(212, 212, 212)),   // Gris claro (para símbolos y operadores)
+    TODOO(new Color(128, 128, 128)),   // Gris medio (para tareas pendientes o marcadores)
+    COMMENT(new Color(106, 153, 85));  // Verde oliva (para comentarios)
+
     
-    SECTION(Color.GREEN),
-    ERROR(Color.RED),
-    RESERV(new Color(128, 0, 128)),
-    INT(Color.MAGENTA),
-    VAL(new Color(255, 140, 0)),
-    SYMSS(new Color(0, 128, 64)),
-    TODOO(Color.BLACK),
-    COMMENT(Color.BLUE),
-    ;
+     
+ 
     
     
     

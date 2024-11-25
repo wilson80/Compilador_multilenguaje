@@ -10,7 +10,8 @@ public sumar(int uno, int dos) {
 		 this.num1 = uno;
 		 this.num2 = dos;
 		  int total = num1 + num2;			
-        println("NUmmmmm: ", this.num1);
+        println("NUm 1: ", this.num1);
+        println("NUm 2: ", this.num2);
         println("Constru:finnnnn" );
 	}
 public int getTotal(){
@@ -44,4 +45,5 @@ void main()
 
  
 }
+
 

@@ -8,6 +8,7 @@ package com.wilsoncys.compi1.java.model.analisis;
 import java_cup.runtime.Symbol;
 import java.util.LinkedList;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
+import com.wilsoncys.compi1.java.model.programa.*;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.simbolo.*;
 import com.wilsoncys.compi1.java.model.instrucciones.*;
@@ -16,6 +17,8 @@ import com.wilsoncys.compi1.java.model.expresiones.*;
 import com.wilsoncys.compi1.java.model.expresiones.Aritmeticas.*;
 import com.wilsoncys.compi1.java.model.expresiones.Enums.*;
 import com.wilsoncys.compi1.java.model.programa.*;
+import com.wilsoncys.compi1.java.model.programa.expresiones.*;
+import com.wilsoncys.compi1.java.model.programa.instrucciones.*;
 import java.util.HashMap;
 import java_cup.runtime.XMLElement;
 
@@ -2287,7 +2290,7 @@ class CUP$parser$actions {
           case 26: // instructionsC ::= 
             {
               LinkedList<Instruction> RESULT =null;
-
+		RESULT = new LinkedList<>(); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("instructionsC",48, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -2761,7 +2764,7 @@ class CUP$parser$actions {
 		int elifleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int elifright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		Instruction elif = (Instruction)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		 RESULT = new IF(exp, ins, elif, expleft, expright);    
+		 RESULT = new IFC(exp, ins, elif, expleft, expright);    
               CUP$parser$result = parser.getSymbolFactory().newSymbol("ifC",60, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-8)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -3370,7 +3373,7 @@ class CUP$parser$actions {
 		int aleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String a = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		   RESULT = new Nativo(Integer.parseInt(a), new Tipo(tipoDato.ENTERO), aleft, aright );   
+		   RESULT = new NativoC(Integer.parseInt(a), new Tipo(tipoDato.ENTERO), aleft, aright );   
               CUP$parser$result = parser.getSymbolFactory().newSymbol("EXPRESIONCC",53, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -3382,7 +3385,7 @@ class CUP$parser$actions {
 		int aleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String a = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		   RESULT = new Nativo(a, new Tipo(tipoDato.CARACTER), aleft, aright );   
+		   RESULT = new NativoC(a, new Tipo(tipoDato.CARACTER), aleft, aright );   
               CUP$parser$result = parser.getSymbolFactory().newSymbol("EXPRESIONCC",53, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -3394,7 +3397,7 @@ class CUP$parser$actions {
 		int aleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String a = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		   RESULT = new Nativo(new Double(a), new Tipo(tipoDato.DECIMAL), aleft, aright );   
+		   RESULT = new NativoC(new Double(a), new Tipo(tipoDato.DECIMAL), aleft, aright );   
               CUP$parser$result = parser.getSymbolFactory().newSymbol("EXPRESIONCC",53, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -3406,7 +3409,7 @@ class CUP$parser$actions {
 		int aleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String a = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		   RESULT = new Nativo(a, new Tipo(tipoDato.CADENA), aleft, aright );   
+		   RESULT = new NativoC(a, new Tipo(tipoDato.CADENA), aleft, aright );   
               CUP$parser$result = parser.getSymbolFactory().newSymbol("EXPRESIONCC",53, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -3418,7 +3421,7 @@ class CUP$parser$actions {
 		int aleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
 		String a = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
-		   RESULT = new Access(a, aleft, aright);   
+		   RESULT = new AccessC(a, aleft, aright);   
               CUP$parser$result = parser.getSymbolFactory().newSymbol("EXPRESIONCC",53, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

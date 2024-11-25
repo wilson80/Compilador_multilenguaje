@@ -11,6 +11,7 @@ import java.util.LinkedList;
  * @author jonwilson
  */
 public class Includes {
+//    private boolean javaTodo = false;
     private boolean javaTodo = false;
     private boolean pascalTodo = false;
     private LinkedList<String> claseJava;
@@ -44,6 +45,14 @@ public class Includes {
 
     public boolean isPascalTodo() {
         return pascalTodo;
+    }
+
+    public void setJavaTodo(boolean javaTodo) {
+        this.javaTodo = javaTodo;
+    }
+
+    public void setPascalTodo(boolean pascalTodo) {
+        this.pascalTodo = pascalTodo;
     }
     
     
