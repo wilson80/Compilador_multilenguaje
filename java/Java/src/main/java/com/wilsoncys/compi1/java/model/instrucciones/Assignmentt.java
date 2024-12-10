@@ -210,23 +210,27 @@ public class Assignmentt extends Instruction{
         String varr = "";
         
         if(isThis){
+                                                //  buscar el sym solo en el ambito global
             String armedId = arbol.getCurrentAmbit().get(0);
              armedId += arbol.getCurrentAmbit().get(1)+id;
-                dir = arbol.getSym(armedId).getDir();            
+                dir = arbol.getSym(armedId).getDir();  
+                
+        }else{                  //buscando en el ambito local
+            String armedId = "";
+            armedId= arbol.getAmbito_asID() + id;
+            Simbolo sym = arbol.getSym(armedId);
+
+            if(sym==null){      //si no se encuentra en el ambito local buscar en el ambito global
+                armedId = arbol.getCurrentAmbit().get(0);
+                armedId += arbol.getCurrentAmbit().get(1) + id;
+                sym = arbol.getSym(armedId);
+                if(sym == null){        //revisar esto
+                    return new Errores(id, "no se ha encontrado el simboloooooooooooooo", line, col);
+                }else{
+                    dir = sym.getDir();
+                }
+            }
             
-//            buscar el sym solo en el ambito global
-
-
-        }else{
-            Simbolo encontrado = null;
-            String armedId = arbol.getAmbito_asID() + id;
-            encontrado = arbol.getSym(armedId);
-//            buscar el sym en abmos ambitos
-               if(encontrado == null){
-                   
-               }else{
-               
-               }
 
         }
         
@@ -236,29 +240,31 @@ public class Assignmentt extends Instruction{
                 armed+=c.c3d_asignVal("", dir);     //Entrada cin
                 c.varsParams = new LinkedList<>();  //limpiar despues de agregar
              
-         }else{
-            if(this.expr instanceof Nativo){    //declaracion con valor vativo
+         }else if(this.expr instanceof Nativo n){    //declaracion con valor vativo
+            n.createC3D(arbol, anterior);   
+            varr = c.varsParams.getFirst();
+            c.varsParams.removeFirst();
+        }else if(this.expr instanceof Call call){                          //declaracion y asignacion
+                  //pndte
+                                                  //create a la llamada
+              armed+= call.createC3D(arbol, anterior);
+                                              //asignacion
 
-              this.expr.createC3D(arbol, anterior);
-              armed = c.c3d_asignVal("", dir);
-              
-            }else if(this.expr instanceof Call call){                          //declaracion y asignacion
-                    //pndte
-                                                    //create a la llamada
-                armed+= call.createC3D(arbol, anterior);
-                                                //asignacion
- 
-                c.setPtrTemp("ptr");
-                armed+=c.c3d_asignVar(id, dir);
-                c.clearPtrTemp();
+              c.setPtrTemp("ptr");
+              armed+=c.c3d_asignVar(id, dir);
+              c.clearPtrTemp();
 
-            }else if(expr instanceof Access){
-               armed+= expr.createC3D(arbol, anterior);
-              varr = c.varsParams.getFirst();
-              c.varsParams.removeFirst();
-            }       
+        }else if(expr instanceof Access a){
+             armed+= a.createC3D(arbol, anterior);
+            varr = c.varsParams.getFirst();
+            c.varsParams.removeFirst();
+                
             
-         }
+        }else{
+            armed +=this.expr.createC3D(arbol, anterior);
+            varr = c.varsParams.getFirst();
+            c.varsParams.removeFirst();
+        }
          
                                                 //instance dir
          armed+= c.c3d_acces("", 0);            

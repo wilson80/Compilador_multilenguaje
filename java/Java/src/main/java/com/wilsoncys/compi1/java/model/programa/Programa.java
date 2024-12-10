@@ -60,7 +60,7 @@ public class Programa extends Instruction{
            
          ClasesJava clasesJ = arbol.getClasesJava();
          if(includes.isJavaTodo()){
-             for (Instruction clss : clasesJ.getClasesJava()) {
+             for (Instruction clss : clasesJ.getListaClasesJava()) {
                   var algo = clss.createSym(arbol, tabla);
                   if(algo instanceof  Errores){
                       return algo;
@@ -107,16 +107,16 @@ public class Programa extends Instruction{
             if(ins==null){
                 continue;
             }
-            if(ins instanceof StatementC as){
-                Simbolo sym = new Simbolo(as.tipo, as.id, tabla, as.isConst);
-                 //ambito
+            if(ins instanceof StatementC stt){
+                Simbolo sym = new Simbolo(stt.tipo, stt.id, tabla, stt.isConst);
+                 //ambito   
                 sym.setCat(categoria.ATRIBUTO);
                 sym.setDir(contador);
-                sym.setInstruction(as);
+                sym.setInstruction(stt);
                 sym.armarAmbito("PROGRAMA");
-                sym.armarAmbito(as.id);
+                sym.armarAmbito(stt.id);
                 if(!(tabla.addSsymbolPre(sym))){
-                    return new Errores("SEMANTIC", "El simbolo ya existe: " + as.id , as.line, as.col);
+                    return new Errores("SEMANTIC", "El simbolo ya existe: " + stt.id , stt.line, stt.col);
                 }
                 
                 contador++;
@@ -124,7 +124,6 @@ public class Programa extends Instruction{
         }
         
         arbol.attbPrincipal+=contador;
-        
         
         
         for (Instruction ins : instrucciones) {
@@ -157,11 +156,11 @@ public class Programa extends Instruction{
          ClasesJava clasesJ = arbol.getClasesJava();
 //         if(includes.isJavaTodo()){
          if(includes.isJavaTodo()){
-             for (Instruction clss : clasesJ.getClasesJava()) {
-                 if(clss instanceof Classs cl){
-                  ArmedJavas+=  "\n\n\n"+ cl.createC3D(arbol, anterior);
-                 }
-             }
+                //             for (Instruction clss : clasesJ.getListaClasesJava()) {
+                //                 if(clss instanceof Classs cl){
+                //                  ArmedJavas+=  "\n\n\n"+ cl.createC3D(arbol, anterior);
+                //                 }
+                //             }
              
              
 //             for (String idClase : includes.getClaseJava()) {
@@ -221,15 +220,24 @@ public class Programa extends Instruction{
            } 
        }
         
-        
+       
+       
+
+       
+        for (Instruction clss : clasesJ.getListaClasesJava()) {
+                if(clss instanceof Classs cl){
+//                    ArmedJavas+=  "\n\n\n" + cl.createC3D(arbol, anterior);
+                    cl.createC3D(arbol, anterior);
+//                    arbol.Print(ArmedJavas);
+                }
+        }
+       
+               //instrucciones del programa principal
+       ArmedPrincipal +=  this.main.createC3D(arbol, anterior);  
+       
        
         
         
-        
-        
-       
-       
-       
         
         
         

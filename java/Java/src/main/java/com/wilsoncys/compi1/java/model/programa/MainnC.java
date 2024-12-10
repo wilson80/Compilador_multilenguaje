@@ -26,16 +26,15 @@ import java.util.List;
  * @author Jonwil
  */
 public class MainnC extends Instruction{
-    public String id;
-    public LinkedList<HashMap> parameters;
+//    public String id;
+//    private List<String>  ambito;   //idclase/metodo/params
     public LinkedList<Instruction> instrucciones;
     private int cantParams = 0;
-    private List<String>  ambito;   //idclase/metodo/params
 
     
     public MainnC(String id, LinkedList<Instruction> instrucciones, int linea, int col) {
         super(new Tipo(tipoDato.VOID), linea, col);
-        this.id = id;
+//        this.id = id;
         this.instrucciones = instrucciones;
     }
 
@@ -55,7 +54,7 @@ public class MainnC extends Instruction{
             if(instruct instanceof transferReturn){
                 return instruct;
             }
-            // el problema de eso ^^ es que no la expresion podria retornar // Verify
+            // El problema de eso ^^ es que no la expresion podria retornar // Verify
 //            algo que no es y el error tiene que ser devuelto por la llamada y no por la asignacion
             var ressult = instruct.interpretar(arbol, table);
             if(ressult instanceof transferReturn){
@@ -86,25 +85,7 @@ public class MainnC extends Instruction{
     
     
     public Object createSym(Arbol arbol, TablaSimbolos tabla) {
-                //dir ref
-        //retorno
-        //dir dir ret
-        //desde la clase se le hace set a la cantidad de params
-                                                            //pte
-        cantParams++;
-        for (Instruction ins : instrucciones) {
-            if(ins instanceof Statement st){
-                //ambito
-                Simbolo sym = new Simbolo(tipo, st.id, tabla, true);
-                sym.setCat(categoria.VARL);
-                sym.setDir(cantParams);
-                sym.setInstruction(ins);
-                sym.setAmbito(ambito);
-                tabla.addSsymbolPre(sym);
-                cantParams++;
-            }
-        } 
-        
+        //dentro del main c no hay vars locales\
         
         return "";
     }
@@ -113,26 +94,16 @@ public class MainnC extends Instruction{
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
         String armed = "";
-        C3d_Java c = arbol.getJava();
-        arbol.setPosReturn(1);
-        
-        //reservar el espacio en el  heap
-        armed+= c.c3d_reserveHeap(this.cantParams);
-        
-        //set a la referencia (stack[0])
-        armed+= c.c3d_asignVal("", 0);
-
+        C3d c = arbol.getC3d();
         
         for (Instruction ins : instrucciones) {
-                    if(ins ==null){
-                        continue;
-                    }
-                    armed += ins.createC3D(arbol, anterior);
-                }
-      
+            armed += ins.createC3D(arbol, anterior);
+        }
+        
         return armed;
     }
-
+    
+    
     
     
     
@@ -150,13 +121,13 @@ public class MainnC extends Instruction{
         return cantParams;
     }
 
-    public List<String> getAmbito() {
-        return ambito;
-    }
-
-    public void setAmbito(List<String> ambito) {
-        this.ambito = ambito;
-    }
+//    public List<String> getAmbito() {
+//        return ambito;
+//    }
+//
+//    public void setAmbito(List<String> ambito) {
+//        this.ambito = ambito;
+//    }
      
     
 }

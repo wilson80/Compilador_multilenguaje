@@ -9,6 +9,7 @@ import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.instrucciones.Statement;
 import com.wilsoncys.compi1.java.model.instrucciones.transferReturn;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
+import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,11 +27,13 @@ import java.util.List;
  */
 public class Method extends Instruction{
     public String id;
+    public String idClase = "";
     public LinkedList<HashMap> parameters;
     public LinkedList<Instruction> instrucciones;
     
     private int cantParams = 0;
     private List<String>  ambito;   //idclase/metodo/params
+    private int cantSyms = 0;
     
 
     public Method(String id, LinkedList<HashMap> parametros, LinkedList<Instruction> instrucciones, Tipo tipo, int linea, int col) {
@@ -119,7 +123,12 @@ public class Method extends Instruction{
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
         String armed = "";
-        C3d c = new C3d();
+        C3d_Java c = arbol.getJava();
+        
+        arbol.setCurrentAmbit(this.getAmbito());
+//                 JOptionPane.showMessageDialog(null, "?>>>>>> " + this.get );
+
+        
         String bodyMet = "";
         for (Instruction ins : instrucciones) {
             if(ins ==null){
@@ -127,11 +136,12 @@ public class Method extends Instruction{
             }
             bodyMet += (String)ins.createC3D(arbol, anterior);
         }
-        armed+=c.c3d_metodo(id, bodyMet);
+        
+        armed += c.c3d_metodo("java_" + idClase +"_"+ id, bodyMet);
             
         arbol.Print(armed);
         
-        return ">>Methos<<";
+        return "";
     }
 
      
@@ -141,12 +151,26 @@ public class Method extends Instruction{
         this.cantParams = cantParams;
     }
 
+    public int getCantParams() {
+        return cantParams;
+    }
+
     public void setAmbito(List<String> ambito) {
         this.ambito = ambito;
     }
 
-    public int getCantParams() {
-        return cantParams;
+    public List<String> getAmbito() {
+        return ambito;
     }
+
+    public String getIdClase() {
+        return idClase;
+    }
+
+    public void setIdClase(String idClase) {
+        this.idClase = idClase;
+    }
+    
+    
      
 }

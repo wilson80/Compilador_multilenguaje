@@ -134,57 +134,57 @@ public class Access extends Instruction{
     }
     
         
-            @Override
+             @Override
     public Object createC3D(Arbol arbol, String anterior) {
 
         String armed = "";
         C3d_Java c =  arbol.getJava();
         Simbolo sym = null;
         
-        
-        if(this.isThis){//vali
+        if(this.isThis){
             String armedId = arbol.getCurrentAmbit().get(0);
-             armedId += arbol.getCurrentAmbit().get(1) + id;
+            armedId += arbol.getCurrentAmbit().get(1) + id;
             sym = arbol.getSym(armedId);
 
+        }else{      // si no se usa this.
+            String armedId = "";
+            armedId= arbol.getAmbito_asID() + id;
 
-        }else{
-            String armedId = arbol.getAmbito_asID() + id;
             sym = arbol.getSym(armedId);
+
+            if(sym==null){      //si no se encuentra en el ambito local buscar en el ambito global
+                armedId = arbol.getCurrentAmbit().get(0);
+                armedId += arbol.getCurrentAmbit().get(1) + id;
+                sym = arbol.getSym(armedId);
+                if(sym == null){        //revisar esto
+                    return new Errores(id, "no se ha encontrado el simboloooooooooooooo", line, col);
+                }
+            }
 
         }
-        
+
+
         int dir = sym.getDir();
         
-
         
-        if(sym.getCat()==categoria.PARAM){
+
+        if(sym.getCat()==categoria.PARAM){  
+
             armed+= c.c3d_accesParam(id, dir);
-            
-        }else if(sym.getCat()==categoria.ATRIBUTO){
-            
-            if(this.isThis){
+
+        }else if(sym.getCat()==categoria.ATRIBUTO){ 
                 armed+= c.c3d_acces("", 0);
                 
                 armed+= c.c3d_accesAttVarl("", dir);
-                c.varsParams.add("algo");
                 
-                
-                        
-                
-            }else{
-            
-            }
-            //buscar el sym primero en el ambito actual
-            // si no se encuentra buscar en el global
-            //
+                   
+              
         }else if(sym.getCat()==categoria.VARL){
             //buscar en el heap
 
 //            solo con este amibto
         }
-        
-        
+                 
         return armed;
     }
 }

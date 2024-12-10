@@ -88,7 +88,7 @@ public class IniciarAnalizadores {
             } 
 
             
-             
+              
             
 //            Generate C3D             
 //            valid si no se encuentra el programa Principan y el Main
@@ -111,7 +111,7 @@ public class IniciarAnalizadores {
                     if(ins ==null){
                         continue;
                     }
-                    if(ins instanceof  Programa cl){
+                    if(ins instanceof  Programa cl){            //  creacion del programa principal
                         bodyMain += (String)cl.createC3D(ast, "");
 
                     }

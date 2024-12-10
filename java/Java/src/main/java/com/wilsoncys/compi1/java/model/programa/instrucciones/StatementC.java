@@ -53,6 +53,7 @@ public class StatementC extends Instruction{
         this.declaracionSimple = false;
         this.isConst = isMutable;
         this.whatConstruct = 1;
+
     }
 //    \\\\analizar
 
@@ -141,10 +142,6 @@ public class StatementC extends Instruction{
     
     
     public Object createSym(Arbol arbol, TablaSimbolos tabla) {
-            
-            
-            
-            
         return null;
     }
  

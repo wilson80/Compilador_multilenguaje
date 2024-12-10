@@ -2,37 +2,56 @@
  
 %%JAVA
 public class sumar {
-	int num1;
-	int num2;
-	int num3;
+	int uno;
+	int dos;
+	int tres;
+	int total;
+
 	public sumar(int uno, int dos, int tres) {
 		println("Constrrr sumar");
-		 this.num1 = uno;
-		 this.num2 = dos;
-		 this.num3 = tres;
-        println("NUm1: ", this.num1);
-        println("NUm2: ", this.num2);
-        println("NUm3: ", this.num3);
-        println("Constru:finnnnn" );
+		 this.uno = uno;
+		 this.dos = dos;
+		 this.tres = tres;
+		 println("El total es: ", this.uno);
+		 println("Constru:finnnnn" );
+		 
+	}
+		//otro constructor 
+	public void unvoid(int aa){
+		// int varlocal = 0;
+		this.uno = aa;
+		println("dentro de un void randodom");	
+		println("att1: ", uno);	
+		println("dentro de un void randodom");	
+	}
+	public void getTotal(){
+		total = uno + dos;
+		return this.total;
+	}
+
+	public void setTotal(int algo){
+		this.total = algo;
+		println("Ahora el total es: ", this.total);
 	}
 } 
 
 %%PROGRAMA
 #include "JAVA.*"  
- 
-
 int x = 4;
 int y = 6;
 int z = 9;
+int total = 0;
 
-	JAVA.sumar      call1(x, y, z);
-
+	 JAVA.sumar      call1(x, y, z);
 void main()
 { 
- 
-	   
-	 
+	JAVA.call1.unvoid(77);
+	total = JAVA.call1.getTotal();
+	printf("el total es %d",);
 
- 
+
+	// call1.setTotal(y);
+	// call1.getTotal();
+	
 }
 

@@ -9,6 +9,7 @@ import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.expresiones.Enums.OperadoresAritmeticos;
 import com.wilsoncys.compi1.java.model.expresiones.Nativo;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
+import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
@@ -221,7 +222,7 @@ public class Suma extends Instruction {
         String op2 = "";
           
 //        
-        C3d c=  arbol.getC3d();
+        C3d_Java c=  arbol.getJava();
         c.varsParams = new LinkedList<>();
         
         if(operando1 instanceof Nativo){        
@@ -254,7 +255,7 @@ public class Suma extends Instruction {
         
         c.setOPRT("+");
         armed+=c.c3d_operation(op1, op2);
-        c.varsParams.add("w"+(arbol.cMain.getContador()-1));  //guarda el id de la var q contiene el resultado
+        c.varsParams.add("w"+(arbol.java.getContador()-1));  //guarda el id de la var q contiene el resultado
 
         return armed;
     }

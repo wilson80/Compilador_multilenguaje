@@ -240,7 +240,7 @@ public class CallPascalC extends Instruction{
             
         }
                                             //stack temp
-        armed+=c.c3d_ptrTemp(arbol.getSizeStack());
+        armed+=c.c3d_ptrTemp(arbol.getSizeHeap());
                                             //PREPARED params en el stack
         for (Instruction exps : parametersExp) {
 //            if(exps instanceof Nativo){
@@ -250,15 +250,15 @@ public class CallPascalC extends Instruction{
         }
         c.clearPtrTemp();   
                                             //ejecutar el metodo
-        armed+=c.c3d_moveToStack(true, arbol.getSizeStack());
+        armed+=c.c3d_moveToStack(true, arbol.getSizeHeap());
         armed+= id+"();\n";
-        armed+=c.c3d_moveToStack(false, arbol.getSizeStack());
+        armed+=c.c3d_moveToStack(false, arbol.getSizeHeap());
         
                             //create al metodo/funcion
         sym.getInstruction().createC3D(arbol, anterior);
         
 //                    mover el ptr temporal
-            armed+=c.c3d_ptrTemp(arbol.getSizeStack());
+            armed+=c.c3d_ptrTemp(arbol.getSizeHeap());
             //obtener valor del return
             armed+=c.c3d_accesTemp(id, arbol.getPosReturn());
         

@@ -17,6 +17,7 @@ import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;  
 import java.util.ArrayList;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
@@ -118,7 +119,7 @@ public class Prints extends Instruction {
                 armed+=c.c3d_printNativo(val);
                 c.clearVarParams();
             }else{
-                
+
                 armed+= exp.createC3D(arbol, anterior);
                 armed+=c.c3d_printVar();
                 c.clearVarParams();

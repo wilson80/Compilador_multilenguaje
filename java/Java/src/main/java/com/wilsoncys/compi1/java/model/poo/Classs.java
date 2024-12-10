@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,6 +28,7 @@ import java.util.List;
  */
   public class Classs extends Instruction{
     public  String id;
+    private  String id_constructor;
     String idPadre;
     int cantAttb = 0;
     private List<String>  ambito;   //idclase/metodo/params
@@ -116,7 +118,7 @@ import java.util.List;
                 
             }
         }
-        arbol.attbClassJava = cantAttb ;
+        arbol.setSizeHeap(contador); 
         contador = 0;
         
         //Main
@@ -126,10 +128,10 @@ import java.util.List;
             }
             
             if(ins instanceof  Mainn mainn){
-                contador = 0;
+                contador = 2;
                 Simbolo sym = new Simbolo(tipo, mainn.id, tabla, false);
                 sym.setCat(categoria.CONSTRUCTOR);
-                            //                sym.setDir(contador);
+                sym.setDir(contador);
                 sym.setInstruction(ins);
                 sym.armarAmbito("java");
                 sym.armarAmbito(this.id);
@@ -138,14 +140,14 @@ import java.util.List;
                 for (HashMap hash : mainn.parameters) {
                     Tipo tipo = (Tipo)hash.get("tipo");
                     typeParam.add(tipo.getTypeString());
-                }
-                    
+                } 
                 sym.getAmbito().addAll(typeParam);          //Car_Car_int_String_Motor
+                
+                
                 if(!(tabla.addSsymbolPre(sym))){
                     return new Errores("SEMANTIC", "El simbolo ya existe: " + mainn.id , mainn.line, mainn.col);
                 }
                 mainn.setAmbito(sym.getAmbito());
-                contador = 2;
                 for (HashMap param : mainn.parameters) {          //syms de params
                     String idparam = (String)param.get("id");
                     Simbolo symPar = new Simbolo(mainn.tipo, idparam, null, false);
@@ -158,10 +160,10 @@ import java.util.List;
                     contador++;
                 }
                 
-                    mainn.setCantParams(cantAttb);
-                    mainn.createSym(arbol, tabla);          //create syms
-                    arbol.setSizeStack(mainn.getCantParams());
-                
+                mainn.setCantParams(contador);
+                mainn.createSym(arbol, tabla);          //create syms
+//                    arbol.setSizeHeap(mainn.getCantParams());
+//                
             }
         }
         
@@ -172,38 +174,44 @@ import java.util.List;
                 continue;
             }
             
-            if(ins instanceof  Method met){
+            if(ins instanceof  Method fun){
                 contador = 0;
-                Simbolo sym = new Simbolo(tipo, met.id, tabla, true);
+                Simbolo sym = new Simbolo(tipo, fun.id, null, true);
                 sym.setCat(categoria.METHOD);
                 sym.setDir(contador);
                 sym.setInstruction(ins);
+                sym.armarAmbito("java");
                 sym.armarAmbito(this.id);
-                sym.armarAmbito(met.id);
+                sym.armarAmbito(fun.id);
                 List<String> typeParam = new ArrayList<>();
-                for (HashMap hash : met.parameters) {
-//                    hash.get("id");
+                for (HashMap hash : fun.parameters) { 
                     Tipo tipo = (Tipo)hash.get("tipo");
                     typeParam.add(tipo.getTypeString());
-                }    
-                //syms de c/param
-                
-                sym.getAmbito().addAll(typeParam);                 //Car_Car_int_String_Motor
-                if(!(tabla.addSsymbolPre(sym))){
-                    return new Errores("SEMANTIC", "El simbolo ya existe: " + met.id , met.line, met.col);
                 }
+                sym.getAmbito().addAll(typeParam);                 //Car_Car_int_String_Motor
                 
                 
-                
-                
-                contador++;
-                    met.setCantParams(contador);
-                    met.setAmbito(sym.getAmbito());
-                    met.createSym(arbol, tabla);
-                
-                    
+                if(!(tabla.addSsymbolPre(sym))){
+                    return new Errores("SEMANTIC", "El simbolo ya existe: " + fun.id , fun.line, fun.col);
+                }
+                fun.setAmbito(sym.getAmbito());
+                contador=2;       //add dir(ref,retorno,dir_retorno)
+                for (HashMap param : fun.parameters) {          //syms de params
+                    String idparam = (String)param.get("id");
+                    Simbolo symPar = new Simbolo(fun.tipo, idparam, null, true);
+                    symPar.setCat(categoria.PARAM);
+                    symPar.setDir(contador);
+                    symPar.setAmbito(fun.getAmbito());
+                    symPar.armarAmbito((String)param.get("id"));
+                    tabla.addSsymbolPre(symPar);            //add symParam
+//                    sym.setInstruction(ins);
+                    contador++;
+                }
+                fun.setCantParams(contador);
+                fun.createSym(arbol, tabla);
             }
         }
+        
         
         
 
@@ -217,7 +225,8 @@ import java.util.List;
                 Simbolo sym = new Simbolo(tipo, fun.id, null, true);
                 sym.setCat(categoria.FUNCTION);
 //                                                sym.setDir(contador);
-                sym.setInstruction(ins);
+                sym.setInstruction(ins); 
+                sym.armarAmbito("java");
                 sym.armarAmbito(this.id);
                 sym.armarAmbito(fun.id);
                 List<String> typeParam = new ArrayList<>();
@@ -230,9 +239,8 @@ import java.util.List;
                 if(!(tabla.addSsymbolPre(sym))){
                     return new Errores("SEMANTIC", "El simbolo ya existe: " + fun.id , fun.line, fun.col);
                 }
-                fun.setAmbito(sym.getAmbito());
-                                //add dir(ref,retorno,dir_retorno)
-                contador=3; 
+                fun.setAmbito(sym.getAmbito()); 
+                contador=3;     //add dir(ref,retorno,dir_retorno)
                 for (HashMap param : fun.parameters) {          //syms de params
                     String idparam = (String)param.get("id");
                     Simbolo symPar = new Simbolo(fun.tipo, idparam, null, true);
@@ -249,12 +257,7 @@ import java.util.List;
             }
         }
         contador = 0;
-
-//        constructor
-        
-        
-        
-        
+ 
             
         return null; 
     }
@@ -273,31 +276,57 @@ import java.util.List;
         
         
         //reservar el espacio en el  heap
-        armed+= c.c3d_reserveHeap(arbol.attbClassJava);
+        armed+= c.c3d_reserveHeap(arbol.getSizeHeap());
         
         //set a la referencia (stack[0])
         armed+= c.c3d_asignVal("", 0);
         
         
+        arbol.setCurrentAmbit(this.getAmbito());
         for (Instruction ins : instrucciones) {
-            arbol.setCurrentAmbit(this.getAmbito());
             if(ins instanceof Statement st){
                 armed += (String)st.createC3D(arbol, anterior);
             }
         }
-        
-//        buscar su constructor     pte
+        int contador = 0;
+//        buscar su constructor  dependiendo los parametros enviados
+        Mainn mainEcontrado = null;
         for (Instruction ins : instrucciones) {
-            if(ins instanceof Mainn mn){
-                arbol.setCurrentAmbit(mn.getAmbito());
-                armed+=mn.createC3D(arbol, anterior);
+            
+            if(ins instanceof Mainn mn){    //Main(clase de los constructores)
+                contador++;
+                if(mn.id.equals(this.id)){
+                    //identificar el constructor
+//                    JOptionPane.showMessageDialog(null, "ambito_mn:" + mn.getAmbito_asID());
+//                    JOptionPane.showMessageDialog(null, "idconss:" + id_constructor);
+                    if(this.id_constructor.equals(mn.getAmbito_asID())){
+                        mainEcontrado = mn;
+                    }
+                }else{
+                                            //validacion >> el nombre del constructor debe ser igual al nombre de la clase
+                    JOptionPane.showMessageDialog(null, "error en el nombre del constructor");
+                }
             }
+            
         }
         
         
+        if(mainEcontrado!=null){
+            //realizar el constructor por defecto
+                    //inicializar los attb con valores por defecto
+            arbol.setCurrentAmbit(mainEcontrado.getAmbito());
+            armed+=mainEcontrado.createC3D(arbol, anterior);
+        }else{
+            if(contador!=0 || !(id_constructor.equals("java" + id + id))){  
+                    //no hay constructor por defecto
+                JOptionPane.showMessageDialog(null, "Parametros incorrectos al instanciar una clase");
+            } 
+        }
         
         
-        return c.c3d_metodo("java_"+id, armed);
+        armed = c.c3d_metodo("java_"+id + "_"+ id, armed);
+        arbol.Print(armed);
+        return "";
     }
 
     
@@ -332,13 +361,13 @@ import java.util.List;
     }
 
 
-    public void setCantAttb(int cantAttb) {
-        this.cantAttb = cantAttb;
-    }
-
-    public int getCantAttb() {
-        return cantAttb;
-    }
+//    public void setCantAttb(int cantAttb) {
+//        this.cantAttb = cantAttb;
+//    }
+//
+//    public int getCantAttb() {
+//        return cantAttb;
+//    }
 
     public boolean isMain() {
         return main;
@@ -346,6 +375,10 @@ import java.util.List;
 
     public List<String> getAmbito() {
         return ambito;
+    }
+
+    public void setId_constructor(String id_constructor) {
+        this.id_constructor = id_constructor;
     }
  
     

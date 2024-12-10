@@ -4,13 +4,15 @@
  */
 package com.wilsoncys.compi1.java.model.simbolo;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author yoyo
  */
 public class Tipo {
     private tipoDato tipo;
-    private String idObjeto = "";
+    private String idObjeto = "ONBJECT";
     
     public Tipo(tipoDato tipo) {
         this.tipo = tipo;
@@ -25,6 +27,7 @@ public class Tipo {
     }
 
     public String getTypeString(){
+        
         switch (tipo) {
             case ENTERO:
                 return "int";

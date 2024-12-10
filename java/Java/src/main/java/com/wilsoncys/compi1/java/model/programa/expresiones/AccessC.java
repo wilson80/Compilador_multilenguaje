@@ -146,6 +146,7 @@ public class AccessC extends Instruction{
  
         int dir = sym.getDir();
         
+        
 
         if(sym.getCat()==categoria.ATRIBUTO){
                 armed+= c.c3d_acces("", dir);
@@ -154,6 +155,9 @@ public class AccessC extends Instruction{
         } 
         
 
+        if(sym!=null){
+            this.tipo = sym.getTipo();
+        }
 
 
         return armed;

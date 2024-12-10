@@ -96,10 +96,10 @@ public class Mainn extends Instruction{
         for (Instruction ins : instrucciones) {
             if(ins instanceof Statement st){
                 //ambito
-                Simbolo sym = new Simbolo(st.tipo, st.id, "empy", false);
+                Simbolo sym = new Simbolo(st.tipo, st.id, "", false);
                 sym.setCat(categoria.VARL);
                 sym.setDir(cantParams);
-                sym.setInstruction(ins);
+//                sym.setInstruction(ins);
                 sym.setAmbito(ambito);
                 sym.armarAmbito(st.id);
                 if(!(tabla.addSsymbolPre(sym))){

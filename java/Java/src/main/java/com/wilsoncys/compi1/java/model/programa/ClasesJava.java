@@ -63,7 +63,7 @@ public class ClasesJava extends Instruction{
         return clase;
     }
 
-    public LinkedList<Instruction> getClasesJava() {
+    public LinkedList<Instruction> getListaClasesJava() {
         return clasesJava;
     }
     

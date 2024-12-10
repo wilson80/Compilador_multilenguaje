@@ -157,7 +157,7 @@ public class C3d_Java {
 //    stack[tr6] = var;
     
     
-    public String c3d_newVar(){
+    private String c3d_newVar(){
         String varInt = "int w" + countCreateVar;
 //        ptrTemp = varInt;
         countCreateVar++;
@@ -210,11 +210,11 @@ public class C3d_Java {
     public String c3d_main(String id, String body){
         String armed = "";
         String INT = "int";
-        armed = INT +" "+ id + PAR_L + PAR_R + KEY_L +  saltoLinea+  
+        armed = INT +" "+ id + PAR_L + PAR_R + KEY_L +  saltoLinea +  
                 body + saltoLinea + KEY_R;
-        
         return  armed;
     }
+
     public String c3d_Input(){
         String armed = c3d_newVar() + SEMIC  ;
         armed += "cin>>" + "w" + (countCreateVar-1)  + SEMIC +saltoLinea;

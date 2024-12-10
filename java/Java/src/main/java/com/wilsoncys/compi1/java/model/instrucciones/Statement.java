@@ -166,7 +166,7 @@ public class Statement extends Instruction{
             //-1 si es un objeto para marcar que esta nulo
             //halar la ref
                                             //dir ref
-            armed += c.c3d_acces("ptr", dir);
+            armed += c.c3d_acces("ptr", 0);
             
             armed += c.c3d_asignHeap("0", dir);
             

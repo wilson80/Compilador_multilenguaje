@@ -283,6 +283,8 @@ decVarsC::= typeC:t ID:id ASSIGNMENT EXPRESIONCC:exp SEMIC
 
 
 //vectores
+
+
 mainC::= VOID MAIN:a PAR_OP PAR_CL K_OP  instructionsC:ins  K_CL
         {:RESULT = new MainnC("MAIN", ins, aleft, aright); :}
 ;
@@ -297,13 +299,13 @@ declaracionC::= declaracionC:decs decConstC:dec
 | {:RESULT = new LinkedList<>(); :}
 ;
 
-instructionsC::= insC instructionsC
+instructionsC::= insC:in instructionsC:ins {: RESULT = ins; RESULT.add(in); :}
                 | error SEMIC
-                | {:RESULT = new LinkedList<>(); :}
+                | {: RESULT = new LinkedList<>(); :}
 ;
 
 
-typeC::= INT {: new Tipo(tipoDato.ENTERO); :}
+typeC::= INT {: RESULT = new Tipo(tipoDato.ENTERO); :}
 |CHAR   {: RESULT = new Tipo(tipoDato.CARACTER); :}
 |DOUBLE  {: RESULT = new Tipo(tipoDato.DECIMAL); :}
 |STRING  {: RESULT = new Tipo(tipoDato.CADENA); :}
@@ -316,7 +318,7 @@ printf::= PRINT PAR_OP CADENA PAR_CL SEMIC
         | PRINT PAR_OP CADENA varsPrintf PAR_CL SEMIC
 ;
 //scanf   printf("Integer: %d, Character: %c, Float: %.2f", 10, 'B', 2.718);
-varsPrintf::= COLON ID 
+varsPrintf::= COLON ID:id {: RESULT = id.toString(); :}
         | COLON ID varsPrintf
 ;
 
@@ -336,7 +338,7 @@ insC::= PRINT PAR_OP PAR_CL SEMIC
 |GETCH PAR_OP PAR_CL SEMIC
 | scanf
 | asignacionC
-| printf
+| printf:c {: RESULT =c; :}
 |whileC
 |forC
 |DOC
@@ -344,7 +346,7 @@ insC::= PRINT PAR_OP PAR_CL SEMIC
 |CONTINUE SEMIC
 |ifC
 |switchC
-|callC
+|callC:c {: RESULT = c; :}
 ;
 
 
@@ -370,14 +372,12 @@ insSwC::= inSwC insSwC
 
 
 
-//OBJETOS
+//OBJETOS (instanciacion)
 decObjetos::= JAVA DOT ID:cl instancesC:ins 
         {:
             RESULT = new ReferenceC(cl,ins, clleft, clright);    
         :}
  ;
-
-//inciiar con llenar la tabla de simbolos del pr Principal
 
 
 instancesC::= ID:id PAR_OP paramssC:p PAR_CL COLON  instancesC:ins
@@ -434,8 +434,8 @@ updateVarForC::=  ID:id PLUSPLUS  {: RESULT = new IncreaseDecrease(id, true, idl
         |ID:id  MINUSMINUS  {: RESULT = new IncreaseDecrease(id, false, idleft, idright); :}
         |ID:id ASSIGNMENT EXPRESIONCC:exp {:  RESULT = new Assignmentt(id, exp, idleft, idright);  :}
         ;
-
-declaraAsignaC::= asignacionC
+//esto es para los ciclos 
+declaraAsignaC::= asignacionC 
                 | typeC ID ASSIGNMENT EXPRESIONCC SEMIC
 ;
 
@@ -470,7 +470,7 @@ paramssC::= callsParametersC:c {:RESULT = c; :}
 
 callC::= PASCAL DOT ID PAR_OP paramssC PAR_CL SEMIC
         | JAVA DOT ID:id DOT ID:id1 PAR_OP paramssC:p PAR_CL SEMIC
-        // {: RESULT = new CallJavaC(id, id1, p, idleft, idright ); :}
+        {: RESULT = new call_to_java(id, id1, p, idleft, idright ); :}
 ;
 
 
@@ -567,7 +567,7 @@ EXPRESIONCC::= MINUS EXPRESIONCC:a             {:   RESULT = new Negacion(a, Ope
 
 
 
-//GRAMATICA PROGRAMA JAVA
+//GRAMATICA  JAVA
 claass::= Oneclaass:c {: RESULT = new LinkedList<>(); RESULT.add(c); :} 
         | claass:cls Oneclaass:c  {: RESULT = cls; RESULT.add(c); :}
 ;
@@ -583,9 +583,13 @@ methodIns::=InstructionES:ins {: RESULT = ins; :}
 
 
 constructor::=  ID:id  PAR_OP parametersFuncts:p PAR_CL K_OP methodIns:ins K_CL 
-{: RESULT = new Mainn(id, p, ins, idleft, idright );  :}
+                        {: RESULT = new Mainn(id, p, ins, idleft, idright );  :}
+                | ID:id  PAR_OP PAR_CL K_OP methodIns:ins K_CL 
+                        {: RESULT = new Mainn(id, new LinkedList<HashMap>(), ins, idleft, idright );  :}
                 | modPriv ID:id PAR_OP parametersFuncts:p PAR_CL  K_OP methodIns:ins K_CL 
-{: RESULT = new Mainn(id, p, ins, idleft, idright );  :}
+                        {: RESULT = new Mainn(id, p, ins, idleft, idright );  :}
+                | modPriv ID:id PAR_OP PAR_CL  K_OP methodIns:ins K_CL 
+                        {: RESULT = new Mainn(id, new LinkedList<HashMap>(), ins, idleft, idright );  :}
 ;
 
 modPriv::= PUBLIC
@@ -675,14 +679,13 @@ EXPRESION::= MINUS EXPRESION:a             {:   RESULT = new Negacion(a, Operado
         //     | ID:idStruct DOT ID:field DOT ID:elseID {: RESULT = new Access(idStruct, field, elseID, idStructright, idStructleft); :} 
         //     | K_OP:a valuesStruct:valuess K_CL {: RESULT = new Structs(null, valuess, aleft, aright); :}
 ;
-
+  
 
 // public Method(String id, LinkedList<HashMap> parametros, LinkedList<Instruction> instrucciones, Tipo tipo, int linea, int col) {
  methodd::= modPriv VOID:a ID:b PAR_OP parametersFuncts:p PAR_CL K_OP methodIns:c K_CL    {:   RESULT= new Method(b, p, c, new Tipo(tipoDato.VOID), aleft, aright );   :}
         |  modPriv VOID:a ID:b PAR_OP PAR_CL K_OP methodIns:c K_CL             {:   RESULT= new Method(b, new LinkedList<HashMap>(), c, new Tipo(tipoDato.VOID), aleft, aright );   :}
         |  modPriv typeVar:a ID:b PAR_OP parametersFuncts:p PAR_CL K_OP methodIns:c K_CL    {:   RESULT= new Functionss(b, p, c, a, aleft, aright );   :}
-        |  modPriv typeVar:a ID:b PAR_OP PAR_CL K_OP methodIns:c K_CL             {:   RESULT= new Functionss(b, new LinkedList<HashMap>(), c, a, aleft, aright );   :}
-        
+        |  modPriv typeVar:a ID:b PAR_OP PAR_CL K_OP methodIns:c K_CL             {:   RESULT= new Functionss(b, new LinkedList<HashMap>(), c, a, aleft, aright );   :}   
         |  VOID:a ID:b PAR_OP parametersFuncts:p PAR_CL K_OP methodIns:c K_CL    {:   RESULT= new Method(b, p, c, new Tipo(tipoDato.VOID), aleft, aright );   :}
         |   VOID:a ID:b PAR_OP PAR_CL K_OP methodIns:c K_CL             {:   RESULT= new Method(b, new LinkedList<HashMap>(), c, new Tipo(tipoDato.VOID), aleft, aright );   :}
         |   typeVar:a ID:b PAR_OP parametersFuncts:p PAR_CL K_OP methodIns:c K_CL    {:   RESULT= new Functionss(b, p, c, a, aleft, aright );   :}

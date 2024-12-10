@@ -43,15 +43,13 @@ public class Arbol {
 
 
     
-    public int attbClassJava = 0;
+    private int attbClassJava = 0;
     public int attbPrincipal = 0;
     private int posReturn = 1;
     
     
-    public int count;
+    public int count;       //contador de las variables que se van creando
     
-    
-
     
     private LinkedList<Errores> listaErrores = new LinkedList<>();
 
@@ -172,11 +170,11 @@ public class Arbol {
         return cMain;
     }
 
-    public void setSizeStack(int sizeStack) {
+    public void setSizeHeap(int sizeStack) {
         this.attbClassJava = sizeStack;
     }
 
-    public int getSizeStack() {
+    public int getSizeHeap() {
         return attbClassJava;
     }
 
@@ -197,7 +195,7 @@ public class Arbol {
             if(ins instanceof ClasesJava cl){
                 clases = cl;
             }
-        }
+        }   
         
         return clases;
     } 
