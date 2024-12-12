@@ -86,30 +86,19 @@ cout<<endl;
 
 }
 
-void java_sumar_unvoid(){
-int w33 = ptr + 2;
+void java_sumar_getTotal(){
+int w33 = ptr + 3;
 int w34 = stack[w33];
 
-int w35 = ptr + 0;
-int w36 = stack[w35];
+int w35 = 99;
 
-int w37 = w36 + 0;
-heap[w37] = w34;
+int w36 = w34+w35;
+int w37 = 5;
 
+int w38 = w36-w37;
+int w39 = ptr + 1;
+stack[w39] = w38;
 
-cout<<"dentro de un void randodom";
-cout<<endl;
-cout<<"att1: ";
-int w38 = ptr + 0;
-int w39 = stack[w38];
-
-int w40 = w39 + 0;
-int w41 = heap[w40];
-
-cout<<w41;
-cout<<endl;
-cout<<"dentro de un void randodom";
-cout<<endl;
 
 }
 
@@ -124,7 +113,7 @@ int w2 = ptr + 2;
 stack[w2] = 9;
 
 int w3 = ptr + 3;
-stack[w3] = 0;
+stack[w3] = 88;
 
 int w4 = ptr + 0;
 int w5 = stack[w4];
@@ -165,15 +154,38 @@ int w20 = ptr + 5;
 int w21 = w20 + 0;
 stack[w21] = w19;
 
-int w22 = ptr + 5;
+int w22 = ptr + 0;
+int w23 = stack[w22];
 
-int w23 = w22 + 2;
-stack[w23] = 77;
+int w24 = ptr + 2;
+int w25 = stack[w24];
+
+int w26 = ptr + 5;
+
+int w27 = w26 + 3;
+stack[w27] = w23;
+
+int w28 = w26 + 4;
+stack[w28] = w25;
 
 ptr = ptr + 5;
-java_sumar_unvoid();
+java_sumar_getTotal();
 ptr = ptr - 5;
+int w29 = ptr + 5;
 
+int w30 = w29 + 1;
+int w31 = stack[w30];
+
+int w32 = ptr + 3;
+stack[w32] = w31;
+
+
+int w33 = ptr + 3;
+int w34 = stack[w33];
+
+cout<<"El total es: ";
+cout<<w34;
+cout<<endl;
 }
 //________________
 

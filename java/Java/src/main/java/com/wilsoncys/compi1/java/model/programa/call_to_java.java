@@ -6,6 +6,7 @@ package com.wilsoncys.compi1.java.model.programa;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores; 
+import com.wilsoncys.compi1.java.model.poo.Functionss;
 import com.wilsoncys.compi1.java.model.poo.Method;
 import com.wilsoncys.compi1.java.model.programa.expresiones.AccessC;
 import com.wilsoncys.compi1.java.model.programa.expresiones.NativoC;
@@ -87,8 +88,6 @@ public class call_to_java extends Instruction{
         
         idObject = ((CallJavaC)sym.getInstruction()).getIdClase();
         
-         
-        
                 //set a la referencia (stack[0]) 
         armed+= c.c3d_acces(armed, sym.getDir());
 
@@ -96,6 +95,9 @@ public class call_to_java extends Instruction{
 
         armed+= c.c3d_asignVar("", 0);
        
+        
+        
+        
         String id_Methodo = "java" + idObject + idMethod;
                                             //extrayendo los params
         for (Instruction exps : parametersExp) {
@@ -119,14 +121,14 @@ public class call_to_java extends Instruction{
         
                                     //create al metodo/funcion
         Simbolo symMethod = arbol.getSym(id_Methodo);
-        ((Method)symMethod.getInstruction()).setIdClase(idObject);
-        symMethod.getInstruction().createC3D(arbol, anterior);
-        
         int posIni = 0;
-        
         if(symMethod.getCat().equals(categoria.FUNCTION) ){
+            ((Functionss)symMethod.getInstruction()).setIdClase(idObject);
+            symMethod.getInstruction().createC3D(arbol, anterior);
             posIni = 3;   
         }else if(symMethod.getCat().equals(categoria.METHOD)){
+            ((Method)symMethod.getInstruction()).setIdClase(idObject);
+            symMethod.getInstruction().createC3D(arbol, anterior);
             posIni = 2;   
         }
          
@@ -135,8 +137,6 @@ public class call_to_java extends Instruction{
                 armed += c.c3d_asignVar("", posIni);
                 posIni++;
         }
-        
-        
          
         c.clearPtrTemp();   
                                             //ejecutar el metodo
@@ -144,12 +144,17 @@ public class call_to_java extends Instruction{
         armed+= c.callJava(idObject+"_"+idMethod);
         armed+=c.c3d_moveToStack(false, arbol.attbPrincipal);
         
-         
-
+        //dejar el retorno
+        if(symMethod.getCat().equals(categoria.FUNCTION) ){
+          armed += c.c3d_ptrTemp(arbol.attbPrincipal);
+          armed += c.c3d_accesTemp(armed, 1);
+            
+        }
+        
+        
         return armed;
     }
     
-
     
     
     

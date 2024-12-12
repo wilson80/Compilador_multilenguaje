@@ -62,15 +62,11 @@ public class CiclicaWhileC extends Instruction{
                 if(instructions instanceof transferContinueC){
                     break;
                 } 
-                if(instructions instanceof transferReturnC){
-                    return instructions;
-                } 
+                
                 
                 var value = instructions.interpretar(arbol, newTable);
                 
-                if(value instanceof transferReturnC){
-                    return value;
-                } 
+                
                 
                 if(value instanceof transferContinueC){
                     break;
@@ -111,14 +107,10 @@ public Object doWhile(Arbol arbol, TablaSimbolos tabla){
                     if(instructions instanceof transferContinueC){
                         break;
                     }
-                    if(instructions instanceof transferReturnC){
-                        return instructions;
-                    }
+                    
                     
                     var value = instructions.interpretar(arbol, newTable);
-                    if(value instanceof transferReturnC){
-                        return value;
-                    }
+                   
                     if(value instanceof transferContinueC){
                         break;
                     }

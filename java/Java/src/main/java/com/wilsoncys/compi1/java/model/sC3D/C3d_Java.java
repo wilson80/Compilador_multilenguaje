@@ -96,13 +96,14 @@ public class C3d_Java {
         return  armed;
     }   
 //    t26 = t25 + 1;    
-//    stack[t26] = t22; 
+//    stack[t26] = t22;     
     public String c3d_asignVar(String val, int dir){
         String armed = c3d_newVar() + ASSIG +  val +MAS+dir + SEMIC;
         armed += c3d_stack("w" + (countCreateVar-1)) + ASSIG + varsParams.get(0) + SEMIC+saltoLinea;
         varsParams.removeFirst();
         return  armed;
     }
+    
     public String c3d_asignHeap(String val, int dir){
         String armed = c3d_newVar() + ASSIG +  varsParams.getFirst() +MAS+dir + SEMIC;
         armed += c3d_heap("w" + (countCreateVar-1)) + ASSIG +val  + SEMIC+saltoLinea;
@@ -116,14 +117,13 @@ public class C3d_Java {
         return  armed;
     }
     
-    
     public String c3d_asignAlone(String val){
         String armed = c3d_newVar() + ASSIG +  val+ SEMIC+saltoLinea;
         varsParams.add("w"+(countCreateVar-1));
         return  armed;
     }
     public String c3d_reserveHeap(int stackSize){
-        String armed = c3d_newVar() + ASSIG +  H+ SEMIC;
+        String armed = c3d_newVar() + ASSIG + H + SEMIC;
         armed += H + ASSIG +  "w" + (countCreateVar -1)+MAS +stackSize+ SEMIC+saltoLinea;
         varsParams.add("w"+(countCreateVar-1));
         return  armed;

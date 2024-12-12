@@ -148,7 +148,7 @@ nonterminal Tipo typeC;
 
 nonterminal Includes includes;
 nonterminal String includeJ, includeP;
-nonterminal varsPrintf;
+nonterminal LinkedList<String> varsPrintf;
 // nonterminal LinkedList<Instruction> pascalCode;
 
 precedence left OR;
@@ -299,7 +299,7 @@ declaracionC::= declaracionC:decs decConstC:dec
 | {:RESULT = new LinkedList<>(); :}
 ;
 
-instructionsC::= insC:in instructionsC:ins {: RESULT = ins; RESULT.add(in); :}
+instructionsC::=  instructionsC:ins insC:in {: RESULT = ins; RESULT.add(in); :}
                 | error SEMIC
                 | {: RESULT = new LinkedList<>(); :}
 ;
@@ -314,12 +314,12 @@ typeC::= INT {: RESULT = new Tipo(tipoDato.ENTERO); :}
 
   
 
-printf::= PRINT PAR_OP CADENA PAR_CL SEMIC
-        | PRINT PAR_OP CADENA varsPrintf PAR_CL SEMIC
+printf::= PRINT:a PAR_OP CADENA PAR_CL SEMIC
+        | PRINT:a PAR_OP CADENA:c varsPrintf:ids PAR_CL SEMIC {: RESULT = new PrintsC(c, ids, aleft, aright); :}
 ;
 //scanf   printf("Integer: %d, Character: %c, Float: %.2f", 10, 'B', 2.718);
-varsPrintf::= COLON ID:id {: RESULT = id.toString(); :}
-        | COLON ID varsPrintf
+varsPrintf::= COLON ID:id {: RESULT = new LinkedList<>();  RESULT.add(id);   :}
+        | varsPrintf:ids  COLON ID:id {: RESULT = ids; RESULT.add(id);  :}
 ;
 
 
@@ -329,7 +329,8 @@ scanf::= SCAN PAR_OP MASK_D:s COLON ANDSIMPLE ID PAR_CL SEMIC
         |SCAN PAR_OP MASK_S COLON ANDSIMPLE ID PAR_CL SEMIC
 ;
 
-asignacionC::= ID ASSIGNMENT EXPRESIONCC SEMIC
+asignacionC::= ID:id ASSIGNMENT EXPRESIONCC:exp SEMIC
+        {: RESULT = new AssignmenttC(id, exp, idleft, idright); :}
 ;
 
 
@@ -337,8 +338,8 @@ insC::= PRINT PAR_OP PAR_CL SEMIC
 |CLRSCR PAR_OP  PAR_CL SEMIC
 |GETCH PAR_OP PAR_CL SEMIC
 | scanf
-| asignacionC
-| printf:c {: RESULT =c; :}
+| asignacionC:c {: RESULT = c; :}
+| printf:c {: RESULT = c; :}
 |whileC
 |forC
 |DOC
@@ -474,8 +475,9 @@ callC::= PASCAL DOT ID PAR_OP paramssC PAR_CL SEMIC
 ;
 
 
-callExpC::= PASCAL DOT ID PAR_OP paramssC PAR_CL  
-        | JAVA DOT ID DOT ID PAR_OP paramssC PAR_CL  
+callExpC::= PASCAL DOT ID PAR_OP paramssC PAR_CL   
+        | JAVA DOT ID:id DOT ID:id1 PAR_OP paramssC:p PAR_CL  
+                {: RESULT = new call_to_java(id, id1, p, idleft, idright ); :}
 ;
 
 
@@ -523,7 +525,7 @@ EXPRESIONCC::= MINUS EXPRESIONCC:a             {:   RESULT = new Negacion(a, Ope
 
 
             | GETCH PAR_OP PAR_CL SEMIC    
-            | callExpC
+            | callExpC:c {: RESULT = c; :} 
 ;
 
 

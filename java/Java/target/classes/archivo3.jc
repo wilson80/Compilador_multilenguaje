@@ -24,9 +24,8 @@ public class sumar {
 		println("att1: ", uno);	
 		println("dentro de un void randodom");	
 	}
-	public void getTotal(){
-		total = uno + dos;
-		return this.total;
+	public int getTotal(){
+		return this.uno + this.dos;
 	}
 
 	public void setTotal(int algo){
@@ -34,20 +33,20 @@ public class sumar {
 		println("Ahora el total es: ", this.total);
 	}
 } 
-
+	
 %%PROGRAMA
 #include "JAVA.*"  
 int x = 4;
 int y = 6;
 int z = 9;
-int total = 0;
+int total = 88;
 
 	 JAVA.sumar      call1(x, y, z);
 void main()
-{ 
-	JAVA.call1.unvoid(77);
+{ 	   
+	// JAVA.call1.unvoid(77);
 	total = JAVA.call1.getTotal();
-	printf("el total es %d",);
+	printf("El total es: ", total);
 
 
 	// call1.setTotal(y);

@@ -73,14 +73,9 @@ public class IFC extends Instruction{
                     return instructions;
                 }
                 
-                                if(instructions instanceof transferReturnC){
-                                    return instructions;
-                                }
+                                 
                 var ifSimple = instructions.interpretar(arbol, blockTabla);
-                if(ifSimple instanceof transferReturnC){
-                    return ifSimple;
-                }
-                
+              
                 if(ifSimple instanceof transferContinueC){
                     return ifSimple;
                 }
@@ -102,14 +97,10 @@ public class IFC extends Instruction{
                     if(instructions instanceof transferContinueC){
                         return instructions;
                     }
-                    if(instructions instanceof transferReturnC){
-                        return instructions;
-                    }
+                     
                   
                     var elseResult = instructions.interpretar(arbol, blockTabla);       //execute Ins
-                    if(elseResult instanceof transferReturnC){
-                        return elseResult;
-                    }
+                     
                     if(elseResult instanceof transferContinueC){
                         return instructions;
                     }
@@ -126,9 +117,7 @@ public class IFC extends Instruction{
                     if(resultElif instanceof Errores){
                         return resultElif;
                     }
-                    if(resultElif instanceof transferReturnC){
-                        return resultElif;
-                    }
+                    
                     if(resultElif instanceof transferContinueC){
                         return resultElif;
                     }

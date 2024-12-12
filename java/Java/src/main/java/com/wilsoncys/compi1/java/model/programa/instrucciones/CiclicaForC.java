@@ -74,14 +74,10 @@ public class CiclicaForC extends Instruction {
                     System.out.println("continue1");
                     break;
                 }
-                if (i instanceof transferReturnC) {
-                    return i;
-                }
+          
                 var resIns = i.interpretar(arbol, newTabla2);   //Instrucciones del ciclo
                 
-                if (resIns instanceof transferReturnC) {
-                    return resIns;
-                }
+             
 
                 if (resIns instanceof Errores) {        //identificar el error
                     return resIns;

@@ -7,6 +7,7 @@ package com.wilsoncys.compi1.java.model.instrucciones;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
+import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
@@ -58,15 +59,12 @@ public class transferReturn extends Instruction{
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
         String armed = "";
-        C3d c =  arbol.getC3d();
+        C3d_Java c =  arbol.getJava();
         
         //create exp
         armed+=this.expression.createC3D(arbol, anterior);
-                //preparar en la pos de retorno
-        c.setPtrTemp("ptr");
-        armed+=c.c3d_asignVar(c.varsParams.get(0), arbol.getPosReturn());
-        c.varsParams = new LinkedList<>();
-        c.clearPtrTemp();
+//        
+        armed+=c.c3d_asignVal("", 1);
         
         return armed;
     }

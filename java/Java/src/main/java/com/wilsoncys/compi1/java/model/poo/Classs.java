@@ -176,7 +176,7 @@ import javax.swing.JOptionPane;
             
             if(ins instanceof  Method fun){
                 contador = 0;
-                Simbolo sym = new Simbolo(tipo, fun.id, null, true);
+                Simbolo sym = new Simbolo(fun.tipo, fun.id, null, true);
                 sym.setCat(categoria.METHOD);
                 sym.setDir(contador);
                 sym.setInstruction(ins);
@@ -222,7 +222,7 @@ import javax.swing.JOptionPane;
             }
             if(ins instanceof  Functionss fun){
                 contador = 0;
-                Simbolo sym = new Simbolo(tipo, fun.id, null, true);
+                Simbolo sym = new Simbolo(fun.tipo, fun.id, null, true);
                 sym.setCat(categoria.FUNCTION);
 //                                                sym.setDir(contador);
                 sym.setInstruction(ins); 

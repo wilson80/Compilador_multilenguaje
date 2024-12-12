@@ -14,6 +14,7 @@ import com.wilsoncys.compi1.java.model.poo.Call;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
 import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
+import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;  
@@ -26,41 +27,41 @@ import org.apache.commons.lang3.StringEscapeUtils;
  * @author yoyo
  */
 public class PrintsC extends Instruction {
-    private boolean ln;
-    private  LinkedList<Instruction> expresioness;
-
-    public PrintsC(LinkedList<Instruction> expresion, boolean ln, int linea, int col) {
+    private  LinkedList<String> ids;
+    private String cadena;
+    public PrintsC(String cadena, LinkedList<String> ids, int linea, int col) {
         super(new Tipo(tipoDato.VOID), linea, col);
-        this.ln = ln;
-        this.expresioness = expresion;
+        this.cadena = cadena;
+        this.ids = ids;
     }
-
+    
+    
     @Override
     public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
         String concatenacion  = "";
         
-        for (int i = 0; i <= expresioness.size()-1; i++) {
-            var resultado = expresioness.get(i).interpretar(arbol, tabla);
-            
-            if (resultado instanceof Errores) {
-    //            arbol.Print(resultado.toString());
-                return resultado;
-            }
-            if(resultado  == null ){
-                return new Errores("SEMANTIC", "recibiendo valor Null en Print", line, col);
-            }
-            concatenacion += resultado.toString();
-            
-        }
-        
-//        for (Instruction expr : expresioness) {
-            
+//        for (int i = 0; i <= ids.size()-1; i++) {
+//            var resultado = ids.get(i).interpretar(arbol, tabla);
+//            
+//            if (resultado instanceof Errores) {
+//    //            arbol.Print(resultado.toString());
+//                return resultado;
+//            }
+//            if(resultado  == null ){
+//                return new Errores("SEMANTIC", "recibiendo valor Null en Print", line, col);
+//            }
+//            concatenacion += resultado.toString();
+//            
 //        }
-        
-        
-
-//        arbol.Print(resultado.toString());
-        arbol.Print(StringEscapeUtils.unescapeJava(concatenacion));
+//        
+////        for (Instruction expr : expresioness) {
+//            
+////        }
+//        
+//        
+//
+////        arbol.Print(resultado.toString());
+//        arbol.Print(StringEscapeUtils.unescapeJava(concatenacion));
         return null;
     }
     
@@ -101,35 +102,40 @@ public class PrintsC extends Instruction {
         return null;
     }
         
+   
     
     
-    
-    
-        @Override
+//    printf("la suma de %d mas %d es igual a %d", x, y, total );
+      
+    @Override
     public Object createC3D(Arbol arbol, String anterior) {        
         String armed = "";
-            C3d_Java c = arbol.java;
+        C3d c = arbol.getC3d();
         
-        for (Instruction exp : expresioness) {
-                    //		println(sumar(num1, num2));
-            if(exp instanceof Call){
-                armed+= exp.createC3D(arbol, anterior);
-                armed+=c.c3d_printVar();
-            }else if(exp instanceof Nativo){
-                String val= (String)exp.createC3D(arbol, anterior);
-                armed+=c.c3d_printNativo(val);
-                c.clearVarParams();
-            }else{
-                
-                armed+= exp.createC3D(arbol, anterior);
-                armed+=c.c3d_printVar();
-                c.clearVarParams();
-            }
+        String [] cadenas = cadena.split("%c|%d|%f"); 
+        
+        int contador = 0;
+        for (String vars : ids) {
+            //encontrar el simbolo
+            Simbolo sim = arbol.getSym("PROGRAMA" + vars);
+            //crear el acceso
+            armed += c.c3d_acces(vars, sim.getDir());
+            armed += c.c3d_printNativo(cadenas[contador]);
+            armed += c.c3d_printVar();
+            c.clearVarParams();
+            contador++;
         }   
         
-        if(ln){
+        
+        
+//imprimir las cadenas  
+//        printf(“Valor %d”, var);
+//            ver que hacer para no imprimir el comodin 
+//                        ->>> imfprimir varias variables
+        
+//        if(ln){
             armed+= "cout<<endl;";
-        }
+//        }
         
         return armed;
     }

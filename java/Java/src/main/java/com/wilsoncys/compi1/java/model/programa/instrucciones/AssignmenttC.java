@@ -11,6 +11,7 @@ import com.wilsoncys.compi1.java.model.expresiones.Access;
 import com.wilsoncys.compi1.java.model.expresiones.Input;
 import com.wilsoncys.compi1.java.model.expresiones.Nativo;
 import com.wilsoncys.compi1.java.model.poo.Call;
+import com.wilsoncys.compi1.java.model.programa.call_to_java;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
 import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
@@ -21,6 +22,7 @@ import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import java.lang.annotation.Native;
 import java.util.HashMap;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,29 +43,24 @@ public class AssignmenttC extends Instruction{
         this.whatConstruct = 0;
     }
 
-    public AssignmenttC(boolean isThis, String id, Instruction expression, int linea, int col) {
-        super(new Tipo(tipoDato.VOID), linea, col);
-        this.id = id;
-        this.expr = expression;
-        this.whatConstruct = 1;
-        this.isThis = isThis;
-    }
-    
-    public AssignmenttC(String id,  String idField, String elseField, Instruction expression, int linea, int col) {
-        super(new Tipo(tipoDato.VOID), linea, col);
-        this.id = id;
-        this.expr = expression;
-        this.idField = idField;
-        this.elseField = elseField;
-        this.whatConstruct = 2;
-    }
+//    public AssignmenttC(boolean isThis, String id, Instruction expression, int linea, int col) {
+//        super(new Tipo(tipoDato.VOID), linea, col);
+//        this.id = id;
+//        this.expr = expression;
+//        this.whatConstruct = 1;
+//        this.isThis = isThis;
+//    }
+//    
+//    public AssignmenttC(String id,  String idField, String elseField, Instruction expression, int linea, int col) {
+//        super(new Tipo(tipoDato.VOID), linea, col);
+//        this.id = id;
+//        this.expr = expression;
+//        this.idField = idField;
+//        this.elseField = elseField;
+//        this.whatConstruct = 2;
+//    }
 
-
-    
-    
-
-//    num1 = 5;
-    
+  
     @Override
     public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
         if(idField!=null){
@@ -111,6 +108,7 @@ public class AssignmenttC extends Instruction{
 //        }
 //    }
 
+    
         public Object structAssignment(Arbol arbol, TablaSimbolos tabla) {
             Simbolo symStruc = tabla.getSsymbol(id);        //buscar el simbolo
             if(symStruc ==  null){
@@ -196,14 +194,11 @@ public class AssignmenttC extends Instruction{
         
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
-        
-        
         String armed = "";
-        C3d_Java c =  arbol.getJava();
-        int dir = arbol.getSym(id).getDir();            //pdt
+        C3d c =  arbol.getC3d();
+        int dir = arbol.getSym("PROGRAMA" + id).getDir();            //pdt
         String varr = "";
-  
-        
+   
          if(expr instanceof Input inp){
                 inp.createC3D(arbol, anterior);
                 armed+= c.c3d_Input();          //new var  
@@ -211,39 +206,33 @@ public class AssignmenttC extends Instruction{
                 c.varsParams = new LinkedList<>();  //limpiar despues de agregar
              
          }else{
-            if(this.expr instanceof Nativo){    //declaracion con valor vativo
+
+            if(this.expr instanceof Nativo){    //declaracion con valor nativo
 
               this.expr.createC3D(arbol, anterior);
               armed = c.c3d_asignVal("", dir);
               
-            }else if(this.expr instanceof Call call){                          //declaracion y asignacion
-                    //pndte
-                                                    //create a la llamada
-                armed+= call.createC3D(arbol, anterior);
-                                                //asignacion
- 
-                c.setPtrTemp("ptr");
-                armed+=c.c3d_asignVar(id, dir);
+            }else if(this.expr instanceof call_to_java call){                          //declaracion y asignacion
+                    //create a la llamada
+                armed += call.createC3D(arbol, anterior);
+                
+                                                //realizar la asignacion
                 c.clearPtrTemp();
+                
+                armed +=c.c3d_asignVal("", dir);
 
+                
             }else if(expr instanceof Access){
-               armed+= expr.createC3D(arbol, anterior);
-              varr = c.varsParams.getFirst();
-              c.varsParams.removeFirst();
+               armed += expr.createC3D(arbol, anterior);
+               varr = c.varsParams.getFirst();
+               c.varsParams.removeFirst();
             }       
             
          }
          
-                                                //instance dir
-         armed+= c.c3d_acces("", 0);            
-                                                //insert en heap
-         armed+= c.c3d_asignHeap(varr, dir);
+  
          
-        
-//        //assig 
-//    tr6 = ptr + dir;
-//    stack[tr6] = var;
-        
+          
         
             armed +="\n";
         return armed;

@@ -14,7 +14,6 @@ com/wilsoncys/compi1/java/model/programa/ClasesJava.class
 com/wilsoncys/compi1/java/model/programa/NewClass.class
 com/wilsoncys/compi1/java/model/analisis/parser$CUP$parser$actions.class
 com/wilsoncys/compi1/java/model/programa/instrucciones/CiclicaForC.class
-com/wilsoncys/compi1/java/model/programa/instrucciones/transferReturnC.class
 com/wilsoncys/compi1/java/vistas/VistaGeneral$10.class
 com/wilsoncys/compi1/java/model/programa/Aritmeticas/RaisedC$1.class
 com/wilsoncys/compi1/java/model/sC3D/C3d.class
@@ -93,8 +92,8 @@ com/wilsoncys/compi1/java/model/instrucciones/AssignmentVectores.class
 com/wilsoncys/compi1/java/model/programa/instrucciones/CaseMatchC.class
 com/wilsoncys/compi1/java/model/expresiones/LogicalOperations.class
 com/wilsoncys/compi1/java/model/programa/ReferenceC.class
-com/wilsoncys/compi1/java/vistas/VistaGeneral$ClosableTabComponent.class
 com/wilsoncys/compi1/java/vistas/colorInfo.class
+com/wilsoncys/compi1/java/vistas/VistaGeneral$ClosableTabComponent.class
 com/wilsoncys/compi1/java/model/poo/Classs.class
 com/wilsoncys/compi1/java/model/simbolo/TablaTipos.class
 com/wilsoncys/compi1/java/model/instrucciones/IncreaseDecrease$1.class

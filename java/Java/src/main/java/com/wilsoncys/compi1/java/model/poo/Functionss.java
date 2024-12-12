@@ -9,6 +9,7 @@ import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.instrucciones.Statement;
 import com.wilsoncys.compi1.java.model.instrucciones.transferReturn;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
+import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
@@ -24,6 +25,8 @@ import java.util.List;
  */
 public class Functionss extends Instruction{
     public String id;
+    public String idClase = "";
+
     public LinkedList<HashMap> parameters;
     public LinkedList<Instruction> instrucciones;
     
@@ -33,7 +36,7 @@ public class Functionss extends Instruction{
 
 
     public Functionss(String identificator, LinkedList<HashMap> parameters, LinkedList<Instruction> instrucciones, Tipo tipo, int linea, int col) {
-        super(tipo, linea, col);
+        super(tipo, linea, col);    
         this.id = identificator;
         this.parameters = parameters;
         this.instrucciones = instrucciones;
@@ -108,7 +111,12 @@ public class Functionss extends Instruction{
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
         String armed = "";
-                C3d c = new C3d();
+        C3d_Java c = arbol.getJava();
+        
+        arbol.setCurrentAmbit(this.getAmbito());
+//                 JOptionPane.showMessageDialog(null, "?>>>>>> " + this.get );
+
+        
         String bodyMet = "";
         for (Instruction ins : instrucciones) {
             if(ins ==null){
@@ -116,12 +124,15 @@ public class Functionss extends Instruction{
             }
             bodyMet += (String)ins.createC3D(arbol, anterior);
         }
-        armed+=c.c3d_metodo(id, bodyMet);
+        
+        armed += c.c3d_metodo("java_" + idClase +"_"+ id, bodyMet);
             
         arbol.Print(armed);
         
         return "";
     }
+    
+    
 
     public void setCantParams(int cantParams) {
         this.cantParams = cantParams;
@@ -137,6 +148,14 @@ public class Functionss extends Instruction{
 
     public List<String> getAmbito() {
         return ambito;
+    }
+
+    public String getIdClase() {
+        return idClase;
+    }
+
+    public void setIdClase(String idClase) {
+        this.idClase = idClase;
     }
     
         
