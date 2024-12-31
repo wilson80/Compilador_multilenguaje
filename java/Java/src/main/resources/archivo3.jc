@@ -1,56 +1,88 @@
 %%PASCAL
- 
 %%JAVA
 public class sumar {
-	int uno;
-	int dos;
-	int tres;
-	int total;
+  
+	Simple objeto1;
+	// Simple objeto2;
+	int atri; 
+	int uno; 
+	public sumar() {
+		atri = 6;
+		uno = 3;
+		info();
+		// objeto1 = new Simple(8, 7); 
+	} 
+	public void info(){
+		 int varl = 12;
+		 int varl2 = 4;
+		 int total = adicion(atri, varl, uno, varl2 );
+		 println("sumar: ", total);  
+		
+		 println("restar: ", restar(varl, uno) ); 
+println("total: ", total);
+		 println("multi: ", multiplicar(varl, uno) ); 
+		 println("div: ", div(varl, uno) ); 
 
-	public sumar(int uno, int dos, int tres) {
-		println("Constrrr sumar");
-		 this.uno = uno;
-		 this.dos = dos;
-		 this.tres = tres;
-		 println("El total es: ", this.uno);
-		 println("Constru:finnnnn" );
-		 
-	}
-		//otro constructor 
-	public void unvoid(int aa){
-		// int varlocal = 0;
-		this.uno = aa;
-		println("dentro de un void randodom");	
-		println("att1: ", uno);	
-		println("dentro de un void randodom");	
-	}
-	public int getTotal(){
-		return this.uno + this.dos;
+ 
+
+
+
+		println("varL: ", varl); 	
+		println("varl2: ", varl2);	
+		println("att atri: ", atri);	
+		println("att uno: ", this.uno);	
+
+
+		println("asdfasdfasdf");
+			
+			
+		// int uno = objeto1.getCui();
+		// int dos = objeto2.getCui();
 	}
 
-	public void setTotal(int algo){
-		this.total = algo;
-		println("Ahora el total es: ", this.total);
-	}
-} 
+	public int calc(int a, int b){
+		println("dentro de calc: ", a); 
+		println("dentro de calc: ", b); 
+		return getAlgo();
+	}	
 	
+	public int restar(int a, int b){
+		return a-b;
+	}
+	public int adicion(int a, int b, int c, int d){
+		// println("dentro de add a: ", a); 
+		// println("dentro de add b: ", b); 
+		// println("dentro de add c: ", c); 
+		// println("dentro de add d: ", d); 
+		return a+b+c + d;
+	}
+	public int multiplicar(int a, int b){
+		return a*b;
+	}
+	public int div(int a, int b){
+		return a/b;
+	}
+
+} 
+ //seguir probando
+
+ 
+
+ 
+
+
 %%PROGRAMA
 #include "JAVA.*"  
-int x = 4;
+int x = 12;
 int y = 6;
 int z = 9;
 int total = 88;
 
-	 JAVA.sumar      call1(x, y, z);
+	JAVA.sumar call1();
+
+ 
 void main()
-{ 	   
-	// JAVA.call1.unvoid(77);
-	total = JAVA.call1.getTotal();
-	printf("El total es: ", total);
-
-
-	// call1.setTotal(y);
-	// call1.getTotal();
+{ 	 
+	 
 	
 }
-

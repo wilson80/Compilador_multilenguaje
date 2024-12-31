@@ -49,7 +49,7 @@ public class ReferenceC extends Instruction{
 
 //        int contador = arbol.attbPrincipal;
         for (Instruction call : calls ) {
-             if(call instanceof CallJavaC cl){
+             if(call instanceof InstanceJava cl){
                  cl.setIdClase(this.id);
                  Tipo tipo = new Tipo(tipoDato.OBJECT);
                  tipo.setIdObjeto(this.id);
@@ -80,7 +80,7 @@ public class ReferenceC extends Instruction{
         String armed = "";
         
         for (Instruction call : calls) {
-            if(call instanceof CallJavaC cll){
+            if(call instanceof InstanceJava cll){
                 cll.setIdClase(this.id);
                 armed += cll.createC3D(arbol, anterior);
             }

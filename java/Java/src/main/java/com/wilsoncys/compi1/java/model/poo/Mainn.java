@@ -31,7 +31,7 @@ public class Mainn extends Instruction{
     public LinkedList<Instruction> instrucciones;
     private int cantParams = 0;
     private List<String>  ambito;   //idclase/metodo/params
-
+    private boolean isCreate = false;
     
     public Mainn(String id, LinkedList<HashMap> parametros, LinkedList<Instruction> instrucciones, int linea, int col) {
         super(new Tipo(tipoDato.VOID), linea, col);
@@ -121,7 +121,7 @@ public class Mainn extends Instruction{
         C3d_Java c = arbol.getJava();
 //        arbol.setPosReturn(1);
          
-
+//         JOptionPane.showMessageDialog(null, "tamanoooo:  " +arbol.attbClassJava);
 
         
         for (Instruction ins : instrucciones) {
@@ -134,7 +134,6 @@ public class Mainn extends Instruction{
         return armed;
     }
 
-    
     
     
     
@@ -173,6 +172,17 @@ public class Mainn extends Instruction{
         return ambi; 
                 
     }
+
+    
+    public boolean isIsCreate() {
+        return isCreate;
+    }
+
+    public void setIsCreate(boolean isCreate) {
+        this.isCreate = isCreate;
+    }
+    
+    
     
     
 }

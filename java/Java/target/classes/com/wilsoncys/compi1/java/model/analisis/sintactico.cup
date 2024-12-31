@@ -120,7 +120,8 @@ nonterminal LinkedList<HashMap>  parametersFuncts;
 nonterminal LinkedList<Instruction>  callsParameters;
 nonterminal Instruction call, returnn, callEXP;
 nonterminal modPriv;
-nonterminal Instruction gIns, declaracion, call2;
+nonterminal Call call2;
+nonterminal Instruction gIns, declaracion;
 nonterminal Instruction callEXP2, assig_to_acces;
 nonterminal LinkedList<Instruction> gInstructionss, insClass, methodIns;
 nonterminal LinkedList<Instruction> paramss, claass;
@@ -361,7 +362,7 @@ inSwC::= PRINT PAR_OP PAR_CL SEMIC
 |forC
 |DOC
 |ifC
-|switchC
+|switchC 
 |callC
 |error SEMIC
 ;
@@ -383,13 +384,13 @@ decObjetos::= JAVA DOT ID:cl instancesC:ins
 
 instancesC::= ID:id PAR_OP paramssC:p PAR_CL COLON  instancesC:ins
         {: RESULT = ins;
-        CallJavaC cl = new CallJavaC(id, p, idleft, idright); 
+        InstanceJava cl = new InstanceJava(id, p, idleft, idright); 
         RESULT.add(cl);
 
         :}
         | ID:id PAR_OP paramssC:p PAR_CL SEMIC
         {: RESULT = new LinkedList<>();
-          CallJavaC cl = new CallJavaC(id, p, idleft, idright); 
+          InstanceJava cl = new InstanceJava(id, p, idleft, idright); 
           RESULT.add(cl);
         :}
 ;
@@ -673,7 +674,7 @@ EXPRESION::= MINUS EXPRESION:a             {:   RESULT = new Negacion(a, Operado
             | ID:a BRACK_L EXPRESION:indx BRACK_R      {:   RESULT = new AccesVector(a, indx, aleft, aright);   :}
             | ID:a BRACK_L EXPRESION:indx1 BRACK_R BRACK_L  EXPRESION:indx2 BRACK_R      {:   RESULT = new AccesVector(a, indx1, indx2, aleft, aright);   :}
             | callEXP:a {: RESULT = a; :}    
-            | NEW ID:t  PAR_OP callsParameters:p PAR_CL 
+            | NEW ID:t  PAR_OP callsParameters:p PAR_CL     
                 {:RESULT = new Reference(t, p, tleft, tright); :}
             | NEW ID:t  PAR_OP PAR_CL  
                 {:RESULT = new Reference(t, new LinkedList<>(), tleft, tright); :}
@@ -738,14 +739,17 @@ callEXP2::=
 ;
 
 
-call::= ID DOT call2 
-        | ID:a PAR_OP paramss PAR_CL DOT call2
+call::= ID:id DOT call2:call1
+        {: RESULT = new Call(id, call1, idleft, idright); :}
+        | ID:a PAR_OP paramss:p PAR_CL DOT call2
         | ID:a PAR_OP paramss:p PAR_CL SEMIC 
         {:RESULT = new Call(a, p, aleft, aright); :}
-;
-call2::= ID PAR_OP paramss PAR_CL DOT call
+;       
+call2::= ID PAR_OP paramss:p PAR_CL DOT call
         |  ID DOT call
-        | ID:a PAR_OP paramss PAR_CL SEMIC
+        | ID:a PAR_OP paramss:p PAR_CL SEMIC
+        {:RESULT = new Call(a, p, aleft, aright); :}
+
 ;
  
  

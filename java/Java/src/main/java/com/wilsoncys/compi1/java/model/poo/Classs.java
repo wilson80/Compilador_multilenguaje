@@ -29,20 +29,15 @@ import javax.swing.JOptionPane;
   public class Classs extends Instruction{
     public  String id;
     private  String id_constructor;
-    String idPadre;
-    int cantAttb = 0;
+    private String idPadre;
+    private int cantAttb = 0;
     private List<String>  ambito;   //idclase/metodo/params
 
-    
-    
     public LinkedList<Instruction> instrucciones;
     
     private boolean main;
-
-
     
    // private TablaSimbolos tablaGlobal;              //contiene las variables declaradas globalmente
-   
     
     public Classs(String id, LinkedList<Instruction> instrucciones, int linea, int col) {
         super(new Tipo(tipoDato.VOID), linea, col);
@@ -57,10 +52,7 @@ import javax.swing.JOptionPane;
         
         
     }
- 
-    
-    
-    
+  
     @Override
     public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
         
@@ -86,16 +78,13 @@ import javax.swing.JOptionPane;
         return null;
     }
 
-    
-    
- 
-        
+     
     public Object createSym(Arbol arbol, TablaSimbolos tabla) {
         this.ambito = new LinkedList<>();
         ambito.add("java");
         ambito.add(this.id);
         
-        //attb 
+        //attb
         int contador = 0;
         for (Instruction ins : instrucciones) {
             if(ins ==null){
@@ -103,13 +92,13 @@ import javax.swing.JOptionPane;
             }
             if(ins instanceof Statement st){
                 //ambito
-                Simbolo sym = new Simbolo(tipo, st.id, tabla, false);
+                Simbolo sym = new Simbolo(st.tipo, st.id, tabla, false);
                 sym.setCat(categoria.ATRIBUTO);
                 sym.setDir(contador);
                 sym.setInstruction(ins);
                 sym.armarAmbito(this.getAmbito_asID());
                 sym.armarAmbito(st.id);
-                                        st.setAmbito(sym.getAmbito());//ambito a la instruccion
+                st.setAmbito(sym.getAmbito());//ambito a la instruccion
                 if(!(tabla.addSsymbolPre(sym))){
                     return new Errores("SEMANTIC", "El simbolo ya existe: " + st.id , st.line, st.col);
                 }
@@ -118,7 +107,8 @@ import javax.swing.JOptionPane;
                 
             }
         }
-        arbol.setSizeHeap(contador); 
+        
+        this.cantAttb = contador; 
         contador = 0;
         
         //Main
@@ -129,7 +119,7 @@ import javax.swing.JOptionPane;
             
             if(ins instanceof  Mainn mainn){
                 contador = 2;
-                Simbolo sym = new Simbolo(tipo, mainn.id, tabla, false);
+                Simbolo sym = new Simbolo(mainn.tipo, mainn.id, tabla, false);
                 sym.setCat(categoria.CONSTRUCTOR);
                 sym.setDir(contador);
                 sym.setInstruction(ins);
@@ -150,7 +140,7 @@ import javax.swing.JOptionPane;
                 mainn.setAmbito(sym.getAmbito());
                 for (HashMap param : mainn.parameters) {          //syms de params
                     String idparam = (String)param.get("id");
-                    Simbolo symPar = new Simbolo(mainn.tipo, idparam, null, false);
+                    Simbolo symPar = new Simbolo((Tipo)param.get("tipo"), idparam, null, false);
                     symPar.setCat(categoria.PARAM);
                     symPar.setDir(contador);
                     symPar.setAmbito(mainn.getAmbito());
@@ -198,7 +188,7 @@ import javax.swing.JOptionPane;
                 contador=2;       //add dir(ref,retorno,dir_retorno)
                 for (HashMap param : fun.parameters) {          //syms de params
                     String idparam = (String)param.get("id");
-                    Simbolo symPar = new Simbolo(fun.tipo, idparam, null, true);
+                    Simbolo symPar = new Simbolo((Tipo)param.get("tipo"), idparam, null, true);
                     symPar.setCat(categoria.PARAM);
                     symPar.setDir(contador);
                     symPar.setAmbito(fun.getAmbito());
@@ -243,7 +233,7 @@ import javax.swing.JOptionPane;
                 contador=3;     //add dir(ref,retorno,dir_retorno)
                 for (HashMap param : fun.parameters) {          //syms de params
                     String idparam = (String)param.get("id");
-                    Simbolo symPar = new Simbolo(fun.tipo, idparam, null, true);
+                    Simbolo symPar = new Simbolo((Tipo)param.get("tipo"), idparam, null, true);
                     symPar.setCat(categoria.PARAM);
                     symPar.setDir(contador);
                     symPar.setAmbito(fun.getAmbito());
@@ -274,6 +264,7 @@ import javax.swing.JOptionPane;
         String armed = ""; 
         C3d_Java c = arbol.getJava(); 
         
+        arbol.setSizeHeap(this.cantAttb);
         
         //reservar el espacio en el  heap
         armed+= c.c3d_reserveHeap(arbol.getSizeHeap());
@@ -297,8 +288,6 @@ import javax.swing.JOptionPane;
                 contador++;
                 if(mn.id.equals(this.id)){
                     //identificar el constructor
-//                    JOptionPane.showMessageDialog(null, "ambito_mn:" + mn.getAmbito_asID());
-//                    JOptionPane.showMessageDialog(null, "idconss:" + id_constructor);
                     if(this.id_constructor.equals(mn.getAmbito_asID())){
                         mainEcontrado = mn;
                     }
@@ -325,7 +314,12 @@ import javax.swing.JOptionPane;
         
         
         armed = c.c3d_metodo("java_"+id + "_"+ id, armed);
-        arbol.Print(armed);
+        
+        
+        if(!mainEcontrado.isIsCreate()){
+            arbol.Print(armed);
+            mainEcontrado.setIsCreate(true);
+        }
         return "";
     }
 
@@ -380,7 +374,16 @@ import javax.swing.JOptionPane;
     public void setId_constructor(String id_constructor) {
         this.id_constructor = id_constructor;
     }
- 
+
+    public void setCantAttb(int cantAttb) {
+        this.cantAttb = cantAttb;
+    }
+
+    public int getCantAttb() {
+        return cantAttb;
+    }
+    
+     
     
     
     

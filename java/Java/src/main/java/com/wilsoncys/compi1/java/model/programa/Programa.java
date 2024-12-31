@@ -61,6 +61,18 @@ public class Programa extends Instruction{
          ClasesJava clasesJ = arbol.getClasesJava();
          if(includes.isJavaTodo()){
              for (Instruction clss : clasesJ.getListaClasesJava()) {
+                 Simbolo sym = new Simbolo(tipo, "java"  + ((Classs)clss).id, "", true);
+                 sym.armarAmbito("java");
+                 sym.armarAmbito(((Classs)clss).id);
+                 
+                 sym.setInstruction(clss);
+                 if(!tabla.addSsymbolPre(sym)){
+                     JOptionPane.showMessageDialog(null, "noooo crearndo SYMMM: java"+ ((Classs)clss).id);
+                 } 
+                 
+                 
+                 
+                 
                   var algo = clss.createSym(arbol, tabla);
                   if(algo instanceof  Errores){
                       return algo;
@@ -220,18 +232,18 @@ public class Programa extends Instruction{
            } 
        }
         
-       
+       //problema que no encuentro el sim
        
 
        
-        for (Instruction clss : clasesJ.getListaClasesJava()) {
-                if(clss instanceof Classs cl){
-//                    ArmedJavas+=  "\n\n\n" + cl.createC3D(arbol, anterior);
-                    cl.createC3D(arbol, anterior);
-//                    arbol.Print(ArmedJavas);
-                }
-        }
-       
+//        for (Instruction clss : clasesJ.getListaClasesJava()) {
+//                if(clss instanceof Classs cl){
+////                    ArmedJavas+=  "\n\n\n" + cl.createC3D(arbol, anterior);
+//                    cl.createC3D(arbol, anterior);
+////                    arbol.Print(ArmedJavas);
+//                }
+//        }
+        
                //instrucciones del programa principal
        ArmedPrincipal +=  this.main.createC3D(arbol, anterior);  
        

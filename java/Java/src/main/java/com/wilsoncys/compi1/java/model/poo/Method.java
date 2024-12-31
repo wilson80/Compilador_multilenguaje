@@ -30,7 +30,7 @@ public class Method extends Instruction{
     public String idClase = "";
     public LinkedList<HashMap> parameters;
     public LinkedList<Instruction> instrucciones;
-    
+    private boolean isCreate = false;
     private int cantParams = 0;
     private List<String>  ambito;   //idclase/metodo/params
     private int cantSyms = 0;
@@ -100,14 +100,17 @@ public class Method extends Instruction{
         //retorno
         //dir dir ret
         //desde la clase se le hace set a la cantidad de params
+                cantParams++;       //pte analisis 
+
         for (Instruction ins : instrucciones) {
             if(ins instanceof Statement st){
                 //ambito
-                Simbolo sym = new Simbolo(tipo, st.id, tabla, true);
+                Simbolo sym = new Simbolo(st.tipo, st.id, tabla, true);
                 sym.setCat(categoria.VARL);
                 sym.setDir(cantParams);
                 sym.setInstruction(ins);
                 sym.setAmbito(ambito);
+                sym.armarAmbito(st.id);
                 tabla.addSsymbolPre(sym);
                 cantParams++;
             }
@@ -125,9 +128,8 @@ public class Method extends Instruction{
         String armed = "";
         C3d_Java c = arbol.getJava();
         
-        arbol.setCurrentAmbit(this.getAmbito());
-//                 JOptionPane.showMessageDialog(null, "?>>>>>> " + this.get );
 
+        arbol.setCurrentAmbit(this.getAmbito());
         
         String bodyMet = "";
         for (Instruction ins : instrucciones) {
@@ -135,11 +137,16 @@ public class Method extends Instruction{
                 continue;
             }
             bodyMet += (String)ins.createC3D(arbol, anterior);
+            arbol.setCurrentAmbit(this.getAmbito());
+
         }
         
         armed += c.c3d_metodo("java_" + idClase +"_"+ id, bodyMet);
             
-        arbol.Print(armed);
+        if(!isCreate){
+            arbol.Print(armed);
+            this.isCreate = true;
+        }
         
         return "";
     }

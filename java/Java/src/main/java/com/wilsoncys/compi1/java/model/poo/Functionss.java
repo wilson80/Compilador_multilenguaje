@@ -33,6 +33,7 @@ public class Functionss extends Instruction{
     private List<String>  ambito;   //idclase/metodo/params
     private int cantParams = 0;
     private int cantSyms = 0;
+    private boolean isCreate = false;
 
 
     public Functionss(String identificator, LinkedList<HashMap> parameters, LinkedList<Instruction> instrucciones, Tipo tipo, int linea, int col) {
@@ -89,12 +90,13 @@ public class Functionss extends Instruction{
         //retorno
         //dir dir ret
         //desde la clase se le hace set a la cantidad de params
-        cantParams++;       //pte analisis
+        cantParams++;       //pte analisis 
+//                                (creo que es por la posicion de retorno o algo asi no me acuerdo)
 
         for (Instruction ins : instrucciones) {
             if(ins instanceof Statement st){
                 //ambito
-                Simbolo sym = new Simbolo(tipo, st.id, tabla, true);
+                Simbolo sym = new Simbolo(st.tipo, st.id, tabla, true);
                 sym.setCat(categoria.VARL);
                 sym.setDir(cantParams);
                 sym.setInstruction(ins);
@@ -114,7 +116,6 @@ public class Functionss extends Instruction{
         C3d_Java c = arbol.getJava();
         
         arbol.setCurrentAmbit(this.getAmbito());
-//                 JOptionPane.showMessageDialog(null, "?>>>>>> " + this.get );
 
         
         String bodyMet = "";
@@ -123,11 +124,15 @@ public class Functionss extends Instruction{
                 continue;
             }
             bodyMet += (String)ins.createC3D(arbol, anterior);
+            arbol.setCurrentAmbit(this.getAmbito());
         }
         
         armed += c.c3d_metodo("java_" + idClase +"_"+ id, bodyMet);
             
-        arbol.Print(armed);
+        if(!isCreate){
+            arbol.Print(armed);       
+            isCreate = true;
+        }
         
         return "";
     }

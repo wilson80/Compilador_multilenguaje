@@ -140,50 +140,53 @@ public class Access extends Instruction{
         String armed = "";
         C3d_Java c =  arbol.getJava();
         Simbolo sym = null;
-        
         if(this.isThis){
             String armedId = arbol.getCurrentAmbit().get(0);
             armedId += arbol.getCurrentAmbit().get(1) + id;
             sym = arbol.getSym(armedId);
+//            this.tipo = sym.getTipo();
 
         }else{      // si no se usa this.
+
             String armedId = "";
             armedId= arbol.getAmbito_asID() + id;
-
+      
             sym = arbol.getSym(armedId);
-
+//            this.tipo = sym.getTipo();
+            
             if(sym==null){      //si no se encuentra en el ambito local buscar en el ambito global
                 armedId = arbol.getCurrentAmbit().get(0);
                 armedId += arbol.getCurrentAmbit().get(1) + id;
                 sym = arbol.getSym(armedId);
+                
                 if(sym == null){        //revisar esto
                     return new Errores(id, "no se ha encontrado el simboloooooooooooooo", line, col);
+                }else{
+//                    this.tipo = sym.getTipo();
                 }
             }
 
         }
-
-
+ 
+ 
+        
         int dir = sym.getDir();
-        
-        
 
         if(sym.getCat()==categoria.PARAM){  
-
             armed+= c.c3d_accesParam(id, dir);
-
         }else if(sym.getCat()==categoria.ATRIBUTO){ 
                 armed+= c.c3d_acces("", 0);
-                
                 armed+= c.c3d_accesAttVarl("", dir);
                 
-                   
-              
         }else if(sym.getCat()==categoria.VARL){
-            //buscar en el heap
-
-//            solo con este amibto
+            armed+= c.c3d_acces("", sym.getDir());
+            
         }
+
+
+        if(sym!=null){
+            this.tipo = sym.getTipo();
+        } 
                  
         return armed;
     }

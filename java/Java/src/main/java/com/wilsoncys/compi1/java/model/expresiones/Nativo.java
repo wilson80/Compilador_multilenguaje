@@ -53,6 +53,7 @@ public class Nativo extends Instruction{
     public Object createC3D(Arbol arbol, String anterior) {
         arbol.java.varsParams.add(valor.toString());
         return valor.toString();
+//        return "";
     }
     
     

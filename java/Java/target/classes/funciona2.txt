@@ -4,7 +4,7 @@
 public class sumar {
 	public int num1;
 	public int num2;
-               public int total;
+    public int total;
 public sumar(int uno, int dos) {
 		println("Constrrr sumar");
 		 this.num1 = uno;

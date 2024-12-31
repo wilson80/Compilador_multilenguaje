@@ -86,7 +86,7 @@ public class call_to_java extends Instruction{
             return new Errores("SEMANTIC", "id no definido: " + idMethod, line, col);
         }
         
-        idObject = ((CallJavaC)sym.getInstruction()).getIdClase();
+        idObject = ((InstanceJava)sym.getInstruction()).getIdClase();
         
                 //set a la referencia (stack[0]) 
         armed+= c.c3d_acces(armed, sym.getDir());
@@ -94,7 +94,7 @@ public class call_to_java extends Instruction{
         armed+=c.c3d_ptrTemp(arbol.attbPrincipal);
 
         armed+= c.c3d_asignVar("", 0);
-       
+        
         
         
         

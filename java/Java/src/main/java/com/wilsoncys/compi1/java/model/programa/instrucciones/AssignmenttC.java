@@ -230,10 +230,7 @@ public class AssignmenttC extends Instruction{
             
          }
          
-  
          
-          
-        
             armed +="\n";
         return armed;
     }

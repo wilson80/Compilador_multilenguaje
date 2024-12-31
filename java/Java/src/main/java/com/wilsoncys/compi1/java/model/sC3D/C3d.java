@@ -147,7 +147,7 @@ public class C3d {
         String arm = "";
             arm+="\n";
         ptrTemp = "";
-        ptrTemp += "w" + contador;
+        ptrTemp += "w" + contador; 
             arm = c3d_newVar() + ASSIG  + PTR + MAS +size + SEMIC;
             arm+="\n";
         return arm; 

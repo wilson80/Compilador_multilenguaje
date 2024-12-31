@@ -73,13 +73,15 @@ public class C3d_Java {
         return  armed;
     }
     
-    public String c3d_acces(String val, int dir){
+     public String c3d_acces(String val, int dir){
         String armed = c3d_newVar() + ASSIG + PTR +MAS+dir + SEMIC;
         armed += c3d_newVar() + ASSIG + c3d_stack("w" + (countCreateVar-2))  + SEMIC +saltoLinea;
-        varsParams.add("w" + (countCreateVar-1));
+//        varsParams.add("w" + (countCreateVar-1));
+        varsParams.addFirst("w" + (countCreateVar-1));
         return  armed;
     }
- 
+    
+    
     public String c3d_accesTemp(String val, int dir){
                                                     //    t28 = t27 + 0;
                                                     //    t29 = stack[t28];
@@ -104,9 +106,16 @@ public class C3d_Java {
         return  armed;
     }
     
+    public String c3d_asignTemp(String val, int dir){
+        String armed = c3d_newVar() + ASSIG +  ptrTemp +MAS+dir + SEMIC;
+        armed += c3d_stack("w" + (countCreateVar-1)) + ASSIG + varsParams.get(0) + SEMIC+saltoLinea;
+        varsParams.removeFirst();
+        return  armed;
+    }
+    
     public String c3d_asignHeap(String val, int dir){
         String armed = c3d_newVar() + ASSIG +  varsParams.getFirst() +MAS+dir + SEMIC;
-        armed += c3d_heap("w" + (countCreateVar-1)) + ASSIG +val  + SEMIC+saltoLinea;
+        armed += c3d_heap("w" + (countCreateVar-1)) + ASSIG + val + SEMIC+saltoLinea;
         varsParams.removeFirst();
         return  armed;
     }
@@ -221,7 +230,11 @@ public class C3d_Java {
         varsParams.add("w"+(countCreateVar-1));
         return  armed;
     }
-     
+    
+    public String callJava(String id){
+        return  "java_" + id + "()" +  SEMIC;
+    }
+    
     
     
     

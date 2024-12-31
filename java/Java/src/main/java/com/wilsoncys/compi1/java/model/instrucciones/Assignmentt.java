@@ -10,12 +10,14 @@ import com.wilsoncys.compi1.java.model.expresiones.Access;
 import com.wilsoncys.compi1.java.model.expresiones.Input;
 import com.wilsoncys.compi1.java.model.expresiones.Nativo;
 import com.wilsoncys.compi1.java.model.poo.Call;
+import com.wilsoncys.compi1.java.model.poo.Reference;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
 import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
+import com.wilsoncys.compi1.java.model.simbolo.categoria;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import java.lang.annotation.Native;
 import java.util.HashMap;
@@ -58,12 +60,11 @@ public class Assignmentt extends Instruction{
         this.elseField = elseField;
         this.whatConstruct = 2;
     }
-
-
     
     
 
 //    num1 = 5;
+
     
     @Override
     public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
@@ -113,93 +114,22 @@ public class Assignmentt extends Instruction{
 //    }
 
         public Object structAssignment(Arbol arbol, TablaSimbolos tabla) {
-            Simbolo symStruc = tabla.getSsymbol(id);        //buscar el simbolo
-            if(symStruc ==  null){
-                mensErr = "No se encontro la variable con ID: " + id+ " ";
-                return new Errores("SEMANTIC",mensErr, line, col);
-            }
-            if(symStruc.getTipoStruct().isEmpty()){         //verificar si es un struct 
-                mensErr = "El struct: " + id+ " No existe ";
-                return new Errores("SEMANTIC",mensErr, line, col);
-            }
-            
-            
-            HashMap hassym =(HashMap)symStruc.getValor();
-            if(elseField!=null){ //id.id.id     id1(identifi).p(persona).nombre
-                HashMap elseMap = (HashMap)hassym.get(idField);
-                Simbolo sym3 = (Simbolo)elseMap.get(elseField);
-                //interpretar la exp
-                    var valueExp = this.expr.interpretar(arbol, tabla);
-                    if(valueExp instanceof  Errores){
-                        return valueExp;
-                    }
-                    //validar los tipos
-                    if(symStruc.isConst()){ // es un error si es constante ya no se le puede asignar un nuevo valor
-                        return  new Errores("SEMANTIC", "Struct instanciado como const (Al asignar)", line, col);
-                    }else{
-                        //validar tipos 
-                        if (sym3.getTipo().getTipo() != this.expr.tipo.getTipo()) {
-                            mensErr = "Tipos erroneos al asignar a un campo de Struct " + id + " ";
-                            return new Errores("SEMANTICO",mensErr,
-                                    this.expr.line, this.expr.col);
-                        }
-                        sym3.setValor(valueExp);
-                        return null;
-                    }
-                    
-                    
-            }else{               // id.id           p.nombre
-                Simbolo fieldSymbol = (Simbolo)hassym.get(idField);
-                if(fieldSymbol ==null){
-                        mensErr = "Campo del struct incorrecto: " + idField+ " ";
-                        return new Errores("SEMANTIC",mensErr, line, col);
-                    }
-
-                    //interpretar la exp
-                    var valueExp = this.expr.interpretar(arbol, tabla);
-                    if(valueExp instanceof  Errores){
-                        return valueExp;
-                    }
-
-                    //validar los tipos
-                    if(symStruc.isConst()){ // es un error si es constante ya no se le puede asignar un nuevo valor
-                        return  new Errores("SEMANTIC", "Struct instanciado como const (Al asignar)", line, col);
-                    }else{
-                        //validar tipos 
-                        if (fieldSymbol.getTipo().getTipo() != this.expr.tipo.getTipo()) {
-                            mensErr = "Tipos erroneos al asignar a un campo de Struct " + id + " ";
-                            return new Errores("SEMANTICO",mensErr,
-                                    this.expr.line, this.expr.col);
-                        }
-                        fieldSymbol.setValor(valueExp);
-                        return null;
-                    }
-                    
-            }
-            
-
-        }
+            return null;
+        }        
 
         
         @Override
     public String generarast(Arbol arbol, String anterior) {
         String algo = anterior;
         algo = expr.generarast(arbol, anterior);
-        
-        
         return algo;
     }
     
-        public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+    public Object createSym(Arbol arbol, TablaSimbolos tabla) {
         return null;
     }
     
-        
-        
-        
-        
-        
-        
+         
         
         
         
@@ -209,18 +139,18 @@ public class Assignmentt extends Instruction{
         C3d_Java c =  arbol.getJava();
         int dir = 0;
         String varr = "";
-        
+        Simbolo sym = null;
         if(isThis){
                                                 //  buscar el sym solo en el ambito global
             String armedId = arbol.getCurrentAmbit().get(0);
              armedId += arbol.getCurrentAmbit().get(1)+id;
-                dir = arbol.getSym(armedId).getDir();  
+             sym = arbol.getSym(armedId);
+                dir = sym.getDir();
                 
         }else{                  //buscando en el ambito local
             String armedId = "";
             armedId= arbol.getAmbito_asID() + id;
-            Simbolo sym = arbol.getSym(armedId);
-
+            sym = arbol.getSym(armedId);
             if(sym==null){      //si no se encuentra en el ambito local buscar en el ambito global
                 armedId = arbol.getCurrentAmbit().get(0);
                 armedId += arbol.getCurrentAmbit().get(1) + id;
@@ -230,11 +160,13 @@ public class Assignmentt extends Instruction{
                 }else{
                     dir = sym.getDir();
                 }
+            }else{
+                dir = sym.getDir();
             }
             
 
         }
-        
+                                                      // create a la expresion
          if(expr instanceof Input inp){
                 inp.createC3D(arbol, anterior);
                 armed+= c.c3d_Input();          //new var  
@@ -245,38 +177,52 @@ public class Assignmentt extends Instruction{
             n.createC3D(arbol, anterior);   
             varr = c.varsParams.getFirst();
             c.varsParams.removeFirst();
-        }else if(this.expr instanceof Call call){                          //declaracion y asignacion
-                  //pndte
-                                                  //create a la llamada
-              armed+= call.createC3D(arbol, anterior);
-                                              //asignacion
-
-              c.setPtrTemp("ptr");
-              armed+=c.c3d_asignVar(id, dir);
-              c.clearPtrTemp();
-
-        }else if(expr instanceof Access a){
-             armed+= a.createC3D(arbol, anterior);
-            varr = c.varsParams.getFirst();
-            c.varsParams.removeFirst();
-                
-            
+        
+//         else if(this.expr instanceof Call call){                          //declaracion y asignacion
+//                                                  //create a la llamada
+//              armed+= call.createC3D(arbol, anterior);
+//              varr = c.varsParams.get(0);
+//              c.clearVarParams();
+//         }else if(expr instanceof Access a){
+//             armed+= a.createC3D(arbol, anterior);
+//            varr = c.varsParams.getFirst();
+//            c.varsParams.removeFirst();
+//        }else if(this.expr instanceof Reference ref){
+//                                                  //create a la llamada
+//              armed+= ref.createC3D(arbol, anterior);
+//              varr = c.varsParams.get(0);
+//              c.clearVarParams();
+//            
         }else{
             armed +=this.expr.createC3D(arbol, anterior);
             varr = c.varsParams.getFirst();
             c.varsParams.removeFirst();
         }
          
-                                                //instance dir
-         armed+= c.c3d_acces("", 0);            
-                                                //insert en heap
-         armed+= c.c3d_asignHeap(varr, dir);
          
+          
+         
+                                            //realizando la asignacion
+        if(sym.getCat() == categoria.ATRIBUTO){
+                                            //instance dir
+            armed+= c.c3d_acces("", 0);            
+                                                   //insert en heap
+            armed+= c.c3d_asignHeap(varr, dir);
+         
+        }else{
+                                            //instance dir
+                                                   //insert en stack
+            armed+= c.c3d_asignAlone(varr);
+            
+            armed+= c.c3d_asignVal("", dir);
+
+        }
+
         
 //        //assig 
 //    tr6 = ptr + dir;
 //    stack[tr6] = var;
-        
+ 
         
             armed +="\n";
         return armed;

@@ -160,14 +160,13 @@ public class Statement extends Instruction{
         
         
         if(whatConstruct == 0){
-            //dep el tipo dar el valor por defecto
 //            c.varsParams.add("0");
             //si el valor es un nativo
             //-1 si es un objeto para marcar que esta nulo
             //halar la ref
                                             //dir ref
             armed += c.c3d_acces("ptr", 0);
-            
+                                            //val por defecto
             armed += c.c3d_asignHeap("0", dir);
             
             
@@ -185,14 +184,18 @@ public class Statement extends Instruction{
             }else if(exp instanceof Nativo n){
                  n.createC3D(arbol, anterior); //create exp
                                                             //asignacion
-                armed+=c.c3d_asignVal(c.varsParams.get(0), dir);
+                armed+=c.c3d_asignVal("", dir);
                 c.varsParams = new LinkedList<>();
                 
                 
             }else{
                 armed+=this.exp.createC3D(arbol, anterior); //create exp
                                                             //asignacion
-                armed+=c.c3d_asignVal(c.varsParams.get(0), dir);
+//                armed+=c.c3d_asignVal(c.varsParams.get(0), dir);
+//                for (String vaa : c.varsParams) {
+//               }
+                armed+=c.c3d_asignVal("", dir);
+                
                 c.varsParams = new LinkedList<>();
             }
             

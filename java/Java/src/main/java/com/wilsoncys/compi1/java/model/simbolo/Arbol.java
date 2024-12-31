@@ -17,6 +17,7 @@ import com.wilsoncys.compi1.java.model.sC3D.C3d;
 import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import java.util.LinkedList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -43,7 +44,7 @@ public class Arbol {
 
 
     
-    private int attbClassJava = 0;
+    public int attbClassJava = 0;
     public int attbPrincipal = 0;
     private int posReturn = 1;
     
