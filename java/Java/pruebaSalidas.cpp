@@ -73,41 +73,55 @@ heap[w31] = 55;
 
 void java_Simple_imprimirInfo(){
 cout<<"unoo: ";
-int w47 = ptr + 0;
-int w48 = stack[w47];
+int w44 = ptr + 0;
+int w45 = stack[w44];
 
-int w49 = w48 + 0;
-int w50 = heap[w49];
+int w46 = w45 + 0;
+int w47 = heap[w46];
 
-cout<<w50;
+cout<<w47;
 cout<<endl;
 cout<<"doss: ";
-int w51 = ptr + 0;
-int w52 = stack[w51];
+int w48 = ptr + 0;
+int w49 = stack[w48];
 
-int w53 = w52 + 1;
-int w54 = heap[w53];
+int w50 = w49 + 1;
+int w51 = heap[w50];
 
-cout<<w54;
+cout<<w51;
 cout<<endl;
 cout<<"tresss: ";
-int w55 = ptr + 0;
-int w56 = stack[w55];
+int w52 = ptr + 0;
+int w53 = stack[w52];
 
-int w57 = w56 + 2;
-int w58 = heap[w57];
+int w54 = w53 + 2;
+int w55 = heap[w54];
 
-cout<<w58;
+cout<<w55;
 cout<<endl;
 cout<<"cuaa: ";
-int w59 = ptr + 0;
-int w60 = stack[w59];
+int w56 = ptr + 0;
+int w57 = stack[w56];
 
-int w61 = w60 + 3;
-int w62 = heap[w61];
+int w58 = w57 + 3;
+int w59 = heap[w58];
 
-cout<<w62;
+cout<<w59;
 cout<<endl;
+
+}
+
+void java_Simple_setUno(){
+int w67 = ptr + 2;
+int w68 = stack[w67];
+
+int w69 = ptr + 0;
+int w70 = stack[w69];
+
+int w71 = w70 + 0;
+heap[w71] = w68;
+
+
 
 }
 
@@ -141,26 +155,55 @@ int w37 = w36 + 0;
 heap[w37] = w34;
 
 
+cout<<"before del sett";
+cout<<endl;
 int w38 = ptr + 0;
 int w39 = stack[w38];
 
 int w40 = w39 + 0;
 int w41 = heap[w40];
 
-int w42 = ptr + 0;
-stack[w42] = w41;
+int w42 = ptr + 1;
 
-int w43 = ptr + 4;
+int w43 = w42 + 0;
+stack[w43] = w41;
 
-int w44 = ptr + 0;
-int w45 = stack[w44];
-
-int w46 = w43 + 0;
-stack[w46] = w45;
-
-ptr = ptr + 4;
+ptr = ptr + 1;
 java_Simple_imprimirInfo();
-ptr = ptr - 4;
+ptr = ptr - 1;
+int w60 = ptr + 0;
+int w61 = stack[w60];
+
+int w62 = w61 + 0;
+int w63 = heap[w62];
+
+int w64 = ptr + 1;
+
+int w65 = w64 + 0;
+stack[w65] = w63;
+
+int w66 = w64 + 2;
+stack[w66] = 12;
+
+ptr = ptr + 1;
+java_Simple_setUno();
+ptr = ptr - 1;
+cout<<"after del sett";
+cout<<endl;
+int w72 = ptr + 0;
+int w73 = stack[w72];
+
+int w74 = w73 + 0;
+int w75 = heap[w74];
+
+int w76 = ptr + 1;
+
+int w77 = w76 + 0;
+stack[w77] = w75;
+
+ptr = ptr + 1;
+java_Simple_imprimirInfo();
+ptr = ptr - 1;
 
 }
 

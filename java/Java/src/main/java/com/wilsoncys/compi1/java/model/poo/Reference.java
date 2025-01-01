@@ -22,6 +22,7 @@ import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java_cup.runtime.Symbol;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -249,12 +250,13 @@ public class Reference extends Instruction{
         symClass.getInstruction().createC3D(arbol, anterior);
 
 
+        arbol.setSizeHeap(cantAttbCurrent);
                                             //mover el ptrtemp Temporal
-        armed+=c.c3d_ptrTemp(cantAttbCurrent);
+        armed+=c.c3d_ptrTemp(arbol.attbClassJava);
                                             //obtener valor de la referencia
         armed+=c.c3d_accesTemp("", 0);
  
-         
+ 
         
         return armed;
     }

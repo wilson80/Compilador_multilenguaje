@@ -261,16 +261,21 @@ public class Call extends Instruction{
 //            String idObject  = "";
 //            idObject = ((InstanceJava)sym0.getInstruction()).getIdClase();
 
+
                     //set a la referencia (stack[0]) 
             armed+= c.c3d_acces("", 0);
 
             armed+= c.c3d_accesAttVarl("", sym0.getDir());
             
-            armed+= c.c3d_asignVal("", 0);
+//            armed+= c.c3d_asignVal("", 0);
             
-            
+//            int cantAttbCurrent = arbol.attbClassJava;
+
                         //interpretar la llamada
             armed += llamada.createC3D(arbol, anterior);
+            
+//            arbol.setSizeHeap(cantAttbCurrent);
+            
         }
         
         
@@ -312,9 +317,6 @@ public class Call extends Instruction{
             }
         }
         
-                                                            //stack temp
-        armed+=c.c3d_ptrTemp(arbol.attbClassJava);
-        
 
                                     //set a la posicion inicial para dejar los parametros
         Simbolo symMethod = arbol.getSym(id_Methodo);
@@ -332,19 +334,26 @@ public class Call extends Instruction{
         
 
 
+                                                            //stack temp
+        armed+=c.c3d_ptrTemp(arbol.attbClassJava);
+        
+                                //dando la direccion de referencia
+        if(c.varsParams.size() == 0){
+            armed+= c.c3d_acces("", 0);
+        }                     
+        
+        armed+= c.c3d_asignVar(c.getPtrTemp(), 0);
+        
                                             //PREPARED params en el stack
         for (Instruction exps : parametersExp) {
                 armed += c.c3d_asignVar(c.getPtrTemp(), posIni);
                 posIni++;
         }
-                                //dando la direccion de referencia
-        armed+= c.c3d_acces("", 0);
-        armed+= c.c3d_asignVar(c.getPtrTemp(), 0);
  
         c.clearPtrTemp();   
         
 
-        
+
                                             //ejecutar el metodo
         armed+=c.c3d_moveToStack(true, arbol.attbClassJava);
         armed+= c.callJava(arbol.getCurrentAmbit().get(1) + "_" + this.id);

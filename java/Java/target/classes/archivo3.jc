@@ -5,20 +5,18 @@ public class sumar {
 	Simple objeto1;
 	// Simpl 
 	public sumar() {
-		objeto1 = new Simple(); 
-		objeto1.imprimirInfo(); 
+			//instancia
+		objeto1 = new Simple();
 		
-		// objeto1.setUno(43);
-		// info();
+		println("before del sett");	
+		objeto1.imprimirInfo();
+		objeto1.setUno(12); 
+		println("after del sett");	
+		objeto1.imprimirInfo();
+		 		//get
+		println("un get de dosss: ", objeto1.getDos());
 	} 
-
-	public void info(){ 
-		objeto1.setUno(43);
-		//  objeto1.setUno(43);
-		// println("un GET: ", objeto1.getUno() );
-		// int aa = objeto1.getUno();
-		// int bb = objeto2.getDos();
-	}
+ 
 	 
 } 
 
