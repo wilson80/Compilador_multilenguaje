@@ -225,19 +225,25 @@ public class Call extends Instruction{
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
         String armed = "";
-        C3d_Java c =  arbol.getJava();
-        Simbolo sym0 = null;
-
+        
+                           //llamada simple calcular();
         if(llamada == null){
             armed += simpleCall(arbol, anterior);
         }
-                                    // int uno = objeto1.getCui();
+
+        
+        
+                                    // int uno = objeto1.getCui();  
+                                    //encontrar el simbolo del objeto
         if(parametersExp == null){
+            C3d_Java c =  arbol.getJava();
+            Simbolo sym0 = null;
 
             String armedId = "";
             armedId= arbol.getAmbito_asID() + id;
 
             sym0 = arbol.getSym(armedId);
+            
             
             if(sym0==null){      //si no se encuentra en el ambito local buscar en el ambito global
                 armedId = arbol.getCurrentAmbit().get(0);
@@ -247,14 +253,14 @@ public class Call extends Instruction{
                     return new Errores(id, "no se ha encontrado el simboloooooooooooooo", line, col);
                 }
             }
+            if(sym0.getInstruction() instanceof Functionss fun){
+                fun.setIdClase(id);
+            }
             
-            String idObject  = "";
+            
+//            String idObject  = "";
+//            idObject = ((InstanceJava)sym0.getInstruction()).getIdClase();
 
-//            if(sym == null){
-////                return new Errores("SEMANTIC", "id no definido: " + idMethod, line, col);
-//            }
-
-            idObject = ((InstanceJava)sym0.getInstruction()).getIdClase();
 
                     //set a la referencia (stack[0]) 
             armed+= c.c3d_acces(armed, sym0.getDir());
@@ -263,13 +269,20 @@ public class Call extends Instruction{
 
             armed+= c.c3d_asignVar("", 0);
         
-            
+                        //interpretar la llamada
             armed += llamada.createC3D(arbol, anterior);
-//            set a la clase 
         }
+        
+        
+        
         
         return armed;
     }
+    
+    
+    
+    
+    
     
     
     
@@ -279,6 +292,7 @@ public class Call extends Instruction{
 
         String id_Methodo = "java"  + arbol.getCurrentAmbit().get(1) + this.id;
                                             //extrayendo los params
+
         for (Instruction exps : parametersExp) {
             if(exps instanceof Nativo n){        
 
@@ -321,8 +335,14 @@ public class Call extends Instruction{
                 armed += c.c3d_asignVar(c.getPtrTemp(), posIni);
                 posIni++;
         }
-                
+                                //dando la direccion de referencia
+        armed+= c.c3d_acces("", 0);
+        armed+= c.c3d_asignVar(c.getPtrTemp(), 0);
+ 
         c.clearPtrTemp();   
+        
+
+        
                                             //ejecutar el metodo
         armed+=c.c3d_moveToStack(true, arbol.attbClassJava);
         armed+= c.callJava(arbol.getCurrentAmbit().get(1) + "_" + this.id);
@@ -332,16 +352,12 @@ public class Call extends Instruction{
         
                                             //create al metodo/funcion
         if(symMethod.getCat().equals(categoria.FUNCTION) ){
-            ((Functionss)symMethod.getInstruction()).setIdClase(arbol.getCurrentAmbit().get(1));
             symMethod.getInstruction().createC3D(arbol, anterior);
         }else if(symMethod.getCat().equals(categoria.METHOD)){
-            ((Method)symMethod.getInstruction()).setIdClase(arbol.getCurrentAmbit().get(1));
             symMethod.getInstruction().createC3D(arbol, anterior);
-             
         }
            
-               //dejar el retorno
-
+                                           //dejar el retorno
         if(symMethod.getCat().equals(categoria.FUNCTION) ){
             armed += c.c3d_ptrTemp(arbol.attbClassJava);
             armed += c.c3d_accesTemp("", 1);

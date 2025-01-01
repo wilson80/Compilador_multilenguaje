@@ -137,6 +137,10 @@ public class Access extends Instruction{
              @Override
     public Object createC3D(Arbol arbol, String anterior) {
 
+
+        
+        
+        
         String armed = "";
         C3d_Java c =  arbol.getJava();
         Simbolo sym = null;
@@ -158,7 +162,7 @@ public class Access extends Instruction{
                 armedId = arbol.getCurrentAmbit().get(0);
                 armedId += arbol.getCurrentAmbit().get(1) + id;
                 sym = arbol.getSym(armedId);
-                
+                       
                 if(sym == null){        //revisar esto
                     return new Errores(id, "no se ha encontrado el simboloooooooooooooo", line, col);
                 }else{
@@ -168,16 +172,16 @@ public class Access extends Instruction{
 
         }
  
- 
+
         
         int dir = sym.getDir();
-
+        
         if(sym.getCat()==categoria.PARAM){  
             armed+= c.c3d_accesParam(id, dir);
         }else if(sym.getCat()==categoria.ATRIBUTO){ 
                 armed+= c.c3d_acces("", 0);
                 armed+= c.c3d_accesAttVarl("", dir);
-                
+
         }else if(sym.getCat()==categoria.VARL){
             armed+= c.c3d_acces("", sym.getDir());
             

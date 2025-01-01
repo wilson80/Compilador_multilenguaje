@@ -129,7 +129,7 @@ public class Method extends Instruction{
         C3d_Java c = arbol.getJava();
         
 
-        arbol.setCurrentAmbit(this.getAmbito());
+        arbol.setCurrentAmbit(this.ambito);
         
         String bodyMet = "";
         for (Instruction ins : instrucciones) {
@@ -141,7 +141,7 @@ public class Method extends Instruction{
 
         }
         
-        armed += c.c3d_metodo("java_" + idClase +"_"+ id, bodyMet);
+        armed += c.c3d_metodo("java_" + this.ambito.get(1) +"_"+ id, bodyMet);
             
         if(!isCreate){
             arbol.Print(armed);

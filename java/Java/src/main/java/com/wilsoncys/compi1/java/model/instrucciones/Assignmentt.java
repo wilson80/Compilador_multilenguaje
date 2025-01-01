@@ -137,6 +137,9 @@ public class Assignmentt extends Instruction{
     public Object createC3D(Arbol arbol, String anterior) {
         String armed = "";
         C3d_Java c =  arbol.getJava();
+        
+        
+        
         int dir = 0;
         String varr = "";
         Simbolo sym = null;
@@ -166,6 +169,8 @@ public class Assignmentt extends Instruction{
             
 
         }
+
+ 
                                                       // create a la expresion
          if(expr instanceof Input inp){
                 inp.createC3D(arbol, anterior);
@@ -218,6 +223,12 @@ public class Assignmentt extends Instruction{
 
         }
 
+               
+        if(this.id.equals("objeto1")){
+            JOptionPane.showMessageDialog(null, "dirObjetctVAR: "  + varr);
+        }
+        
+        
         
 //        //assig 
 //    tr6 = ptr + dir;

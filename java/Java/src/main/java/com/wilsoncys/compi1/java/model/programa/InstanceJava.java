@@ -96,7 +96,6 @@ public class InstanceJava extends Instruction{
                 n.createC3D(arbol, anterior);
                 id_constructor += n.tipo.getTypeString();
                 
-                
             }else if(exps instanceof AccessC cs){
                     armed+=cs.createC3D(arbol, anterior);
                 id_constructor += cs.tipo.getTypeString();

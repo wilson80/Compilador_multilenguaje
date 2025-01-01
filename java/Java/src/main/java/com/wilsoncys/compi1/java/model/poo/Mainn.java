@@ -122,14 +122,16 @@ public class Mainn extends Instruction{
 //        arbol.setPosReturn(1);
          
 //         JOptionPane.showMessageDialog(null, "tamanoooo:  " +arbol.attbClassJava);
-
+        
+        arbol.setAmbito(this.ambito);
         
         for (Instruction ins : instrucciones) {
-                    if(ins ==null){
-                        continue;
-                    }
-                    armed += ins.createC3D(arbol, anterior);
-                }
+            if(ins ==null){
+                    continue;
+            }
+            armed += ins.createC3D(arbol, anterior);
+            arbol.setAmbito(this.ambito);
+        }
       
         return armed;
     }

@@ -1,70 +1,62 @@
 %%PASCAL
 %%JAVA
 public class sumar {
-  
+	
 	Simple objeto1;
 	// Simple objeto2;
 	int atri; 
 	int uno; 
 	public sumar() {
-		atri = 6;
-		uno = 3;
-		info();
-		// objeto1 = new Simple(8, 7); 
-	} 
-	public void info(){
-		 int varl = 12;
-		 int varl2 = 4;
-		 int total = adicion(atri, varl, uno, varl2 );
-		 println("sumar: ", total);  
+		objeto1 = new Simple(); 
+		objeto1.imprimirInfo();
 		
-		 println("restar: ", restar(varl, uno) ); 
-println("total: ", total);
-		 println("multi: ", multiplicar(varl, uno) ); 
-		 println("div: ", div(varl, uno) ); 
+		// objeto1.setUno(43);
+		// info();
+	} 
 
- 
-
-
-
-		println("varL: ", varl); 	
-		println("varl2: ", varl2);	
-		println("att atri: ", atri);	
-		println("att uno: ", this.uno);	
-
-
-		println("asdfasdfasdf");
-			
-			
-		// int uno = objeto1.getCui();
-		// int dos = objeto2.getCui();
+	public void info(){
+		objeto1.setUno(43);
+		//  objeto1.setUno(43);
+		// println("un GET: ", objeto1.getUno() );
+		// int aa = objeto1.getUno();
+		// int bb = objeto2.getDos();
 	}
-
-	public int calc(int a, int b){
-		println("dentro de calc: ", a); 
-		println("dentro de calc: ", b); 
-		return getAlgo();
-	}	
-	
-	public int restar(int a, int b){
-		return a-b;
-	}
-	public int adicion(int a, int b, int c, int d){
-		// println("dentro de add a: ", a); 
-		// println("dentro de add b: ", b); 
-		// println("dentro de add c: ", c); 
-		// println("dentro de add d: ", d); 
-		return a+b+c + d;
-	}
-	public int multiplicar(int a, int b){
-		return a*b;
-	}
-	public int div(int a, int b){
-		return a/b;
-	}
-
+	 
 } 
- //seguir probando
+
+
+public class Simple {
+	int uno;
+	int dos;
+	int tres;
+	public 	Simple(){
+		this.uno = 4;
+		this.dos = 6;
+		this.tres = 9;
+		// println("unoo: ", uno);		
+		// println("doss: ", dos);		
+		// imprimirInfo();
+
+
+	}
+
+	public int getUno(){
+		return this.uno;
+	}	
+	public void setUno(int a){
+		this.uno = a;
+	}	
+	public int getDos(){
+		return this.dos;
+	}	
+
+	public void imprimirInfo(){
+		println("unoo: ", uno);		
+		println("doss: ", dos);		
+		println("tresss: ", this.tres);		
+	}
+
+}
 
  
 

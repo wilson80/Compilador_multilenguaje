@@ -110,12 +110,15 @@ public class Functionss extends Instruction{
         return null;
     }
         
+    
+    
+    
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
         String armed = "";
         C3d_Java c = arbol.getJava();
         
-        arbol.setCurrentAmbit(this.getAmbito());
+        arbol.setCurrentAmbit(this.ambito);
 
         
         String bodyMet = "";
@@ -127,7 +130,7 @@ public class Functionss extends Instruction{
             arbol.setCurrentAmbit(this.getAmbito());
         }
         
-        armed += c.c3d_metodo("java_" + idClase +"_"+ id, bodyMet);
+        armed += c.c3d_metodo("java_" + this.ambito.get(1) +"_"+ id, bodyMet);
             
         if(!isCreate){
             arbol.Print(armed);       
