@@ -928,7 +928,7 @@ typeVar::=STRING        {: RESULT = new Tipo(tipoDato.CADENA); :}
         |CHAR            {: RESULT = new Tipo(tipoDato.CARACTER); :}
         |BOOLEAN          {: RESULT = new Tipo(tipoDato.BOOLEANO); :}
         // |VOID          {: RESULT = new Tipo(tipoDato.VOID); :}
-        | ID
+        | ID:id             {: RESULT = new Tipo(tipoDato.OBJECT); RESULT.setIdObjeto(id.toString()); :}
         ;
 
 

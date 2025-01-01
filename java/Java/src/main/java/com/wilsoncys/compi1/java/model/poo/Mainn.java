@@ -30,6 +30,8 @@ public class Mainn extends Instruction{
     public LinkedList<HashMap> parameters;
     public LinkedList<Instruction> instrucciones;
     private int cantParams = 0;
+    private int cantAttb = 0;
+
     private List<String>  ambito;   //idclase/metodo/params
     private boolean isCreate = false;
     
@@ -183,8 +185,17 @@ public class Mainn extends Instruction{
     public void setIsCreate(boolean isCreate) {
         this.isCreate = isCreate;
     }
+
+    public int getCantAttb() {
+        return cantAttb;
+    }
+
+    public void setCantAttb(int cantAttb) {
+        this.cantAttb = cantAttb;
+    }
     
     
+            
     
     
 }

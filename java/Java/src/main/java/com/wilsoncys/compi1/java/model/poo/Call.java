@@ -33,7 +33,7 @@ import javax.swing.JOptionPane;
 public class Call extends Instruction{
     private String id;
     private Call llamada;
-    private boolean idSimple;
+    private String otroId;
     
     private LinkedList<Instruction> parametersExp;
 
@@ -244,7 +244,6 @@ public class Call extends Instruction{
 
             sym0 = arbol.getSym(armedId);
             
-            
             if(sym0==null){      //si no se encuentra en el ambito local buscar en el ambito global
                 armedId = arbol.getCurrentAmbit().get(0);
                 armedId += arbol.getCurrentAmbit().get(1) + id;
@@ -253,22 +252,23 @@ public class Call extends Instruction{
                     return new Errores(id, "no se ha encontrado el simboloooooooooooooo", line, col);
                 }
             }
-            if(sym0.getInstruction() instanceof Functionss fun){
-                fun.setIdClase(id);
-            }
             
+            if(sym0.getInstruction() instanceof Statement met){
+                arbol.getCurrentAmbit().set(1, met.tipo.getTypeString());
+//                arbol.setSizeHeap(3);
+            }
             
 //            String idObject  = "";
 //            idObject = ((InstanceJava)sym0.getInstruction()).getIdClase();
 
-
                     //set a la referencia (stack[0]) 
-            armed+= c.c3d_acces(armed, sym0.getDir());
+            armed+= c.c3d_acces("", 0);
 
-            armed+=c.c3d_ptrTemp(arbol.attbPrincipal);
-
-            armed+= c.c3d_asignVar("", 0);
-        
+            armed+= c.c3d_accesAttVarl("", sym0.getDir());
+            
+            armed+= c.c3d_asignVal("", 0);
+            
+            
                         //interpretar la llamada
             armed += llamada.createC3D(arbol, anterior);
         }
@@ -292,7 +292,9 @@ public class Call extends Instruction{
 
         String id_Methodo = "java"  + arbol.getCurrentAmbit().get(1) + this.id;
                                             //extrayendo los params
-
+        if(this.id.equals("imprimirInfo")){
+            JOptionPane.showMessageDialog(null, "idddd MET: " + id_Methodo);
+        }                                            
         for (Instruction exps : parametersExp) {
             if(exps instanceof Nativo n){        
 
@@ -368,6 +370,17 @@ public class Call extends Instruction{
         return armed;
     }
 
+    public void setId(String otroId) {
+        this.id = otroId;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    
+    
+    
     
     
     

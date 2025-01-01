@@ -32,6 +32,8 @@ public class Method extends Instruction{
     public LinkedList<Instruction> instrucciones;
     private boolean isCreate = false;
     private int cantParams = 0;
+    private int cantAttb = 0;
+
     private List<String>  ambito;   //idclase/metodo/params
     private int cantSyms = 0;
     
@@ -176,6 +178,14 @@ public class Method extends Instruction{
 
     public void setIdClase(String idClase) {
         this.idClase = idClase;
+    }
+
+    public int getCantAttb() {
+        return cantAttb;
+    }
+
+    public void setCantAttb(int cantAttb) {
+        this.cantAttb = cantAttb;
     }
     
     

@@ -225,7 +225,7 @@ public class Reference extends Instruction{
         arbol.getClasesJava().getclase(this.id).setId_constructor(id_constructor);
            
                                                     //stack temp
-        armed+=c.c3d_ptrTemp(arbol.attbPrincipal);
+        armed+=c.c3d_ptrTemp(arbol.attbClassJava);
 
                                                     //PREPARED params en el stack
         for (Instruction exps : parametersExp) {
@@ -234,24 +234,25 @@ public class Reference extends Instruction{
         }
         
         
-        
+        int cantAttbCurrent = arbol.attbClassJava;
         c.clearPtrTemp(); 
 
                                                 //ejecutar el metodo
-        armed+= c.c3d_moveToStack(true, arbol.attbPrincipal);
+        armed+= c.c3d_moveToStack(true, arbol.attbClassJava);
         armed+= c.callJava(this.id + "_" + this.id);
-        armed+=c.c3d_moveToStack(false, arbol.attbPrincipal);
+        armed+=c.c3d_moveToStack(false, arbol.attbClassJava);
         
            
                             //create a la Clase
         Simbolo symClass = arbol.getSym("java" + this.id);
+        arbol.setSizeHeap(((Classs)symClass.getInstruction()).getCantAttb());
         symClass.getInstruction().createC3D(arbol, anterior);
 
 
                                             //mover el ptrtemp Temporal
-        armed+=c.c3d_ptrTemp(arbol.attbPrincipal);
+        armed+=c.c3d_ptrTemp(cantAttbCurrent);
                                             //obtener valor de la referencia
-        armed+=c.c3d_accesTemp(id, 0);
+        armed+=c.c3d_accesTemp("", 0);
  
          
         

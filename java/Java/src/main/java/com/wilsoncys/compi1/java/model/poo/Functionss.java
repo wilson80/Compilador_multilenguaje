@@ -32,6 +32,8 @@ public class Functionss extends Instruction{
     
     private List<String>  ambito;   //idclase/metodo/params
     private int cantParams = 0;
+    private int cantAttb = 0;
+
     private int cantSyms = 0;
     private boolean isCreate = false;
 
@@ -164,6 +166,14 @@ public class Functionss extends Instruction{
 
     public void setIdClase(String idClase) {
         this.idClase = idClase;
+    }
+
+    public int getCantAttb() {
+        return cantAttb;
+    }
+
+    public void setCantAttb(int cantAttb) {
+        this.cantAttb = cantAttb;
     }
     
         

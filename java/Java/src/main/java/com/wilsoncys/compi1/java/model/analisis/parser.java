@@ -5710,7 +5710,10 @@ class CUP$parser$actions {
           case 282: // typeVar ::= ID 
             {
               Tipo RESULT =null;
-
+		int idleft = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int idright = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String id = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		 RESULT = new Tipo(tipoDato.OBJECT); RESULT.setIdObjeto(id.toString()); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("typeVar",8, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

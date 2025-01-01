@@ -42,7 +42,7 @@ public class Tipo {
                 
             case CADENA:
                 return "string";
-            case VOID:
+            case OBJECT:
                 return idObjeto;
                 
             default:

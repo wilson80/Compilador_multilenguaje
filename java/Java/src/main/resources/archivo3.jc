@@ -3,18 +3,16 @@
 public class sumar {
 	
 	Simple objeto1;
-	// Simple objeto2;
-	int atri; 
-	int uno; 
+	// Simpl 
 	public sumar() {
 		objeto1 = new Simple(); 
-		objeto1.imprimirInfo();
+		objeto1.imprimirInfo(); 
 		
 		// objeto1.setUno(43);
 		// info();
 	} 
 
-	public void info(){
+	public void info(){ 
 		objeto1.setUno(43);
 		//  objeto1.setUno(43);
 		// println("un GET: ", objeto1.getUno() );
@@ -29,10 +27,12 @@ public class Simple {
 	int uno;
 	int dos;
 	int tres;
+	int cuatro;
 	public 	Simple(){
 		this.uno = 4;
 		this.dos = 6;
 		this.tres = 9;
+		this.cuatro = 55;
 		// println("unoo: ", uno);		
 		// println("doss: ", dos);		
 		// imprimirInfo();
@@ -53,7 +53,8 @@ public class Simple {
 	public void imprimirInfo(){
 		println("unoo: ", uno);		
 		println("doss: ", dos);		
-		println("tresss: ", this.tres);		
+		println("tresss: ", this.tres);
+		println("cuaa: ", cuatro);		
 	}
 
 }

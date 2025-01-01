@@ -96,7 +96,7 @@ import javax.swing.JOptionPane;
                 sym.setCat(categoria.ATRIBUTO);
                 sym.setDir(contador);
                 sym.setInstruction(ins);
-                sym.armarAmbito(this.getAmbito_asID());
+                sym.setAmbito(this.ambito);
                 sym.armarAmbito(st.id);
                 st.setAmbito(sym.getAmbito());//ambito a la instruccion
                 if(!(tabla.addSsymbolPre(sym))){
@@ -118,6 +118,7 @@ import javax.swing.JOptionPane;
             }
             
             if(ins instanceof  Mainn mainn){
+                mainn.setCantAttb(this.cantAttb);
                 contador = 2;
                 Simbolo sym = new Simbolo(mainn.tipo, mainn.id, tabla, false);
                 sym.setCat(categoria.CONSTRUCTOR);
@@ -165,6 +166,7 @@ import javax.swing.JOptionPane;
             }
             
             if(ins instanceof  Method fun){
+                fun.setCantAttb(this.cantAttb);
                 contador = 0;
                 Simbolo sym = new Simbolo(fun.tipo, fun.id, null, true);
                 sym.setCat(categoria.METHOD);
@@ -210,7 +212,8 @@ import javax.swing.JOptionPane;
             if(ins ==null){
                 continue;
             }
-            if(ins instanceof  Functionss fun){
+            if(ins instanceof  Functionss fun){                
+                fun.setCantAttb(this.cantAttb);
                 contador = 0;
                 Simbolo sym = new Simbolo(fun.tipo, fun.id, null, true);
                 sym.setCat(categoria.FUNCTION);

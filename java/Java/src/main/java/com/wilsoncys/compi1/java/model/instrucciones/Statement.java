@@ -214,6 +214,10 @@ public class Statement extends Instruction{
             }
         }
 
+    public List<String> getAmbito() {
+        return ambito;
+    }
+
     
     public String getAmbito_asID(){
         String ambi = "";
@@ -222,6 +226,10 @@ public class Statement extends Instruction{
         }
         return ambi; 
                 
+    }
+
+    public String getId() {
+        return id;
     }
     
     
