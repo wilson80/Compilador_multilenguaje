@@ -10,11 +10,16 @@ public class sumar {
 		
 		println("before del sett");	
 		objeto1.imprimirInfo();
-		objeto1.setUno(12); 
+		objeto1.setUno(11); 
+		objeto1.setDos(12); 
 		println("after del sett");	
 		objeto1.imprimirInfo();
-		 		//get
+
+		 		//getters
+		println("un get de uno: ", objeto1.getUno());
 		println("un get de dosss: ", objeto1.getDos());
+		println("un get de tres: ", objeto1.getTres());
+		println("un get de cuatro: ", objeto1.getCuatro());
 	} 
  
 	 
@@ -38,15 +43,26 @@ public class Simple {
 
 	}
 
-	public int getUno(){
-		return this.uno;
-	}	
 	public void setUno(int a){
 		this.uno = a;
+	}	
+	public void setDos(int a){
+		this.dos = a;
+	}	
+	
+	public int getUno(){
+		return this.uno;
 	}	
 	public int getDos(){
 		return this.dos;
 	}	
+	public int getTres(){
+		return this.tres;
+	}	
+	public int getCuatro(){
+		return this.cuatro;
+	}	
+ 
 
 	public void imprimirInfo(){
 		println("unoo: ", uno);		
