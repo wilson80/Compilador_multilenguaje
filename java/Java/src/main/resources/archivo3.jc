@@ -1,83 +1,69 @@
+
 %%PASCAL
 %%JAVA
 public class sumar {
-	
-	Simple objeto1;
-	// Simpl 
-	public sumar() {
-			//instancia
-		objeto1 = new Simple();
-		
-		println("before del sett");	
-		objeto1.imprimirInfo();
-		objeto1.setUno(11); 
-		objeto1.setDos(12); 
-		println("after del sett");	
-		objeto1.imprimirInfo();
-
-		 		//getters
-		println("un get de uno: ", objeto1.getUno());
-		println("un get de dosss: ", objeto1.getDos());
-		println("un get de tres: ", objeto1.getTres());
-		println("un get de cuatro: ", objeto1.getCuatro());
-	} 
- 
-	 
-} 
-
-
-public class Simple {
 	int uno;
 	int dos;
 	int tres;
-	int cuatro;
-	public 	Simple(){
-		this.uno = 4;
-		this.dos = 6;
-		this.tres = 9;
-		this.cuatro = 55;
-		// println("unoo: ", uno);		
-		// println("doss: ", dos);		
-		// imprimirInfo();
+	int total;
+    Carta carta1;
+    Carta carta2;
+    Carta carta3;
 
-
+	public sumar(int uno, int dos, int tres) {
+		 this.uno = uno;
+		 this.dos = dos;
+		 this.tres = tres;
 	}
 
-	public void setUno(int a){
-		this.uno = a;
-	}	
-	public void setDos(int a){
-		this.dos = a;
-	}	
-	
-	public int getUno(){
-		return this.uno;
-	}	
-	public int getDos(){
-		return this.dos;
-	}	
-	public int getTres(){
-		return this.tres;
-	}	
-	public int getCuatro(){
-		return this.cuatro;
-	}	
+	public void crearCartas(){
+		// println("prueba randoommm");
+        carta1 = new Carta(1,2,3);
+        carta2 = new Carta(4,5,6);
+         carta3 = new Carta(7,8,9);
+		
+		println(">>>>>>>CARTA1");
+        carta1.printInfoCarta();
+		println(">>>>>>>CARTA2");
+         carta2.printInfoCarta();	
+		println(">>>>>>>CARTA3");
+         carta3.printInfoCarta();
+
+    }
+
+	 
+} 
+
+public class Carta {
+	int color;
+	int numero;
+	int numeroTipo;
  
-
-	public void imprimirInfo(){
-		println("unoo: ", uno);		
-		println("doss: ", dos);		
-		println("tresss: ", this.tres);
-		println("cuaa: ", cuatro);		
+	public Carta(int color, int numero, int numeroTipo) {
+		 this.color = color;
+		 this.numero = numero;
+		 this.numeroTipo = numeroTipo;
+		//  printInfoCarta();
 	}
-
+	public void printInfoCarta(){
+        println("Color: ", color);
+        println("Numero: ", numero);
+        println("#tipo: ", numeroTipo);
+	}
+    
+	public int getColor(){
+		return this.color;
+	}
+	public int getNumero(){
+		return this.numero;
+	}
+	public int getNumeroTipo(){
+		return this.numeroTipo;
+	}
+ 
 }
 
  
-
- 
-
-
 %%PROGRAMA
 #include "JAVA.*"  
 int x = 12;
@@ -85,11 +71,15 @@ int y = 6;
 int z = 9;
 int total = 88;
 
-	JAVA.sumar call1();
-
- 
+	 JAVA.sumar      call1(x, y, z);
+	  
 void main()
-{ 	 
-	 
+{ 	   
+	JAVA.call1.crearCartas();
+
+    
+    
 	
 }
+
+ 

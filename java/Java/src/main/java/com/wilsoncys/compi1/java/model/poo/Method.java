@@ -129,8 +129,9 @@ public class Method extends Instruction{
     public Object createC3D(Arbol arbol, String anterior) {
         String armed = "";
         C3d_Java c = arbol.getJava();
-        
-
+ 
+         
+        String ambitoAnt = arbol.getCurrentAmbit().get(1);
         arbol.setCurrentAmbit(this.ambito);
         
         String bodyMet = "";
@@ -139,11 +140,13 @@ public class Method extends Instruction{
                 continue;
             }
             bodyMet += (String)ins.createC3D(arbol, anterior);
-            arbol.setCurrentAmbit(this.getAmbito());
+//            arbol.setCurrentAmbit(this.getAmbito());
+            arbol.getCurrentAmbit().set(1, ambitoAnt);
 
         }
         
-        armed += c.c3d_metodo("java_" + this.ambito.get(1) +"_"+ id, bodyMet);
+        armed += c.c3d_metodo("java_" + ambitoAnt +"_"+ id, bodyMet);
+        
             
         if(!isCreate){
             arbol.Print(armed);

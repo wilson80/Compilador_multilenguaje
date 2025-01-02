@@ -24,6 +24,7 @@ import com.wilsoncys.compi1.java.model.simbolo.categoria;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -224,18 +225,25 @@ public class Call extends Instruction{
         
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
+
         String armed = "";
         
                            //llamada simple calcular();
         if(llamada == null){
+
             armed += simpleCall(arbol, anterior);
-        }
+              
+        } 
 
         
         
                                     // int uno = objeto1.getCui();  
                                     //encontrar el simbolo del objeto
         if(parametersExp == null){
+
+//            JOptionPane.showMessageDialog(null, "iniii: "
+//                        + arbol.getCurrentAmbit().get(1)); 
+            
             C3d_Java c =  arbol.getJava();
             Simbolo sym0 = null;
 
@@ -253,6 +261,10 @@ public class Call extends Instruction{
                 }
             }
             
+                       
+            
+            String currentAmbit = arbol.getCurrentAmbit().get(1);  
+                                            //buscando el tipo del objeto
             if(sym0.getInstruction() instanceof Statement met){
                 arbol.getCurrentAmbit().set(1, met.tipo.getTypeString());
 //                arbol.setSizeHeap(3);
@@ -274,13 +286,18 @@ public class Call extends Instruction{
                         //interpretar la llamada
             armed += llamada.createC3D(arbol, anterior);
             
+            arbol.getCurrentAmbit().set(1, currentAmbit);
+            
+            
+           
+            
+             
 //            arbol.setSizeHeap(cantAttbCurrent);
             
         }
         
-        
-        
-        
+
+         
         return armed;
     }
     
@@ -292,14 +309,13 @@ public class Call extends Instruction{
     
     
     public Object simpleCall(Arbol arbol, String anterior) {
+
         String armed = "";
         C3d_Java c =  arbol.getJava();
 
         String id_Methodo = "java"  + arbol.getCurrentAmbit().get(1) + this.id;
                                             //extrayendo los params
-        if(this.id.equals("imprimirInfo")){
-            JOptionPane.showMessageDialog(null, "idddd MET: " + id_Methodo);
-        }                                            
+                                            
         for (Instruction exps : parametersExp) {
             if(exps instanceof Nativo n){        
 
@@ -375,7 +391,7 @@ public class Call extends Instruction{
             
         } 
   
-        
+  
         return armed;
     }
 

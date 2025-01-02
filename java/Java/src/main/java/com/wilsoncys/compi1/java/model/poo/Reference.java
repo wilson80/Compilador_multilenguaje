@@ -255,7 +255,7 @@ public class Reference extends Instruction{
         armed+=c.c3d_ptrTemp(arbol.attbClassJava);
                                             //obtener valor de la referencia
         armed+=c.c3d_accesTemp("", 0);
- 
+        
  
         
         return armed;

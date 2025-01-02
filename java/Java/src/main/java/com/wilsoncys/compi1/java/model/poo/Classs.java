@@ -275,7 +275,7 @@ import javax.swing.JOptionPane;
         //set a la referencia (stack[0])
         armed+= c.c3d_asignVal("", 0);
         
-        
+//         List<String> currentAmbito = arbol.getCurrentAmbit();
         arbol.setCurrentAmbit(this.getAmbito());
         for (Instruction ins : instrucciones) {
             if(ins instanceof Statement st){
@@ -323,6 +323,11 @@ import javax.swing.JOptionPane;
             arbol.Print(armed);
             mainEcontrado.setIsCreate(true);
         }
+        
+//        if(currentAmbito.size() != 0){
+//            arbol.setAmbito(currentAmbito);
+//        } 
+        
         return "";
     }
 

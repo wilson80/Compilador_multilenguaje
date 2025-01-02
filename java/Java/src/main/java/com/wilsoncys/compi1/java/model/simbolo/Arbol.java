@@ -15,6 +15,8 @@ import com.wilsoncys.compi1.java.model.poo.Mainn;
 import com.wilsoncys.compi1.java.model.programa.ClasesJava;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
 import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -60,7 +62,8 @@ public class Arbol {
         this.consola = "";
         this.tablaGlobal = new TablaSimbolos();
         this.errores = new LinkedList<>();
-        this.functionsPascal = new LinkedList<>();      
+        this.functionsPascal = new LinkedList<>();   
+        this.currentAmbit = new ArrayList<>();
         this.count = 0;
         cMain = new C3d();
         java = new C3d_Java();
