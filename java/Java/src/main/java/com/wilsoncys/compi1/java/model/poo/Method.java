@@ -130,9 +130,11 @@ public class Method extends Instruction{
         String armed = "";
         C3d_Java c = arbol.getJava();
  
-         
+
+        
         String ambitoAnt = arbol.getCurrentAmbit().get(1);
         arbol.setCurrentAmbit(this.ambito);
+
         
         String bodyMet = "";
         for (Instruction ins : instrucciones) {

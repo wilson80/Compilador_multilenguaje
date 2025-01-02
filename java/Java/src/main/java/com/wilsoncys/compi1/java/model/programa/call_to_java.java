@@ -6,6 +6,7 @@ package com.wilsoncys.compi1.java.model.programa;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores; 
+import com.wilsoncys.compi1.java.model.instrucciones.Statement;
 import com.wilsoncys.compi1.java.model.poo.Functionss;
 import com.wilsoncys.compi1.java.model.poo.Method;
 import com.wilsoncys.compi1.java.model.programa.expresiones.AccessC;
@@ -75,6 +76,7 @@ public class call_to_java extends Instruction{
     
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
+               
         String armed = "";
         C3d c =  arbol.getC3d();
         
@@ -87,6 +89,16 @@ public class call_to_java extends Instruction{
         }
         
         idObject = ((InstanceJava)sym.getInstruction()).getIdClase();
+        
+        
+ 
+                                        //buscando el tipo del objeto
+        if(sym.getInstruction() instanceof InstanceJava met){
+            arbol.getCurrentAmbit().set(1, met.tipo.getTypeString());
+//                arbol.setSizeHeap(3);
+        }        
+        
+        
         
                 //set a la referencia (stack[0]) 
         armed+= c.c3d_acces(armed, sym.getDir());
@@ -118,7 +130,9 @@ public class call_to_java extends Instruction{
                                                             //stack temp
         armed+=c.c3d_ptrTemp(arbol.attbPrincipal);
         
-        
+           
+ 
+    //        arbol.setAmbito(ambito);
                                     //create al metodo/funcion
         Simbolo symMethod = arbol.getSym(id_Methodo);
         int posIni = 0;
@@ -127,6 +141,9 @@ public class call_to_java extends Instruction{
             symMethod.getInstruction().createC3D(arbol, anterior);
             posIni = 3;   
         }else if(symMethod.getCat().equals(categoria.METHOD)){
+           
+        
+            
             ((Method)symMethod.getInstruction()).setIdClase(idObject);
             symMethod.getInstruction().createC3D(arbol, anterior);
             posIni = 2;   
@@ -151,6 +168,7 @@ public class call_to_java extends Instruction{
             
         }
         
+
         
         return armed;
     }

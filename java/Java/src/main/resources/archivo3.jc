@@ -9,7 +9,9 @@ public class sumar {
     Carta carta1;
     Carta carta2;
     Carta carta3;
-
+	Simple sim1;
+	Simple sim2;
+	
 	public sumar(int uno, int dos, int tres) {
 		 this.uno = uno;
 		 this.dos = dos;
@@ -21,13 +23,33 @@ public class sumar {
         carta1 = new Carta(1,2,3);
         carta2 = new Carta(4,5,6);
          carta3 = new Carta(7,8,9);
+		sim1 = new Simple(uno, dos);
+		sim2 = new Simple(44, this.dos);
 		
+
+
 		println(">>>>>>>CARTA1");
         carta1.printInfoCarta();
 		println(">>>>>>>CARTA2");
          carta2.printInfoCarta();	
 		println(">>>>>>>CARTA3");
-         carta3.printInfoCarta();
+		carta3.printInfoCarta();
+		
+		
+		println("Simpleeeeeeeeeeeee");
+		println("uno: ", sim1.getNumber());
+		println("uno: ", sim1.getCarne());
+
+		println("uno: ", sim2.getNumber());
+		println("uno: ", sim2.getCarne());
+
+
+
+		println("Simpleeeeeeeeeeeee");
+		
+
+
+
 
     }
 
@@ -63,6 +85,23 @@ public class Carta {
  
 }
 
+
+public class Simple{
+	int number;
+	int carne;
+	public Simple(int a, int b){
+		this.number = a;
+		this.carne = b;
+	}	
+	public int getNumber(){
+		return this.number;	
+	}
+	public int getCarne(){
+		return this.carne;	
+	}
+
+}
+
  
 %%PROGRAMA
 #include "JAVA.*"  
@@ -72,10 +111,14 @@ int z = 9;
 int total = 88;
 
 	 JAVA.sumar      call1(x, y, z);
+	 JAVA.Simple      call2(4,3);
 	  
 void main()
 { 	   
 	JAVA.call1.crearCartas();
+	total = JAVA.call2.getNumber();
+	printf("algo: %d", total);
+
 
     
     

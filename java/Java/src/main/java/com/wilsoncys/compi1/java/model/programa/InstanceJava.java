@@ -77,6 +77,7 @@ public class InstanceJava extends Instruction{
     
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
+ 
         String armed = "";
         C3d c =  arbol.getC3d();
         
@@ -107,7 +108,12 @@ public class InstanceJava extends Instruction{
 
         
         arbol.getClasesJava().getclase(idClase).setId_constructor(id_constructor);
-            
+        
+        
+        this.tipo.setTipo(tipoDato.OBJECT);
+        this.tipo.setIdObjeto(idClase);
+        
+        
                                                             //stack temp
         armed+=c.c3d_ptrTemp(arbol.attbPrincipal);
         
