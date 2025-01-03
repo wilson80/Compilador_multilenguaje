@@ -58,6 +58,11 @@ public class C3d_Java {
         String armed = c3d_newVar() + ASSIG + val1+OPRT+val2 + SEMIC;
         return  armed;
     }
+    public String c3d_operationRelation(String val1, String val2){
+        String armed = c3d_newVarCond()+ ASSIG + val1+OPRT+val2 + SEMIC;
+        return  armed;
+    }
+    
     public String c3d_accesParam(String val, int dir){
         String armed = c3d_newVar() + ASSIG + PTR +MAS+dir + SEMIC;
         armed += c3d_newVar() + ASSIG + c3d_stack("w" + (countCreateVar-2))  + SEMIC +saltoLinea;
@@ -172,6 +177,12 @@ public class C3d_Java {
         countCreateVar++;
         return varInt;
     } 
+    private String c3d_newVarCond(){
+        String varInt = "bool w" + countCreateVar;
+//        ptrTemp = varInt;
+        countCreateVar++;
+        return varInt;
+    } 
     
     public String c3d_stack(String i){
         String BR_L = "[";
@@ -234,6 +245,27 @@ public class C3d_Java {
     public String callJava(String id){
         return  "java_" + id + "()" +  SEMIC;
     }
+    
+    public String cond_If(){
+        String armed = "";
+          armed =  "if" + PAR_L +varsParams.getFirst() + ">" + "0"+ PAR_R + 
+                                            "goto " + "if" + countCreateVar + SEMIC  ;
+          countCreateVar++;
+
+        varsParams.removeFirst();
+        
+        
+        return armed;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

@@ -7,10 +7,12 @@ package com.wilsoncys.compi1.java.model.expresiones;
 import com.wilsoncys.compi1.java.model.expresiones.Enums.Relational_LogicalOperations;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
+import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
+import java.util.LinkedList;
 /**
  *
  * @author Jonwil
@@ -486,7 +488,81 @@ public class OperateRelacionales extends Instruction {
     
         @Override
     public Object createC3D(Arbol arbol, String anterior) {
-        return anterior;
+         String armed = "";
+        String op1 = "";
+        String op2 = "";
+          
+        C3d_Java c=  arbol.getJava();
+        c.varsParams = new LinkedList<>();
+        
+        
+        if(operando1 instanceof Nativo){        
+            operando1.createC3D(arbol, anterior);   //inser en la lista
+            op1 = c.varsParams.get(0);
+            c.varsParams.removeFirst();
+            armed+=c.c3d_asignAlone(op1);
+            op1 = c.varsParams.get(0);
+            c.varsParams.removeFirst();
+            
+        }else{
+            armed+=operando1.createC3D(arbol, anterior);
+            op1 = c.varsParams.get(0);
+            c.varsParams.removeFirst();
+            
+        }
+        
+        if(operando2 instanceof Nativo){            
+            operando2.createC3D(arbol, anterior);   //inser en la lista
+            op2 = c.varsParams.get(0);
+            c.varsParams.removeFirst();
+            armed+=c.c3d_asignAlone(op2);
+            op2 = c.varsParams.get(0);
+            c.varsParams.removeFirst();
+        }else{
+            armed+=operando2.createC3D(arbol, anterior);
+            op2 = c.varsParams.get(0);
+            c.varsParams.removeFirst();
+        }
+        
+        
+           
+         switch (relacion) {
+                            case MAYOR->{
+                                c.setOPRT(">");
+                                break;
+                            }
+                            case MENOR->{
+                                c.setOPRT("<");
+                                break;
+                            }   
+                            case MAYOR_IGUAL->{
+                                c.setOPRT(">=");
+                                break;
+                            }
+                            case MENOR_IGUAL->{
+                                c.setOPRT("<=");
+                                break;
+                            }
+                            case IGUALA->{
+                                c.setOPRT("==");
+                                break;
+                            }
+                            case DIFERENTEQUE->{
+                                c.setOPRT("!=");
+                                break;
+                            }
+                            default->{
+                                return  new Errores("SEMANTICO","al operar entero con Entero", this.line, this.col );
+ 
+                            }
+                        }
+        
+        armed+=c.c3d_operationRelation(op1, op2);
+        c.varsParams.add("w"+(arbol.java.getContador()-1));  //guarda el id de la var q contiene el resultado
+
+         
+        
+        return armed;
     }
     
 }

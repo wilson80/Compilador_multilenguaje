@@ -6,6 +6,7 @@ package com.wilsoncys.compi1.java.model.instrucciones;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
+import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
@@ -41,7 +42,6 @@ public class IF extends Instruction{
         super(new Tipo(tipoDato.VOID), linea, col);
         this.expression = expression;
         this.instructionss = instructionss;
-        this.instructionsElse = instructionsElse;
         this.elif = elif;
     }
     
@@ -144,13 +144,60 @@ public class IF extends Instruction{
         return "";
     }
     
-        public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+    public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+              
         return null;
     }
     
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
-        return anterior;
+        String armed = "";
+        C3d_Java c = arbol.getJava();
+        
+        //create a la expresion 
+        armed += expression.createC3D(arbol, anterior);
+
+//         condicion  goto if
+          String idIf = "if" + c.countCreateVar;
+          armed+= c.cond_If();
+          
+//        goto salida
+        String idSalida= "salida" + c.countCreateVar;
+        c.countCreateVar++;
+        armed+= "goto " + idSalida +  ";\n";
+        
+        
+//        label if
+        armed+= idIf +  ":\n";
+    //          instrucciones del if
+        for (Instruction instructions : instructionss) {
+            if(instructions ==null){
+                continue;
+            }
+            armed+= instructions.createC3D(arbol, anterior);
+//            arbol.getCurrentAmbit().set(1, ambitoAnt);
+
+        }
+    
+    //          label salida
+        armed+= idSalida +  ":\n";
+
+            
+             
+        if(instructionsElse!=null){  //instrucciones del else 
+
+
+        }else if(elif!=null){   // instrucciones del Elif
+
+
+
+        }
+            
+             
+        
+         
+        
+        return armed;
     }
     
 }
