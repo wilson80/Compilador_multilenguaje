@@ -14,14 +14,47 @@ public class sumar {
 	}
 
 	public void crearCartas(){ 
-      
-		println("aquiiiii");
-		
-		if(uno==0){
-			println("dentro if");
+		int a = 10;
+		int b = 5;
+
+		println("test de else simple"); 
+		if(a>b){
+			println("444 es mayor que 2");
+		}else{
+			println("else and");
+			
 		}
 		
-		println("otro codifgo");
+		
+		println("test de AND"); 
+		if(a>b && 1>2){
+			println("444 es mayor que 2");
+		}else{
+			println("else and");
+			
+		}
+		
+		println("test de OR");
+		if(1>1 || a>2){
+			println("444 es mayor que 2");
+		}else{
+			println("else ORR");
+		}
+		
+		println("test de elifff");
+		if(1>1 || 1>2){
+			println("444 es mayor que 2");
+		}else if(2>3){
+			println("elifff");
+		}else{
+			println("else despues del elif");
+		}
+		
+
+
+		println("resto codifgo");
+
+
  
 
     }

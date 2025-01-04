@@ -246,14 +246,13 @@ public class C3d_Java {
         return  "java_" + id + "()" +  SEMIC;
     }
     
-    public String cond_If(){
+    public String cond_If(String op1, String op2, String labelif, String labelSalida){
         String armed = "";
-          armed =  "if" + PAR_L +varsParams.getFirst() + ">" + "0"+ PAR_R + 
-                                            "goto " + "if" + countCreateVar + SEMIC  ;
-          countCreateVar++;
-
-        varsParams.removeFirst();
+        armed =  "if" + PAR_L + op1;
+        armed+= OPRT + op2 + PAR_R + 
+                                "goto " + labelif+ SEMIC;
         
+        armed+= "goto " + labelSalida + SEMIC;
         
         return armed;
     }

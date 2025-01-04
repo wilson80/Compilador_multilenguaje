@@ -6,6 +6,8 @@ package com.wilsoncys.compi1.java.model.instrucciones;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
+import com.wilsoncys.compi1.java.model.expresiones.LogicalOperations;
+import com.wilsoncys.compi1.java.model.expresiones.OperateRelacionales;
 import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
@@ -154,43 +156,74 @@ public class IF extends Instruction{
         String armed = "";
         C3d_Java c = arbol.getJava();
         
-        //create a la expresion 
-        armed += expression.createC3D(arbol, anterior);
-
-//         condicion  goto if
-          String idIf = "if" + c.countCreateVar;
-          armed+= c.cond_If();
-          
-//        goto salida
+        String idIf = "if" + c.countCreateVar;
+        c.countCreateVar++;
         String idSalida= "salida" + c.countCreateVar;
         c.countCreateVar++;
-        armed+= "goto " + idSalida +  ";\n";
         
+        String idElse= "ifElse" + c.countCreateVar;
+        c.countCreateVar++;
+          
+        
+        //create a la condicion 
+        if(this.expression instanceof OperateRelacionales){
+          armed+= expression.createC3D(arbol, anterior);
+          String op1 = c.varsParams.get(0); 
+          c.varsParams.removeFirst();
+          String op2 = c.varsParams.get(0);  
+          c.varsParams.removeFirst();
+          
+          if(instructionsElse==null){
+              armed+= c.cond_If(op1, op2, idIf, idSalida);
+          }else{
+              armed+= c.cond_If(op1, op2, idIf, idElse);
+          }
+
+        }else if(this.expression instanceof LogicalOperations log){
+            if(instructionsElse!=null){
+                log.setElseIns(true);
+            }
+            armed += log.createC3D(arbol, anterior);
+        }
+                                
         
 //        label if
         armed+= idIf +  ":\n";
-    //          instrucciones del if
+                                          //instrucciones del IF
         for (Instruction instructions : instructionss) {
             if(instructions ==null){
                 continue;
             }
             armed+= instructions.createC3D(arbol, anterior);
 //            arbol.getCurrentAmbit().set(1, ambitoAnt);
-
-        }
     
-    //          label salida
-        armed+= idSalida +  ":\n";
+        }
+        armed+= "goto " + idSalida + ";\n";
+        
+        
+        if(instructionsElse!=null){         //instrucciones del ELSE 
+        //        label else
+        armed+= idElse +  ":\n";      
+        for (Instruction instructions : instructionsElse) {
+            if(instructions ==null){
+                continue;
+            }
+            armed+= instructions.createC3D(arbol, anterior);
+//            arbol.getCurrentAmbit().set(1, ambitoAnt);
+    
+        }
 
-            
-             
-        if(instructionsElse!=null){  //instrucciones del else 
-
+//                      label salida
+            armed+= idSalida +  ":\n";
 
         }else if(elif!=null){   // instrucciones del Elif
 
 
 
+        }else{
+//                      label salida
+            armed+= idSalida +  ":\n";
+            
         }
             
              

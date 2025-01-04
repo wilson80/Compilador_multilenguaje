@@ -13,6 +13,10 @@ public class NewClass {
         int algo = 10;
         
         
+        if(4>1 && 2>=4 || 3==3){
+            System.out.println("dentro if");
+        }
+        
         
         
         

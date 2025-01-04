@@ -68,20 +68,24 @@ heap[w25] = w22;
 }
 
 void java_sumar_crearCartas(){
-cout<<"aquiiiii";
-cout<<endl;
-int w26 = 12;
+int w26 = ptr + 3;
+stack[w26] = 10;
 
-int w27 = 11;
+int w27 = ptr + 4;
+stack[w27] = 5;
 
-bool w28 = w26>w27;
-if(w28>0)goto if29;
-goto salida30;
-if29:
-cout<<"dentro if";
+cout<<"test de elifff";
 cout<<endl;
-salida30:
-cout<<"otro codifgo";
+if(1>1)goto if28;
+goto cmpOp231;
+cmpOp231:
+if(1>2)goto if28;
+goto ifElse30;
+if28:
+cout<<"444 es mayor que 2";
+cout<<endl;
+goto salida29;
+cout<<"resto codifgo";
 cout<<endl;
 
 }

@@ -500,9 +500,9 @@ public class OperateRelacionales extends Instruction {
             operando1.createC3D(arbol, anterior);   //inser en la lista
             op1 = c.varsParams.get(0);
             c.varsParams.removeFirst();
-            armed+=c.c3d_asignAlone(op1);
-            op1 = c.varsParams.get(0);
-            c.varsParams.removeFirst();
+//            armed+=c.c3d_asignAlone(op1);
+//            op1 = c.varsParams.get(0);
+//            c.varsParams.removeFirst();
             
         }else{
             armed+=operando1.createC3D(arbol, anterior);
@@ -515,16 +515,14 @@ public class OperateRelacionales extends Instruction {
             operando2.createC3D(arbol, anterior);   //inser en la lista
             op2 = c.varsParams.get(0);
             c.varsParams.removeFirst();
-            armed+=c.c3d_asignAlone(op2);
-            op2 = c.varsParams.get(0);
-            c.varsParams.removeFirst();
+//            armed+=c.c3d_asignAlone(op2);
+//            op2 = c.varsParams.get(0);
+//            c.varsParams.removeFirst();
         }else{
             armed+=operando2.createC3D(arbol, anterior);
             op2 = c.varsParams.get(0);
             c.varsParams.removeFirst();
         }
-        
-        
            
          switch (relacion) {
                             case MAYOR->{
@@ -557,10 +555,10 @@ public class OperateRelacionales extends Instruction {
                             }
                         }
         
-        armed+=c.c3d_operationRelation(op1, op2);
-        c.varsParams.add("w"+(arbol.java.getContador()-1));  //guarda el id de la var q contiene el resultado
-
-         
+//        armed+=c.c3d_operationRelation(op1, op2);
+        c.clearVarParams();
+        c.varsParams.add(op1);   
+        c.varsParams.add(op2);
         
         return armed;
     }
