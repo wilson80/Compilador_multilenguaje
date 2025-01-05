@@ -10,10 +10,9 @@ package com.wilsoncys.compi1.java.model.instrucciones;
  */
 public class NewClass {
     public static void main(String[] args) {
-        int algo = 10;
+        String algo = "";
         
-        
-        if(4>1 && 2>=4 || 3==3){
+        if(algo.isEmpty()){
             System.out.println("dentro if");
         }
         

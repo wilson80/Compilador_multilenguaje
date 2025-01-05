@@ -14,6 +14,7 @@ import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,8 +24,9 @@ public class IF extends Instruction{
     private Instruction expression;
     private LinkedList<Instruction> instructionss;
     private LinkedList<Instruction> instructionsElse;
-
     private Instruction  elif;
+    private String idIf = "";
+    private String idSalida = "";
                                                      //simple IF
     public IF(Instruction expression, LinkedList<Instruction> instructionss, int linea, int col) {
         super(new Tipo(tipoDato.VOID), linea, col);
@@ -155,13 +157,19 @@ public class IF extends Instruction{
     public Object createC3D(Arbol arbol, String anterior) {
         String armed = "";
         C3d_Java c = arbol.getJava();
+       
+        if(idIf.isEmpty()){
+            idIf = "if" + c.countCreateVar;
+            c.countCreateVar++;
+        }
         
-        String idIf = "if" + c.countCreateVar;
+        if(idSalida.isEmpty()){
+            idSalida= "salida" + c.countCreateVar;
+            c.countCreateVar++;
+        }
+        String idElse= "else" + c.countCreateVar;
         c.countCreateVar++;
-        String idSalida= "salida" + c.countCreateVar;
-        c.countCreateVar++;
-        
-        String idElse= "ifElse" + c.countCreateVar;
+        String idElif= "elif" + c.countCreateVar;
         c.countCreateVar++;
           
         
@@ -173,23 +181,35 @@ public class IF extends Instruction{
           String op2 = c.varsParams.get(0);  
           c.varsParams.removeFirst();
           
-          if(instructionsElse==null){
+          if(instructionsElse==null && elif==null){//simple if
               armed+= c.cond_If(op1, op2, idIf, idSalida);
           }else{
-              armed+= c.cond_If(op1, op2, idIf, idElse);
-          }
-
+              if(elif!=null){           //elif
+                  armed+= c.cond_If(op1, op2, idIf, "label" + idElif);
+              }else{                //else
+                  armed+= c.cond_If(op1, op2, idIf, idElse);
+              }
+          } 
+          
+                                            //LOGICAL op
         }else if(this.expression instanceof LogicalOperations log){
             if(instructionsElse!=null){
                 log.setElseIns(true);
             }
+            if(elif!=null){
+                log.setElifIns(true);
+            }
+            log.setIdIf(idIf);
+            log.setIdSalida(idSalida);
+            log.setIdElse(idElse);
+            log.setIdElif(idElif);
             armed += log.createC3D(arbol, anterior);
         }
-                                
+        
         
 //        label if
-        armed+= idIf +  ":\n";
-                                          //instrucciones del IF
+        armed+= idIf +  ":{\n";
+                                          //INS del IF
         for (Instruction instructions : instructionss) {
             if(instructions ==null){
                 continue;
@@ -198,32 +218,38 @@ public class IF extends Instruction{
 //            arbol.getCurrentAmbit().set(1, ambitoAnt);
     
         }
+        armed += "}\n";
         armed+= "goto " + idSalida + ";\n";
         
         
-        if(instructionsElse!=null){         //instrucciones del ELSE 
-        //        label else
-        armed+= idElse +  ":\n";      
-        for (Instruction instructions : instructionsElse) {
-            if(instructions ==null){
-                continue;
-            }
-            armed+= instructions.createC3D(arbol, anterior);
-//            arbol.getCurrentAmbit().set(1, ambitoAnt);
-    
-        }
+        
+        if(instructionsElse!=null){         //INS del ELSE 
+            //label else
+            armed+= idElse +  ":{\n";      
+            for (Instruction instructions : instructionsElse) {
+                if(instructions ==null){
+                    continue;
+                }
+                armed+= instructions.createC3D(arbol, anterior);
+    //            arbol.getCurrentAmbit().set(1, ambitoAnt);
 
-//                      label salida
+            }
+            armed += "}\n";
+
+    //                      label salida
             armed+= idSalida +  ":\n";
 
-        }else if(elif!=null){   // instrucciones del Elif
-
-
-
+        }else if(elif!=null){                        //INS del Elif
+            armed+= "label"+idElif+":\n";
+                    
+            ((IF)elif).setIdIf(idElif);
+            ((IF)elif).setIdSalida(idSalida);
+            armed += elif.createC3D(arbol, anterior);
+            
+            
         }else{
 //                      label salida
             armed+= idSalida +  ":\n";
-            
         }
             
              
@@ -232,5 +258,17 @@ public class IF extends Instruction{
         
         return armed;
     }
+
+    public void setIdIf(String idIf) {
+        this.idIf = idIf;
+    }
+
+    public void setIdSalida(String idSalida) {
+        this.idSalida = idSalida;
+    }
+    
+    
+    
+     
     
 }

@@ -74,17 +74,50 @@ stack[w26] = 10;
 int w27 = ptr + 4;
 stack[w27] = 5;
 
-cout<<"test de elifff";
+cout<<"test  de  elifff";
 cout<<endl;
-if(1>1)goto if28;
-goto cmpOp231;
-cmpOp231:
-if(1>2)goto if28;
-goto ifElse30;
-if28:
+int w32 = ptr + 0;
+int w33 = stack[w32];
+
+int w34 = w33 + 1;
+int w35 = heap[w34];
+
+int w36 = ptr + 0;
+int w37 = stack[w36];
+
+int w38 = w37 + 0;
+int w39 = heap[w38];
+
+if(1>1)goto cmpOp240;
+goto labelelif31;
+cmpOp240:
+if(w35>w39)goto if28;
+goto labelelif31;
+if28:{
 cout<<"444 es mayor que 2";
 cout<<endl;
+}
 goto salida29;
+labelelif31:
+if(2>3)goto elif31;
+goto else41;
+elif31:{
+cout<<"elifff";
+cout<<endl;
+}
+goto salida29;
+else41:{
+cout<<"else despues del elif: ";
+int w43 = ptr + 0;
+int w44 = stack[w43];
+
+int w45 = w44 + 0;
+int w46 = heap[w45];
+
+cout<<w46;
+cout<<endl;
+}
+salida29:
 cout<<"resto codifgo";
 cout<<endl;
 

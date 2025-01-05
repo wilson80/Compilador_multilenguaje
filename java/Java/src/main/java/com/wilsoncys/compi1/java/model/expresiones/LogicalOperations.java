@@ -32,8 +32,16 @@ public class LogicalOperations extends Instruction{
     private Object operL = null;
     private Object operR = null;
     private boolean elseIns = false;
+    private boolean elifIns = false;
 
-
+    
+    private String idIf = ""; 
+    private String idSalida= ""; 
+    private String idElse= "";
+    private String idElif= "";
+    
+    
+    
     //cualquier operacion menos negacion
     public LogicalOperations(Instruction operando1, Instruction operando2, Relational_LogicalOperations operator, int line, int col) {
         super(new Tipo(tipoDato.BOOLEANO), line, col);
@@ -120,25 +128,16 @@ public class LogicalOperations extends Instruction{
         
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
-        
         String armed = "";
         String op1 = "";
         String op2 = "";
         String ope1 = "";
         String ope2 = "";
         
-          
         C3d_Java c=  arbol.getJava();
         c.varsParams = new LinkedList<>();
         
-        String idIf = "if" + (c.countCreateVar-3);
-        String idSalida= "salida" + (c.countCreateVar-2);
-        String idElse= "ifElse" + (c.countCreateVar-1);
-       
-        
-        
         //op1
- 
         armed+=operando1.createC3D(arbol, anterior);
         op1 = c.varsParams.get(0);
         c.varsParams.removeFirst();
@@ -155,11 +154,16 @@ public class LogicalOperations extends Instruction{
         String cmpOp2 = "cmpOp2" + c.countCreateVar;
         c.countCreateVar++;
         if(operator == Relational_LogicalOperations.AND){
-            if(elseIns){
-                armed+= c.cond_If(op1, op2,cmpOp2, idElse); 
-            }else{
+            if(!elseIns  && !elifIns){
                 armed+= c.cond_If(op1, op2,cmpOp2, idSalida); 
             }
+            if(elseIns){
+                armed+= c.cond_If(op1, op2,cmpOp2, idElse); 
+            } 
+            if(elifIns){
+                armed+= c.cond_If(op1, op2,cmpOp2, "label" + idElif); 
+            }
+            
         }else if(operator == Relational_LogicalOperations.OR){
             armed+= c.cond_If(op1, op2, idIf, cmpOp2);       
         }
@@ -168,11 +172,17 @@ public class LogicalOperations extends Instruction{
 
         //op2
         armed += cmpOp2 + ":\n";
-                
+        
+        if(!elifIns && !elseIns){
+            armed += c.cond_If(ope1, ope2, idIf, idSalida);
+        }
+        
         if(elseIns){
-            armed+= c.cond_If(ope1, ope2,idIf, idElse);
-        }else{
-            armed+= c.cond_If(ope1, ope2, idIf, idElse);       
+            armed += c.cond_If(ope1, ope2, idIf, idElse);
+        }
+        
+        if(elifIns){
+            armed+= c.cond_If(ope1, ope2, idIf, "label" + idElif);       
         }
         
         
@@ -187,6 +197,31 @@ public class LogicalOperations extends Instruction{
     public void setElseIns(boolean elseIns) {
         this.elseIns = elseIns;
     }
+
+    public void setElifIns(boolean elifIns) {
+        this.elifIns = elifIns;
+    }
+
+    public void setIdIf(String idIf) {
+        this.idIf = idIf;
+    }
+
+    public void setIdElse(String idElse) {
+        this.idElse = idElse;
+    }
+
+    public void setIdSalida(String idSalida) {
+        this.idSalida = idSalida;
+    }
+
+    public void setIdElif(String idElif) {
+        this.idElif = idElif;
+    }
+    
+    
+    
+
+    
     
     
      

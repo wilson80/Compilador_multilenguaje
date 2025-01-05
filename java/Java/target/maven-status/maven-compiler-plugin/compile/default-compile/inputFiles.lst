@@ -1,110 +1,110 @@
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/Main.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/control/Control.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/control/CppRunn.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/control/IniciarAnalizadores.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/analisis/NewClass.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/analisis/colorear2.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/analisis/parser.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/analisis/scanner.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/analisis/sym.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/asbtracto/Instruction.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/excepciones/Errores.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/AccesVector.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Access.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Aritmeticas/Division.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Aritmeticas/Modulee.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Aritmeticas/Multiplicacion.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Aritmeticas/Raised.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Aritmeticas/Resta.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Aritmeticas/Suma.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Casting.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Enums/OperadoresAritmeticos.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Enums/Relational_LogicalOperations.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Enums/TypeVar.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Input.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/InstanceStruct.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/LogicalOperations.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Nativo.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Negacion.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/OperateRelacionales.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/AssignmentVectores.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/Assignmentt.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/CaseMatch.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/CiclicaFor.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/CiclicaWhile.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/IF.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/IncreaseDecrease.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/Match.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/NewClass.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/Prints.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/Statement.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/Structs.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/VectorsStatement.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/transferBreak.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/transferContinue.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/transferReturn.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/poo/Call.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/poo/Classs.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/poo/Functionss.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/poo/Mainn.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/poo/Method.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/poo/Reference.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/poo/call_Objetcts.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/Aritmeticas/DivisionC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/Aritmeticas/ModuleeC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/Aritmeticas/MultiplicacionC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/Aritmeticas/RaisedC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/Aritmeticas/RestaC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/Aritmeticas/SumaC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/CallPascalC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/ClasesJava.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/Includes.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/InstanceJava.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/MainnC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/NewClass.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/Programa.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/ReferenceC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/call_to_java.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/expresiones/AccesVectorC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/expresiones/AccessC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/expresiones/InputC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/expresiones/LogicalOperationsC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/expresiones/NativoC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/expresiones/NegacionC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/expresiones/OperateRelacionalesC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/AssignmentVectoresC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/AssignmenttC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/CaseMatchC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/CiclicaForC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/CiclicaWhileC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/IFC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/IncreaseDecreaseC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/MatchC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/PrintsC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/StatementC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/StructsC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/VectorsStatementC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/transferBreakC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/transferContinueC.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/sC3D/C3d.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/sC3D/C3d_Java.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/Arbol.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/Simbolo.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/TablaSimbolos.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/TablaSimbolos1.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/TablaTipos.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/Tipo.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/categoria.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/tipoDato.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/visib.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/FrameReportes.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/PatronInterprete.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/SetColor.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/TextLineNumber.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/TipoT.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/VistaGeneral.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/colorInfo.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/controlColores.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/prueba.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/prueba2.java
-/media/jonwilson/Nuevo vol/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/pascal/model/PascalIns.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/Main.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/control/Control.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/control/CppRunn.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/control/IniciarAnalizadores.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/analisis/NewClass.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/analisis/colorear2.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/analisis/parser.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/analisis/scanner.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/analisis/sym.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/asbtracto/Instruction.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/excepciones/Errores.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/AccesVector.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Access.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Aritmeticas/Division.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Aritmeticas/Modulee.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Aritmeticas/Multiplicacion.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Aritmeticas/Raised.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Aritmeticas/Resta.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Aritmeticas/Suma.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Casting.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Enums/OperadoresAritmeticos.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Enums/Relational_LogicalOperations.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Enums/TypeVar.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Input.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/InstanceStruct.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/LogicalOperations.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Nativo.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Negacion.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/OperateRelacionales.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/AssignmentVectores.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/Assignmentt.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/CaseMatch.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/CiclicaFor.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/CiclicaWhile.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/IF.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/IncreaseDecrease.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/Match.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/NewClass.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/Prints.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/Statement.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/Structs.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/VectorsStatement.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/transferBreak.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/transferContinue.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/transferReturn.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/poo/Call.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/poo/Classs.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/poo/Functionss.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/poo/Mainn.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/poo/Method.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/poo/Reference.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/poo/call_Objetcts.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/Aritmeticas/DivisionC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/Aritmeticas/ModuleeC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/Aritmeticas/MultiplicacionC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/Aritmeticas/RaisedC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/Aritmeticas/RestaC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/Aritmeticas/SumaC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/CallPascalC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/ClasesJava.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/Includes.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/InstanceJava.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/MainnC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/NewClass.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/Programa.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/ReferenceC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/call_to_java.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/expresiones/AccesVectorC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/expresiones/AccessC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/expresiones/InputC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/expresiones/LogicalOperationsC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/expresiones/NativoC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/expresiones/NegacionC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/expresiones/OperateRelacionalesC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/AssignmentVectoresC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/AssignmenttC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/CaseMatchC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/CiclicaForC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/CiclicaWhileC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/IFC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/IncreaseDecreaseC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/MatchC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/PrintsC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/StatementC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/StructsC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/VectorsStatementC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/transferBreakC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/transferContinueC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/sC3D/C3d.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/sC3D/C3d_Java.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/Arbol.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/Simbolo.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/TablaSimbolos.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/TablaSimbolos1.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/TablaTipos.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/Tipo.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/categoria.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/tipoDato.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/simbolo/visib.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/FrameReportes.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/PatronInterprete.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/SetColor.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/TextLineNumber.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/TipoT.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/VistaGeneral.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/colorInfo.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/controlColores.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/prueba.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/vistas/prueba2.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/pascal/model/PascalIns.java
