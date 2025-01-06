@@ -129,7 +129,9 @@ public class Method extends Instruction{
     public Object createC3D(Arbol arbol, String anterior) {
         String armed = "";
         C3d_Java c = arbol.getJava();
- 
+        
+        String devVars = "";
+        int iniVars = c.countCreateVar;
 
         
         String ambitoAnt = arbol.getCurrentAmbit().get(1);
@@ -146,10 +148,20 @@ public class Method extends Instruction{
             arbol.getCurrentAmbit().set(1, ambitoAnt);
 
         }
-        
-        armed += c.c3d_metodo("java_" + ambitoAnt +"_"+ id, bodyMet);
-        
+        int finVars = c.countCreateVar;
+
+        for (int i = iniVars; i < finVars; i++) {
+            devVars += "int w" + i+  ";\n";
+        }
             
+        armed = devVars + "\n";
+        armed += bodyMet;
+        
+        
+        armed = c.c3d_metodo("java_" + ambitoAnt +"_"+ id, armed);
+        
+        
+        
         if(!isCreate){
             arbol.Print(armed);
             this.isCreate = true;

@@ -11,6 +11,7 @@ import com.wilsoncys.compi1.java.model.excepciones.*;
 import com.wilsoncys.compi1.java.model.poo.*; 
 import com.wilsoncys.compi1.java.model.programa.ClasesJava;
 import com.wilsoncys.compi1.java.model.programa.Programa;
+import com.wilsoncys.compi1.java.model.sC3D.C3d;
 import com.wilsoncys.compi1.java.model.simbolo.*;
 
 import java.io.BufferedReader;
@@ -112,8 +113,18 @@ public class IniciarAnalizadores {
                         continue;
                     }
                     if(ins instanceof  Programa cl){            //  creacion del programa principal
+                        
+                        C3d c3d = ast.getC3d();
+                        int iniVars = c3d.contador;
                         bodyMain += (String)cl.createC3D(ast, "");
-
+                        int finVars = c3d.contador;
+                        String devVars = "";
+                        for (int i = iniVars; i < finVars; i++) {
+                            devVars += "int w" + i+  ";\n";
+                        }
+                        String temp = bodyMain;
+                        bodyMain = devVars + "\n";
+                        bodyMain += temp;
                     }
 
 

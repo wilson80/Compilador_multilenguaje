@@ -172,13 +172,15 @@ public class C3d_Java {
     
     
     private String c3d_newVar(){
-        String varInt = "int w" + countCreateVar;
+//        String varInt = "int w" + countCreateVar;
+        String varInt = "w" + countCreateVar;
 //        ptrTemp = varInt;
         countCreateVar++;
         return varInt;
     } 
     private String c3d_newVarCond(){
-        String varInt = "bool w" + countCreateVar;
+//        String varInt = "bool w" + countCreateVar;
+        String varInt = " w" + countCreateVar;
 //        ptrTemp = varInt;
         countCreateVar++;
         return varInt;

@@ -6,11 +6,15 @@ package com.wilsoncys.compi1.java.model.instrucciones;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
+import com.wilsoncys.compi1.java.model.expresiones.LogicalOperations;
+import com.wilsoncys.compi1.java.model.expresiones.OperateRelacionales;
+import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -147,7 +151,85 @@ public Object doWhile(Arbol arbol, TablaSimbolos tabla){
     
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
-        return anterior;
+        String armed = "";
+        C3d_Java c = arbol.getJava();        
+        
+        String finWhile = "finWhile" + c.countCreateVar;
+        c.countCreateVar++;
+        
+        String idIns = "insDo" + c.countCreateVar;
+        c.countCreateVar++;
+        
+        
+        //DO
+        if(isDoWhile){
+                                //instrucciones 
+            armed+= idIns + ":{}\n";
+            for (Instruction ins : instructionss) {
+                if(ins==null){
+                    continue;
+                }
+                armed+= ins.createC3D(arbol, anterior);
+            }
+
+            //condition
+            if(this.expression instanceof OperateRelacionales){
+              armed+= expression.createC3D(arbol, anterior);
+              String op1 = c.varsParams.get(0); 
+              c.varsParams.removeFirst();
+              String op2 = c.varsParams.get(0);  
+              c.varsParams.removeFirst();
+                  armed+= c.cond_If(op1, op2, idIns, finWhile);
+
+                                      //LOGICAL op
+            }else if(this.expression instanceof LogicalOperations log){
+                log.setIdIf(idIns);
+                log.setIdSalida(finWhile);
+                armed += log.createC3D(arbol, anterior);
+            }
+         //WHILE   
+        }else{
+             String  idWhile =  "while" + c.countCreateVar ; 
+                    //label del while
+             armed+= idWhile+ ":{}\n";
+             c.countCreateVar++;
+             
+            //condicion
+            if(this.expression instanceof OperateRelacionales){
+              armed+= expression.createC3D(arbol, anterior);
+              String op1 = c.varsParams.get(0); 
+              c.varsParams.removeFirst();
+              String op2 = c.varsParams.get(0);  
+              c.varsParams.removeFirst();
+                  armed+= c.cond_If(op1, op2, idIns, finWhile);
+
+                                      //LOGICAL op
+            }else if(this.expression instanceof LogicalOperations log){
+                log.setIdIf(idIns);
+                log.setIdSalida(finWhile);
+                armed += log.createC3D(arbol, anterior);
+            }
+            
+                                        //instrucciones
+            armed+= idIns + ":{}\n";        //label ins
+            for (Instruction ins : instructionss) {
+                if(ins==null){
+                    continue;
+                }
+                armed+= ins.createC3D(arbol, anterior);
+            }
+            armed += "goto " + idWhile + ";\n";
+
+        }
+        
+        
+//        label salida
+        armed+= finWhile +":{}\n";
+  
+        
+        return armed;
     }
+    
+    
     
 }

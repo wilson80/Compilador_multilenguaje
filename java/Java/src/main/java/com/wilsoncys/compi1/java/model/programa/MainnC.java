@@ -96,6 +96,9 @@ public class MainnC extends Instruction{
         String armed = "";
         C3d c = arbol.getC3d();
         
+        String devVars = "";
+        int iniVars = c.contador;
+        
         for (Instruction ins : instrucciones) {
             armed += ins.createC3D(arbol, anterior);
         }

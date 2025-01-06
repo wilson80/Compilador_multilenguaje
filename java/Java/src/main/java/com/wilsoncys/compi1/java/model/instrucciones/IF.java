@@ -27,6 +27,7 @@ public class IF extends Instruction{
     private Instruction  elif;
     private String idIf = "";
     private String idSalida = "";
+    private boolean isElif = false;
                                                      //simple IF
     public IF(Instruction expression, LinkedList<Instruction> instructionss, int linea, int col) {
         super(new Tipo(tipoDato.VOID), linea, col);
@@ -190,7 +191,9 @@ public class IF extends Instruction{
                   armed+= c.cond_If(op1, op2, idIf, idElse);
               }
           } 
-          
+          if(isElif){
+            armed+= "}\n";
+          }
                                             //LOGICAL op
         }else if(this.expression instanceof LogicalOperations log){
             if(instructionsElse!=null){
@@ -204,6 +207,8 @@ public class IF extends Instruction{
             log.setIdElse(idElse);
             log.setIdElif(idElif);
             armed += log.createC3D(arbol, anterior);
+            //            armed+= "}\n";
+
         }
         
         
@@ -240,12 +245,12 @@ public class IF extends Instruction{
             armed+= idSalida +  ":\n";
 
         }else if(elif!=null){                        //INS del Elif
-            armed+= "label"+idElif+":\n";
+            armed+= "label"+idElif+":{\n";
                     
+            ((IF)elif).setIsElif(true);
             ((IF)elif).setIdIf(idElif);
             ((IF)elif).setIdSalida(idSalida);
             armed += elif.createC3D(arbol, anterior);
-            
             
         }else{
 //                      label salida
@@ -265,6 +270,10 @@ public class IF extends Instruction{
 
     public void setIdSalida(String idSalida) {
         this.idSalida = idSalida;
+    }
+
+    public void setIsElif(boolean isElif) {
+        this.isElif = isElif;
     }
     
     

@@ -121,6 +121,10 @@ public class Mainn extends Instruction{
     public Object createC3D(Arbol arbol, String anterior) {
         String armed = "";
         C3d_Java c = arbol.getJava();
+        
+//        String devVars = "";
+//        int iniVars = c.countCreateVar;
+        
 //        arbol.setPosReturn(1);
          
 //         JOptionPane.showMessageDialog(null, "tamanoooo:  " +arbol.attbClassJava);

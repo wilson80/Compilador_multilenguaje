@@ -10,12 +10,18 @@ package com.wilsoncys.compi1.java.model.instrucciones;
  */
 public class NewClass {
     public static void main(String[] args) {
-        String algo = "";
         
-        if(algo.isEmpty()){
-            System.out.println("dentro if");
-        }
-        
+        	int a = 10;
+		int b = 5;
+
+		      System.out.println("doo");
+		
+		do{
+			a = a-1;
+                        System.out.println("dentro de un while");
+
+		}while(a>0);
+
         
         
         

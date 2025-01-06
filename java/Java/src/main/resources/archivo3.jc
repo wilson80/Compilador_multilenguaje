@@ -17,6 +17,21 @@ public class sumar {
 		int a = 10;
 		int b = 5;
 
+		println("test  Do while"); 
+		do{
+			a = a-1;
+			println("dentro de while"); 
+
+		}while(a>0 && a!=5);
+
+		println("test while"); 
+		while(a>0){
+			a = a-1;
+			println("a es =  ",a ); 
+		} 
+ 
+ 
+
 		// println("test de else simple"); 
 		// if(a>b){
 		// 	println("444 es mayor que 2");
@@ -41,15 +56,15 @@ public class sumar {
 		// 	println("else ORR");
 		// }
 		
-		println("test de elifff");
-		if(1>1 || 1>2){
-		// if(1>2){
-			println("444 es mayor que 2");
-		}else if(2>3){
-			println("elifff");
-		}else{
-			println("else despues del elif");
-		}
+		// println("test de elifff");
+		// if(a>b || b>a){
+		// // if(1>2){
+		// 	println("444 es mayor que 2");
+		// }else if(2>3){
+		// 	println("elifff");
+		// }else{
+		// 	println("else despues del elif");
+		// }
 		
 
 

@@ -120,6 +120,10 @@ public class Functionss extends Instruction{
         String armed = "";
         C3d_Java c = arbol.getJava();
         
+        String devVars = "";
+        int iniVars = c.countCreateVar;
+
+        
         arbol.setCurrentAmbit(this.ambito);
 
         
@@ -131,15 +135,23 @@ public class Functionss extends Instruction{
             bodyMet += (String)ins.createC3D(arbol, anterior);
             arbol.setCurrentAmbit(this.getAmbito());
         }
+                            //creando la declaracion de vars del ambito
+        int finVars = c.countCreateVar;
+        for (int i = iniVars; i < finVars; i++) {
+            devVars += "int w" + i+  ";\n";
+        }
+        armed = devVars + "\n";
+        armed += bodyMet;
         
-        armed += c.c3d_metodo("java_" + this.ambito.get(1) +"_"+ id, bodyMet);
+        armed = c.c3d_metodo("java_" + this.ambito.get(1) +"_"+ id, armed);
             
         if(!isCreate){
             arbol.Print(armed);       
             isCreate = true;
         }
         
-        return "";
+        
+            return "";
     }
     
     

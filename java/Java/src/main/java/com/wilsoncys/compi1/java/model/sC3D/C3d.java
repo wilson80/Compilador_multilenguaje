@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  * @author jonwilson
  */
 public class C3d {
-    int contador = 0;
+    public int contador = 0;
     String var1 = "";
     String var2 = "";
     private String ptrTemp = "";
@@ -119,7 +119,8 @@ public class C3d {
     
     
     private String c3d_newVar(){
-        String varInt = "int w" + contador;
+//        String varInt = "int w" + contador;
+        String varInt = "w" + contador;
 //        ptrTemp = varInt;
         contador++;
         return varInt;

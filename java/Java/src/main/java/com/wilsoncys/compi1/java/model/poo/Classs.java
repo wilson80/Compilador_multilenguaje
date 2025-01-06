@@ -266,6 +266,9 @@ import javax.swing.JOptionPane;
     public Object createC3D(Arbol arbol, String anterior) {
         String armed = ""; 
         C3d_Java c = arbol.getJava(); 
+        int iniVars = c.countCreateVar; 
+
+        
         
         arbol.setSizeHeap(this.cantAttb);
         
@@ -307,7 +310,20 @@ import javax.swing.JOptionPane;
             //realizar el constructor por defecto
                     //inicializar los attb con valores por defecto
             arbol.setCurrentAmbit(mainEcontrado.getAmbito());
+            String devVars = "";
+            
             armed+=mainEcontrado.createC3D(arbol, anterior);
+            int finVars = c.countCreateVar;
+            
+
+            for (int i = iniVars; i < finVars; i++) {
+                devVars += "int w" + i+  ";\n";
+            }
+
+            String temp = armed; 
+            armed = "\n" + devVars + "\n";
+            armed += temp;
+            
         }else{
             if(contador!=0 || !(id_constructor.equals("java" + id + id))){  
                     //no hay constructor por defecto

@@ -22,7 +22,7 @@ import com.wilsoncys.compi1.java.model.programa.instrucciones.*;
 
 
 import java.util.HashMap;
-
+ 
 
 // parser
 parser code
@@ -795,7 +795,7 @@ while::= WHILE PAR_OP    EXPRESION:a   PAR_CL K_OP  InstructionES:ins K_CL
         ;
 
 do::= DO K_OP  InstructionES:ins K_CL WHILE PAR_OP    EXPRESION:a   PAR_CL SEMIC
-                {: RESULT = new CiclicaWhile(a, ins, false, aleft, aright); :}
+                {: RESULT = new CiclicaWhile(a, ins, true, aleft, aright); :}
         ;
 
 
