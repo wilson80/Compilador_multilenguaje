@@ -221,7 +221,7 @@ public class IF extends Instruction{
             }
             armed+= instructions.createC3D(arbol, anterior);
 //            arbol.getCurrentAmbit().set(1, ambitoAnt);
-    
+       
         }
         armed += "}\n";
         armed+= "goto " + idSalida + ";\n";

@@ -114,7 +114,7 @@ int w40;
 int w41;
 
 w26 = ptr + 3;
-stack[w26] = 10;
+stack[w26] = 5;
 
 w27 = ptr + 4;
 stack[w27] = 5;

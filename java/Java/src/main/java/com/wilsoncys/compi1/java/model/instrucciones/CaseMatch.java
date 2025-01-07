@@ -133,7 +133,7 @@ public class CaseMatch extends Instruction{
         } 
         
         
-                    //INSTRUCCIONES DEL case
+                                //INSTRUCCIONES DEL case
         if(this.expression != null){
             armed +=  idCase+ ":{}\n" ;
         }            
