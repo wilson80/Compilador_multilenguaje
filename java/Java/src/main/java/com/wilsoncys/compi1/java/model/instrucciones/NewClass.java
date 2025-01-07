@@ -12,70 +12,16 @@ public class NewClass {
 //    int a;
     public static void main(String[] args) {
      
-         
         
-        char a = '@';
-        System.out.println("");
-        if('@' == a ){
-            System.out.println("caracteres iguakes");
-        
-        }
-            
-        
-        
-        
-        
-        
-//        int a = 10;
-        int b = 5;
-        
-    switch (a) {
-        case 1:
+int a = 10;
 
-            break;
-            
-      
-        case 10:
-            System.out.println("a es: " + a);
-            break;
-            
-        default:
-            System.out.println("a es: " + a);
-            break;
- 
-                
-    }
+for (int i = 0; i < a; i++) {
+    System.out.println("Número: " + i);
+}
     
-    a =2;
-    
-    switch (a) {
-        case 1:
-            
-            break;
-        case 2:
-               System.out.println("segundo switchh ");
-            break;
-    }
-         
-    switch (a) {
-        default:
-               System.out.println("defaultttt");
-            break;
-    }
- 
-    switch (a) {
-      
-    }
-        
- 
-                 
-
         
         
         
-        
-                
-                
                 
                 
                 

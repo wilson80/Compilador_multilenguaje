@@ -14,72 +14,39 @@ public class sumar {
 	}
  
 	public void crearCartas(){ 
-		     
-        
-        int a = 5;
-        int b = 5;
-    println("switch completo");    
-    switch (a) {
-        case 1:
-		 println("a es: ", a);
-		break;
-      
-        case 10:
-            println("a es: ", a);
-            break;
-            
-		default:
-		println("DEFFFF a es: " ,a);
-		break;
-			
+		int i;
+		int a = 10;
+
+		println("un for ");
+		for (int i = 0; i < a; i++) {
+			println("Número: " , i);
 		}
-	println("\n\n otro switch sin def");
-	a =10;
-	switch (a) {
-		case 5:
-			println("a es: 5 ");
-			break;
-		case 10:
-			println("a es: 10 ");
-			if(a ==11 ){
-				println("a es: 11 ", uno);
-				
-			}else if(a==12){
-				println("a es: 12 ", uno);
-				
-			} else if(a==10){
-				println("a es: 10 ", uno);
-				
-			}else{
-				println("else dentro de un switchhh ", uno);
-
-			}
-
-
-
-			break;
-                
-	}
-
 			
-	println("\n\n otro switch solo con deff ");
-	switch (a) {
-		default: 
-			println("dentro switch solo con deffffff ", uno);
-			break;		 
-					
-	}
-	
-	println("\n\n otro switch sin nadaaa");
-	switch (a) {
-		 
-	}
-	
+		for (int i = 10; i >= 0; i--) {
+			 println("Cuenta regresiva: " , i);
+		}
+
+
+		println("otro for: ");
+
+		int suma = 0;
+		for (int i = 1; i <= 10; i++) {
+			suma = suma + i;
+			println("Suma acumulada: ", suma);
+		}
+
+		println("otro for: ");
+ 
+		for (int i = 1; i <= 10; i++) {
+			println("Multiplicación de 5 por " , i , ": " , (5 * i));
+		}
+		
 
 
 
-	println("resto del codigo");
-   
+
+
+
    
 
 

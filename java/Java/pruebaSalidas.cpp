@@ -164,165 +164,175 @@ int w90;
 int w91;
 int w92;
 int w93;
+int w94;
+int w95;
+int w96;
+int w97;
+int w98;
+int w99;
 
-w26 = ptr + 3;
-stack[w26] = 5;
+w26 = ptr + 0;
+w27 = stack[w26];
 
-w27 = ptr + 4;
-stack[w27] = 5;
+w28 = w27 + 3;
+heap[w28] = 0;
 
-cout<<"switch completo";
+w29 = ptr + 4;
+stack[w29] = 10;
+
+cout<<"un for ";
 cout<<endl;
-w29 = ptr + 3;
-w30 = stack[w29];
+w33 = ptr + 3;
+stack[w33] = 0;
 
-case31_0:{}
-if(w30==1)goto caseIns33;
-goto case31_1;
-caseIns33:{}
-cout<<"a es: ";
+label_Loop30:{}
 w34 = ptr + 3;
 w35 = stack[w34];
 
-cout<<w35;
-cout<<endl;
-goto salida28;
-case31_1:{}
-if(w30==10)goto caseIns36;
-goto deff32;
-caseIns36:{}
-cout<<"a es: ";
-w37 = ptr + 3;
-w38 = stack[w37];
+w36 = ptr + 4;
+w37 = stack[w36];
 
-cout<<w38;
+if(w35<w37)goto label_ins32;
+goto salida31;
+label_ins32:{}
+cout<<"Número: ";
+w38 = ptr + 3;
+w39 = stack[w38];
+
+cout<<w39;
 cout<<endl;
-goto salida28;
-deff32:{}
-cout<<"DEFFFF a es: ";
 w40 = ptr + 3;
 w41 = stack[w40];
 
-cout<<w41;
-cout<<endl;
-salida28:{}
-cout<<"\n\n otro switch sin def";
-cout<<endl;
-w42 = 10;
+w42 = 1;
 
-w43 = ptr + 3;
-stack[w43] = w42;
-
+w43 = w41+w42;
+w44 = w43;
 
 w45 = ptr + 3;
-w46 = stack[w45];
+stack[w45] = w44;
 
-case47_0:{}
-if(w46==5)goto caseIns48;
-goto case47_1;
-caseIns48:{}
-cout<<"a es: 5 ";
-cout<<endl;
-goto salida44;
-case47_1:{}
-if(w46==10)goto caseIns49;
-goto salida44;
-caseIns49:{}
-cout<<"a es: 10 ";
+
+goto label_Loop30;
+salida31:{}
+w49 = ptr + 3;
+stack[w49] = 10;
+
+label_Loop46:{}
+w50 = ptr + 3;
+w51 = stack[w50];
+
+if(w51>=0)goto label_ins48;
+goto salida47;
+label_ins48:{}
+cout<<"Cuenta regresiva: ";
+w52 = ptr + 3;
+w53 = stack[w52];
+
+cout<<w53;
 cout<<endl;
 w54 = ptr + 3;
 w55 = stack[w54];
 
-if(w55==11)goto if50;
-goto labelelif53;
-if50:{
-cout<<"a es: 11 ";
-w56 = ptr + 0;
-w57 = stack[w56];
+w56 = 1;
 
-w58 = w57 + 0;
-w59 = heap[w58];
+w57 = w55-w56;
+w58 = w57;
 
-cout<<w59;
+w59 = ptr + 3;
+stack[w59] = w58;
+
+
+goto label_Loop46;
+salida47:{}
+cout<<"otro for: ";
 cout<<endl;
-}
-goto salida51;
-labelelif53:{
-w62 = ptr + 3;
-w63 = stack[w62];
+w60 = ptr + 5;
+stack[w60] = 0;
 
-if(w63==12)goto elif53;
-goto labelelif61;
-}
-elif53:{
-cout<<"a es: 12 ";
-w64 = ptr + 0;
-w65 = stack[w64];
+w64 = ptr + 3;
+stack[w64] = 1;
 
-w66 = w65 + 0;
-w67 = heap[w66];
+label_Loop61:{}
+w65 = ptr + 3;
+w66 = stack[w65];
 
-cout<<w67;
-cout<<endl;
-}
-goto salida51;
-labelelif61:{
-w70 = ptr + 3;
-w71 = stack[w70];
+if(w66<=10)goto label_ins63;
+goto salida62;
+label_ins63:{}
+w67 = ptr + 5;
+w68 = stack[w67];
 
-if(w71==10)goto elif61;
-goto else68;
-}
-elif61:{
-cout<<"a es: 10 ";
-w72 = ptr + 0;
-w73 = stack[w72];
+w69 = ptr + 3;
+w70 = stack[w69];
 
-w74 = w73 + 0;
-w75 = heap[w74];
+w71 = w68+w70;
+w72 = w71;
+
+w73 = ptr + 5;
+stack[w73] = w72;
+
+
+cout<<"Suma acumulada: ";
+w74 = ptr + 5;
+w75 = stack[w74];
 
 cout<<w75;
 cout<<endl;
-}
-goto salida51;
-else68:{
-cout<<"else dentro de un switchhh ";
-w76 = ptr + 0;
+w76 = ptr + 3;
 w77 = stack[w76];
 
-w78 = w77 + 0;
-w79 = heap[w78];
+w78 = 1;
 
-cout<<w79;
-cout<<endl;
-}
-salida51:
-goto salida44;
-salida44:{}
-cout<<"\n\n otro switch solo con deff ";
-cout<<endl;
+w79 = w77+w78;
+w80 = w79;
+
 w81 = ptr + 3;
-w82 = stack[w81];
+stack[w81] = w80;
 
-deff84:{}
-cout<<"dentro switch solo con deffffff ";
-w86 = ptr + 0;
+
+goto label_Loop61;
+salida62:{}
+cout<<"otro for: ";
+cout<<endl;
+w85 = ptr + 3;
+stack[w85] = 1;
+
+label_Loop82:{}
+w86 = ptr + 3;
 w87 = stack[w86];
 
-w88 = w87 + 0;
-w89 = heap[w88];
+if(w87<=10)goto label_ins84;
+goto salida83;
+label_ins84:{}
+cout<<"Multiplicación de 5 por ";
+w88 = ptr + 3;
+w89 = stack[w88];
 
 cout<<w89;
-cout<<endl;
-salida80:{}
-cout<<"\n\n otro switch sin nadaaa";
-cout<<endl;
+cout<<": ";
+w90 = 5;
+
 w91 = ptr + 3;
 w92 = stack[w91];
 
-salida90:{}
-cout<<"resto del codigo";
+w93 = w90*w92;
+cout<<w93;
 cout<<endl;
+w94 = ptr + 3;
+w95 = stack[w94];
+
+w96 = 1;
+
+w97 = w95+w96;
+w98 = w97;
+
+w99 = ptr + 3;
+stack[w99] = w98;
+
+
+goto label_Loop82;
+salida83:{}
 
 }
 

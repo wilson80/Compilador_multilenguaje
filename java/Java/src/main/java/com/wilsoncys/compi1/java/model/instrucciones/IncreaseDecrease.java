@@ -6,6 +6,12 @@ package com.wilsoncys.compi1.java.model.instrucciones;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
+import com.wilsoncys.compi1.java.model.expresiones.Access;
+import com.wilsoncys.compi1.java.model.expresiones.Aritmeticas.Resta;
+import com.wilsoncys.compi1.java.model.expresiones.Aritmeticas.Suma;
+import com.wilsoncys.compi1.java.model.expresiones.Enums.OperadoresAritmeticos;
+import com.wilsoncys.compi1.java.model.expresiones.Nativo;
+import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
@@ -86,7 +92,29 @@ public class IncreaseDecrease extends Instruction{
         
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
-        return anterior;
+        String armed = "";
+        C3d_Java c = arbol.getJava();
+        
+        
+        //creando una asignacion
+               //creando el nativo a sumar
+               Nativo nat = new Nativo(1, new Tipo(tipoDato.ENTERO), line, col);
+               
+               //creando el acceso
+               Access acc = new Access(id, line, col);
+               
+               Instruction suma_resta;
+               //creando la operacion
+               if(increase){
+                   suma_resta = new Suma(acc, nat, OperadoresAritmeticos.SUMA, line, col);
+               }else{
+                   suma_resta = new Resta(acc, nat, OperadoresAritmeticos.RESTA, line, col);
+               }
+        Assignmentt assig = new Assignmentt(id, suma_resta, line, col);
+        //crear la asignacion
+        armed += assig.createC3D(arbol, anterior);
+        
+        return armed;
     }
     
 }
