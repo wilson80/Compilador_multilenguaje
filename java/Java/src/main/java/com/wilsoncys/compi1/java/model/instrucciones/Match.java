@@ -6,11 +6,14 @@ package com.wilsoncys.compi1.java.model.instrucciones;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
+import com.wilsoncys.compi1.java.model.expresiones.Nativo;
+import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,7 +31,7 @@ public class Match extends Instruction{
         this.expression = expression;
         this.cazzos = cazzos;
     }
-
+    
     
     @Override
     public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
@@ -94,6 +97,16 @@ public class Match extends Instruction{
         }
         
     }
+    public CaseMatch getDefault() {
+        CaseMatch casee = null;
+        for (CaseMatch cazzo : this.cazzos) {
+            if(cazzo.isDefault()){
+                casee = cazzo;
+            }
+        }
+        return casee;
+        
+    }
     
     
     @Override
@@ -101,12 +114,86 @@ public class Match extends Instruction{
         return "";
     }
     
-        public Object createSym(Arbol arbol, TablaSimbolos tabla) {
+    public Object createSym(Arbol arbol, TablaSimbolos tabla) {
         return null;
     }
     
         @Override
     public Object createC3D(Arbol arbol, String anterior) {
-        return anterior;
+        String armed = "";
+        C3d_Java c = arbol.getJava();
+        
+        String idSalida = "salida" + c.countCreateVar;
+        c.countCreateVar++;
+        String idDef = "";
+                            //identificar el default del resto de casos
+        CaseMatch caseDef = getDefault();
+
+        
+        //expression
+        if(this.expression instanceof Nativo){
+            this.expression.createC3D(arbol, anterior);
+        }else{
+            armed += this.expression.createC3D(arbol, anterior);
+        }
+        String valMatch = c.varsParams.get(0);
+        c.clearVarParams();
+        
+        
+        
+        int idSwitch = c.countCreateVar;
+        c.countCreateVar++;
+        
+        if(caseDef!=null ){
+            cazzos.remove(caseDef);
+            idDef = "deff"  + c.countCreateVar;
+            c.countCreateVar++;
+            caseDef.setIdLabel(idDef);
+            caseDef.setIdSalida(idSalida);
+            caseDef.setIdNextCase(idSalida);
+            
+        }
+        
+        
+        for (int i = 0; i < cazzos.size(); i++) {
+            cazzos.get(i).setValStringMatch(valMatch);
+            cazzos.get(i).setIdSalida(idSalida);
+            cazzos.get(i).setIdLabel("case" + idSwitch + "_" +i);
+                              
+            if((cazzos.size()-1) == i ){
+                if(caseDef != null){
+                    cazzos.get(i).setIdNextCase(idDef);
+                }else{
+                    cazzos.get(i).setIdNextCase(idSalida);
+                }
+            }
+        }
+ 
+                                    //set label del siguiente caso 
+        for (int i = 0; i < cazzos.size(); i++) {
+            if(!(cazzos.size()-1 == i)){
+
+                cazzos.get(i).setIdNextCase(cazzos.get(i+1).getIdLabel());
+            }
+        }
+        
+        
+         
+        
+                                //crear el codigo 3D
+        for (CaseMatch cazzo : cazzos) {
+            armed += cazzo.createC3D(arbol, anterior);
+
+        }
+         
+                            //crear el codigo 3D del default
+        if(caseDef!=null){
+            armed += caseDef.createC3D(arbol, anterior);
+        } 
+        
+        armed += idSalida + ":{}\n";
+        
+        
+        return armed;
     }
 }

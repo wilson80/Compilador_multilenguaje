@@ -112,18 +112,6 @@ int w38;
 int w39;
 int w40;
 int w41;
-int w42;
-int w43;
-int w44;
-int w45;
-int w46;
-int w47;
-int w48;
-int w49;
-int w50;
-int w51;
-int w52;
-int w53;
 
 w26 = ptr + 3;
 stack[w26] = 10;
@@ -131,66 +119,39 @@ stack[w26] = 10;
 w27 = ptr + 4;
 stack[w27] = 5;
 
-cout<<"test  Do while";
+w29 = ptr + 3;
+w30 = stack[w29];
+
+case31_0:{}
+if(w30==1)goto caseIns33;
+goto case31_1;
+caseIns33:{}
+cout<<"a es: ";
+w34 = ptr + 3;
+w35 = stack[w34];
+
+cout<<w35;
 cout<<endl;
-insDo29:{}
-w30 = ptr + 3;
-w31 = stack[w30];
+goto salida28;
+case31_1:{}
+if(w30==10)goto caseIns36;
+goto deff32;
+caseIns36:{}
+cout<<"a es: ";
+w37 = ptr + 3;
+w38 = stack[w37];
 
-w32 = 1;
-
-w33 = w31-w32;
-w34 = w33;
-
-w35 = ptr + 3;
-stack[w35] = w34;
-
-
-cout<<"dentro de while";
+cout<<w38;
 cout<<endl;
-w36 = ptr + 3;
-w37 = stack[w36];
+goto salida28;
+deff32:{}
+cout<<"DEFFFF a es: ";
+w40 = ptr + 3;
+w41 = stack[w40];
 
-w38 = ptr + 3;
-w39 = stack[w38];
-
-if(w37!=0)goto cmpOp240;
-goto finWhile28;
-cmpOp240:
-if(w39!=5)goto insDo29;
-goto finWhile28;
-finWhile28:{}
-cout<<"test while";
+cout<<w41;
 cout<<endl;
-while43:{}
-w44 = ptr + 3;
-w45 = stack[w44];
-
-if(w45>0)goto insDo42;
-goto finWhile41;
-insDo42:{}
-w46 = ptr + 3;
-w47 = stack[w46];
-
-w48 = 1;
-
-w49 = w47-w48;
-w50 = w49;
-
-w51 = ptr + 3;
-stack[w51] = w50;
-
-
-cout<<"a es =  ";
-w52 = ptr + 3;
-w53 = stack[w52];
-
-cout<<w53;
-cout<<endl;
-goto while43;
-finWhile41:{}
-cout<<"resto codifgo";
-cout<<endl;
+salida28:{}
 
 }
 
