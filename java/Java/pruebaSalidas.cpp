@@ -112,6 +112,58 @@ int w38;
 int w39;
 int w40;
 int w41;
+int w42;
+int w43;
+int w44;
+int w45;
+int w46;
+int w47;
+int w48;
+int w49;
+int w50;
+int w51;
+int w52;
+int w53;
+int w54;
+int w55;
+int w56;
+int w57;
+int w58;
+int w59;
+int w60;
+int w61;
+int w62;
+int w63;
+int w64;
+int w65;
+int w66;
+int w67;
+int w68;
+int w69;
+int w70;
+int w71;
+int w72;
+int w73;
+int w74;
+int w75;
+int w76;
+int w77;
+int w78;
+int w79;
+int w80;
+int w81;
+int w82;
+int w83;
+int w84;
+int w85;
+int w86;
+int w87;
+int w88;
+int w89;
+int w90;
+int w91;
+int w92;
+int w93;
 
 w26 = ptr + 3;
 stack[w26] = 5;
@@ -119,6 +171,8 @@ stack[w26] = 5;
 w27 = ptr + 4;
 stack[w27] = 5;
 
+cout<<"switch completo";
+cout<<endl;
 w29 = ptr + 3;
 w30 = stack[w29];
 
@@ -152,6 +206,123 @@ w41 = stack[w40];
 cout<<w41;
 cout<<endl;
 salida28:{}
+cout<<"\n\n otro switch sin def";
+cout<<endl;
+w42 = 10;
+
+w43 = ptr + 3;
+stack[w43] = w42;
+
+
+w45 = ptr + 3;
+w46 = stack[w45];
+
+case47_0:{}
+if(w46==5)goto caseIns48;
+goto case47_1;
+caseIns48:{}
+cout<<"a es: 5 ";
+cout<<endl;
+goto salida44;
+case47_1:{}
+if(w46==10)goto caseIns49;
+goto salida44;
+caseIns49:{}
+cout<<"a es: 10 ";
+cout<<endl;
+w54 = ptr + 3;
+w55 = stack[w54];
+
+if(w55==11)goto if50;
+goto labelelif53;
+if50:{
+cout<<"a es: 11 ";
+w56 = ptr + 0;
+w57 = stack[w56];
+
+w58 = w57 + 0;
+w59 = heap[w58];
+
+cout<<w59;
+cout<<endl;
+}
+goto salida51;
+labelelif53:{
+w62 = ptr + 3;
+w63 = stack[w62];
+
+if(w63==12)goto elif53;
+goto labelelif61;
+}
+elif53:{
+cout<<"a es: 12 ";
+w64 = ptr + 0;
+w65 = stack[w64];
+
+w66 = w65 + 0;
+w67 = heap[w66];
+
+cout<<w67;
+cout<<endl;
+}
+goto salida51;
+labelelif61:{
+w70 = ptr + 3;
+w71 = stack[w70];
+
+if(w71==10)goto elif61;
+goto else68;
+}
+elif61:{
+cout<<"a es: 10 ";
+w72 = ptr + 0;
+w73 = stack[w72];
+
+w74 = w73 + 0;
+w75 = heap[w74];
+
+cout<<w75;
+cout<<endl;
+}
+goto salida51;
+else68:{
+cout<<"else dentro de un switchhh ";
+w76 = ptr + 0;
+w77 = stack[w76];
+
+w78 = w77 + 0;
+w79 = heap[w78];
+
+cout<<w79;
+cout<<endl;
+}
+salida51:
+goto salida44;
+salida44:{}
+cout<<"\n\n otro switch solo con deff ";
+cout<<endl;
+w81 = ptr + 3;
+w82 = stack[w81];
+
+deff84:{}
+cout<<"dentro switch solo con deffffff ";
+w86 = ptr + 0;
+w87 = stack[w86];
+
+w88 = w87 + 0;
+w89 = heap[w88];
+
+cout<<w89;
+cout<<endl;
+salida80:{}
+cout<<"\n\n otro switch sin nadaaa";
+cout<<endl;
+w91 = ptr + 3;
+w92 = stack[w91];
+
+salida90:{}
+cout<<"resto del codigo";
+cout<<endl;
 
 }
 
