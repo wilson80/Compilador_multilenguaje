@@ -9,26 +9,39 @@ package com.wilsoncys.compi1.java.model.instrucciones;
  * @author jonwilson
  */
 public class NewClass {
-//    int a;
-    public static void main(String[] args) {
-     
-        
-int a = 10;
 
-for (int i = 0; i < a; i++) {
-    System.out.println("Número: " + i);
-}
-    
-        
-        
-        
-                
-                
-                
-        
-        
+    int uno;
+    int dos;
+    int tres;
+
+    public NewClass(int uno, int dos, int tres) {
+        this.uno = uno;
+        this.dos = dos;
+        this.tres = tres;
     }
-    
-    
-   
+
+    public void crearCartas() {
+        // Prueba del método recursivo
+        int numero = 3;
+        int resultado = calcularFactorial(numero);
+
+        // println("El factorial de " , numero + " es: " , resultado);
+        System.out.println("El factorial de essssss " + resultado);
+
+    }
+
+    public int calcularFactorial(int n) {
+        if (n == 0 || n == 1) {
+            return 1;
+        }
+        // Caso recursivo: n * factorial(n - 1)
+        return n * calcularFactorial(n - 1);
+
+    }
+
+    public static void main(String[] args) {
+        NewClass algo = new NewClass(1, 1, 1);
+        algo.crearCartas();
+    }
+
 }

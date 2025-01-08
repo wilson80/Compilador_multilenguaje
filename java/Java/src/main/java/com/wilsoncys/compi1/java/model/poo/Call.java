@@ -35,6 +35,8 @@ public class Call extends Instruction{
     private String id;
     private Call llamada;
     private String otroId;
+    private boolean recursiva;
+    
     
     private LinkedList<Instruction> parametersExp;
 
@@ -326,7 +328,7 @@ public class Call extends Instruction{
         
         String id_Methodo = "java"  + arbol.getCurrentAmbit().get(1) + this.id;
                                             //extrayendo los params
-//        llamada a objeto
+//        identificando llamada a objeto
         if(c.varsParams.size()!=0){
             ref = c.varsParams.get(0);
             c.varsParams.removeFirst();
@@ -350,7 +352,11 @@ public class Call extends Instruction{
             }
         }
         
-
+        if(arbol.getAmbito_asID().equals(id_Methodo)){
+            recursiva =true;
+        }
+        
+        
                                     //set a la posicion inicial para dejar los parametros
         Simbolo symMethod = arbol.getSym(id_Methodo);
         if(symMethod == null){
@@ -379,8 +385,8 @@ public class Call extends Instruction{
         armed+= c.c3d_asignVar(c.getPtrTemp(), 0);
 //      
 
-                   JOptionPane.showMessageDialog(null, "llllllllegael symbolo: " 
-                           + id_Methodo + "varp: " + c.varsParams.size());
+//                   JOptionPane.showMessageDialog(null, "llllllllegael symbolo: " 
+//                           + id_Methodo + "varp: " + c.varsParams.size());
         
                    
                                             //PREPARED params en el stack
@@ -398,14 +404,16 @@ public class Call extends Instruction{
         armed+= c.callJava(arbol.getCurrentAmbit().get(1) + "_" + this.id);
         armed+=c.c3d_moveToStack(false, arbol.attbClassJava);
         
-
         
-                                            //create al metodo/funcion
-        if(symMethod.getCat().equals(categoria.FUNCTION) ){
-            symMethod.getInstruction().createC3D(arbol, anterior);
-        }else if(symMethod.getCat().equals(categoria.METHOD)){
-            symMethod.getInstruction().createC3D(arbol, anterior);
+        if(!recursiva){
+            if(symMethod.getCat().equals(categoria.FUNCTION) ){
+                symMethod.getInstruction().createC3D(arbol, anterior);
+            }else if(symMethod.getCat().equals(categoria.METHOD)){
+                symMethod.getInstruction().createC3D(arbol, anterior);
+            }
+        
         }
+                                            //create al metodo/funcion
            
                                            //dejar el retorno
         if(symMethod.getCat().equals(categoria.FUNCTION) ){
@@ -424,6 +432,10 @@ public class Call extends Instruction{
 
     public String getId() {
         return id;
+    }
+
+    public void setRecursiva(boolean recursiva) {
+        this.recursiva = recursiva;
     }
 
     

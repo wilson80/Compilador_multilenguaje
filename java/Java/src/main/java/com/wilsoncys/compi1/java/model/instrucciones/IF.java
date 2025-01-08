@@ -8,12 +8,15 @@ import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.expresiones.LogicalOperations;
 import com.wilsoncys.compi1.java.model.expresiones.OperateRelacionales;
+import com.wilsoncys.compi1.java.model.poo.Call;
 import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -214,7 +217,16 @@ public class IF extends Instruction{
         
 //        label if
         armed+= idIf +  ":{\n";
+        
+        
+        
+        
+//        List<String> ambitoAntList = new ArrayList<>(arbol.getCurrentAmbit());
+//        String ambitoAnt = arbol.getCurrentAmbit().get(1);
+//        arbol.setCurrentAmbit(this.ambito);
+        
                                           //INS del IF
+ 
         for (Instruction instructions : instructionss) {
             if(instructions ==null){
                 continue;
@@ -225,6 +237,9 @@ public class IF extends Instruction{
         }
         armed += "}\n";
         armed+= "goto " + idSalida + ";\n";
+//        arbol.setCurrentAmbit(ambitoAntList);
+        
+        
         
         
         
@@ -236,9 +251,9 @@ public class IF extends Instruction{
                     continue;
                 }
                 armed+= instructions.createC3D(arbol, anterior);
-    //            arbol.getCurrentAmbit().set(1, ambitoAnt);
-
+ 
             }
+            
             armed += "}\n";
 
     //                      label salida
