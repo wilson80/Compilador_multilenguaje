@@ -5,22 +5,21 @@ public class sumar {
 	int uno;
 	int dos;
 	int tres;
-	int cuatro;
-	int cinco;
  
 	
-	public sumar(int a, int b ) {
-		uno = a;
-		dos = b
+	public sumar(int uno, int dos, int tres) {
+		 this.uno = uno;
+		 this.dos = dos;
+		 this.tres = tres; 
 	}
  
 	public void crearCartas(){ 
 		// Prueba del método recursivo
-		int numero = 5;
-		// int resultado = calcularFactorial(numero);
-		// println("El factorial de " , numero, " es: " , resultado);
+		int numero = 9;
+		int resultado = calcularFactorial(numero);
+		println("El factorial de " , numero, " es: " , resultado);
 
-		int resultado = calcularFibonacci(numero);
+	    resultado = calcularFibonacci(numero);
         println("El número Fibonacci en la posición " , numero , " es: " , resultado);
 
 
@@ -40,13 +39,8 @@ public class sumar {
 		
 	} 
 	
-
-
-
-
-
-
-
+ 
+	
 	public int calcularFactorial(int n){
 		if (n == 0 || n == 1) {
 			return 1;
@@ -68,7 +62,7 @@ int y = 6;
 int z = 9;
 int total = 88;
 
-	 JAVA.sumar      call1(x,y );
+	 JAVA.sumar      call1(x, y, z);
 	 
 	  
 void main()

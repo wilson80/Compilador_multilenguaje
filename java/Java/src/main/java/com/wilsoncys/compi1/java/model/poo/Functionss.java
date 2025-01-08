@@ -93,7 +93,7 @@ public class Functionss extends Instruction{
         //retorno
         //dir dir ret
         //desde la clase se le hace set a la cantidad de params
-        cantParams++;       //pte analisis 
+//        cantParams++;       //pte analisis 
 //                                (creo que es por la posicion de retorno o algo asi no me acuerdo)
 
         for (Instruction ins : instrucciones) {

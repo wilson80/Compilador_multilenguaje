@@ -322,7 +322,7 @@ public class Call extends Instruction{
         boolean callPoo = false;
         C3d_Java c =  arbol.getJava();
 
-        
+        int ptrTemp = 0;
         
         
         
@@ -364,6 +364,12 @@ public class Call extends Instruction{
 //            return new Errores("SEMANTIC", "id no definido: " + this.id, line, col);
         } 
   
+        if(symMethod.getInstruction() instanceof  Functionss f){
+            ptrTemp = f.getCantParams();
+        }else if(symMethod.getInstruction() instanceof  Method m){
+            ptrTemp = m.getCantParams();
+            
+        }
 
         int posIni = 0;
         if(symMethod.getCat().equals(categoria.FUNCTION) ){
@@ -371,9 +377,12 @@ public class Call extends Instruction{
         }else if(symMethod.getCat().equals(categoria.METHOD)){
             posIni = 2;
         }
+         
         
                                                             //stack temp
-        armed+=c.c3d_ptrTemp(arbol.attbClassJava);
+//        armed+=c.c3d_ptrTemp(arbol.attbClassJava);
+            armed+=c.c3d_ptrTemp(ptrTemp);
+
         
                                 //dando la direccion de referencia
         if(!callPoo){
@@ -400,9 +409,9 @@ public class Call extends Instruction{
 
 
                                             //ejecutar el metodo
-        armed+=c.c3d_moveToStack(true, arbol.attbClassJava);
+        armed+=c.c3d_moveToStack(true, ptrTemp);
         armed+= c.callJava(arbol.getCurrentAmbit().get(1) + "_" + this.id);
-        armed+=c.c3d_moveToStack(false, arbol.attbClassJava);
+        armed+=c.c3d_moveToStack(false, ptrTemp);
         
         
                                             //create al metodo/funcion
@@ -418,7 +427,7 @@ public class Call extends Instruction{
                                            //dejar el retorno
             if(symMethod.getCat().equals(categoria.FUNCTION) ){
                 armed += "\n//retorno\n";
-                armed += c.c3d_ptrTemp(arbol.attbClassJava);
+                armed += c.c3d_ptrTemp(ptrTemp);
                 armed += c.c3d_accesTemp("", 1);
                 armed += "\n//retorno\n";
 
