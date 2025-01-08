@@ -49,6 +49,7 @@ public class Arbol {
     public int attbClassJava = 0;
     public int attbPrincipal = 0;
     private int posReturn = 1;
+    private String labelRetorno = "";
     
     
     public int count;       //contador de las variables que se van creando
@@ -231,6 +232,14 @@ public class Arbol {
 
     public void setCurrentAmbit(List<String> currentAmbit) {
         this.currentAmbit = currentAmbit;
+    }
+
+    public void setLabelRetorno(String labelRetorno) {
+        this.labelRetorno = labelRetorno;
+    }
+
+    public String getLabelRetorno() {
+        return labelRetorno;
     }
     
     

@@ -22,11 +22,11 @@ public class NewClass {
 
     public void crearCartas() {
         // Prueba del método recursivo
-        int numero = 3;
-        int resultado = calcularFactorial(numero);
+        int numero = 6;
+        int resultado = calcularFibonacci(numero);
 
         // println("El factorial de " , numero + " es: " , resultado);
-        System.out.println("El factorial de essssss " + resultado);
+        System.out.println("El factorial de essssss: " + resultado);
 
     }
 
@@ -39,6 +39,28 @@ public class NewClass {
 
     }
 
+    public int calcularFibonacci(int n){
+            if (n == 0) {
+                return 0;  // Caso base
+            } else if (n == 1) {
+                return 1;  // Caso base
+            } else {
+                return calcularFibonacci(n - 1) + calcularFibonacci(n - 2);  // Caso recursivo
+            }
+		
+    } 
+    
+    
+    
+    
+    
+    
+    
+    
+    //hacer pruebas en c+++++++
+    
+    
+    
     public static void main(String[] args) {
         NewClass algo = new NewClass(1, 1, 1);
         algo.crearCartas();

@@ -5,40 +5,58 @@ public class sumar {
 	int uno;
 	int dos;
 	int tres;
+	int cuatro;
+	int cinco;
  
 	
-	public sumar(int uno, int dos, int tres) {
-		 this.uno = uno;
-		 this.dos = dos;
-		 this.tres = tres; 
+	public sumar(int a, int b ) {
+		uno = a;
+		dos = b
 	}
  
 	public void crearCartas(){ 
-		// int numero = 7;
-        // int resultado = calcularFibonacci(numero);
-        // println("El número Fibonacci en la posición " + numero + " es: " + resultado);
-		cuentaRegresiva(5);
-	
-	}
+		// Prueba del método recursivo
+		int numero = 5;
+		// int resultado = calcularFactorial(numero);
+		// println("El factorial de " , numero, " es: " , resultado);
 
-	public void cuentaRegresiva(int n) {
-		int algo = n;
-		if (n == 0) {
-            println("¡Despegue!");
-        } else {
-            // Imprimir el número actual
-            println(n);
-            // Llamada recursiva con n - 1
-			println("recccccc");
+		int resultado = calcularFibonacci(numero);
+        println("El número Fibonacci en la posición " , numero , " es: " , resultado);
 
-			// n = n-1;
-            // cuentaRegresiva(n);
-        }
+
+
     }
 
 
 
- 
+	public int calcularFibonacci(int n){
+		if (n == 0) {
+            return 0;  // Caso base
+        } else if (n == 1) {
+            return 1;  // Caso base
+        } else {
+            return calcularFibonacci(n - 1) + calcularFibonacci(n - 2);  // Caso recursivo
+        }
+		
+	} 
+	
+
+
+
+
+
+
+
+	public int calcularFactorial(int n){
+		if (n == 0 || n == 1) {
+			return 1;
+		}
+		// Caso recursivo: n * factorial(n - 1)
+		return n * calcularFactorial(n - 1);
+		
+	}
+	 
+	 
 } 
 
   
@@ -50,7 +68,7 @@ int y = 6;
 int z = 9;
 int total = 88;
 
-	 JAVA.sumar      call1(x, y, z);
+	 JAVA.sumar      call1(x,y );
 	 
 	  
 void main()

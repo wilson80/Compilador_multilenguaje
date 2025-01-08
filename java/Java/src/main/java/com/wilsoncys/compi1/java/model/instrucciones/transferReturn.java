@@ -69,12 +69,13 @@ public class transferReturn extends Instruction{
        }else{
             armed+=this.expression.createC3D(arbol, anterior);
        }
-        
-        
-        
+         
 //        c.varsParams.remove(0);
 //        JOptionPane.showMessageDialog(null, "");
         armed+=c.c3d_asignVal("", 1);
+        
+        armed += "goto " + arbol.getLabelRetorno() + ";\n";
+         
         
         return armed;
     }

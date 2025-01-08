@@ -29,17 +29,9 @@ int w14;
 int w15;
 int w16;
 int w17;
-int w18;
-int w19;
-int w20;
-int w21;
-int w22;
-int w23;
-int w24;
-int w25;
 
 w0 = h;
-h = w0 + 3;
+h = w0 + 2;
 
 w1 = ptr + 0;
 stack[w1] = w0;
@@ -56,106 +48,67 @@ w6 = stack[w5];
 w7 = w6 + 1;
 heap[w7] = 0;
 
-w8 = ptr + 0;
+w8 = ptr + 2;
 w9 = stack[w8];
 
-w10 = w9 + 2;
-heap[w10] = 0;
+w10 = ptr + 0;
+w11 = stack[w10];
 
-w11 = ptr + 2;
-w12 = stack[w11];
+w12 = w11 + 0;
+heap[w12] = w9;
 
-w13 = ptr + 0;
+
+w13 = ptr + 3;
 w14 = stack[w13];
 
-w15 = w14 + 0;
-heap[w15] = w12;
+w15 = ptr + 0;
+w16 = stack[w15];
 
-
-w16 = ptr + 3;
-w17 = stack[w16];
-
-w18 = ptr + 0;
-w19 = stack[w18];
-
-w20 = w19 + 1;
-heap[w20] = w17;
-
-
-w21 = ptr + 4;
-w22 = stack[w21];
-
-w23 = ptr + 0;
-w24 = stack[w23];
-
-w25 = w24 + 2;
-heap[w25] = w22;
+w17 = w16 + 1;
+heap[w17] = w14;
 
 
 
 }
 
-void java_sumar_cuentaRegresiva(){
-int w31;
-int w32;
-int w33;
-int w34;
-int w35;
-int w36;
-int w37;
-int w38;
-int w39;
-int w40;
-int w41;
-int w42;
-int w43;
-int w44;
-int w45;
-int w46;
-int w47;
+void java_sumar_calcularFibonacci(){
+int w23;
+int w24;
+int w25;
+int w26;
+int w27;
+int w28;
+int w29;
 
-w35 = ptr + 2;
-w36 = stack[w35];
+w24 = ptr + 4;
+stack[w24] = 44;
 
-if(w36==0)goto if31;
-goto else33;
-if31:{
-cout<<"¡Despegue!";
+cout<<"varrrrrrrr local: ";
+w25 = ptr + 4;
+w26 = stack[w25];
+
+cout<<w26;
 cout<<endl;
-}
-goto salida32;
-else33:{
-w37 = ptr + 2;
-w38 = stack[w37];
+w27 = ptr + 4;
+w28 = stack[w27];
 
-cout<<w38;
-cout<<endl;
-w39 = ptr + 2;
-w40 = stack[w39];
+w29 = ptr + 1;
+stack[w29] = w28;
 
-w41 = 1;
-
-w42 = w40-w41;
-w43 = ptr + 3;
-
-w44 = ptr + 0;
-w45 = stack[w44];
-
-w46 = w43 + 0;
-stack[w46] = w45;
-
-w47 = w43 + 2;
-stack[w47] = w42;
-
-ptr = ptr + 3;
-java_sumar_cuentaRegresiva();
-ptr = ptr - 3;
-}
-salida32:
+goto retorno23;
+retorno23:
 
 }
 
 void java_sumar_crearCartas(){
+int w18;
+int w19;
+int w20;
+int w21;
+int w22;
+int w23;
+int w24;
+int w25;
 int w26;
 int w27;
 int w28;
@@ -168,31 +121,45 @@ int w34;
 int w35;
 int w36;
 int w37;
-int w38;
-int w39;
-int w40;
-int w41;
-int w42;
-int w43;
-int w44;
-int w45;
-int w46;
-int w47;
 
-w26 = ptr + 3;
+w18 = ptr + 3;
+stack[w18] = 10;
 
-w27 = ptr + 0;
-w28 = stack[w27];
+w19 = ptr + 2;
 
-w29 = w26 + 0;
-stack[w29] = w28;
+w20 = ptr + 0;
+w21 = stack[w20];
 
-w30 = w26 + 2;
-stack[w30] = 5;
+w22 = w19 + 0;
+stack[w22] = w21;
 
-ptr = ptr + 3;
-java_sumar_cuentaRegresiva();
-ptr = ptr - 3;
+ptr = ptr + 2;
+java_sumar_calcularFibonacci();
+ptr = ptr - 2;
+
+//retorno
+w30 = ptr + 2;
+
+w31 = w30 + 1;
+w32 = stack[w31];
+
+
+//retorno
+w33 = ptr + 4;
+stack[w33] = w32;
+
+cout<<"El número : ";
+w34 = ptr + 3;
+w35 = stack[w34];
+
+cout<<w35;
+cout<<endl;
+cout<<"resultadooo: ";
+w36 = ptr + 4;
+w37 = stack[w36];
+
+cout<<w37;
+cout<<endl;
 
 }
 
@@ -217,9 +184,6 @@ int w16;
 int w17;
 int w18;
 int w19;
-int w20;
-int w21;
-int w22;
 
 w0 = ptr + 0;
 stack[w0] = 12;
@@ -239,40 +203,34 @@ w5 = stack[w4];
 w6 = ptr + 1;
 w7 = stack[w6];
 
-w8 = ptr + 2;
-w9 = stack[w8];
+w8 = ptr + 5;
 
-w10 = ptr + 5;
+w9 = w8 + 2;
+stack[w9] = w5;
 
-w11 = w10 + 2;
-stack[w11] = w5;
-
-w12 = w10 + 3;
-stack[w12] = w7;
-
-w13 = w10 + 4;
-stack[w13] = w9;
+w10 = w8 + 3;
+stack[w10] = w7;
 
 ptr = ptr + 5;
 java_sumar_sumar();
 ptr = ptr - 5;
-w14 = ptr + 5;
+w11 = ptr + 5;
 
-w15 = w14 + 0;
+w12 = w11 + 0;
+w13 = stack[w12];
+
+w14 = ptr + 4;
+stack[w14] = w13;
+
+w15 = ptr + 4;
 w16 = stack[w15];
 
-w17 = ptr + 4;
-stack[w17] = w16;
+w17 = ptr + 5;
 
-w18 = ptr + 4;
-w19 = stack[w18];
+w18 = w17 + 0;
+stack[w18] = w16;
 
-w20 = ptr + 5;
-
-w21 = w20 + 0;
-stack[w21] = w19;
-
-w22 = ptr + 5;
+w19 = ptr + 5;
 
 ptr = ptr + 5;
 java_sumar_crearCartas();

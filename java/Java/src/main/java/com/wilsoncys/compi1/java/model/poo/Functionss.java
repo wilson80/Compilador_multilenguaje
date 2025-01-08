@@ -123,7 +123,12 @@ public class Functionss extends Instruction{
         
         String devVars = "";
         int iniVars = c.countCreateVar;
-
+        
+        String idRetorno ="retorno" + c.countCreateVar;
+        c.countCreateVar++;
+                                    //label de retorno
+        arbol.setLabelRetorno(idRetorno);
+        
         
         List<String> ambitoAntList = new ArrayList<>(arbol.getCurrentAmbit());
         
@@ -144,6 +149,9 @@ public class Functionss extends Instruction{
         
         arbol.setCurrentAmbit(ambitoAntList);
         
+        bodyMet += idRetorno + ":\n";
+        
+         
                             //creando la declaracion de vars del ambito
         int finVars = c.countCreateVar;
         for (int i = iniVars; i < finVars; i++) {
@@ -165,6 +173,10 @@ public class Functionss extends Instruction{
     
     
 
+    
+    
+    
+    
     public void setCantParams(int cantParams) {
         this.cantParams = cantParams;
     }

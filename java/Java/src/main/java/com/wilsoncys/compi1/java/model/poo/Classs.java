@@ -167,7 +167,8 @@ import javax.swing.JOptionPane;
             
             if(ins instanceof  Method fun){
                 fun.setCantAttb(this.cantAttb);
-                contador = 0;
+                                                    contador = 0;
+                                                    
                 Simbolo sym = new Simbolo(fun.tipo, fun.id, null, true);
                 sym.setCat(categoria.METHOD);
                 sym.setDir(contador);
@@ -214,7 +215,7 @@ import javax.swing.JOptionPane;
             }
             if(ins instanceof  Functionss fun){                
                 fun.setCantAttb(this.cantAttb);
-                contador = 0;
+                                                contador = 0;
                 Simbolo sym = new Simbolo(fun.tipo, fun.id, null, true);
                 sym.setCat(categoria.FUNCTION);
 //                                                sym.setDir(contador);

@@ -405,6 +405,7 @@ public class Call extends Instruction{
         armed+=c.c3d_moveToStack(false, arbol.attbClassJava);
         
         
+                                            //create al metodo/funcion
         if(!recursiva){
             if(symMethod.getCat().equals(categoria.FUNCTION) ){
                 symMethod.getInstruction().createC3D(arbol, anterior);
@@ -412,15 +413,16 @@ public class Call extends Instruction{
                 symMethod.getInstruction().createC3D(arbol, anterior);
             }
         
-        }
-                                            //create al metodo/funcion
            
+        }
                                            //dejar el retorno
-        if(symMethod.getCat().equals(categoria.FUNCTION) ){
-            armed += c.c3d_ptrTemp(arbol.attbClassJava);
-            armed += c.c3d_accesTemp("", 1);
-            
-        } 
+            if(symMethod.getCat().equals(categoria.FUNCTION) ){
+                armed += "\n//retorno\n";
+                armed += c.c3d_ptrTemp(arbol.attbClassJava);
+                armed += c.c3d_accesTemp("", 1);
+                armed += "\n//retorno\n";
+
+            } 
   
   
         return armed;
