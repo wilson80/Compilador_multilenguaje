@@ -364,7 +364,7 @@ inSwC::= PRINT PAR_OP PAR_CL SEMIC
 |ifC
 |switchC 
 |callC
-|error SEMIC
+// |error SEMIC
 ;
 
 insSwC::= inSwC insSwC

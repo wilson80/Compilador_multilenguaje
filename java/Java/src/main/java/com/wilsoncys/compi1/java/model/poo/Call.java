@@ -260,7 +260,9 @@ public class Call extends Instruction{
                 armedId += arbol.getCurrentAmbit().get(1) + id;
                 sym0 = arbol.getSym(armedId);
                 if(sym0 == null){        //revisar esto
-                    return new Errores(id, "no se ha encontrado el simboloooooooooooooo", line, col);
+
+                    JOptionPane.showMessageDialog(null, "error en llamada OBJ no se ha encontrado el symbolo");
+//                    return new Errores(id, "no se ha encontrado el simboloooooooooooooo", line, col);
                 }
             }
             
@@ -314,10 +316,22 @@ public class Call extends Instruction{
     public Object simpleCall(Arbol arbol, String anterior) {
 
         String armed = "";
+        String ref = "";
+        boolean callPoo = false;
         C3d_Java c =  arbol.getJava();
 
+        
+        
+        
+        
         String id_Methodo = "java"  + arbol.getCurrentAmbit().get(1) + this.id;
                                             //extrayendo los params
+//        llamada a objeto
+        if(c.varsParams.size()!=0){
+            ref = c.varsParams.get(0);
+            c.varsParams.removeFirst();
+            callPoo = true;
+        }
                                             
         for (Instruction exps : parametersExp) {
             if(exps instanceof Nativo n){        
@@ -340,8 +354,9 @@ public class Call extends Instruction{
                                     //set a la posicion inicial para dejar los parametros
         Simbolo symMethod = arbol.getSym(id_Methodo);
         if(symMethod == null){
-            return new Errores("SEMANTIC", "id no definido: " + this.id, line, col);
-        }
+            JOptionPane.showMessageDialog(null, "error en llamada no se ha encontrado el symbolo");
+//            return new Errores("SEMANTIC", "id no definido: " + this.id, line, col);
+        } 
   
 
         int posIni = 0;
@@ -351,18 +366,23 @@ public class Call extends Instruction{
             posIni = 2;
         }
         
-
-
                                                             //stack temp
         armed+=c.c3d_ptrTemp(arbol.attbClassJava);
         
                                 //dando la direccion de referencia
-        if(c.varsParams.size() == 0){
+        if(!callPoo){
             armed+= c.c3d_acces("", 0);
+        }else{
+            c.varsParams.addFirst(ref);
         }                     
         
         armed+= c.c3d_asignVar(c.getPtrTemp(), 0);
+//      
+
+                   JOptionPane.showMessageDialog(null, "llllllllegael symbolo: " 
+                           + id_Methodo + "varp: " + c.varsParams.size());
         
+                   
                                             //PREPARED params en el stack
         for (Instruction exps : parametersExp) {
                 armed += c.c3d_asignVar(c.getPtrTemp(), posIni);
@@ -378,7 +398,7 @@ public class Call extends Instruction{
         armed+= c.callJava(arbol.getCurrentAmbit().get(1) + "_" + this.id);
         armed+=c.c3d_moveToStack(false, arbol.attbClassJava);
         
-       
+
         
                                             //create al metodo/funcion
         if(symMethod.getCat().equals(categoria.FUNCTION) ){

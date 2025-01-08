@@ -1,64 +1,65 @@
-
 %%PASCAL
 %%JAVA
 public class sumar {
-	int uno;
-	int dos;
-	int tres;
- 
-	
-	public sumar(int uno, int dos, int tres) {
-		 this.uno = uno;
-		 this.dos = dos;
-		 this.tres = tres; 
-	}
- 
-	public void crearCartas(){ 
-		int i;
-		int a = 10;
-
-		println("un for ");
-		for (int i = 0; i < a; i++) {
-			println("Número: " , i);
-		}
-			
-		for (int i = 10; i >= 0; i--) {
-			 println("Cuenta regresiva: " , i);
-		}
-
-
-		println("otro for: ");
-
-		int suma = 0;
-		for (int i = 1; i <= 10; i++) {
-			suma = suma + i;
-			println("Suma acumulada: ", suma);
-		}
-
-		println("otro for: ");
- 
-		for (int i = 1; i <= 10; i++) {
-			println("Multiplicación de 5 por " , i , ": " , (5 * i));
-		}
-		
-
-
-
-
-
-
-   
-
-
- 
-
-    }
-
-	 
-} 
-
   
+	Simple objeto1;
+	// Simple objeto2;
+	int atri; 
+	int uno; 
+	public sumar() {
+		atri = 6;
+		uno = 3;
+		info();
+		// objeto1 = new Simple(8, 7); 
+	} 
+	public void info(){
+		 int varl = 2;
+		 int varl2 = 4;
+		 int total = adicion(atri, varl, uno, varl2 );
+		 println("sumar: ", total); 
+		 println("restar: ", restar(varl, uno) ); 
+		 println("multi: ", multiplicar(varl, uno) ); 
+		 println("div: ", div(varl, uno) ); 
+
+
+		println("varL: ", varl); 	
+		println("varl2: ", varl2);	
+		println("att atri: ", atri);	
+		println("att uno: ", this.uno);	
+		println("total: ", total);	
+	}
+
+	public int calc(int a, int b){
+		println("dentro de calc: ", a); 
+		println("dentro de calc: ", b); 
+		return getAlgo();
+	}	
+	
+	public int restar(int a, int b){
+		return a-b;
+	}
+	public int adicion(int a, int b, int c, int d){
+		// println("dentro de add a: ", a); 
+		// println("dentro de add b: ", b); 
+		// println("dentro de add c: ", c); 
+		// println("dentro de add d: ", d); 
+		return a+b+c + d;
+	}
+	public int multiplicar(int a, int b){
+		return a*b;
+	}
+	public int div(int a, int b){
+		return a/b;
+	}
+
+} 
+ //seguir probando
+
  
+
+ 
+
+
 %%PROGRAMA
 #include "JAVA.*"  
 int x = 12;
@@ -66,17 +67,11 @@ int y = 6;
 int z = 9;
 int total = 88;
 
-	 JAVA.sumar      call1(x, y, z);
-	 
-	  
-void main()
-{ 	   
-	JAVA.call1.crearCartas();
-	 
-	 
-    
-    
-	
-}
+	JAVA.sumar call1();
 
  
+void main()
+{ 	 
+	 
+	
+}

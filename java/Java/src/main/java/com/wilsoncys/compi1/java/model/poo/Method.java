@@ -132,7 +132,9 @@ public class Method extends Instruction{
         
         String devVars = "";
         int iniVars = c.countCreateVar;
-
+                        //ambito anterior
+        List<String> ambitoAntList = new ArrayList<>(arbol.getCurrentAmbit());
+        
         
         String ambitoAnt = arbol.getCurrentAmbit().get(1);
         arbol.setCurrentAmbit(this.ambito);
@@ -148,6 +150,8 @@ public class Method extends Instruction{
             arbol.getCurrentAmbit().set(1, ambitoAnt);
 
         }
+        arbol.setCurrentAmbit(ambitoAntList);
+        
         int finVars = c.countCreateVar;
 
         for (int i = iniVars; i < finVars; i++) {

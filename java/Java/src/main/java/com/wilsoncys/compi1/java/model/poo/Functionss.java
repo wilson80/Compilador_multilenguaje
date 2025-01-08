@@ -15,6 +15,7 @@ import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.java.model.simbolo.categoria;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -124,6 +125,9 @@ public class Functionss extends Instruction{
         int iniVars = c.countCreateVar;
 
         
+        List<String> ambitoAntList = new ArrayList<>(arbol.getCurrentAmbit());
+        
+        String ambitoAnt = arbol.getCurrentAmbit().get(1);
         arbol.setCurrentAmbit(this.ambito);
 
         
@@ -133,8 +137,13 @@ public class Functionss extends Instruction{
                 continue;
             }
             bodyMet += (String)ins.createC3D(arbol, anterior);
-            arbol.setCurrentAmbit(this.getAmbito());
+//            arbol.setCurrentAmbit(this.getAmbito());
+            arbol.getCurrentAmbit().set(1, ambitoAnt);
+
         }
+        
+        arbol.setCurrentAmbit(ambitoAntList);
+        
                             //creando la declaracion de vars del ambito
         int finVars = c.countCreateVar;
         for (int i = iniVars; i < finVars; i++) {

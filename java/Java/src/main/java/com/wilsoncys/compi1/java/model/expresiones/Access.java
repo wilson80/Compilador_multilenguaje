@@ -138,7 +138,7 @@ public class Access extends Instruction{
     public Object createC3D(Arbol arbol, String anterior) {
 
 
-        
+
         
         
         String armed = "";
@@ -164,6 +164,7 @@ public class Access extends Instruction{
                 sym = arbol.getSym(armedId);
                        
                 if(sym == null){        //revisar esto
+                    JOptionPane.showMessageDialog(null, "acces no sym: " +armedId);
                     return new Errores(id, "no se ha encontrado el simboloooooooooooooo", line, col);
                 }else{
 //                    this.tipo = sym.getTipo();
