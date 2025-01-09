@@ -224,9 +224,9 @@ public class Assignmentt extends Instruction{
         }
 
                
-        if(this.id.equals("objeto1")){
-            JOptionPane.showMessageDialog(null, "dirObjetctVAR: "  + varr);
-        } 
+//        if(this.id.equals("objeto1")){
+//            JOptionPane.showMessageDialog(null, "dirObjetctVAR: "  + varr);
+//        } 
 //        //assig 
 //    tr6 = ptr + dir;
 //    stack[tr6] = var;

@@ -191,7 +191,7 @@ public class Match extends Instruction{
             armed += caseDef.createC3D(arbol, anterior);
         } 
         
-        armed += idSalida + ":{}\n";
+        armed += idSalida + ":\n";
         
         
         return armed;

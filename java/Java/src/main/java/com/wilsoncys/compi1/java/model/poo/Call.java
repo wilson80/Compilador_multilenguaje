@@ -239,8 +239,7 @@ public class Call extends Instruction{
             armed += simpleCall(arbol, anterior);
               
         } 
-
-        
+         
         
                                     // int uno = objeto1.getCui();  
                                     //encontrar el simbolo del objeto
@@ -274,17 +273,34 @@ public class Call extends Instruction{
                                             //buscando el tipo del objeto
             if(sym0.getInstruction() instanceof Statement met){
                 arbol.getCurrentAmbit().set(1, met.tipo.getTypeString());
+                JOptionPane.showMessageDialog(null, "call277: " + met.tipo.getTypeString());
 //                arbol.setSizeHeap(3);
+            }else{
+                arbol.getCurrentAmbit().set(1,  sym0.getTipo().getTypeString());
             }
+            
+            
+            
             
 //            String idObject  = "";
 //            idObject = ((InstanceJava)sym0.getInstruction()).getIdClase();
 
 
-                    //set a la referencia (stack[0]) 
-            armed+= c.c3d_acces("", 0);
 
-            armed+= c.c3d_accesAttVarl("", sym0.getDir());
+            if(sym0.getCat() == categoria.ATRIBUTO){
+                        //set a la referencia (stack[0]) 
+                armed+= c.c3d_accesRef("", 0);
+                armed+= c.c3d_accesAttVarl("", sym0.getDir());
+            }else if(sym0.getCat() == categoria.PARAM){
+                armed+= c.c3d_acces("", sym0.getDir()); 
+//                c.setPtrTemp(c.varsParams.get(0));
+//                c.varsParams.removeFirst();
+//                armed+= c.c3d_accesTemp(c.getPtrTemp(), sym0.getDir() ); 
+//                c.clearPtrTemp();
+                
+            }
+            
+            
             
 //            armed+= c.c3d_asignVal("", 0);
             
@@ -330,10 +346,11 @@ public class Call extends Instruction{
                                             //extrayendo los params
 //        identificando llamada a objeto
         if(c.varsParams.size()!=0){
-            ref = c.varsParams.get(0);
+            ref = c.varsParams.getFirst();
             c.varsParams.removeFirst();
             callPoo = true;
-        }
+        } 
+        
                                             
         for (Instruction exps : parametersExp) {
             if(exps instanceof Nativo n){        
@@ -360,7 +377,8 @@ public class Call extends Instruction{
                                     //set a la posicion inicial para dejar los parametros
         Simbolo symMethod = arbol.getSym(id_Methodo);
         if(symMethod == null){
-            JOptionPane.showMessageDialog(null, "error en llamada no se ha encontrado el symbolo");
+            JOptionPane.showMessageDialog(null, "error en llamada "
+                    + "no se ha encontrado el symbolo: " + this.id );
 //            return new Errores("SEMANTIC", "id no definido: " + this.id, line, col);
         } 
   
@@ -387,7 +405,11 @@ public class Call extends Instruction{
                                 //dando la direccion de referencia
         if(!callPoo){
             armed+= c.c3d_acces("", 0);
+            String simpleRef = c.varsParams.getLast();
+            c.varsParams.removeLast();
+            c.varsParams.add(0, simpleRef);
         }else{
+//            JOptionPane.showMessageDialog(null, "aquiiiiiii: " + id);
             c.varsParams.addFirst(ref);
         }                     
         

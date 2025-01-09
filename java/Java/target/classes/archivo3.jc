@@ -1,60 +1,88 @@
-
 %%PASCAL
 %%JAVA
 public class sumar {
+	//OBJETOS COMO PARAMETROS
+
+	Simple objeto1;
+	// Simpl 
+	public sumar() {
+			//instancia
+		objeto1 = new Simple(44,55,66,77);
+		
+		println("antes: ");
+		imprimirInfo(objeto1);
+		println("Despues: ");
+
+	} 
+
+
+	public void imprimirInfo(Simple obj){
+
+		println("uno: ", obj.getUno());
+		println("dos: ", obj.getDos());
+		println("tres: ", obj.getTres());
+		println("cuatro: ", obj.getCuatro());
+
+	}
+
+
+
+
+	//RETORNAR UN OBJETO
+	
+} 
+
+
+public class Simple {
 	int uno;
 	int dos;
 	int tres;
- 
-	
-	public sumar(int uno, int dos, int tres) {
-		 this.uno = uno;
-		 this.dos = dos;
-		 this.tres = tres; 
+	int cuatro;
+	public 	Simple(int a, int b, int c, int d){
+		this.uno = a;
+		this.dos = b;
+		this.tres = c;
+		this.cuatro = d;
+		// println("unoo: ", uno);		
+		// println("doss: ", dos);		
+		// imprimirInfo();
 	}
- 
-	public void crearCartas(){ 
-		// Prueba del método recursivo
-		int numero = 9;
-		int resultado = calcularFactorial(numero);
-		println("El factorial de " , numero, " es: " , resultado);
 
-	    resultado = calcularFibonacci(numero);
-        println("El número Fibonacci en la posición " , numero , " es: " , resultado);
-
-
-
-    }
-
-
-
-	public int calcularFibonacci(int n){
-		if (n == 0) {
-            return 0;  // Caso base
-        } else if (n == 1) {
-            return 1;  // Caso base
-        } else {
-            return calcularFibonacci(n - 1) + calcularFibonacci(n - 2);  // Caso recursivo
-        }
-		
-	} 
+	public void setUno(int a){
+		this.uno = a;
+	}	
+	public void setDos(int a){
+		this.dos = a;
+	}	
 	
- 
-	
-	public int calcularFactorial(int n){
-		if (n == 0 || n == 1) {
-			return 1;
-		}
-		// Caso recursivo: n * factorial(n - 1)
-		return n * calcularFactorial(n - 1);
-		
+	public int getUno(){
+		return this.uno;
+	}	
+	public int getDos(){
+		return this.dos;
+	}	
+	public int getTres(){
+		return this.tres;
+	}	
+	public int getCuatro(){
+		return this.cuatro;
+	}	
+
+	public void imprimirInfo(){
+		println("unoo: ", uno);		
+		println("doss: ", dos);		
+		println("tresss: ", this.tres);
+		println("cuaa: ", cuatro);		
 	}
-	 
-	 
-} 
 
-  
- 
+
+}
+
+
+
+
+
+
 %%PROGRAMA
 #include "JAVA.*"  
 int x = 12;
@@ -62,17 +90,11 @@ int y = 6;
 int z = 9;
 int total = 88;
 
-	 JAVA.sumar      call1(x, y, z);
-	 
-	  
+	JAVA.sumar call1();
+
+
 void main()
-{ 	   
-	JAVA.call1.crearCartas();
-	 
-	 
-    
-    
+{ 	 
+	
 	
 }
-
- 

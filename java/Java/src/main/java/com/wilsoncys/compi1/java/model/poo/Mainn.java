@@ -94,7 +94,7 @@ public class Mainn extends Instruction{
         //dir dir ret
         //desde la clase se le hace set a la cantidad de params
                                                             //pte
-        cantParams++;
+//        cantParams++;
         for (Instruction ins : instrucciones) {
             if(ins instanceof Statement st){
                 //ambito

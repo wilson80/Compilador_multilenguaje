@@ -111,7 +111,7 @@ public class CaseMatch extends Instruction{
         c.countCreateVar++;
             
         
-        armed += idLabel + ":{}\n";
+        armed += idLabel + ":\n";
         
         if(this.expression != null){
                 //exp del switch
@@ -135,7 +135,7 @@ public class CaseMatch extends Instruction{
         
                                 //INSTRUCCIONES DEL case
         if(this.expression != null){
-            armed +=  idCase+ ":{}\n" ;
+            armed +=  idCase+ ":\n" ;
         }            
         for (Instruction ins : instructionss) {
             if(ins ==null){

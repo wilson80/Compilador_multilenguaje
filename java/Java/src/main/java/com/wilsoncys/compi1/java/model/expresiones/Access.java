@@ -180,7 +180,7 @@ public class Access extends Instruction{
         if(sym.getCat()==categoria.PARAM){  
             armed+= c.c3d_accesParam(id, dir);
         }else if(sym.getCat()==categoria.ATRIBUTO){ 
-                armed+= c.c3d_acces("", 0);
+                armed+= c.c3d_accesRef("", 0);
                 armed+= c.c3d_accesAttVarl("", dir);
 
         }else if(sym.getCat()==categoria.VARL){

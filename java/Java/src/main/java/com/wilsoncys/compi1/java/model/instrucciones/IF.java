@@ -195,7 +195,8 @@ public class IF extends Instruction{
               }
           } 
           if(isElif){
-            armed+= "}\n";
+//            armed+= "}\n";
+            armed+= "\n";
           }
                                             //LOGICAL op
         }else if(this.expression instanceof LogicalOperations log){
@@ -216,7 +217,7 @@ public class IF extends Instruction{
         
         
 //        label if
-        armed+= idIf +  ":{\n";
+        armed+= idIf +  ":\n";
         
         
         
@@ -235,7 +236,7 @@ public class IF extends Instruction{
 //            arbol.getCurrentAmbit().set(1, ambitoAnt);
        
         }
-        armed += "}\n";
+        armed += "\n";
         armed+= "goto " + idSalida + ";\n";
 //        arbol.setCurrentAmbit(ambitoAntList);
         
@@ -245,7 +246,7 @@ public class IF extends Instruction{
         
         if(instructionsElse!=null){         //INS del ELSE 
             //label else
-            armed+= idElse +  ":{\n";      
+            armed+= idElse +  ":\n";      
             for (Instruction instructions : instructionsElse) {
                 if(instructions ==null){
                     continue;
@@ -254,13 +255,13 @@ public class IF extends Instruction{
  
             }
             
-            armed += "}\n";
+            armed += "\n";
 
     //                      label salida
             armed+= idSalida +  ":\n";
 
         }else if(elif!=null){                        //INS del Elif
-            armed+= "label"+idElif+":{\n";
+            armed+= "label"+idElif+":\n";
                     
             ((IF)elif).setIsElif(true);
             ((IF)elif).setIdIf(idElif);

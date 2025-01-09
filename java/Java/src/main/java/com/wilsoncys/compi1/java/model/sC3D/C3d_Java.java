@@ -31,6 +31,7 @@ public class C3d_Java {
     String var1 = "";
     String var2 = "";
     public LinkedList<String> varsParams;
+    public LinkedList<String> varsRef;
     
  
     String OPRT = " + ";
@@ -45,6 +46,7 @@ public class C3d_Java {
     
     public C3d_Java() {
         varsParams = new LinkedList<>();
+        varsRef = new LinkedList<>();
     }
     
     
@@ -69,9 +71,12 @@ public class C3d_Java {
         varsParams.add("w" + (countCreateVar-1));
         return  armed;
     }
+    
+    int dirRef = 0;
+    
     public String c3d_accesAttVarl(String val, int dir){
-        String armed = c3d_newVar() + ASSIG + varsParams.getFirst() +MAS+dir + SEMIC;
-        varsParams.removeFirst();
+        String armed = c3d_newVar() + ASSIG + varsRef.getFirst() +MAS+dir + SEMIC;
+        varsRef.removeFirst();
         armed += c3d_newVar() + ASSIG + c3d_heap("w" + (countCreateVar-2))  + SEMIC +saltoLinea;
         varsParams.add("w" + (countCreateVar-1));
         //bugggg
@@ -81,8 +86,15 @@ public class C3d_Java {
      public String c3d_acces(String val, int dir){
         String armed = c3d_newVar() + ASSIG + PTR +MAS+dir + SEMIC;
         armed += c3d_newVar() + ASSIG + c3d_stack("w" + (countCreateVar-2))  + SEMIC +saltoLinea;
-//        varsParams.add("w" + (countCreateVar-1));
-        varsParams.addFirst("w" + (countCreateVar-1));
+        varsParams.add("w" + (countCreateVar-1));
+//        varsParams.addFirst("w" + (countCreateVar-1));
+        return  armed;
+    }
+     public String c3d_accesRef(String val, int dir){
+        String armed = c3d_newVar() + ASSIG + PTR +MAS+dir + SEMIC;
+        armed += c3d_newVar() + ASSIG + c3d_stack("w" + (countCreateVar-2))  + SEMIC +saltoLinea;
+        varsRef.add("w" + (countCreateVar-1));
+//        varsParams.addFirst("w" + (countCreateVar-1));
         return  armed;
     }
     
