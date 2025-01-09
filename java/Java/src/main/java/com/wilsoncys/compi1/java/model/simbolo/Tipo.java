@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  */
 public class Tipo {
     private tipoDato tipo;
-    private String idObjeto = "ONBJECT";
+    private String idObjeto = "OBJECTT";
     
     public Tipo(tipoDato tipo) {
         this.tipo = tipo;

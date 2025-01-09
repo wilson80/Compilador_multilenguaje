@@ -37,6 +37,7 @@ public class Call extends Instruction{
     private String otroId;
     private boolean recursiva;
     
+    private String nombreObjeto = "";
     
     private LinkedList<Instruction> parametersExp;
 
@@ -227,17 +228,12 @@ public class Call extends Instruction{
         
             @Override
     public Object createC3D(Arbol arbol, String anterior) {
-        
-                 
-
          
         String armed = "";
         
                            //llamada simple calcular();
         if(llamada == null){
-
             armed += simpleCall(arbol, anterior);
-              
         } 
          
         
@@ -262,22 +258,27 @@ public class Call extends Instruction{
                 sym0 = arbol.getSym(armedId);
                 if(sym0 == null){        //revisar esto
 
-                    JOptionPane.showMessageDialog(null, "error en llamada OBJ no se ha encontrado el symbolo");
+                    JOptionPane.showMessageDialog(null,
+                            "error en llamada OBJ no se ha encontrado el symbolo" + armedId);
 //                    return new Errores(id, "no se ha encontrado el simboloooooooooooooo", line, col);
                 }
             }
+             
             
-                       
-            
-            String currentAmbit = arbol.getCurrentAmbit().get(1);  
+//            String currentAmbit = arbol.getCurrentAmbit().get(1);  
                                             //buscando el tipo del objeto
-            if(sym0.getInstruction() instanceof Statement met){
-                arbol.getCurrentAmbit().set(1, met.tipo.getTypeString());
-                JOptionPane.showMessageDialog(null, "call277: " + met.tipo.getTypeString());
-//                arbol.setSizeHeap(3);
-            }else{
-                arbol.getCurrentAmbit().set(1,  sym0.getTipo().getTypeString());
-            }
+//            if(sym0.getInstruction() instanceof Statement met){
+//                arbol.getCurrentAmbit().set(1, met.tipo.getTypeString());
+////                JOptionPane.showMessageDialog(null, "call277: " + met.tipo.getTypeString());
+////                arbol.setSizeHeap(3);
+//            }else{
+            if(this.id.equals("nuevoNodo")){
+                JOptionPane.showMessageDialog(null, "calllNosimp" + sym0.getTipo().getTypeString());
+        }
+
+            
+        llamada.setNombreObjeto(sym0.getTipo().getTypeString());
+//            }
             
             
             
@@ -309,7 +310,7 @@ public class Call extends Instruction{
                         //interpretar la llamada
             armed += llamada.createC3D(arbol, anterior);
             
-            arbol.getCurrentAmbit().set(1, currentAmbit);
+//            arbol.getCurrentAmbit().set(1, currentAmbit);
             
             
            
@@ -342,7 +343,6 @@ public class Call extends Instruction{
         
         
         
-        String id_Methodo = "java"  + arbol.getCurrentAmbit().get(1) + this.id;
                                             //extrayendo los params
 //        identificando llamada a objeto
         if(c.varsParams.size()!=0){
@@ -351,7 +351,18 @@ public class Call extends Instruction{
             callPoo = true;
         } 
         
-                                            
+        String id_Methodo = "";
+        String id_Methodo2 = "";
+        
+        if(callPoo){
+              id_Methodo = "java"  + nombreObjeto + this.id;
+        }else{
+              id_Methodo = "java"  + arbol.getCurrentAmbit().get(1) + this.id;
+              id_Methodo = "java"  + arbol.getAmbito_asID() + this.id;
+        }
+                                         
+        
+        
         for (Instruction exps : parametersExp) {
             if(exps instanceof Nativo n){        
 
@@ -376,12 +387,19 @@ public class Call extends Instruction{
         
                                     //set a la posicion inicial para dejar los parametros
         Simbolo symMethod = arbol.getSym(id_Methodo);
+        
         if(symMethod == null){
-            JOptionPane.showMessageDialog(null, "error en llamada "
+            symMethod = arbol.getSym(id_Methodo2);
+            if(symMethod ==null){
+                JOptionPane.showMessageDialog(null, "error en  simpleCall"
                     + "no se ha encontrado el symbolo: " + this.id );
+            }
 //            return new Errores("SEMANTIC", "id no definido: " + this.id, line, col);
         } 
   
+        
+        
+        
         if(symMethod.getInstruction() instanceof  Functionss f){
             ptrTemp = f.getCantParams();
         }else if(symMethod.getInstruction() instanceof  Method m){
@@ -437,7 +455,7 @@ public class Call extends Instruction{
         
         
                                             //create al metodo/funcion
-        if(!recursiva){
+        if(!recursiva ){
             if(symMethod.getCat().equals(categoria.FUNCTION) ){
                 symMethod.getInstruction().createC3D(arbol, anterior);
             }else if(symMethod.getCat().equals(categoria.METHOD)){
@@ -469,6 +487,10 @@ public class Call extends Instruction{
 
     public void setRecursiva(boolean recursiva) {
         this.recursiva = recursiva;
+    }
+
+    public void setNombreObjeto(String nombreObjeto) {
+        this.nombreObjeto = nombreObjeto;
     }
 
     

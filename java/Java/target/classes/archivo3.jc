@@ -1,81 +1,119 @@
 %%PASCAL
 %%JAVA
 public class sumar {
-	//OBJETOS COMO PARAMETROS
 
-	Simple objeto1;
+	int algo;
+	int dos;
+	ListaE lista1;
 	// Simpl 
 	public sumar() {
-			//instancia
-		objeto1 = new Simple(44,55,66,77);
-		
-		println("antes: ");
-		imprimirInfo(objeto1);
-		println("Despues: ");
+		lista1 = new ListaE();
 
-	} 
-
-
-	public void imprimirInfo(Simple obj){
-
-		println("uno: ", obj.getUno());
-		println("dos: ", obj.getDos());
-		println("tres: ", obj.getTres());
-		println("cuatro: ", obj.getCuatro());
-
-	}
-
-
-
-
-	//RETORNAR UN OBJETO
-	
+		lista1.agregar(99);
+		// println("lista: ", lista1.getSize() );
+		// lista.agregar(37);
+		// lista.agregar(43);
+		// lista.imprimirLista();
+ 	} 
 } 
 
+public class ListaE {
 
-public class Simple {
-	int uno;
-	int dos;
-	int tres;
-	int cuatro;
-	public 	Simple(int a, int b, int c, int d){
-		this.uno = a;
-		this.dos = b;
-		this.tres = c;
-		this.cuatro = d;
-		// println("unoo: ", uno);		
-		// println("doss: ", dos);		
-		// imprimirInfo();
+	Nodo primero;
+	Nodo ultimo;
+	int size;
+	int numero;
+	public ListaE(){
+		// numero = 99;
+		// println("desde lista: " , numero);
 	}
+  
+   public void agregar(int contenido) {
+	   	println("intanciacion");	
+		Nodo nuevoNodo = new Nodo(contenido);
+		println("intanciacion");	
+		
+		if (esVacia()) {
+			println("if agregar");	
+			  primero = nuevoNodo;
+			  ultimo = nuevoNodo;
+		} else {
 
-	public void setUno(int a){
-		this.uno = a;
-	}	
-	public void setDos(int a){
-		this.dos = a;
-	}	
+			println("else agregar");	
+		}
+		// ultimo.setSiguiente(nuevoNodo); 
+		nuevoNodo.setAnterior(ultimo);
+		// ultimo = nuevoNodo;
+		
+	  size++;
+  }
+  
+   public int getSize(){
+	return size;
+  }
+   public int getNum(){
+	return numero;
+  }
+  public boolean esVacia() {
+	  return primero == null;
+  }
+
+
+  
+  public void imprimirLista() {
+	  if (esVacia()) {
+			println("La lista esta vacia");
+	  } else {
+	  
+		  Nodo actual = primero;
+		  while(actual.getSiguiente() != null) {
+			    println("contenido: " , actual.getContenido());
+			  actual = actual.getSiguiente();
+		  }
+		    println("contenido: " , actual.getContenido());
+	  }
+  }
+  
+
+}
+
+
+
+public class Nodo {
+	 
+		int contenido;
+		Nodo siguiente;
+		Nodo anterior;
 	
-	public int getUno(){
-		return this.uno;
-	}	
-	public int getDos(){
-		return this.dos;
-	}	
-	public int getTres(){
-		return this.tres;
-	}	
-	public int getCuatro(){
-		return this.cuatro;
-	}	
-
-	public void imprimirInfo(){
-		println("unoo: ", uno);		
-		println("doss: ", dos);		
-		println("tresss: ", this.tres);
-		println("cuaa: ", cuatro);		
-	}
-
-
+		public Nodo(int contenido) {
+			this.contenido = contenido;
+		}
+	
+		// public void setContenido(String contenido) {
+		//     this.contenido = contenido;
+		// }
+	
+		public int getContenido() {
+			return contenido;
+		}
+		 public Nodo getSiguiente() {
+			 return siguiente;
+		 }
+	
+		public void setSiguiente(Nodo siguiente) {
+			this.siguiente = siguiente;
+		}
+		
+		public void setAnterior(Nodo anterior) {
+			this.anterior = anterior;
+		}
+		  
+	
+		// public Nodo getAnterior() {
+		//     return anterior;
+		// }
+		
+		 
 }
 
 
@@ -95,6 +133,8 @@ int total = 88;
 
 void main()
 { 	 
+	//JAVA.call1.setObjeto(JAVA.call1.darObjeto());
+	// JAVA.call1.iniciar();
 	
 	
 }

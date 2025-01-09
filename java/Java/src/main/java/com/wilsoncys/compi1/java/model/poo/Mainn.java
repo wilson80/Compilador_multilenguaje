@@ -16,6 +16,7 @@ import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.java.model.simbolo.categoria;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -129,16 +130,24 @@ public class Mainn extends Instruction{
          
 //         JOptionPane.showMessageDialog(null, "tamanoooo:  " +arbol.attbClassJava);
         
-        arbol.setAmbito(this.ambito);
+        List<String> ambitoAntList = new ArrayList<>(arbol.getCurrentAmbit());
+        
+        
+//        String ambitoAnt = arbol.getCurrentAmbit().get(1);
+        arbol.setCurrentAmbit(this.ambito);
+    
         
         for (Instruction ins : instrucciones) {
             if(ins ==null){
                     continue;
             }
+ 
             armed += ins.createC3D(arbol, anterior);
             arbol.setAmbito(this.ambito);
+//            arbol.getCurrentAmbit().set(1, ambitoAnt);
         }
-      
+        arbol.setCurrentAmbit(ambitoAntList);
+        
         return armed;
     }
 

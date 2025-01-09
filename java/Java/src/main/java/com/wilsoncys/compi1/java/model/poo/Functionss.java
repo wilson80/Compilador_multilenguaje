@@ -142,8 +142,8 @@ public class Functionss extends Instruction{
                 continue;
             }
             bodyMet += (String)ins.createC3D(arbol, anterior);
-//            arbol.setCurrentAmbit(this.getAmbito());
-            arbol.getCurrentAmbit().set(1, ambitoAnt);
+            arbol.setCurrentAmbit(this.getAmbito());
+//            arbol.getCurrentAmbit().set(1, ambitoAnt);
 
         }
         
@@ -160,7 +160,7 @@ public class Functionss extends Instruction{
         armed = devVars + "\n";
         armed += bodyMet;
         
-        armed = c.c3d_metodo("java_" + this.ambito.get(1) +"_"+ id, armed);
+        armed = c.c3d_metodo("java_" + arbol.getCurrentAmbit().get(1) +"_"+ id, armed);
             
         if(!isCreate){
             arbol.Print(armed);       

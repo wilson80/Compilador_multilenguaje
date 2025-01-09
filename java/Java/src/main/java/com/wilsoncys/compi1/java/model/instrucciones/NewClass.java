@@ -7,63 +7,83 @@ package com.wilsoncys.compi1.java.model.instrucciones;
 /**
  *
  * @author jonwilson
- */
+ */ 
+ 
 public class NewClass {
+      Nodo primero;
+      Nodo ultimo;
+      int size;
 
-    int uno;
-    int dos;
-    int tres;
-
-    public NewClass(int uno, int dos, int tres) {
-        this.uno = uno;
-        this.dos = dos;
-        this.tres = tres;
+    public NewClass() {
     }
-
-    public void crearCartas() {
-        // Prueba del método recursivo
-        int numero = 6;
-        int resultado = calcularFibonacci(numero);
-
-        // println("El factorial de " , numero + " es: " , resultado);
-        System.out.println("El factorial de essssss: " + resultado);
-
-    }
-
-    public int calcularFactorial(int n) {
-        if (n == 0 || n == 1) {
-            return 1;
+     
+     public void agregar(int contenido) {
+        Nodo nuevoNodo = new Nodo(contenido);
+        if (esVacia()) {
+            primero = nuevoNodo;
+            ultimo = nuevoNodo;
+        } else {
+            ultimo.setSiguiente(nuevoNodo); 
+            nuevoNodo.setAnterior(ultimo);
+            ultimo = nuevoNodo;
         }
-        // Caso recursivo: n * factorial(n - 1)
-        return n * calcularFactorial(n - 1);
-
+        
+        size++;
+    }
+    
+    public boolean esVacia() {
+        return primero == null;
     }
 
-    public int calcularFibonacci(int n){
-            if (n == 0) {
-                return 0;  // Caso base
-            } else if (n == 1) {
-                return 1;  // Caso base
-            } else {
-                return calcularFibonacci(n - 1) + calcularFibonacci(n - 2);  // Caso recursivo
+  
+    
+    public void imprimirLista() {
+        if (esVacia()) {
+             System.out.println("La lista esta vacia");
+        } else {
+        
+            Nodo actual = primero;
+            while(actual.getSiguiente() != null) {
+                 System.out.println("contenido: " + actual.getContenido());
+                actual = actual.getSiguiente();
             }
-		
-    } 
+             System.out.println("contenido: " + actual.getContenido());
+        }
+    }
     
-    
-    
-    
-    
-    
-    
-    
-    //hacer pruebas en c+++++++
-    
-    
+
+
+
+  
     
     public static void main(String[] args) {
-        NewClass algo = new NewClass(1, 1, 1);
-        algo.crearCartas();
-    }
+        
+            NewClass lista = new NewClass();
 
+            lista.agregar(99);
+            lista.agregar(37);
+            lista.agregar(43);
+            lista.imprimirLista();
+            
+            // listaString.eliminarUltimo();
+            // listaString.eliminarUltimo();
+            // listaString.imprimirLista();
+            
+            // listaString.eliminarUltimo();
+            // listaString.imprimirLista();
+        
+        
+    }
+    
 }
+
+
+
+   
+//         
+// 
+ 
+
+
+    
+ 

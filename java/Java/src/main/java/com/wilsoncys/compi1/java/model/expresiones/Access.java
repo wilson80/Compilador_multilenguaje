@@ -139,7 +139,7 @@ public class Access extends Instruction{
 
 
 
-        
+
         
         String armed = "";
         C3d_Java c =  arbol.getJava();
@@ -150,12 +150,20 @@ public class Access extends Instruction{
             sym = arbol.getSym(armedId);
 //            this.tipo = sym.getTipo();
 
+
+
+
+
         }else{      // si no se usa this.
 
             String armedId = "";
             armedId= arbol.getAmbito_asID() + id;
+            if(this.id.equals("nuevoNodo")){
+                JOptionPane.showMessageDialog(null, "ambit asID: " + arbol.getAmbito_asID()
+                    +"  \nID: "+this.id);
+            }
       
-            sym = arbol.getSym(armedId);
+            sym = arbol.getSym(armedId);    
 //            this.tipo = sym.getTipo();
             
             if(sym==null){      //si no se encuentra en el ambito local buscar en el ambito global

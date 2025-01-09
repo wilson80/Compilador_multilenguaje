@@ -78,6 +78,7 @@ terminal DO, IF, ELSE, FOR, BREAK, SWITCH, WHILE, CONTINUE, DEFAULT;
 terminal OR, AND, XOR, NOT;
 terminal UNEGATIVE, UMINUS;
 terminal PLUSPLUS, MINUSMINUS;
+terminal NULL;
 
 terminal PRINT, INT, DOUBLE, BOOLEAN, CHAR, STRING, VOID;
 terminal PAR_OP, PAR_CL, K_OP, K_CL, SEMIC, POINTS, BRACK_L, BRACK_R;
@@ -669,6 +670,7 @@ EXPRESION::= MINUS EXPRESION:a             {:   RESULT = new Negacion(a, Operado
             | CADENA:a      {:   RESULT = new Nativo(a, new Tipo(tipoDato.CADENA), aleft, aright );   :}
             | CHARAC:a      {:   RESULT = new Nativo(a, new Tipo(tipoDato.CARACTER), aleft, aright );   :}
             | BOOL:a      {:   RESULT = new Nativo(a, new Tipo(tipoDato.BOOLEANO), aleft, aright );   :}
+            | NULL:a      {:   RESULT = new Null(new Tipo(tipoDato.VOID), aleft, aright );   :}
             | ID:a      {:   RESULT = new Access(a, aleft, aright);   :}
             | THIS DOT ID:a      {:   RESULT = new Access(a, true, aleft, aright);   :}
 

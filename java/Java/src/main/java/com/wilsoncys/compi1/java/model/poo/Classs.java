@@ -307,14 +307,18 @@ import javax.swing.JOptionPane;
         }
         
         
+        
+                    //MAIN
         if(mainEcontrado!=null){
             //realizar el constructor por defecto
                     //inicializar los attb con valores por defecto
-            arbol.setCurrentAmbit(mainEcontrado.getAmbito());
+                    
+           
             String devVars = "";
             
             armed+=mainEcontrado.createC3D(arbol, anterior);
             int finVars = c.countCreateVar;
+            
             
 
             for (int i = iniVars; i < finVars; i++) {

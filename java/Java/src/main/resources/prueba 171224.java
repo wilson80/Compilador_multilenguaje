@@ -59,7 +59,6 @@ public class Carta {
 	}
  
 }
-
  
 %%PROGRAMA
 #include "JAVA.*"  
@@ -73,70 +72,11 @@ int total = 88;
 void main()
 { 	   
 	JAVA.call1.crearCartas();
-
-    
-    
-	
+  
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
  
 

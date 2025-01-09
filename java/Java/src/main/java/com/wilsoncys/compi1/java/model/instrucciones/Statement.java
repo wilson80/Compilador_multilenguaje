@@ -14,6 +14,7 @@ import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
+import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -154,6 +155,7 @@ public class Statement extends Instruction{
         String armed = "";
         C3d_Java c =  arbol.getJava();
 //        int dir  = arbol.getSym(this.getAmbito_asID()).getDir();
+        Simbolo sym = arbol.getSym(arbol.getAmbito_asID()+ id);
         int dir  = arbol.getSym(arbol.getAmbito_asID()+ id) .getDir();
 
         
@@ -166,8 +168,15 @@ public class Statement extends Instruction{
             //halar la ref
                                             //dir ref
             armed += c.c3d_acces("ptr", 0);
+            
+            
+            String valDefault = "0";
+            
+            if(sym.getTipo().getTipo() == tipoDato.OBJECT){
+                valDefault = "-1";
+            }
                                             //val por defecto
-            armed += c.c3d_asignHeap("0", dir);
+            armed += c.c3d_asignHeap(valDefault, dir);
             
             
             

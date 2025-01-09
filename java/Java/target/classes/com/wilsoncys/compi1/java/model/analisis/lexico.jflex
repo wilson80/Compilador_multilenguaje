@@ -101,6 +101,7 @@ Rbrack = \]
         "println"            { return  symbol(sym.PRINTLN, yytext());}
         "true"            { return symbol(sym.BOOL, yytext());}
         "false"            { return symbol(sym.BOOL, yytext());}
+        "null"            { return symbol(sym.NULL, yytext());}
 
 
         "int"            { return symbol(sym.INT, yytext());}
