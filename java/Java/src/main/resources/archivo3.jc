@@ -8,9 +8,9 @@ public class Nodo {
 		Nodo anterior;
 	
 		public Nodo(int contenido) {
-			contenido = 0;
-			siguiente = null;
-			anterior = null;
+			this.contenido = 0;
+			this.siguiente = null;
+			this.anterior = null;
 			this.contenido = contenido;
 		}
 		
@@ -85,9 +85,9 @@ public class ListaE {
    public int getNum(){
 	return numero;
   }
-  public boolean esVacia() {
-	  return primero == null;
-  }
+//   public boolean esVacia() { 
+// 	  return primero == null;
+//   }
 
 
   
@@ -106,16 +106,17 @@ public class ListaE {
 }
 
 
-// public Nodo obtenerNodo(int index) {
-// 	Nodo actual = null;
-// 	 actual = primero;
-// 	 int i;
-// 	for ( i = 0; i < index; i++) {
+public Nodo obtenerNodo(int index) {
+	println("indice: ", index);
+	Nodo actual = this.primero;
+	 
+	 int i;
+	for ( i = 0; i < index; i++) {
 
-// 		actual = actual.getSiguiente();
-// 	}
-// 	return actual;
-// }
+		actual = actual.getSiguiente();
+	}
+	return actual;
+}
 
 }
 
@@ -145,10 +146,10 @@ public class sumar {
 		lista1.agregar(77);
 		lista1.agregar(78);
 		lista1.agregar(79);
+		lista1.imprimirLista();
 		println("lista: ", lista1.getSize() );
-		// Nodo nodo1 =  lista1.obtenerNodo(5);
-		// println("obteniendo contenido de un nodo: ", nodo1.getContenido());
-		 lista1.imprimirLista();
+		Nodo nodo1 =  lista1.obtenerNodo(5);
+		println("obteniendo contenido de un nodo: ", nodo1.getContenido());
 	}
 } 
 

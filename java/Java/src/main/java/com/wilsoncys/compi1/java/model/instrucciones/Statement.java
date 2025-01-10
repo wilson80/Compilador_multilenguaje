@@ -14,6 +14,7 @@ import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
+import com.wilsoncys.compi1.java.model.simbolo.categoria;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -166,17 +167,22 @@ public class Statement extends Instruction{
             //si el valor es un nativo
             //-1 si es un objeto para marcar que esta nulo
             //halar la ref
-                                            //dir ref
-            armed += c.c3d_acces("ptr", 0);
-            
-            
+                                    //pendiente de tipos
             String valDefault = "0";
             
             if(sym.getTipo().getTipo() == tipoDato.OBJECT){
                 valDefault = "-1";
             }
-                                            //val por defecto
-            armed += c.c3d_asignHeap(valDefault, dir);
+            
+                                            //val por defecto asignar
+            if(sym.getCat() == categoria.ATRIBUTO){
+                                                            //dir ref
+                armed += c.c3d_acces("ptr", 0);
+                armed += c.c3d_asignHeap(valDefault, dir);
+            }else if(sym.getCat() == categoria.VARL){
+                armed += c.c3d_asignAlone(valDefault);
+                armed += c.c3d_asignVal(id, dir);
+            }
             
             
             

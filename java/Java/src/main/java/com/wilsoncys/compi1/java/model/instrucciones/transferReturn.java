@@ -70,6 +70,9 @@ public class transferReturn extends Instruction{
             armed+=this.expression.createC3D(arbol, anterior);
        }
          
+       
+       //VALIdar el tipo del retorno
+       
 //        c.varsParams.remove(0);
 //        JOptionPane.showMessageDialog(null, "");
         armed+=c.c3d_asignVal("", 1);
