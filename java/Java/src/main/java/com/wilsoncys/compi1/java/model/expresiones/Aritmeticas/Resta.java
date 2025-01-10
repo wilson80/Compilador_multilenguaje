@@ -8,6 +8,7 @@ import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.expresiones.Enums.OperadoresAritmeticos;
 import com.wilsoncys.compi1.java.model.expresiones.Nativo;
+import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
 import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
@@ -161,7 +162,7 @@ public class Resta extends Instruction {
     }
         
             @Override
-    public Object createC3D(Arbol arbol, String anterior) {         
+    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {         
         String armed = "";
         String op1 = "";
         String op2 = "";

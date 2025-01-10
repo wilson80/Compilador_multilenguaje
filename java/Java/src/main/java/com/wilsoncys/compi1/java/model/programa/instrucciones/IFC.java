@@ -7,6 +7,7 @@ package com.wilsoncys.compi1.java.model.programa.instrucciones;
 import com.wilsoncys.compi1.java.model.programa.instrucciones.*;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
+import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
  
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
@@ -139,7 +140,7 @@ public class IFC extends Instruction{
     }
     
             @Override
-    public Object createC3D(Arbol arbol, String anterior) {
+    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         return anterior;
     }
     

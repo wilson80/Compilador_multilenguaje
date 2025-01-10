@@ -7,6 +7,7 @@ package com.wilsoncys.compi1.java.model.programa;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
+import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.poo.Classs;
 import com.wilsoncys.compi1.java.model.programa.instrucciones.StatementC;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
@@ -161,7 +162,7 @@ public class Programa extends Instruction{
     
     
        @Override
-    public Object createC3D(Arbol arbol, String anterior) {
+    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         String ArmedPrincipal = "";
         String ArmedJavas = "";
 

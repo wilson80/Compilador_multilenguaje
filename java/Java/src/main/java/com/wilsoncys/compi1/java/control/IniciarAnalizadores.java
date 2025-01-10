@@ -8,6 +8,7 @@ import com.wilsoncys.compi1.java.Main;
 import com.wilsoncys.compi1.java.model.analisis.*;
 import com.wilsoncys.compi1.java.model.asbtracto.*;
 import com.wilsoncys.compi1.java.model.excepciones.*;
+import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.poo.*; 
 import com.wilsoncys.compi1.java.model.programa.ClasesJava;
 import com.wilsoncys.compi1.java.model.programa.Programa;
@@ -116,7 +117,7 @@ public class IniciarAnalizadores {
                         
                         C3d c3d = ast.getC3d();
                         int iniVars = c3d.contador;
-                        bodyMain += (String)cl.createC3D(ast, "");
+                        bodyMain += (String)cl.createC3D(ast, new AmbitoMetodo("", ""));
                         int finVars = c3d.contador;
                         String devVars = "";
                         for (int i = iniVars; i < finVars; i++) {

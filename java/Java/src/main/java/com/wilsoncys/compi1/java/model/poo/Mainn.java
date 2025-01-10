@@ -6,6 +6,7 @@ package com.wilsoncys.compi1.java.model.poo;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
+import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.instrucciones.Statement;
 import com.wilsoncys.compi1.java.model.instrucciones.transferReturn;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
@@ -35,6 +36,8 @@ public class Mainn extends Instruction{
 
     private List<String>  ambito;   //idclase/metodo/params
     private boolean isCreate = false;
+    private AmbitoMetodo ambitoContent;
+    
     
     public Mainn(String id, LinkedList<HashMap> parametros, LinkedList<Instruction> instrucciones, int linea, int col) {
         super(new Tipo(tipoDato.VOID), linea, col);
@@ -119,7 +122,7 @@ public class Mainn extends Instruction{
         
     
             @Override
-    public Object createC3D(Arbol arbol, String anterior) {
+    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         String armed = "";
         C3d_Java c = arbol.getJava();
         
@@ -134,7 +137,7 @@ public class Mainn extends Instruction{
         
         List<String> ambitoAntList = new ArrayList<>(arbol.getCurrentAmbit());
         arbol.setCurrentAmbit(this.ambito);
-        arbol.setCurrentPos(this.cantParams);
+//        arbol.setCurrentPos(this.cantParams);
 
         
         
@@ -154,8 +157,10 @@ public class Mainn extends Instruction{
             if(ins ==null){
                     continue;
             }
- 
-            bodyMet += ins.createC3D(arbol, anterior);
+
+            String posPrepared = "" + this.cantParams;
+            this.ambitoContent = new AmbitoMetodo(posPrepared, idRetorno);
+            bodyMet += ins.createC3D(arbol, this.ambitoContent);
             arbol.setAmbito(this.ambito);
 //            arbol.getCurrentAmbit().set(1, ambitoAnt);
         }

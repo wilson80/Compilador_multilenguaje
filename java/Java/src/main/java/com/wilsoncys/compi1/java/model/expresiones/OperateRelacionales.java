@@ -7,6 +7,7 @@ package com.wilsoncys.compi1.java.model.expresiones;
 import com.wilsoncys.compi1.java.model.expresiones.Enums.Relational_LogicalOperations;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
+import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
@@ -487,7 +488,7 @@ public class OperateRelacionales extends Instruction {
     }
     
         @Override
-    public Object createC3D(Arbol arbol, String anterior) {
+    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
          String armed = "";
         String op1 = "";
         String op2 = "";

@@ -6,6 +6,7 @@ package com.wilsoncys.compi1.java.model.poo;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
+import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.poo.Mainn;
 import com.wilsoncys.compi1.java.model.instrucciones.Statement;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
@@ -264,7 +265,7 @@ import javax.swing.JOptionPane;
     
     
     @Override
-    public Object createC3D(Arbol arbol, String anterior) {
+    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         String armed = ""; 
         C3d_Java c = arbol.getJava(); 
         int iniVars = c.countCreateVar; 

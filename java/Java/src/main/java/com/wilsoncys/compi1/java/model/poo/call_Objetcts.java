@@ -7,6 +7,7 @@ package com.wilsoncys.compi1.java.model.poo;
 import com.wilsoncys.compi1.java.model.programa.*;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores; 
+import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.poo.Functionss;
 import com.wilsoncys.compi1.java.model.poo.Method;
 import com.wilsoncys.compi1.java.model.programa.expresiones.AccessC;
@@ -76,7 +77,12 @@ public class call_Objetcts extends Instruction{
 
     
             @Override
-    public Object createC3D(Arbol arbol, String anterior) {
+    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
+        
+        //unused
+        
+        
+        
         String armed = "";
         
         C3d_Java c = arbol.getJava();
@@ -94,7 +100,8 @@ public class call_Objetcts extends Instruction{
                 //set a la referencia (stack[0]) 
         armed+= c.c3d_acces(armed, sym.getDir());
 
-        armed+=c.c3d_ptrTemp(arbol.attbPrincipal);
+        
+        armed+=c.c3d_ptrTemp("");
 
         armed+= c.c3d_asignVar("", 0);
        
@@ -119,7 +126,7 @@ public class call_Objetcts extends Instruction{
             }
         }
                                                             //stack temp
-        armed+=c.c3d_ptrTemp(arbol.attbPrincipal);
+        armed+=c.c3d_ptrTemp("");
         
         
                                     //create al metodo/funcion
@@ -143,13 +150,13 @@ public class call_Objetcts extends Instruction{
          
         c.clearPtrTemp();   
                                             //ejecutar el metodo
-        armed+=c.c3d_moveToStack(true, arbol.attbPrincipal);
+        armed+=c.c3d_moveToStack(true,"");
         armed+= c.callJava(idObject+"_"+idMethod);
-        armed+=c.c3d_moveToStack(false, arbol.attbPrincipal);
+        armed+=c.c3d_moveToStack(false, "");
         
         //dejar el retorno
         if(symMethod.getCat().equals(categoria.FUNCTION) ){
-          armed += c.c3d_ptrTemp(arbol.attbPrincipal);
+          armed += c.c3d_ptrTemp("");
           armed += c.c3d_accesTemp(armed, 1);
             
         }

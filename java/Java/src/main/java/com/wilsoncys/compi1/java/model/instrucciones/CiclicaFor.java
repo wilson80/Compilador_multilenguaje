@@ -121,7 +121,7 @@ public class CiclicaFor extends Instruction {
         return null;
     }
             @Override
-    public Object createC3D(Arbol arbol, String anterior) {
+    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         String armed = "";
         C3d_Java c = arbol.getJava();
         String idLoop = "label_Loop" + c.countCreateVar;

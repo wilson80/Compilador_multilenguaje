@@ -7,6 +7,7 @@ package com.wilsoncys.compi1.java.model.programa;
 import com.wilsoncys.compi1.java.model.poo.*;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
+import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.instrucciones.Statement;
 import com.wilsoncys.compi1.java.model.instrucciones.transferReturn;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
@@ -92,7 +93,7 @@ public class MainnC extends Instruction{
         
     
             @Override
-    public Object createC3D(Arbol arbol, String anterior) {
+    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         String armed = "";
         C3d c = arbol.getC3d();
         

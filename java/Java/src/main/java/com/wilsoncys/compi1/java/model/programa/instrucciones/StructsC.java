@@ -67,7 +67,7 @@ public class StructsC extends Instruction{
         return null;
     }
             @Override
-    public Object createC3D(Arbol arbol, String anterior) {
+    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         return anterior;
     }
     

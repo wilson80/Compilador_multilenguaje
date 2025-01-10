@@ -108,7 +108,7 @@ public class PrintsC extends Instruction {
 //    printf("la suma de %d mas %d es igual a %d", x, y, total );
       
     @Override
-    public Object createC3D(Arbol arbol, String anterior) {        
+    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {        
         String armed = "";
         C3d c = arbol.getC3d();
         

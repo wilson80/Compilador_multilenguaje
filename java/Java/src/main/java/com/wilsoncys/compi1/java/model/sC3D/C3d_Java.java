@@ -211,7 +211,7 @@ public class C3d_Java {
         return arm; 
     }    
     
-    public String c3d_moveToStack(boolean go_Back, int size){       
+    public String c3d_moveToStack(boolean go_Back, String size){       
                         //preparar, al ejecutar un metodo
         String arm = "";
         if(go_Back){
@@ -221,7 +221,7 @@ public class C3d_Java {
         }
         return arm; 
     }
-    public String c3d_ptrTemp(int size){       
+    public String c3d_ptrTemp(String size){       
                         //preparar, temporalmente
         String arm = "";
             arm+="\n";

@@ -92,7 +92,18 @@ public class ListaE {
 
   
   public void imprimirLista() {
-	 
+	// Nodo actual = primero; 
+	// // if (esVacia()) {
+	// if (primero == null) {
+	// 	println("La lista esta vacia");
+	// } else {
+	
+	// 	while(actual.getSiguiente() != null) {
+	// 		 println("contenido: " , actual.getContenido());
+	// 		actual = actual.getSiguiente();
+	// 	}
+	// 	 println("contenido: " , actual.getContenido());
+	// }
 	Nodo actual = primero;
 	// if (esVacia()) {
 	int i;
@@ -107,7 +118,8 @@ public class ListaE {
 
 				//da un nodo en indice indicado
 	public Nodo obtenerNodo(int index) {
-		println("indice: ", index);
+
+		// println("indice: ", index);
 		Nodo actual = this.primero;
 		
 		int i;
@@ -118,25 +130,25 @@ public class ListaE {
 		return actual;
 	}
 
-    // public void eliminarUltimo() {
-    //     Nodo penultimo = null;
-    //     // if (esVacia()) {
-    //     if (primero ==null) {
-    //         println("La lista esta vacia");
-    //     } else {
-    //         if (size == 1) {
-    //             primero = null;
-    //             ultimo = null;
-    //         } else {
-    //             penultimo = ultimo.getAnterior();
-    //             penultimo.setSiguiente(null);
-    //             ultimo.setAnterior(null);
-    //             ultimo = penultimo;
-    //         }
+    public void eliminarUltimo() {
+        Nodo penultimo = null;
+        // if (esVacia()) {
+        if (primero ==null) {
+            println("La lista esta vacia");
+        } else {
+            if (size == 1) {
+                primero = null;
+                ultimo = null;
+            } else {
+                penultimo = ultimo.getAnterior();
+                penultimo.setSiguiente(null);
+                ultimo.setAnterior(null);
+                ultimo = penultimo;
+            }
         
-    //         size--;
-    //     }
-    // }
+            size--;
+        }
+    }
 
 
 
@@ -147,7 +159,7 @@ public class ListaE {
 
 
 
-    /*public int getContent(int index) {
+    public int getContent(int index) {
 		Nodo nodo1 = obtenerNodoPRO(index); 
         return nodo1.getContenido();
     }
@@ -194,8 +206,8 @@ public class ListaE {
         return actual;
     }
 
-*/
 
+ 
 
 
 
@@ -226,18 +238,19 @@ public class sumar {
 		lista1.agregar(76);
 		lista1.agregar(77);
 		lista1.agregar(78);
-		lista1.agregar(79);
-		// lista1.eliminarUltimo();
-		// lista1.eliminarUltimo();
-		// lista1.eliminarUltimo();
+		lista1.imprimirLista();
+		println("eliminando algunos:  " );
+		lista1.eliminarUltimo();
+		lista1.eliminarUltimo();
+		lista1.eliminarUltimo();
 
 		lista1.imprimirLista();
 		
 
 		println("lista: ", lista1.getSize() );
-		// println("obtener modo pro: ", lista1.getContent(2));
-		// Nodo nodo1 =  lista1.obtenerNodo(5);
-		// println("obteniendo contenido de un nodo: ", nodo1.getContenido());
+		println("obtener modo pro pos(5): ", lista1.getContent(5));
+		Nodo nodo1 =  lista1.obtenerNodo(3);
+		println("obteniendo contenido de un nodo: en pos 3: ", nodo1.getContenido());
 	}
 } 
 

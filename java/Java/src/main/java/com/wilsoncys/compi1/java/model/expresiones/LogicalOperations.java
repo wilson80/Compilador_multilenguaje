@@ -15,6 +15,7 @@ import static com.wilsoncys.compi1.java.model.expresiones.Enums.Relational_Logic
 import static com.wilsoncys.compi1.java.model.expresiones.Enums.Relational_LogicalOperations.MAYOR_IGUAL;
 import static com.wilsoncys.compi1.java.model.expresiones.Enums.Relational_LogicalOperations.MENOR;
 import static com.wilsoncys.compi1.java.model.expresiones.Enums.Relational_LogicalOperations.MENOR_IGUAL;
+import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
@@ -127,7 +128,7 @@ public class LogicalOperations extends Instruction{
     
         
             @Override
-    public Object createC3D(Arbol arbol, String anterior) {
+    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         String armed = "";
         String op1 = "";
         String op2 = "";

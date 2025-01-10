@@ -9,6 +9,7 @@ import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores; 
 import com.wilsoncys.compi1.java.model.expresiones.Access;
 import com.wilsoncys.compi1.java.model.expresiones.Nativo;
+import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.instrucciones.Statement;
 import com.wilsoncys.compi1.java.model.instrucciones.transferReturn;
 import com.wilsoncys.compi1.java.model.programa.expresiones.AccessC;
@@ -201,23 +202,23 @@ public class Reference extends Instruction{
          
         
             @Override
-    public Object createC3D(Arbol arbol, String anterior) {
+    public Object createC3D(Arbol arbol, AmbitoMetodo posTemp) {
         String armed = "";
-        int posIni = 2;
+        int posIniParam = 2;
         
         C3d_Java c = arbol.getJava();
         String id_constructor = "java" + this.id + this.id;
                                             //extrayendo los params
         for (Instruction exps : parametersExp) {
             if(exps instanceof Nativo n){             
-                n.createC3D(arbol, anterior);
+                n.createC3D(arbol, posTemp);
                 id_constructor += n.tipo.getTypeString();
                 
             }else if(exps instanceof Access cs){
-                armed+=cs.createC3D(arbol, anterior);
+                armed+=cs.createC3D(arbol, posTemp);
                 id_constructor += cs.tipo.getTypeString();
             }else{
-                armed += exps.createC3D(arbol, anterior);
+                armed += exps.createC3D(arbol, posTemp);
                 id_constructor += exps.tipo.getTypeString();
             }
         }
@@ -226,12 +227,12 @@ public class Reference extends Instruction{
         arbol.getClasesJava().getclase(this.id).setId_constructor(id_constructor);
            
                                                     //stack temp
-        armed+=c.c3d_ptrTemp(arbol.attbClassJava);
+        armed+=c.c3d_ptrTemp(posTemp.getPosTemp());
 
                                                     //PREPARED params en el stack
         for (Instruction exps : parametersExp) {
-                armed += c.c3d_asignTemp("", posIni);
-                posIni++;
+                armed += c.c3d_asignTemp("", posIniParam);
+                posIniParam++;
         }
         
         
@@ -239,22 +240,22 @@ public class Reference extends Instruction{
         c.clearPtrTemp(); 
 
                                                 //ejecutar el metodo
-        armed+= c.c3d_moveToStack(true, arbol.attbClassJava);
+        armed+= c.c3d_moveToStack(true, posTemp.getPosTemp());
         armed+= c.callJava(this.id + "_" + this.id);
-        armed+=c.c3d_moveToStack(false, arbol.attbClassJava);
+        armed+=c.c3d_moveToStack(false, posTemp.getPosTemp());
         
            
         c.clearVarParams();
                             //create a la Clase
         Simbolo symClass = arbol.getSym("java" + this.id);
 //        arbol.setSizeHeap(((Classs)symClass.getInstruction()).getCantAttb());
-        symClass.getInstruction().createC3D(arbol, anterior);
+        symClass.getInstruction().createC3D(arbol, posTemp);
         c.clearVarParams();
         
         
         arbol.setSizeHeap(cantAttbCurrent);
                                             //mover el ptrtemp Temporal
-        armed+=c.c3d_ptrTemp(arbol.attbClassJava);
+        armed+=c.c3d_ptrTemp(posTemp.getPosTemp());
                                             //obtener valor de la referencia
         armed+=c.c3d_accesTemp("", 0);
         

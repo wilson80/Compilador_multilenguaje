@@ -8,6 +8,7 @@ import com.wilsoncys.compi1.java.model.poo.*;
 import com.wilsoncys.compi1.java.model.poo.Method;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores; 
+import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.instrucciones.Statement;
 import com.wilsoncys.compi1.java.model.instrucciones.transferReturn;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
@@ -76,7 +77,7 @@ public class ReferenceC extends Instruction{
 
     
             @Override
-    public Object createC3D(Arbol arbol, String anterior) {
+    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         String armed = "";
         
         for (Instruction call : calls) {

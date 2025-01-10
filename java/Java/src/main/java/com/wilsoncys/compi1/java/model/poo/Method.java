@@ -7,6 +7,7 @@ package com.wilsoncys.compi1.java.model.poo;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.instrucciones.Statement;
+import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.instrucciones.transferReturn;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
 import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
@@ -37,6 +38,8 @@ public class Method extends Instruction{
     private List<String>  ambito;   //idclase/metodo/params
     private int cantSyms = 0;
     
+    private AmbitoMetodo ambitoContent;    
+
 
     public Method(String id, LinkedList<HashMap> parametros, LinkedList<Instruction> instrucciones, Tipo tipo, int linea, int col) {
         super(tipo, linea, col);
@@ -126,7 +129,7 @@ public class Method extends Instruction{
     
     
             @Override
-    public Object createC3D(Arbol arbol, String anterior) {
+    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         String armed = "";
         C3d_Java c = arbol.getJava();
         
@@ -137,14 +140,14 @@ public class Method extends Instruction{
         String idRetorno ="retorno" + c.countCreateVar;
         c.countCreateVar++;
                                     //label de retorno
-        arbol.setLabelRetorno(idRetorno);
+//        arbol.setLabelRetorno(idRetorno);
                         
                         
         
         List<String> ambitoAntList = new ArrayList<>(arbol.getCurrentAmbit());
 //        String ambitoAnt = arbol.getCurrentAmbit().get(1);
         arbol.setCurrentAmbit(this.ambito);
-        arbol.setCurrentPos(this.cantParams);
+//        arbol.setCurrentPos(this.cantParams);
 
         
         String bodyMet = "";
@@ -155,8 +158,10 @@ public class Method extends Instruction{
 //            if(this.id.equals("agregar")){
 //                JOptionPane.showMessageDialog(null, "ambito: " + this.getAmbito().get(2));
 //            }
-                    
-            bodyMet += (String)ins.createC3D(arbol, anterior);
+
+            String posPrepared = "" + this.cantParams;
+            this.ambitoContent = new AmbitoMetodo(posPrepared, idRetorno);
+            bodyMet += (String)ins.createC3D(arbol, this.ambitoContent);
             arbol.setCurrentAmbit(this.getAmbito());
 //            arbol.getCurrentAmbit().set(1, ambitoAnt);
 
@@ -164,6 +169,7 @@ public class Method extends Instruction{
         arbol.setCurrentAmbit(ambitoAntList);
         
         bodyMet += idRetorno + ":\n";
+//        bodyMet += arbol.getLabelRetorno() + ":\n";
         bodyMet += "    cout<< \" \";";
         
         int finVars = c.countCreateVar;

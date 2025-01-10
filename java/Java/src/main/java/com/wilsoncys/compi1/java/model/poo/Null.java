@@ -5,6 +5,7 @@
 package com.wilsoncys.compi1.java.model.poo;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
+import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
@@ -33,7 +34,7 @@ public class Null extends  Instruction{
     }
 
     @Override
-    public Object createC3D(Arbol arbol, String anterior) {
+    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
          arbol.java.varsParams.add(" -1");
         return "";
         

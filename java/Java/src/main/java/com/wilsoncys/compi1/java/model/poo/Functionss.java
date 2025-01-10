@@ -7,6 +7,7 @@ package com.wilsoncys.compi1.java.model.poo;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.instrucciones.Statement;
+import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.instrucciones.transferReturn;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
 import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
@@ -37,6 +38,8 @@ public class Functionss extends Instruction{
 
     private int cantSyms = 0;
     private boolean isCreate = false;
+
+    private AmbitoMetodo ambitoContent;    
 
 
     public Functionss(String identificator, LinkedList<HashMap> parameters, LinkedList<Instruction> instrucciones, Tipo tipo, int linea, int col) {
@@ -117,7 +120,7 @@ public class Functionss extends Instruction{
     
     
             @Override
-    public Object createC3D(Arbol arbol, String anterior) {
+    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         String armed = "";
         C3d_Java c = arbol.getJava();
         
@@ -137,7 +140,7 @@ public class Functionss extends Instruction{
         
 //        String ambitoAnt = arbol.getCurrentAmbit().get(1);
         arbol.setCurrentAmbit(this.ambito);
-        arbol.setCurrentPos(this.cantParams);
+//        arbol.setCurrentPos(this.cantParams);
 
         
         String bodyMet = "";
@@ -145,7 +148,9 @@ public class Functionss extends Instruction{
             if(ins ==null){
                 continue;
             }
-            bodyMet += (String)ins.createC3D(arbol, anterior);
+            String posPrepared = "" + this.cantParams;
+            this.ambitoContent = new AmbitoMetodo(posPrepared, idRetorno);
+            bodyMet += (String)ins.createC3D(arbol, this.ambitoContent);
             arbol.setCurrentAmbit(this.getAmbito());
 //            arbol.getCurrentAmbit().set(1, ambitoAnt);
 
@@ -153,8 +158,8 @@ public class Functionss extends Instruction{
         
         arbol.setCurrentAmbit(ambitoAntList);
         
-//        bodyMet += idRetorno + ":\n";
-        bodyMet += arbol.getLabelRetorno() + ":\n";
+        bodyMet += idRetorno + ":\n";
+//        bodyMet += arbol.getLabelRetorno() + ":\n";
         bodyMet += "    cout<< \"\";";
         
         

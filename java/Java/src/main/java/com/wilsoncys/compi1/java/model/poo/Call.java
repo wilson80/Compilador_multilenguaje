@@ -9,6 +9,7 @@ import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores; 
 import com.wilsoncys.compi1.java.model.expresiones.Access;
 import com.wilsoncys.compi1.java.model.expresiones.Nativo;
+import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.instrucciones.Statement;
 import com.wilsoncys.compi1.java.model.instrucciones.transferReturn;
 import com.wilsoncys.compi1.java.model.programa.InstanceJava;
@@ -38,6 +39,7 @@ public class Call extends Instruction{
     private boolean recursiva;
     
     private String nombreObjeto = "";
+    private boolean callObject = false;
     
     private LinkedList<Instruction> parametersExp;
 
@@ -227,7 +229,7 @@ public class Call extends Instruction{
     }
         
             @Override
-    public Object createC3D(Arbol arbol, String anterior) {
+    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
          
         String armed = "";
         
@@ -288,6 +290,7 @@ public class Call extends Instruction{
              } 
              
                          //interpretar la llamada
+            llamada.setCallObject(true);
             armed += llamada.createC3D(arbol, anterior);
             
 //            arbol.getCurrentAmbit().set(1, currentAmbit);
@@ -306,7 +309,7 @@ public class Call extends Instruction{
     
     
     
-    public Object simpleCall(Arbol arbol, String anterior) {
+    public Object simpleCall(Arbol arbol, AmbitoMetodo anterior) {
  
                
         String armed = "";
@@ -315,7 +318,7 @@ public class Call extends Instruction{
         boolean callPoo = false;
         C3d_Java c =  arbol.getJava();
 
-        int ptrTemp = 0;
+        String ptrTemp = "";
         
         
         
@@ -326,6 +329,8 @@ public class Call extends Instruction{
                 ref = c.varsParams.getFirst();
                 c.varsParams.removeFirst();
                 callPoo = true;
+                
+                
             } 
         } 
         
@@ -377,19 +382,19 @@ public class Call extends Instruction{
         } 
   
          
-
+        ptrTemp = anterior.getPosTemp();
  
    
 
-        ptrTemp = arbol.getCurrentPos();
+ 
         
  
                 //para poner los parametros
-        int posIni = 0;
+        int posIniParam = 0;
         if(symMethod.getCat().equals(categoria.FUNCTION) ){
-            posIni = 3;
+            posIniParam = 3;
         }else if(symMethod.getCat().equals(categoria.METHOD)){
-            posIni = 2;
+            posIniParam = 2;
         }
          
         
@@ -413,8 +418,8 @@ public class Call extends Instruction{
                    
                                             //PREPARED params en el stack
         for (Instruction exps : parametersExp) {
-                armed += c.c3d_asignVar(c.getPtrTemp(), posIni);
-                posIni++;
+                armed += c.c3d_asignVar(c.getPtrTemp(), posIniParam);
+                posIniParam++;
         }
         c.clearPtrTemp();   
         
@@ -474,6 +479,17 @@ public class Call extends Instruction{
     public void setNombreObjeto(String nombreObjeto) {
         this.nombreObjeto = nombreObjeto;
     }
+
+   
+
+    public boolean isCallObject() {
+        return callObject;
+    }
+
+    public void setCallObject(boolean callObject) {
+        this.callObject = callObject;
+    }
+    
 
     
     

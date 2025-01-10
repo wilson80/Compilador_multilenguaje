@@ -6,6 +6,7 @@ package com.wilsoncys.compi1.java.model.expresiones;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
+import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
@@ -37,7 +38,7 @@ public class Input extends Instruction{
  
         
             @Override
-    public Object createC3D(Arbol arbol, String anterior) {
+    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
                 switch (tipo.getTipo()) {
                     case ENTERO:
                         

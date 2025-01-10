@@ -59,15 +59,15 @@ public class transferReturn extends Instruction{
     }
         
             @Override
-    public Object createC3D(Arbol arbol, String anterior) {
+    public Object createC3D(Arbol arbol, AmbitoMetodo ambito) {
         String armed = "";
         C3d_Java c =  arbol.getJava();
         
         //create exp
        if(this.expression instanceof Nativo n){
-            n.createC3D(arbol, anterior);
+            n.createC3D(arbol, ambito);
        }else{
-            armed+=this.expression.createC3D(arbol, anterior);
+            armed+=this.expression.createC3D(arbol, ambito);
        }
          
        
@@ -77,7 +77,7 @@ public class transferReturn extends Instruction{
 //        JOptionPane.showMessageDialog(null, "");
         armed+=c.c3d_asignVal("", 1);
         
-        armed += "goto " + arbol.getLabelRetorno() + ";\n";
+        armed += "goto " + ambito.getLabelReturn()+ ";\n";
          
         
         return armed;

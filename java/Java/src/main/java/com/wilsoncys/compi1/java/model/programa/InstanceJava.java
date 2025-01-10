@@ -6,6 +6,7 @@ package com.wilsoncys.compi1.java.model.programa;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores; 
+import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.poo.Classs;
 import com.wilsoncys.compi1.java.model.programa.expresiones.AccessC;
 import com.wilsoncys.compi1.java.model.programa.expresiones.NativoC;
@@ -76,7 +77,7 @@ public class InstanceJava extends Instruction{
     
     
             @Override
-    public Object createC3D(Arbol arbol, String anterior) {
+    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
  
         String armed = "";
         C3d c =  arbol.getC3d();

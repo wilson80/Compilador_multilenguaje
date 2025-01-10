@@ -27,6 +27,7 @@
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Nativo.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Negacion.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/OperateRelacionales.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/AmbitoMetodo.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/AssignmentVectores.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/Assignmentt.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/CaseMatch.java
