@@ -34,6 +34,7 @@
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/CiclicaWhile.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/IF.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/IncreaseDecrease.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/Lista.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/Match.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/NewClass.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/instrucciones/Nodo.java
@@ -63,7 +64,6 @@
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/Includes.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/InstanceJava.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/MainnC.java
-/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/NewClass.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/Programa.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/ReferenceC.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/call_to_java.java

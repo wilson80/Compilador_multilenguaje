@@ -123,32 +123,68 @@ public class Mainn extends Instruction{
         String armed = "";
         C3d_Java c = arbol.getJava();
         
-//        String devVars = "";
-//        int iniVars = c.countCreateVar;
+         String devVars = "";
+        int iniVars = c.countCreateVar;
         
-//        arbol.setPosReturn(1);
-         
-//         JOptionPane.showMessageDialog(null, "tamanoooo:  " +arbol.attbClassJava);
+        String idRetorno ="retorno" + c.countCreateVar;
+        c.countCreateVar++;
+                                    //label de retorno
+        arbol.setLabelRetorno(idRetorno);
+        
         
         List<String> ambitoAntList = new ArrayList<>(arbol.getCurrentAmbit());
-        
-        
-//        String ambitoAnt = arbol.getCurrentAmbit().get(1);
         arbol.setCurrentAmbit(this.ambito);
+        arbol.setCurrentPos(this.cantParams);
+
+        
+        
+        String bodyMet = "";
+//        String ambitoAnt = arbol.getCurrentAmbit().get(1);
     
+         //reservar el espacio en el  heap
+        bodyMet += c.c3d_reserveHeap(arbol.getSizeHeap());
+        
+        //set a la referencia (stack[0])
+        bodyMet += c.c3d_asignVal("", 0);
+        
+        
+        
         
         for (Instruction ins : instrucciones) {
             if(ins ==null){
                     continue;
             }
  
-            armed += ins.createC3D(arbol, anterior);
+            bodyMet += ins.createC3D(arbol, anterior);
             arbol.setAmbito(this.ambito);
 //            arbol.getCurrentAmbit().set(1, ambitoAnt);
         }
         arbol.setCurrentAmbit(ambitoAntList);
         
-        return armed;
+        bodyMet += idRetorno + ":\n";
+        bodyMet += "    cout<< \"\";";
+        
+         
+                            //creando la declaracion de vars del ambito
+        int finVars = c.countCreateVar;
+        for (int i = iniVars; i < finVars; i++) {
+            devVars += "int w" + i+  ";\n";
+        }
+        armed = devVars + "\n";
+        armed += bodyMet;
+        
+        armed = c.c3d_metodo("java_" + arbol.getCurrentAmbit().get(1) +"_"+ id, armed);
+            
+        if(!isCreate){
+            arbol.Print(armed);       
+            isCreate = true;
+        }
+        
+        
+        
+        
+        
+        return "";
     }
 
     

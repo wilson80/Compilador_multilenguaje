@@ -134,10 +134,17 @@ public class Method extends Instruction{
         int iniVars = c.countCreateVar;
                         //ambito anterior
         
+        String idRetorno ="retorno" + c.countCreateVar;
+        c.countCreateVar++;
+                                    //label de retorno
+        arbol.setLabelRetorno(idRetorno);
+                        
+                        
         
         List<String> ambitoAntList = new ArrayList<>(arbol.getCurrentAmbit());
 //        String ambitoAnt = arbol.getCurrentAmbit().get(1);
         arbol.setCurrentAmbit(this.ambito);
+        arbol.setCurrentPos(this.cantParams);
 
         
         String bodyMet = "";
@@ -155,6 +162,9 @@ public class Method extends Instruction{
 
         }
         arbol.setCurrentAmbit(ambitoAntList);
+        
+        bodyMet += idRetorno + ":\n";
+        bodyMet += "    cout<< \" \";";
         
         int finVars = c.countCreateVar;
 

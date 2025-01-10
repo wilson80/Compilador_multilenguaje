@@ -1,83 +1,5 @@
-%%PASCAL
+ %%PASCAL
 %%JAVA
-public class sumar {
-
-	int algo;
-	int dos;
-	ListaE lista1;
-	// Simpl 
-	public sumar() {
-		lista1 = new ListaE();
-
-		lista1.agregar(99);
-		// println("lista: ", lista1.getSize() );
-		// lista.agregar(37);
-		// lista.agregar(43);
-		// lista.imprimirLista();
- 	} 
-} 
-
-public class ListaE {
-
-	Nodo primero;
-	Nodo ultimo;
-	int size;
-	int numero;
-	public ListaE(){
-		// numero = 99;
-		// println("desde lista: " , numero);
-	}
-  
-   public void agregar(int contenido) {
-	   	println("intanciacion");	
-		Nodo nuevoNodo = new Nodo(contenido);
-		println("intanciacion");	
-		
-		if (esVacia()) {
-			println("if agregar");	
-			  primero = nuevoNodo;
-			  ultimo = nuevoNodo;
-		} else {
-
-			println("else agregar");	
-		}
-		// ultimo.setSiguiente(nuevoNodo); 
-		nuevoNodo.setAnterior(ultimo);
-		// ultimo = nuevoNodo;
-		
-	  size++;
-  }
-  
-   public int getSize(){
-	return size;
-  }
-   public int getNum(){
-	return numero;
-  }
-  public boolean esVacia() {
-	  return primero == null;
-  }
-
-
-  
-  public void imprimirLista() {
-	  if (esVacia()) {
-			println("La lista esta vacia");
-	  } else {
-	  
-		  Nodo actual = primero;
-		  while(actual.getSiguiente() != null) {
-			    println("contenido: " , actual.getContenido());
-			  actual = actual.getSiguiente();
-		  }
-		    println("contenido: " , actual.getContenido());
-	  }
-  }
-  
-
-}
-
-
 
 public class Nodo {
 	 
@@ -86,9 +8,12 @@ public class Nodo {
 		Nodo anterior;
 	
 		public Nodo(int contenido) {
+			contenido = 0;
+			siguiente = null;
+			anterior = null;
 			this.contenido = contenido;
 		}
-	
+		
 		// public void setContenido(String contenido) {
 		//     this.contenido = contenido;
 		// }
@@ -121,6 +46,114 @@ public class Nodo {
 
 
 
+public class ListaE {
+
+	Nodo primero;
+	Nodo ultimo;
+	int size;
+	int numero;
+	public ListaE(){
+		primero =null;
+		ultimo =null;
+		size = 0;
+		numero = 0;
+		// println("desde lista: " , numero);
+	}
+  
+   public void agregar(int contenido) {
+	   	// println("intanciacion");	
+		// println("intanciacion");	
+		Nodo nuevoNodo = new Nodo(contenido);
+		
+		if (primero ==null) {
+			println("agregando el primero");	
+			primero = nuevoNodo;
+			ultimo = nuevoNodo;
+		} else {
+			println("agregando el otro");	
+			ultimo.setSiguiente(nuevoNodo); 
+			nuevoNodo.setAnterior(ultimo);
+			ultimo = nuevoNodo;
+ 		}
+		
+	  size++;
+  }
+  
+   public int getSize(){
+	return size;
+  }
+   public int getNum(){
+	return numero;
+  }
+  public boolean esVacia() {
+	  return primero == null;
+  }
+
+
+  
+  public void imprimirLista() {
+	 
+	Nodo actual = primero;
+	// if (esVacia()) {
+	int i;
+	// actual = primero;
+	for(i = 0; i<size; i++){
+		println("contenido: " , actual.getContenido());
+			actual = actual.getSiguiente();
+	}
+
+ 
+}
+
+
+// public Nodo obtenerNodo(int index) {
+// 	Nodo actual = null;
+// 	 actual = primero;
+// 	 int i;
+// 	for ( i = 0; i < index; i++) {
+
+// 		actual = actual.getSiguiente();
+// 	}
+// 	return actual;
+// }
+
+}
+
+
+
+
+public class sumar {
+
+	int algo;
+	int dos;
+	ListaE lista1; 
+	// Simpl 
+	public sumar() {
+		lista1 = null;
+ 	} 
+
+
+	public void iniciar(){
+		lista1 = new ListaE();
+
+		lista1.agregar(71);
+		lista1.agregar(72);
+		lista1.agregar(73);
+		lista1.agregar(74);
+		lista1.agregar(75);
+		lista1.agregar(76);
+		lista1.agregar(77);
+		lista1.agregar(78);
+		lista1.agregar(79);
+		println("lista: ", lista1.getSize() );
+		// Nodo nodo1 =  lista1.obtenerNodo(5);
+		// println("obteniendo contenido de un nodo: ", nodo1.getContenido());
+		 lista1.imprimirLista();
+	}
+} 
+
+
+
 %%PROGRAMA
 #include "JAVA.*"  
 int x = 12;
@@ -134,7 +167,7 @@ int total = 88;
 void main()
 { 	 
 	//JAVA.call1.setObjeto(JAVA.call1.darObjeto());
-	// JAVA.call1.iniciar();
+	 JAVA.call1.iniciar();
 	
 	
 }

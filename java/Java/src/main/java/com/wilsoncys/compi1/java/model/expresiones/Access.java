@@ -158,10 +158,10 @@ public class Access extends Instruction{
 
             String armedId = "";
             armedId= arbol.getAmbito_asID() + id;
-            if(this.id.equals("nuevoNodo")){
-                JOptionPane.showMessageDialog(null, "ambit asID: " + arbol.getAmbito_asID()
-                    +"  \nID: "+this.id);
-            }
+//            if(this.id.equals("nuevoNodo")){
+//                JOptionPane.showMessageDialog(null, "ambit asID: " + arbol.getAmbito_asID()
+//                    +"  \nID: "+this.id);
+//            }
       
             sym = arbol.getSym(armedId);    
 //            this.tipo = sym.getTipo();

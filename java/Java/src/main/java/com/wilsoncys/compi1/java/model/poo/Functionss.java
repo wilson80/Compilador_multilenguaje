@@ -121,6 +121,9 @@ public class Functionss extends Instruction{
         String armed = "";
         C3d_Java c = arbol.getJava();
         
+//        c.clearVarParams();
+        
+        
         String devVars = "";
         int iniVars = c.countCreateVar;
         
@@ -132,8 +135,9 @@ public class Functionss extends Instruction{
         
         List<String> ambitoAntList = new ArrayList<>(arbol.getCurrentAmbit());
         
-        String ambitoAnt = arbol.getCurrentAmbit().get(1);
+//        String ambitoAnt = arbol.getCurrentAmbit().get(1);
         arbol.setCurrentAmbit(this.ambito);
+        arbol.setCurrentPos(this.cantParams);
 
         
         String bodyMet = "";
@@ -150,6 +154,8 @@ public class Functionss extends Instruction{
         arbol.setCurrentAmbit(ambitoAntList);
         
         bodyMet += idRetorno + ":\n";
+        bodyMet += "    cout<< \"\";";
+        
         
          
                             //creando la declaracion de vars del ambito

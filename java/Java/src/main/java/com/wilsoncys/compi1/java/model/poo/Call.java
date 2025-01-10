@@ -272,52 +272,26 @@ public class Call extends Instruction{
 ////                JOptionPane.showMessageDialog(null, "call277: " + met.tipo.getTypeString());
 ////                arbol.setSizeHeap(3);
 //            }else{
-            if(this.id.equals("nuevoNodo")){
-                JOptionPane.showMessageDialog(null, "calllNosimp" + sym0.getTipo().getTypeString());
-        }
+ 
 
             
         llamada.setNombreObjeto(sym0.getTipo().getTypeString());
-//            }
-            
-            
-            
-            
-//            String idObject  = "";
-//            idObject = ((InstanceJava)sym0.getInstruction()).getIdClase();
-
-
-
+ 
+        
+        
             if(sym0.getCat() == categoria.ATRIBUTO){
                         //set a la referencia (stack[0]) 
                 armed+= c.c3d_accesRef("", 0);
                 armed+= c.c3d_accesAttVarl("", sym0.getDir());
-            }else if(sym0.getCat() == categoria.PARAM){
+            }else if(sym0.getCat() == categoria.PARAM || sym0.getCat()== categoria.VARL){
                 armed+= c.c3d_acces("", sym0.getDir()); 
-//                c.setPtrTemp(c.varsParams.get(0));
-//                c.varsParams.removeFirst();
-//                armed+= c.c3d_accesTemp(c.getPtrTemp(), sym0.getDir() ); 
-//                c.clearPtrTemp();
-                
-            }
-            
-            
-            
-//            armed+= c.c3d_asignVal("", 0);
-            
-//            int cantAttbCurrent = arbol.attbClassJava;
-
-                        //interpretar la llamada
+             } 
+             
+                         //interpretar la llamada
             armed += llamada.createC3D(arbol, anterior);
             
 //            arbol.getCurrentAmbit().set(1, currentAmbit);
-            
-            
-           
-            
              
-//            arbol.setSizeHeap(cantAttbCurrent);
-            
         }
         
 
@@ -333,9 +307,11 @@ public class Call extends Instruction{
     
     
     public Object simpleCall(Arbol arbol, String anterior) {
-
+ 
+               
         String armed = "";
         String ref = "";
+        String id_to_call = "";
         boolean callPoo = false;
         C3d_Java c =  arbol.getJava();
 
@@ -345,10 +321,12 @@ public class Call extends Instruction{
         
                                             //extrayendo los params
 //        identificando llamada a objeto
-        if(c.varsParams.size()!=0){
-            ref = c.varsParams.getFirst();
-            c.varsParams.removeFirst();
-            callPoo = true;
+        if(c.varsParams.size()!=0 || c.varsRef.size() != 0){
+            if(c.varsParams.size()!=0){
+                ref = c.varsParams.getFirst();
+                c.varsParams.removeFirst();
+                callPoo = true;
+            } 
         } 
         
         String id_Methodo = "";
@@ -358,7 +336,7 @@ public class Call extends Instruction{
               id_Methodo = "java"  + nombreObjeto + this.id;
         }else{
               id_Methodo = "java"  + arbol.getCurrentAmbit().get(1) + this.id;
-              id_Methodo = "java"  + arbol.getAmbito_asID() + this.id;
+              id_Methodo2 = "java"  + arbol.getAmbito_asID() + this.id;
         }
                                          
         
@@ -387,9 +365,10 @@ public class Call extends Instruction{
         
                                     //set a la posicion inicial para dejar los parametros
         Simbolo symMethod = arbol.getSym(id_Methodo);
-        
+        id_to_call = id_Methodo;
         if(symMethod == null){
             symMethod = arbol.getSym(id_Methodo2);
+            id_to_call = id_Methodo2;
             if(symMethod ==null){
                 JOptionPane.showMessageDialog(null, "error en  simpleCall"
                     + "no se ha encontrado el symbolo: " + this.id );
@@ -397,16 +376,15 @@ public class Call extends Instruction{
 //            return new Errores("SEMANTIC", "id no definido: " + this.id, line, col);
         } 
   
-        
-        
-        
-        if(symMethod.getInstruction() instanceof  Functionss f){
-            ptrTemp = f.getCantParams();
-        }else if(symMethod.getInstruction() instanceof  Method m){
-            ptrTemp = m.getCantParams();
-            
-        }
+         
 
+ 
+   
+
+        ptrTemp = arbol.getCurrentPos();
+        
+ 
+                //para poner los parametros
         int posIni = 0;
         if(symMethod.getCat().equals(categoria.FUNCTION) ){
             posIni = 3;
@@ -415,11 +393,9 @@ public class Call extends Instruction{
         }
          
         
-                                                            //stack temp
-//        armed+=c.c3d_ptrTemp(arbol.attbClassJava);
+                                        //stack temp
             armed+=c.c3d_ptrTemp(ptrTemp);
 
-        
                                 //dando la direccion de referencia
         if(!callPoo){
             armed+= c.c3d_acces("", 0);
@@ -427,15 +403,12 @@ public class Call extends Instruction{
             c.varsParams.removeLast();
             c.varsParams.add(0, simpleRef);
         }else{
-//            JOptionPane.showMessageDialog(null, "aquiiiiiii: " + id);
             c.varsParams.addFirst(ref);
         }                     
-        
+                                     //dando la ref en el stack del metodo llamado
         armed+= c.c3d_asignVar(c.getPtrTemp(), 0);
-//      
-
-//                   JOptionPane.showMessageDialog(null, "llllllllegael symbolo: " 
-//                           + id_Methodo + "varp: " + c.varsParams.size());
+ 
+        
         
                    
                                             //PREPARED params en el stack
@@ -443,36 +416,44 @@ public class Call extends Instruction{
                 armed += c.c3d_asignVar(c.getPtrTemp(), posIni);
                 posIni++;
         }
- 
         c.clearPtrTemp();   
         
+        
+ 
 
 
-                                            //ejecutar el metodo
+                                            //llamada del metodo/funcion
         armed+=c.c3d_moveToStack(true, ptrTemp);
-        armed+= c.callJava(arbol.getCurrentAmbit().get(1) + "_" + this.id);
+        
+        if(callPoo){
+            armed+= c.callJava(nombreObjeto+ "_" + this.id);
+        }else{
+            armed+= c.callJava(arbol.getCurrentAmbit().get(1) + "_" + this.id);
+        }
         armed+=c.c3d_moveToStack(false, ptrTemp);
         
         
                                             //create al metodo/funcion
         if(!recursiva ){
-            if(symMethod.getCat().equals(categoria.FUNCTION) ){
-                symMethod.getInstruction().createC3D(arbol, anterior);
-            }else if(symMethod.getCat().equals(categoria.METHOD)){
-                symMethod.getInstruction().createC3D(arbol, anterior);
-            }
-        
-           
+//            if(symMethod.getCat().equals(categoria.FUNCTION) ){
+//                symMethod.getInstruction().createC3D(arbol, anterior);
+//            }else if(symMethod.getCat().equals(categoria.METHOD)){
+//                symMethod.getInstruction().createC3D(arbol, anterior);
+//            }
         }
+        
+        
                                            //dejar el retorno
-            if(symMethod.getCat().equals(categoria.FUNCTION) ){
+            if(symMethod.getCat() == categoria.FUNCTION  ){
                 armed += "\n//retorno\n";
                 armed += c.c3d_ptrTemp(ptrTemp);
                 armed += c.c3d_accesTemp("", 1);
                 armed += "\n//retorno\n";
 
             } 
-  
+//            JOptionPane.showMessageDialog(null,    "Size varP: "  
+//       +  c.varsParams.size() + " varRef : " +  c.varsRef.size());
+
   
         return armed;
     }

@@ -1,11 +1,15 @@
  
- 
+
+/**
+ *
+ * @author jose
+ */
 public class ListaDoble {
-      Nodo primero;
-      Nodo ultimo;
-      int size;
+    private Nodo primero;
+    private Nodo ultimo;
+    private int size;
     
-     public void agregar(int contenido) {
+     public void agregar(String contenido) {
         Nodo nuevoNodo = new Nodo(contenido);
         if (esVacia()) {
             primero = nuevoNodo;
@@ -27,47 +31,98 @@ public class ListaDoble {
         return obtenerNodo(index).getContenido();
     }
     
-   
+    public void eliminarUltimo() {
+        if (esVacia()) {
+            println("La lista esta vacia");
+        } else {
+            if (size == 1) {
+                primero = null;
+                ultimo = null;
+            } else {
+                Nodo penultimo = ultimo.getAnterior();
+                penultimo.setSiguiente(null);
+                ultimo.setAnterior(null);
+                ultimo = penultimo;
+            }
+        
+            size--;
+        }
+    }
     
     public void imprimirLista() {
         if (esVacia()) {
-             println("La lista esta vacia");
+            println("La lista esta vacia");
         } else {
         
             Nodo actual = primero;
             while(actual.getSiguiente() != null) {
-                 println("contenido: " + actual.getContenido());
+                 println("contenido: " , actual.getContenido());
                 actual = actual.getSiguiente();
             }
-             println("contenido: " + actual.getContenido());
+             println("contenido: " , actual.getContenido());
         }
     }
 
-  
+    private Nodo obtenerNodo(int index) {
+        if (esVacia()) {
+            System.out.println("La lista esta vacia.");
+            return null;
+        }
+        if (index >= size || index < 0) {
+            System.out.println("El indice esta fuera del tama;o de la lista.");
+            return null;
+        }
+        
+        int medio = size / 2;
+        if (index < medio) {
+            return obtenerNodoAvanzando(index);
+        } else {
+            return  obtenerNodoRetrocediendo(index);
+        }
+        
+    }
     
-  
+    private Nodo obtenerNodoAvanzando(int index) {
+        Nodo actual = primero;
+        for (int i = 0; i < index; i++) {
+
+            actual = actual.getSiguiente();
+        }
+
+        return actual;
+    }
     
+    private Nodo obtenerNodoRetrocediendo(int index) {
+        int indiceFinal = size - 1;
+        int limite = indiceFinal - index;
+        Nodo actual = ultimo;
+        for (int i = 0; i < limite; i++) {
+            actual = actual.getAnterior();
+        }
+
+        return actual;
+    }
 }
 
 
 
 
-public class Maain {
+public class Main {
 
-	public  void main(String args[]) {
-	        ListaDoble listaString = new ListaDoble();
+	public static void main(String args[]) {
+	    ListaDoble listaString = new ListaDoble();
 
             listaString.agregar("x");
             listaString.agregar("y");
             listaString.agregar("z");
             listaString.imprimirLista();
             
-            // listaString.eliminarUltimo();
-            // listaString.eliminarUltimo();
-            // listaString.imprimirLista();
+            listaString.eliminarUltimo();
+            listaString.eliminarUltimo();
+            listaString.imprimirLista();
             
-            // listaString.eliminarUltimo();
-            // listaString.imprimirLista();
+            listaString.eliminarUltimo();
+            listaString.imprimirLista();
         
 	}
 }
@@ -76,11 +131,11 @@ public class Maain {
 
 
 public class Nodo {
-    int contenido;
-    Nodo siguiente;
-    Nodo anterior;
+    private String contenido;
+    private Nodo siguiente;
+    private Nodo anterior;
 
-    public Nodo(String contenido) {
+/*    public Nodo(String contenido) {
         this.contenido = contenido;
     }
 
@@ -88,26 +143,25 @@ public class Nodo {
         return contenido;
     }
 
-    // public void setContenido(String contenido) {
-    //     this.contenido = contenido;
-    // }
+    public void setContenido(String contenido) {
+        this.contenido = contenido;
+    }
 
-    // public Nodo getSiguiente() {
-    //     return siguiente;
-    // }
+    public Nodo getSiguiente() {
+        return siguiente;
+    }
 
     public void setSiguiente(Nodo siguiente) {
         this.siguiente = siguiente;
     }
-    
+
+    public Nodo getAnterior() {
+        return anterior;
+    }
+
     public void setAnterior(Nodo anterior) {
         this.anterior = anterior;
     }
-      
-
-    // public Nodo getAnterior() {
-    //     return anterior;
-    // }
+  */  
     
 }
-

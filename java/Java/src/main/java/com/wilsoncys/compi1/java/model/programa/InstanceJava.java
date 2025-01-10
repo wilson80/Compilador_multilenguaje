@@ -134,8 +134,8 @@ public class InstanceJava extends Instruction{
          
         
                             //create a la Clase
-        arbol.attbClassJava = (((Classs)arbol.getSym("java" + this.idClase).getInstruction()).getCantAttb());
-        arbol.getSym("java" + this.idClase).getInstruction().createC3D(arbol, anterior);
+//                        arbol.attbClassJava = (((Classs)arbol.getSym("java" + this.idClase).getInstruction()).getCantAttb());
+//                        arbol.getSym("java" + this.idClase).getInstruction().createC3D(arbol, anterior);
 //        if(otrosim == null){
 //                 JOptionPane.showMessageDialog(null, "nulll");
 //            

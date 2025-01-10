@@ -47,6 +47,7 @@ public class Arbol {
 
     
     public int attbClassJava = 0;
+    public int currentPos = 0;
     public int attbPrincipal = 0;
     private int posReturn = 1;
     private String labelRetorno = "";
@@ -240,6 +241,14 @@ public class Arbol {
 
     public String getLabelRetorno() {
         return labelRetorno;
+    }
+
+    public void setCurrentPos(int currentPos) {
+        this.currentPos = currentPos;
+    }
+
+    public int getCurrentPos() {
+        return currentPos;
     }
     
     

@@ -98,8 +98,8 @@ public class IniciarAnalizadores {
                             "\n" +
                             "using namespace std;\n" +
                             "\n" +
-                            "int stack[100];\n" +
-                            "int heap[100];\n" +
+                            "int stack[1000];\n" +
+                            "int heap[1000];\n" +
                             "int ptr = 0;\n" +
                             "int h = 0;\n\n";
                 ast.Print(c3d_Main);

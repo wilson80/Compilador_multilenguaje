@@ -269,81 +269,109 @@ import javax.swing.JOptionPane;
         C3d_Java c = arbol.getJava(); 
         int iniVars = c.countCreateVar; 
 
-        
-        
         arbol.setSizeHeap(this.cantAttb);
-        
-        //reservar el espacio en el  heap
-        armed+= c.c3d_reserveHeap(arbol.getSizeHeap());
-        
-        //set a la referencia (stack[0])
-        armed+= c.c3d_asignVal("", 0);
-        
-//         List<String> currentAmbito = arbol.getCurrentAmbit();
-        arbol.setCurrentAmbit(this.getAmbito());
-        for (Instruction ins : instrucciones) {
-            if(ins instanceof Statement st){
-                armed += (String)st.createC3D(arbol, anterior);
+
+        arbol.setAmbito(this.ambito);
+        //interpretar todos lo funciones/funciones de esta clase
+        for (Instruction fun : instrucciones) {
+            if(fun instanceof Functionss funn){
+                funn.createC3D(arbol, anterior);
             }
         }
-        int contador = 0;
+        
+        for (Instruction fun : instrucciones) {
+            if(fun instanceof Method met){
+                met.createC3D(arbol, anterior);
+            }
+        }
+        for (Instruction fun : instrucciones) {
+            if(fun instanceof Mainn constr){
+                constr.createC3D(arbol, anterior);
+            }
+        }
+         
+        
+         
+        
+        //crear el constructor por default
+         //identificar,  si no hay un constructor por default se crea uno
+        
+        
+         
+         
+         
+//        
+//        //reservar el espacio en el  heap
+//        armed+= c.c3d_reserveHeap(arbol.getSizeHeap());
+//        
+//        //set a la referencia (stack[0])
+//        armed+= c.c3d_asignVal("", 0);
+//        
+////         List<String> currentAmbito = arbol.getCurrentAmbit();
+//        arbol.setCurrentAmbit(this.getAmbito());
+//        for (Instruction ins : instrucciones) {
+//            if(ins instanceof Statement st){
+//                armed += (String)st.createC3D(arbol, anterior);
+//            }
+//        }
+//        int contador = 0;
 //        buscar su constructor  dependiendo los parametros enviados
-        Mainn mainEcontrado = null;
-        for (Instruction ins : instrucciones) {
-            
-            if(ins instanceof Mainn mn){    //Main(clase de los constructores)
-                contador++;
-                if(mn.id.equals(this.id)){
-                    //identificar el constructor
-                    if(this.id_constructor.equals(mn.getAmbito_asID())){
-                        mainEcontrado = mn;
-                    }
-                }else{
-                                            //validacion >> el nombre del constructor debe ser igual al nombre de la clase
-                    JOptionPane.showMessageDialog(null, "error en el nombre del constructor");
-                }
-            }
-            
-        }
+//        Mainn mainEcontrado = null;
+//        for (Instruction ins : instrucciones) {
+//            
+//            if(ins instanceof Mainn mn){    //Main(clase de los constructores)
+//                contador++;
+//                if(mn.id.equals(this.id)){
+//                    //identificar el constructor
+//                    if(this.id_constructor.equals(mn.getAmbito_asID())){
+//                        mainEcontrado = mn;
+//                    }
+//                }else{
+//                                            //validacion >> el nombre del constructor debe ser igual al nombre de la clase
+//                    JOptionPane.showMessageDialog(null, "error en el nombre del constructor");
+//                }
+//            }
+//            
+//        }
         
         
         
                     //MAIN
-        if(mainEcontrado!=null){
+//        if(mainEcontrado!=null){
             //realizar el constructor por defecto
                     //inicializar los attb con valores por defecto
                     
            
-            String devVars = "";
-            
-            armed+=mainEcontrado.createC3D(arbol, anterior);
-            int finVars = c.countCreateVar;
-            
-            
-
-            for (int i = iniVars; i < finVars; i++) {
-                devVars += "int w" + i+  ";\n";
-            }
-
-            String temp = armed; 
-            armed = "\n" + devVars + "\n";
-            armed += temp;
-            
-        }else{
-            if(contador!=0 || !(id_constructor.equals("java" + id + id))){  
-                    //no hay constructor por defecto
-                JOptionPane.showMessageDialog(null, "Parametros incorrectos al instanciar una clase");
-            } 
-        }
+//            String devVars = "";
+//            
+//            armed+=mainEcontrado.createC3D(arbol, anterior);
+//            int finVars = c.countCreateVar;
+//            
+//            
+//
+//            for (int i = iniVars; i < finVars; i++) {
+//                devVars += "int w" + i+  ";\n";
+//            }
+//
+//            String temp = armed; 
+//            armed = "\n" + devVars + "\n";
+//            armed += temp;
+//            
+//        }else{
+//            if(contador!=0 || !(id_constructor.equals("java" + id + id))){  
+//                    //no hay constructor por defecto
+//                JOptionPane.showMessageDialog(null, "Parametros incorrectos al instanciar una clase");
+//            } 
+//        }
         
         
-        armed = c.c3d_metodo("java_"+id + "_"+ id, armed);
+//        armed = c.c3d_metodo("java_"+id + "_"+ id, armed);
         
         
-        if(!mainEcontrado.isIsCreate()){
-            arbol.Print(armed);
-            mainEcontrado.setIsCreate(true);
-        }
+//        if(!mainEcontrado.isIsCreate()){
+//            arbol.Print(armed);
+//            mainEcontrado.setIsCreate(true);
+//        }
         
 //        if(currentAmbito.size() != 0){
 //            arbol.setAmbito(currentAmbito);

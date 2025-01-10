@@ -236,13 +236,13 @@ public class Programa extends Instruction{
        
 
        
-//        for (Instruction clss : clasesJ.getListaClasesJava()) {
-//                if(clss instanceof Classs cl){
-////                    ArmedJavas+=  "\n\n\n" + cl.createC3D(arbol, anterior);
-//                    cl.createC3D(arbol, anterior);
-////                    arbol.Print(ArmedJavas);
-//                }
-//        }
+        for (Instruction clss : clasesJ.getListaClasesJava()) {
+                if(clss instanceof Classs cl){
+//                    ArmedJavas+=  "\n\n\n" + cl.createC3D(arbol, anterior);
+                    cl.createC3D(arbol, anterior);
+//                    arbol.Print(ArmedJavas);
+                }
+        }
         
                //instrucciones del programa principal
        ArmedPrincipal +=  this.main.createC3D(arbol, anterior);  

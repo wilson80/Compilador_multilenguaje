@@ -246,8 +246,8 @@ public class Reference extends Instruction{
            
                             //create a la Clase
         Simbolo symClass = arbol.getSym("java" + this.id);
-        arbol.setSizeHeap(((Classs)symClass.getInstruction()).getCantAttb());
-        symClass.getInstruction().createC3D(arbol, anterior);
+//        arbol.setSizeHeap(((Classs)symClass.getInstruction()).getCantAttb());
+//        symClass.getInstruction().createC3D(arbol, anterior);
 
 
         arbol.setSizeHeap(cantAttbCurrent);

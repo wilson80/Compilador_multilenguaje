@@ -2,6 +2,7 @@ com/wilsoncys/compi1/java/vistas/VistaGeneral$8.class
 com/wilsoncys/compi1/java/model/programa/call_to_java.class
 com/wilsoncys/compi1/java/model/instrucciones/transferReturn.class
 com/wilsoncys/compi1/java/model/programa/instrucciones/PrintsC.class
+com/wilsoncys/compi1/java/model/instrucciones/Nodo.class
 com/wilsoncys/compi1/java/model/analisis/sym.class
 com/wilsoncys/compi1/java/model/poo/Mainn.class
 com/wilsoncys/compi1/java/vistas/prueba$1.class
@@ -11,7 +12,6 @@ com/wilsoncys/compi1/java/model/programa/instrucciones/VectorsStatementC.class
 com/wilsoncys/compi1/java/model/programa/Aritmeticas/DivisionC.class
 com/wilsoncys/compi1/java/model/expresiones/Casting$1.class
 com/wilsoncys/compi1/java/model/programa/ClasesJava.class
-com/wilsoncys/compi1/java/model/programa/NewClass.class
 com/wilsoncys/compi1/java/model/analisis/parser$CUP$parser$actions.class
 com/wilsoncys/compi1/java/model/programa/instrucciones/CiclicaForC.class
 com/wilsoncys/compi1/java/vistas/VistaGeneral$10.class
@@ -145,6 +145,7 @@ com/wilsoncys/compi1/java/model/programa/instrucciones/CiclicaWhileC.class
 com/wilsoncys/compi1/java/model/asbtracto/Instruction.class
 com/wilsoncys/compi1/java/vistas/prueba$ClosableTabComponent$1.class
 com/wilsoncys/compi1/java/vistas/VistaGeneral$4.class
+com/wilsoncys/compi1/java/model/poo/Null.class
 com/wilsoncys/compi1/java/control/Control.class
 com/wilsoncys/compi1/java/model/excepciones/Errores.class
 com/wilsoncys/compi1/java/model/programa/Aritmeticas/MultiplicacionC.class

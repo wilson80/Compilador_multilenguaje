@@ -219,7 +219,7 @@ public class IF extends Instruction{
 //        label if
         armed+= idIf +  ":\n";
         
-        
+
         
         
 //        List<String> ambitoAntList = new ArrayList<>(arbol.getCurrentAmbit());
