@@ -34,9 +34,9 @@ public class Nodo {
 		}
 		  
 	
-		// public Nodo getAnterior() {
-		//     return anterior;
-		// }
+		public Nodo getAnterior() {
+		    return anterior;
+		}
 		
 		 
 }
@@ -105,18 +105,99 @@ public class ListaE {
  
 }
 
+				//da un nodo en indice indicado
+	public Nodo obtenerNodo(int index) {
+		println("indice: ", index);
+		Nodo actual = this.primero;
+		
+		int i;
+		for ( i = 0; i < index; i++) {
 
-public Nodo obtenerNodo(int index) {
-	println("indice: ", index);
-	Nodo actual = this.primero;
-	 
-	 int i;
-	for ( i = 0; i < index; i++) {
-
-		actual = actual.getSiguiente();
+			actual = actual.getSiguiente();
+		}
+		return actual;
 	}
-	return actual;
-}
+
+    // public void eliminarUltimo() {
+    //     Nodo penultimo = null;
+    //     // if (esVacia()) {
+    //     if (primero ==null) {
+    //         println("La lista esta vacia");
+    //     } else {
+    //         if (size == 1) {
+    //             primero = null;
+    //             ultimo = null;
+    //         } else {
+    //             penultimo = ultimo.getAnterior();
+    //             penultimo.setSiguiente(null);
+    //             ultimo.setAnterior(null);
+    //             ultimo = penultimo;
+    //         }
+        
+    //         size--;
+    //     }
+    // }
+
+
+
+
+
+
+
+
+
+
+    /*public int getContent(int index) {
+		Nodo nodo1 = obtenerNodoPRO(index); 
+        return nodo1.getContenido();
+    }
+
+	private Nodo obtenerNodoPRO(int index) {
+        // if (esVacia()) {
+        if (primero == null) {
+             println("La lista esta vacia.");
+            return null;
+        }
+        if (index >= size || index < 0) {
+             println("El indice esta fuera del tama;o de la lista.");
+            return null;
+        }
+        
+        int medio = size / 2;
+        if (index < medio) {
+            return obtenerNodoAvanzando(index);
+        } else {
+            return  obtenerNodoRetrocediendo(index);
+        }
+        
+    }
+    private Nodo obtenerNodoAvanzando(int index) {
+        Nodo actual = primero;
+        int i;
+        for ( i = 0; i < index; i++) {
+
+            actual = actual.getSiguiente();
+        }
+
+        return actual;
+    }
+    
+    private Nodo obtenerNodoRetrocediendo(int index) {
+        int indiceFinal = size - 1;
+        int limite = indiceFinal - index;
+        Nodo actual = ultimo;
+        int i;
+        for ( i = 0; i < limite; i++) {
+            actual = actual.getAnterior();
+        }
+
+        return actual;
+    }
+
+*/
+
+
+
 
 }
 
@@ -146,10 +227,17 @@ public class sumar {
 		lista1.agregar(77);
 		lista1.agregar(78);
 		lista1.agregar(79);
+		// lista1.eliminarUltimo();
+		// lista1.eliminarUltimo();
+		// lista1.eliminarUltimo();
+
 		lista1.imprimirLista();
+		
+
 		println("lista: ", lista1.getSize() );
-		Nodo nodo1 =  lista1.obtenerNodo(5);
-		println("obteniendo contenido de un nodo: ", nodo1.getContenido());
+		// println("obtener modo pro: ", lista1.getContent(2));
+		// Nodo nodo1 =  lista1.obtenerNodo(5);
+		// println("obteniendo contenido de un nodo: ", nodo1.getContenido());
 	}
 } 
 

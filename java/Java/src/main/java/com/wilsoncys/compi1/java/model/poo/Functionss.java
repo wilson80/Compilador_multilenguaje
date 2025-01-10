@@ -153,7 +153,8 @@ public class Functionss extends Instruction{
         
         arbol.setCurrentAmbit(ambitoAntList);
         
-        bodyMet += idRetorno + ":\n";
+//        bodyMet += idRetorno + ":\n";
+        bodyMet += arbol.getLabelRetorno() + ":\n";
         bodyMet += "    cout<< \"\";";
         
         
@@ -166,7 +167,8 @@ public class Functionss extends Instruction{
         armed = devVars + "\n";
         armed += bodyMet;
         
-        armed = c.c3d_metodo("java_" + arbol.getCurrentAmbit().get(1) +"_"+ id, armed);
+//        armed = c.c3d_metodo("java_" + arbol.getCurrentAmbit().get(1) +"_"+ id, armed);
+        armed = c.c3d_metodo("java_" + this.ambito.get(1) +"_"+ id, armed);
             
         if(!isCreate){
             arbol.Print(armed);       

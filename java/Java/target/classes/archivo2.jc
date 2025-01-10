@@ -32,6 +32,7 @@ public class ListaDoble {
     }
     
     public void eliminarUltimo() {
+        Nodo penultimo;
         if (esVacia()) {
             println("La lista esta vacia");
         } else {
@@ -39,7 +40,7 @@ public class ListaDoble {
                 primero = null;
                 ultimo = null;
             } else {
-                Nodo penultimo = ultimo.getAnterior();
+                penultimo = ultimo.getAnterior();
                 penultimo.setSiguiente(null);
                 ultimo.setAnterior(null);
                 ultimo = penultimo;
@@ -63,13 +64,14 @@ public class ListaDoble {
         }
     }
 
-    private Nodo obtenerNodo(int index) {
-        if (esVacia()) {
-            System.out.println("La lista esta vacia.");
+    private Nodo obtenerNodoPRO(int index) {
+        // if (esVacia()) {
+        if (primero == null) {
+             println("La lista esta vacia.");
             return null;
         }
         if (index >= size || index < 0) {
-            System.out.println("El indice esta fuera del tama;o de la lista.");
+             println("El indice esta fuera del tama;o de la lista.");
             return null;
         }
         
@@ -84,7 +86,8 @@ public class ListaDoble {
     
     private Nodo obtenerNodoAvanzando(int index) {
         Nodo actual = primero;
-        for (int i = 0; i < index; i++) {
+        int i;
+        for ( i = 0; i < index; i++) {
 
             actual = actual.getSiguiente();
         }
@@ -96,7 +99,8 @@ public class ListaDoble {
         int indiceFinal = size - 1;
         int limite = indiceFinal - index;
         Nodo actual = ultimo;
-        for (int i = 0; i < limite; i++) {
+        int i;
+        for ( i = 0; i < limite; i++) {
             actual = actual.getAnterior();
         }
 

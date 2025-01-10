@@ -108,10 +108,10 @@ public class InstanceJava extends Instruction{
 
         
         arbol.getClasesJava().getclase(idClase).setId_constructor(id_constructor);
-        
-        
         this.tipo.setTipo(tipoDato.OBJECT);
         this.tipo.setIdObjeto(idClase);
+        
+        
         
         
                                                             //stack temp
@@ -127,6 +127,7 @@ public class InstanceJava extends Instruction{
         
         
         c.clearPtrTemp();   
+        
                                             //ejecutar el metodo
         armed+=c.c3d_moveToStack(true, arbol.attbPrincipal);
         armed+= c.callJava(idClase + "_" + idClase);
@@ -134,8 +135,13 @@ public class InstanceJava extends Instruction{
          
         
                             //create a la Clase
-//                        arbol.attbClassJava = (((Classs)arbol.getSym("java" + this.idClase).getInstruction()).getCantAttb());
-//                        arbol.getSym("java" + this.idClase).getInstruction().createC3D(arbol, anterior);
+        c.clearVarParams();
+//        arbol.attbClassJava = (((Classs)arbol.getSym("java" + this.idClase).getInstruction()).getCantAttb());
+        arbol.getSym("java" + this.idClase).getInstruction().createC3D(arbol, anterior);
+        c.clearVarParams();
+        
+        
+        
 //        if(otrosim == null){
 //                 JOptionPane.showMessageDialog(null, "nulll");
 //            

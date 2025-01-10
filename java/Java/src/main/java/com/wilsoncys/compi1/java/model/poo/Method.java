@@ -176,7 +176,8 @@ public class Method extends Instruction{
         armed += bodyMet;
         
         
-        armed = c.c3d_metodo("java_" + arbol.getCurrentAmbit().get(1) +"_"+ id, armed);
+//        armed = c.c3d_metodo("java_" + arbol.getCurrentAmbit().get(1) +"_"+ id, armed);
+        armed = c.c3d_metodo("java_" + this.ambito.get(1) +"_"+ id, armed);
         
         
         

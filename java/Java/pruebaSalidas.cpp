@@ -9,95 +9,128 @@ int h = 0;
 
 
 
-void java_Nodo_getContenido(){
-int w0;
-int w1;
-int w2;
-int w3;
-int w4;
-int w5;
+void java_sumar_adicion(){
+int w36;
+int w37;
+int w38;
+int w39;
+int w40;
+int w41;
+int w42;
+int w43;
+int w44;
+int w45;
+int w46;
+int w47;
+int w48;
 
-w1 = ptr + 0;
-w2 = stack[w1];
+w37 = ptr + 3;
+w38 = stack[w37];
 
-w3 = w2 + 0;
-w4 = heap[w3];
+w39 = ptr + 4;
+w40 = stack[w39];
 
-w5 = ptr + 1;
-stack[w5] = w4;
+w41 = w38+w40;
+w42 = ptr + 5;
+w43 = stack[w42];
 
-goto retorno0;
-retorno0:
+w44 = w41+w43;
+w45 = ptr + 6;
+w46 = stack[w45];
+
+w47 = w44+w46;
+w48 = ptr + 1;
+stack[w48] = w47;
+
+goto retorno36;
+retorno36:
     cout<< "";
 }
 
-void java_Nodo_getSiguiente(){
-int w6;
-int w7;
-int w8;
-int w9;
-int w10;
-int w11;
+void java_sumar_restar(){
+int w67;
+int w68;
+int w69;
+int w70;
+int w71;
+int w72;
+int w73;
 
-w7 = ptr + 0;
-w8 = stack[w7];
+w68 = ptr + 3;
+w69 = stack[w68];
 
-w9 = w8 + 1;
-w10 = heap[w9];
+w70 = ptr + 4;
+w71 = stack[w70];
 
-w11 = ptr + 1;
-stack[w11] = w10;
+w72 = w69-w71;
+w73 = ptr + 1;
+stack[w73] = w72;
 
-goto retorno6;
-retorno6:
+goto retorno67;
+retorno67:
     cout<< "";
 }
 
-void java_Nodo_setSiguiente(){
-int w12;
+void java_sumar_multiplicar(){
+int w89;
+int w90;
+int w91;
+int w92;
+int w93;
+int w94;
+int w95;
+
+w90 = ptr + 3;
+w91 = stack[w90];
+
+w92 = ptr + 4;
+w93 = stack[w92];
+
+w94 = w91*w93;
+w95 = ptr + 1;
+stack[w95] = w94;
+
+goto retorno89;
+retorno89:
+    cout<< "";
+}
+
+void java_sumar_div(){
+int w111;
+int w112;
+int w113;
+int w114;
+int w115;
+int w116;
+int w117;
+
+w112 = ptr + 3;
+w113 = stack[w112];
+
+w114 = ptr + 4;
+w115 = stack[w114];
+
+w116 = w113/w115;
+w117 = ptr + 1;
+stack[w117] = w116;
+
+goto retorno111;
+retorno111:
+    cout<< "";
+}
+
+void java_sumar_info(){
 int w13;
 int w14;
 int w15;
 int w16;
 int w17;
-
-w13 = ptr + 2;
-w14 = stack[w13];
-
-w15 = ptr + 0;
-w16 = stack[w15];
-
-w17 = w16 + 1;
-heap[w17] = w14;
-
-
-retorno12:
-    cout<< " ";
-}
-
-void java_Nodo_setAnterior(){
 int w18;
 int w19;
 int w20;
 int w21;
 int w22;
 int w23;
-
-w19 = ptr + 2;
-w20 = stack[w19];
-
-w21 = ptr + 0;
-w22 = stack[w21];
-
-w23 = w22 + 2;
-heap[w23] = w20;
-
-
-retorno18:
-    cout<< " ";
-}
-
-void java_Nodo_Nodo(){
 int w24;
 int w25;
 int w26;
@@ -115,93 +148,18 @@ int w37;
 int w38;
 int w39;
 int w40;
-
-w25 = h;
-h = w25 + 3;
-
-w26 = ptr + 0;
-stack[w26] = w25;
-
-w27 = ptr + 0;
-w28 = stack[w27];
-
-w29 = w28 + 0;
-heap[w29] = 0;
-
-
-w30 = ptr + 0;
-w31 = stack[w30];
-
-w32 = w31 + 1;
-heap[w32] =  -1;
-
-
-w33 = ptr + 0;
-w34 = stack[w33];
-
-w35 = w34 + 2;
-heap[w35] =  -1;
-
-
-w36 = ptr + 2;
-w37 = stack[w36];
-
-w38 = ptr + 0;
-w39 = stack[w38];
-
-w40 = w39 + 0;
-heap[w40] = w37;
-
-
-retorno24:
-    cout<< "";
-}
-
-void java_ListaE_getSize(){
 int w41;
 int w42;
 int w43;
 int w44;
 int w45;
 int w46;
-
-w42 = ptr + 0;
-w43 = stack[w42];
-
-w44 = w43 + 2;
-w45 = heap[w44];
-
-w46 = ptr + 1;
-stack[w46] = w45;
-
-goto retorno41;
-retorno41:
-    cout<< "";
-}
-
-void java_ListaE_getNum(){
 int w47;
 int w48;
 int w49;
 int w50;
 int w51;
 int w52;
-
-w48 = ptr + 0;
-w49 = stack[w48];
-
-w50 = w49 + 3;
-w51 = heap[w50];
-
-w52 = ptr + 1;
-stack[w52] = w51;
-
-goto retorno47;
-retorno47:
-    cout<< "";
-}
-
-void java_ListaE_obtenerNodo(){
 int w53;
 int w54;
 int w55;
@@ -239,95 +197,6 @@ int w86;
 int w87;
 int w88;
 int w89;
-
-cout<<"indice: ";
-w54 = ptr + 3;
-w55 = stack[w54];
-
-cout<<w55;
-cout<<endl;
-w56 = ptr + 0;
-w57 = stack[w56];
-
-w58 = w57 + 0;
-w59 = heap[w58];
-
-w60 = ptr + 4;
-stack[w60] = w59;
-
-w61 = 0;
-
-w62 = ptr + 5;
-stack[w62] = w61;
-
-w66 = 0;
-
-w67 = ptr + 5;
-stack[w67] = w66;
-
-
-label_Loop63:{}
-w68 = ptr + 5;
-w69 = stack[w68];
-
-w70 = ptr + 3;
-w71 = stack[w70];
-
-if(w69<w71)goto label_ins65;
-goto salida64;
-label_ins65:{}
-w72 = ptr + 4;
-w73 = stack[w72];
-
-w74 = ptr + 6;
-
-w75 = w74 + 0;
-stack[w75] = w73;
-
-ptr = ptr + 6;
-java_Nodo_getSiguiente();
-ptr = ptr - 6;
-
-//retorno
-w76 = ptr + 6;
-
-w77 = w76 + 1;
-w78 = stack[w77];
-
-
-//retorno
-w79 = w78;
-
-w80 = ptr + 4;
-stack[w80] = w79;
-
-
-w81 = ptr + 5;
-w82 = stack[w81];
-
-w83 = 1;
-
-w84 = w82+w83;
-w85 = w84;
-
-w86 = ptr + 5;
-stack[w86] = w85;
-
-
-goto label_Loop63;
-salida64:{}
-w87 = ptr + 4;
-w88 = stack[w87];
-
-w89 = ptr + 1;
-stack[w89] = w88;
-
-goto retorno53;
-retorno53:
-    cout<< "";
-}
-
-void java_ListaE_agregar(){
 int w90;
 int w91;
 int w92;
@@ -373,744 +242,227 @@ int w131;
 int w132;
 int w133;
 int w134;
-int w135;
-int w136;
-int w137;
-int w138;
-int w139;
-int w140;
-int w141;
-int w142;
-int w143;
-int w144;
-int w145;
-int w146;
-int w147;
-int w148;
 
-w91 = ptr + 2;
-w92 = stack[w91];
+w14 = ptr + 2;
+stack[w14] = 12;
 
-w93 = ptr + 4;
+w15 = ptr + 3;
+stack[w15] = 4;
 
-w94 = w93 + 2;
-stack[w94] = w92;
+w16 = ptr + 0;
+w17 = stack[w16];
 
-ptr = ptr + 4;
-java_Nodo_Nodo();
-ptr = ptr - 4;
-w95 = ptr + 4;
+w18 = w17 + 1;
+w19 = heap[w18];
 
-w96 = w95 + 0;
-w97 = stack[w96];
+w20 = ptr + 2;
+w21 = stack[w20];
 
-w98 = ptr + 3;
-stack[w98] = w97;
+w22 = ptr + 0;
+w23 = stack[w22];
 
-w103 = ptr + 0;
-w104 = stack[w103];
+w24 = w23 + 2;
+w25 = heap[w24];
 
-w105 = w104 + 0;
-w106 = heap[w105];
+w26 = ptr + 3;
+w27 = stack[w26];
 
-if(w106== -1)goto if99;
-goto else101;
-if99:
-cout<<"agregando el primero";
+w28 = ptr + 5;
+
+w29 = ptr + 0;
+w30 = stack[w29];
+
+w31 = w28 + 0;
+stack[w31] = w30;
+
+w32 = w28 + 3;
+stack[w32] = w19;
+
+w33 = w28 + 4;
+stack[w33] = w21;
+
+w34 = w28 + 5;
+stack[w34] = w25;
+
+w35 = w28 + 6;
+stack[w35] = w27;
+
+ptr = ptr + 5;
+java_sumar_adicion();
+ptr = ptr - 5;
+
+//retorno
+w49 = ptr + 5;
+
+w50 = w49 + 1;
+w51 = stack[w50];
+
+
+//retorno
+w52 = ptr + 4;
+stack[w52] = w51;
+
+cout<<"sumar: ";
+w53 = ptr + 4;
+w54 = stack[w53];
+
+cout<<w54;
 cout<<endl;
-w107 = ptr + 3;
-w108 = stack[w107];
+cout<<"restar: ";
+w55 = ptr + 2;
+w56 = stack[w55];
 
-w109 = ptr + 0;
-w110 = stack[w109];
+w57 = ptr + 0;
+w58 = stack[w57];
 
-w111 = w110 + 0;
-heap[w111] = w108;
+w59 = w58 + 2;
+w60 = heap[w59];
+
+w61 = ptr + 7;
+
+w62 = ptr + 0;
+w63 = stack[w62];
+
+w64 = w61 + 0;
+stack[w64] = w63;
+
+w65 = w61 + 3;
+stack[w65] = w56;
+
+w66 = w61 + 4;
+stack[w66] = w60;
+
+ptr = ptr + 7;
+java_sumar_restar();
+ptr = ptr - 7;
+
+//retorno
+w74 = ptr + 7;
+
+w75 = w74 + 1;
+w76 = stack[w75];
 
 
-w112 = ptr + 3;
-w113 = stack[w112];
-
-w114 = ptr + 0;
-w115 = stack[w114];
-
-w116 = w115 + 1;
-heap[w116] = w113;
-
-
-
-goto salida100;
-else101:
-cout<<"agregando el otro";
+//retorno
+cout<<w76;
 cout<<endl;
-w117 = ptr + 0;
-w118 = stack[w117];
+cout<<"multi: ";
+w77 = ptr + 2;
+w78 = stack[w77];
+
+w79 = ptr + 0;
+w80 = stack[w79];
+
+w81 = w80 + 2;
+w82 = heap[w81];
+
+w83 = ptr + 5;
+
+w84 = ptr + 0;
+w85 = stack[w84];
+
+w86 = w83 + 0;
+stack[w86] = w85;
+
+w87 = w83 + 3;
+stack[w87] = w78;
+
+w88 = w83 + 4;
+stack[w88] = w82;
+
+ptr = ptr + 5;
+java_sumar_multiplicar();
+ptr = ptr - 5;
+
+//retorno
+w96 = ptr + 5;
+
+w97 = w96 + 1;
+w98 = stack[w97];
+
+
+//retorno
+cout<<w98;
+cout<<endl;
+cout<<"div: ";
+w99 = ptr + 2;
+w100 = stack[w99];
+
+w101 = ptr + 0;
+w102 = stack[w101];
+
+w103 = w102 + 2;
+w104 = heap[w103];
+
+w105 = ptr + 5;
+
+w106 = ptr + 0;
+w107 = stack[w106];
+
+w108 = w105 + 0;
+stack[w108] = w107;
+
+w109 = w105 + 3;
+stack[w109] = w100;
+
+w110 = w105 + 4;
+stack[w110] = w104;
+
+ptr = ptr + 5;
+java_sumar_div();
+ptr = ptr - 5;
+
+//retorno
+w118 = ptr + 5;
 
 w119 = w118 + 1;
-w120 = heap[w119];
+w120 = stack[w119];
 
-w121 = ptr + 3;
+
+//retorno
+cout<<w120;
+cout<<endl;
+cout<<"varL: ";
+w121 = ptr + 2;
 w122 = stack[w121];
 
-w123 = ptr + 4;
-
-w124 = w123 + 0;
-stack[w124] = w120;
-
-w125 = w123 + 2;
-stack[w125] = w122;
-
-ptr = ptr + 4;
-java_Nodo_setSiguiente();
-ptr = ptr - 4;
-w126 = ptr + 3;
-w127 = stack[w126];
-
-w128 = ptr + 0;
-w129 = stack[w128];
-
-w130 = w129 + 1;
-w131 = heap[w130];
-
-w132 = ptr + 4;
-
-w133 = w132 + 0;
-stack[w133] = w127;
-
-w134 = w132 + 2;
-stack[w134] = w131;
-
-ptr = ptr + 4;
-java_Nodo_setAnterior();
-ptr = ptr - 4;
-w135 = ptr + 3;
-w136 = stack[w135];
-
-w137 = ptr + 0;
-w138 = stack[w137];
-
-w139 = w138 + 1;
-heap[w139] = w136;
-
-
-
-salida100:
-w140 = ptr + 0;
-w141 = stack[w140];
-
-w142 = w141 + 2;
-w143 = heap[w142];
-
-w144 = 1;
-
-w145 = w143+w144;
-w146 = ptr + 0;
-w147 = stack[w146];
-
-w148 = w147 + 2;
-heap[w148] = w145;
-
-
-retorno90:
-    cout<< " ";
-}
-
-void java_ListaE_imprimirLista(){
-int w149;
-int w150;
-int w151;
-int w152;
-int w153;
-int w154;
-int w155;
-int w156;
-int w157;
-int w158;
-int w159;
-int w160;
-int w161;
-int w162;
-int w163;
-int w164;
-int w165;
-int w166;
-int w167;
-int w168;
-int w169;
-int w170;
-int w171;
-int w172;
-int w173;
-int w174;
-int w175;
-int w176;
-int w177;
-int w178;
-int w179;
-int w180;
-int w181;
-int w182;
-int w183;
-int w184;
-int w185;
-int w186;
-int w187;
-int w188;
-int w189;
-
-w150 = ptr + 0;
-w151 = stack[w150];
-
-w152 = w151 + 0;
-w153 = heap[w152];
-
-w154 = ptr + 2;
-stack[w154] = w153;
-
-w155 = 0;
-
-w156 = ptr + 3;
-stack[w156] = w155;
-
-w160 = 0;
-
-w161 = ptr + 3;
-stack[w161] = w160;
-
-
-label_Loop157:{}
-w162 = ptr + 3;
-w163 = stack[w162];
-
-w164 = ptr + 0;
-w165 = stack[w164];
-
-w166 = w165 + 2;
-w167 = heap[w166];
-
-if(w163<w167)goto label_ins159;
-goto salida158;
-label_ins159:{}
-cout<<"contenido: ";
-w168 = ptr + 2;
-w169 = stack[w168];
-
-w170 = ptr + 4;
-
-w171 = w170 + 0;
-stack[w171] = w169;
-
-ptr = ptr + 4;
-java_Nodo_getContenido();
-ptr = ptr - 4;
-
-//retorno
-w172 = ptr + 4;
-
-w173 = w172 + 1;
-w174 = stack[w173];
-
-
-//retorno
-cout<<w174;
+cout<<w122;
 cout<<endl;
-w175 = ptr + 2;
-w176 = stack[w175];
-
-w177 = ptr + 4;
-
-w178 = w177 + 0;
-stack[w178] = w176;
-
-ptr = ptr + 4;
-java_Nodo_getSiguiente();
-ptr = ptr - 4;
-
-//retorno
-w179 = ptr + 4;
-
-w180 = w179 + 1;
-w181 = stack[w180];
-
-
-//retorno
-w182 = w181;
-
-w183 = ptr + 2;
-stack[w183] = w182;
-
-
-w184 = ptr + 3;
-w185 = stack[w184];
-
-w186 = 1;
-
-w187 = w185+w186;
-w188 = w187;
-
-w189 = ptr + 3;
-stack[w189] = w188;
-
-
-goto label_Loop157;
-salida158:{}
-retorno149:
-    cout<< " ";
-}
-
-void java_ListaE_ListaE(){
-int w190;
-int w191;
-int w192;
-int w193;
-int w194;
-int w195;
-int w196;
-int w197;
-int w198;
-int w199;
-int w200;
-int w201;
-int w202;
-int w203;
-int w204;
-
-w191 = h;
-h = w191 + 4;
-
-w192 = ptr + 0;
-stack[w192] = w191;
-
-w193 = ptr + 0;
-w194 = stack[w193];
-
-w195 = w194 + 0;
-heap[w195] =  -1;
-
-
-w196 = ptr + 0;
-w197 = stack[w196];
-
-w198 = w197 + 1;
-heap[w198] =  -1;
-
-
-w199 = ptr + 0;
-w200 = stack[w199];
-
-w201 = w200 + 2;
-heap[w201] = 0;
-
-
-w202 = ptr + 0;
-w203 = stack[w202];
-
-w204 = w203 + 3;
-heap[w204] = 0;
-
-
-retorno190:
-    cout<< "";
-}
-
-void java_sumar_iniciar(){
-int w205;
-int w206;
-int w207;
-int w208;
-int w209;
-int w210;
-int w211;
-int w212;
-int w213;
-int w214;
-int w215;
-int w216;
-int w217;
-int w218;
-int w219;
-int w220;
-int w221;
-int w222;
-int w223;
-int w224;
-int w225;
-int w226;
-int w227;
-int w228;
-int w229;
-int w230;
-int w231;
-int w232;
-int w233;
-int w234;
-int w235;
-int w236;
-int w237;
-int w238;
-int w239;
-int w240;
-int w241;
-int w242;
-int w243;
-int w244;
-int w245;
-int w246;
-int w247;
-int w248;
-int w249;
-int w250;
-int w251;
-int w252;
-int w253;
-int w254;
-int w255;
-int w256;
-int w257;
-int w258;
-int w259;
-int w260;
-int w261;
-int w262;
-int w263;
-int w264;
-int w265;
-int w266;
-int w267;
-int w268;
-int w269;
-int w270;
-int w271;
-int w272;
-int w273;
-int w274;
-int w275;
-int w276;
-int w277;
-int w278;
-int w279;
-int w280;
-int w281;
-int w282;
-int w283;
-int w284;
-int w285;
-int w286;
-int w287;
-int w288;
-int w289;
-int w290;
-int w291;
-int w292;
-int w293;
-int w294;
-int w295;
-int w296;
-int w297;
-int w298;
-int w299;
-int w300;
-int w301;
-int w302;
-int w303;
-int w304;
-int w305;
-int w306;
-int w307;
-int w308;
-
-w206 = ptr + 3;
-
-ptr = ptr + 3;
-java_ListaE_ListaE();
-ptr = ptr - 3;
-w207 = ptr + 3;
-
-w208 = w207 + 0;
-w209 = stack[w208];
-
-w210 = ptr + 0;
-w211 = stack[w210];
-
-w212 = w211 + 2;
-heap[w212] = w209;
-
-
-w213 = ptr + 0;
-w214 = stack[w213];
-
-w215 = w214 + 2;
-w216 = heap[w215];
-
-w217 = ptr + 3;
-
-w218 = w217 + 0;
-stack[w218] = w216;
-
-w219 = w217 + 2;
-stack[w219] = 71;
-
-ptr = ptr + 3;
-java_ListaE_agregar();
-ptr = ptr - 3;
-w220 = ptr + 0;
-w221 = stack[w220];
-
-w222 = w221 + 2;
-w223 = heap[w222];
-
-w224 = ptr + 3;
-
-w225 = w224 + 0;
-stack[w225] = w223;
-
-w226 = w224 + 2;
-stack[w226] = 72;
-
-ptr = ptr + 3;
-java_ListaE_agregar();
-ptr = ptr - 3;
-w227 = ptr + 0;
-w228 = stack[w227];
-
-w229 = w228 + 2;
-w230 = heap[w229];
-
-w231 = ptr + 3;
-
-w232 = w231 + 0;
-stack[w232] = w230;
-
-w233 = w231 + 2;
-stack[w233] = 73;
-
-ptr = ptr + 3;
-java_ListaE_agregar();
-ptr = ptr - 3;
-w234 = ptr + 0;
-w235 = stack[w234];
-
-w236 = w235 + 2;
-w237 = heap[w236];
-
-w238 = ptr + 3;
-
-w239 = w238 + 0;
-stack[w239] = w237;
-
-w240 = w238 + 2;
-stack[w240] = 74;
-
-ptr = ptr + 3;
-java_ListaE_agregar();
-ptr = ptr - 3;
-w241 = ptr + 0;
-w242 = stack[w241];
-
-w243 = w242 + 2;
-w244 = heap[w243];
-
-w245 = ptr + 3;
-
-w246 = w245 + 0;
-stack[w246] = w244;
-
-w247 = w245 + 2;
-stack[w247] = 75;
-
-ptr = ptr + 3;
-java_ListaE_agregar();
-ptr = ptr - 3;
-w248 = ptr + 0;
-w249 = stack[w248];
-
-w250 = w249 + 2;
-w251 = heap[w250];
-
-w252 = ptr + 3;
-
-w253 = w252 + 0;
-stack[w253] = w251;
-
-w254 = w252 + 2;
-stack[w254] = 76;
-
-ptr = ptr + 3;
-java_ListaE_agregar();
-ptr = ptr - 3;
-w255 = ptr + 0;
-w256 = stack[w255];
-
-w257 = w256 + 2;
-w258 = heap[w257];
-
-w259 = ptr + 3;
-
-w260 = w259 + 0;
-stack[w260] = w258;
-
-w261 = w259 + 2;
-stack[w261] = 77;
-
-ptr = ptr + 3;
-java_ListaE_agregar();
-ptr = ptr - 3;
-w262 = ptr + 0;
-w263 = stack[w262];
-
-w264 = w263 + 2;
-w265 = heap[w264];
-
-w266 = ptr + 3;
-
-w267 = w266 + 0;
-stack[w267] = w265;
-
-w268 = w266 + 2;
-stack[w268] = 78;
-
-ptr = ptr + 3;
-java_ListaE_agregar();
-ptr = ptr - 3;
-w269 = ptr + 0;
-w270 = stack[w269];
-
-w271 = w270 + 2;
-w272 = heap[w271];
-
-w273 = ptr + 3;
-
-w274 = w273 + 0;
-stack[w274] = w272;
-
-w275 = w273 + 2;
-stack[w275] = 79;
-
-ptr = ptr + 3;
-java_ListaE_agregar();
-ptr = ptr - 3;
-w276 = ptr + 0;
-w277 = stack[w276];
-
-w278 = w277 + 2;
-w279 = heap[w278];
-
-w280 = ptr + 3;
-
-w281 = w280 + 0;
-stack[w281] = w279;
-
-ptr = ptr + 3;
-java_ListaE_imprimirLista();
-ptr = ptr - 3;
-cout<<"lista: ";
-w282 = ptr + 0;
-w283 = stack[w282];
-
-w284 = w283 + 2;
-w285 = heap[w284];
-
-w286 = ptr + 3;
-
-w287 = w286 + 0;
-stack[w287] = w285;
-
-ptr = ptr + 3;
-java_ListaE_getSize();
-ptr = ptr - 3;
-
-//retorno
-w288 = ptr + 3;
-
-w289 = w288 + 1;
-w290 = stack[w289];
-
-
-//retorno
-cout<<w290;
+cout<<"varl2: ";
+w123 = ptr + 3;
+w124 = stack[w123];
+
+cout<<w124;
 cout<<endl;
-w291 = ptr + 0;
-w292 = stack[w291];
+cout<<"att atri: ";
+w125 = ptr + 0;
+w126 = stack[w125];
 
-w293 = w292 + 2;
-w294 = heap[w293];
+w127 = w126 + 1;
+w128 = heap[w127];
 
-w295 = ptr + 3;
-
-w296 = w295 + 0;
-stack[w296] = w294;
-
-w297 = w295 + 3;
-stack[w297] = 5;
-
-ptr = ptr + 3;
-java_ListaE_obtenerNodo();
-ptr = ptr - 3;
-
-//retorno
-w298 = ptr + 3;
-
-w299 = w298 + 1;
-w300 = stack[w299];
-
-
-//retorno
-w301 = ptr + 2;
-stack[w301] = w300;
-
-cout<<"obteniendo contenido de un nodo: ";
-w302 = ptr + 2;
-w303 = stack[w302];
-
-w304 = ptr + 3;
-
-w305 = w304 + 0;
-stack[w305] = w303;
-
-ptr = ptr + 3;
-java_Nodo_getContenido();
-ptr = ptr - 3;
-
-//retorno
-w306 = ptr + 3;
-
-w307 = w306 + 1;
-w308 = stack[w307];
-
-
-//retorno
-cout<<w308;
+cout<<w128;
 cout<<endl;
-retorno205:
+cout<<"att uno: ";
+w129 = ptr + 0;
+w130 = stack[w129];
+
+w131 = w130 + 2;
+w132 = heap[w131];
+
+cout<<w132;
+cout<<endl;
+cout<<"total: ";
+w133 = ptr + 4;
+w134 = stack[w133];
+
+cout<<w134;
+cout<<endl;
+retorno13:
     cout<< " ";
 }
 
 void java_sumar_sumar(){
-int w309;
-int w310;
-int w311;
-int w312;
-int w313;
-int w314;
-
-w310 = h;
-h = w310 + 3;
-
-w311 = ptr + 0;
-stack[w311] = w310;
-
-w312 = ptr + 0;
-w313 = stack[w312];
-
-w314 = w313 + 2;
-heap[w314] =  -1;
-
-
-retorno309:
-    cout<< "";
-}
-
-int main(){
 int w0;
 int w1;
 int w2;
@@ -1125,6 +477,173 @@ int w10;
 int w11;
 int w12;
 int w13;
+int w14;
+int w15;
+int w16;
+int w17;
+int w18;
+int w19;
+int w20;
+int w21;
+int w22;
+int w23;
+int w24;
+int w25;
+int w26;
+int w27;
+int w28;
+int w29;
+int w30;
+int w31;
+int w32;
+int w33;
+int w34;
+int w35;
+int w36;
+int w37;
+int w38;
+int w39;
+int w40;
+int w41;
+int w42;
+int w43;
+int w44;
+int w45;
+int w46;
+int w47;
+int w48;
+int w49;
+int w50;
+int w51;
+int w52;
+int w53;
+int w54;
+int w55;
+int w56;
+int w57;
+int w58;
+int w59;
+int w60;
+int w61;
+int w62;
+int w63;
+int w64;
+int w65;
+int w66;
+int w67;
+int w68;
+int w69;
+int w70;
+int w71;
+int w72;
+int w73;
+int w74;
+int w75;
+int w76;
+int w77;
+int w78;
+int w79;
+int w80;
+int w81;
+int w82;
+int w83;
+int w84;
+int w85;
+int w86;
+int w87;
+int w88;
+int w89;
+int w90;
+int w91;
+int w92;
+int w93;
+int w94;
+int w95;
+int w96;
+int w97;
+int w98;
+int w99;
+int w100;
+int w101;
+int w102;
+int w103;
+int w104;
+int w105;
+int w106;
+int w107;
+int w108;
+int w109;
+int w110;
+int w111;
+int w112;
+int w113;
+int w114;
+int w115;
+int w116;
+int w117;
+int w118;
+int w119;
+int w120;
+int w121;
+int w122;
+int w123;
+int w124;
+int w125;
+int w126;
+int w127;
+int w128;
+int w129;
+int w130;
+int w131;
+int w132;
+int w133;
+int w134;
+
+w1 = h;
+h = w1 + 3;
+
+w2 = ptr + 0;
+stack[w2] = w1;
+
+w3 = ptr + 0;
+w4 = stack[w3];
+
+w5 = w4 + 1;
+heap[w5] = 6;
+
+
+w6 = ptr + 0;
+w7 = stack[w6];
+
+w8 = w7 + 2;
+heap[w8] = 3;
+
+
+w9 = ptr + 2;
+
+w10 = ptr + 0;
+w11 = stack[w10];
+
+w12 = w9 + 0;
+stack[w12] = w11;
+
+ptr = ptr + 2;
+java_sumar_info();
+ptr = ptr - 2;
+retorno0:
+    cout<< "";
+}
+
+int main(){
+int w0;
+int w1;
+int w2;
+int w3;
+int w4;
+int w5;
+int w6;
+int w7;
+int w8;
 
 w0 = ptr + 0;
 stack[w0] = 12;
@@ -1151,19 +670,6 @@ w7 = stack[w6];
 w8 = ptr + 4;
 stack[w8] = w7;
 
-w9 = ptr + 4;
-w10 = stack[w9];
-
-w11 = ptr + 5;
-
-w12 = w11 + 0;
-stack[w12] = w10;
-
-w13 = ptr + 5;
-
-ptr = ptr + 5;
-java_sumar_iniciar();
-ptr = ptr - 5;
 
 }
 //________________

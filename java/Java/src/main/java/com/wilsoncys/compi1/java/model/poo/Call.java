@@ -434,14 +434,15 @@ public class Call extends Instruction{
         
         
                                             //create al metodo/funcion
+        c.clearVarParams();
         if(!recursiva ){
-//            if(symMethod.getCat().equals(categoria.FUNCTION) ){
-//                symMethod.getInstruction().createC3D(arbol, anterior);
-//            }else if(symMethod.getCat().equals(categoria.METHOD)){
-//                symMethod.getInstruction().createC3D(arbol, anterior);
-//            }
+            if(symMethod.getCat().equals(categoria.FUNCTION) ){
+                symMethod.getInstruction().createC3D(arbol, anterior);
+            }else if(symMethod.getCat().equals(categoria.METHOD)){
+                symMethod.getInstruction().createC3D(arbol, anterior);
+            }
         }
-        
+        c.clearVarParams();
         
                                            //dejar el retorno
             if(symMethod.getCat() == categoria.FUNCTION  ){

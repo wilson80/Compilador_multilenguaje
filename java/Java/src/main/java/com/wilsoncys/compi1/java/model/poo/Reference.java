@@ -244,12 +244,14 @@ public class Reference extends Instruction{
         armed+=c.c3d_moveToStack(false, arbol.attbClassJava);
         
            
+        c.clearVarParams();
                             //create a la Clase
         Simbolo symClass = arbol.getSym("java" + this.id);
 //        arbol.setSizeHeap(((Classs)symClass.getInstruction()).getCantAttb());
-//        symClass.getInstruction().createC3D(arbol, anterior);
-
-
+        symClass.getInstruction().createC3D(arbol, anterior);
+        c.clearVarParams();
+        
+        
         arbol.setSizeHeap(cantAttbCurrent);
                                             //mover el ptrtemp Temporal
         armed+=c.c3d_ptrTemp(arbol.attbClassJava);

@@ -273,25 +273,28 @@ import javax.swing.JOptionPane;
 
         arbol.setAmbito(this.ambito);
         //interpretar todos lo funciones/funciones de esta clase
-        for (Instruction fun : instrucciones) {
-            if(fun instanceof Functionss funn){
-                funn.createC3D(arbol, anterior);
-            }
-        }
-        
-        for (Instruction fun : instrucciones) {
-            if(fun instanceof Method met){
-                met.createC3D(arbol, anterior);
-            }
-        }
-        for (Instruction fun : instrucciones) {
-            if(fun instanceof Mainn constr){
-                constr.createC3D(arbol, anterior);
-            }
-        }
+//                            for (Instruction fun : instrucciones) {
+//                                if(fun instanceof Functionss funn){
+//                                    funn.createC3D(arbol, anterior);
+//                                }
+//                            }
+//
+//                            for (Instruction fun : instrucciones) {
+//                                if(fun instanceof Method met){
+//                                    met.createC3D(arbol, anterior);
+//                                }
+//                            }
+//                            for (Instruction fun : instrucciones) {
+//                                if(fun instanceof Mainn constr){
+//                                    constr.createC3D(arbol, anterior);
+//                                }
+//                            }
          
         
-         
+        arbol.getSym(id_constructor).getInstruction().createC3D(arbol, anterior);
+        
+
+
         
         //crear el constructor por default
          //identificar,  si no hay un constructor por default se crea uno
@@ -367,7 +370,7 @@ import javax.swing.JOptionPane;
         
 //        armed = c.c3d_metodo("java_"+id + "_"+ id, armed);
         
-        
+            
 //        if(!mainEcontrado.isIsCreate()){
 //            arbol.Print(armed);
 //            mainEcontrado.setIsCreate(true);
