@@ -1,19 +1,147 @@
-procedure imprimirSaludo(uno, dos, tres:integer; nombre, apellido: string);
-type
-    my_type, ddd = integer; 
-    subrangeId1, subRangeId2, sub3, sub4 ='a' ...'e';  
+ 
+	procedure hellow();
+		
+	begin
+	    println('Hello, World!');
+	    println('Hello, World!');
+	end;
+	
+	procedure Conditionals(grade: char);
+        var 
+            A: char;
+            B: char;
+            C: char;
+            D: char;
+            E: char;
+            F: char;
+		begin
+            A:= 'a';
+            B:= 'b';
+            C:= 'c';
+            D:= 'd';
+            E:= 'e';
+            F:= 'f';
+			println('________________________________________________________________');
+			println(' conditionals');	
 
+			println('Enter the grade:');
+			readln(grade);
+		
+			IF (grade = A) THEN
+			println('Excellent work!')
+			ELSE IF (grade = B) THEN
+			println('You did well...')
+			ELSE IF (grade = C) THEN
+			println('Average performance.')
+			ELSE IF (grade = D) THEN
+			println('Needs some improvement...')
+			ELSE IF (grade = E) THEN
+			println('Trouble ahead!')
+			ELSE
+			println('YOU SUCK!');
+			
+			case (grade) of
+				A : println('Excellent!' );
+				B : println('You did well...');
+				C : println('Average performance.');
+				D : println('Needs some improvement...' );
+				'i' : println('Trouble ahead!');
+				F : println('YOU SUCK!' );
+			else println('asdf');
+			end;     
+
+	end;
+	
+	procedure loops(maxNumber, counter : integer; index, data: integer);
+		begin
+		println('________________________________________________________________');
+			println(' Loops');	
+			counter := 0;
+			while (counter <= maxNumber) do
+			begin
+				COUNTER := counter + 1;
+				println('Contador: ', counter);
+			end;
+
+			for counter:= 0 to maxNumber do println('value of counter:', counter);
+			
+			{ tablas de multiplicar }
+			counter := 1;
+			repeat
+			
+				index:= 1;
+				repeat
+				
+					data := index * counter;
+					println(index, 'x', counter, '=', data);
+					index := index + 1;
+				
+				until (index < 11);
+				counter := counter + 1;
+					
+			until (counter < 11);
+		end;
+	
+	procedure arraysandr( 	(* n is an array of 10 integers *)
+	i, j: integer;
+	studentGrade: string;
+	exists: boolean
+	 );
+	begin
+		println('________________________________________________________________');
+		 println(' ARRAYS AND RECORDs');	
+	(* initialize elements of array n to 0 *)		  
+		for i := 1 to 10 do
+			n[ i ] := i + 100;	(* set element at location i to i + 100 *)
+		 (* output each array element's value *)
+		
+		for j:= 1 to 10 do
+			println('Element[', j, '] = ', n[j] );
+			
+		for i := 0 to 5 do
+		begin
+			println('Enter a grade (A..F):');
+			 readln(grade );
+		end;
+			 
+		println('enter grade: ');
+		readln(studentGrade);
+		
+		exists:=0;
+		 
+		for i := 0 to 5 do
+		begin
+			if ('d' = grade  ) then
+			begin
+				println('Your gradew exists in grades');
+				exists:=1;
+				break;
+			end;
+		end;
+		 
+		if ( exists) then
+		println('Your grade does not exists in grades');
+		
+		for i := 1 to 5 do
+		begin
+			println('Enter a name:');
+			readln( exists);
+			
+			println('Enter a grade (A..F):');
+			readln( studentGrade);
+		end;
+	end;
+
+
+   
+function restar(var1, var2: integer): integer;
 var 
-    total: integer; 
-    idd: string;
-nueva:ddd;
-
-begin  
-idd:=45;
-writeln('desde un procccc: ' );
-writeln(idd);
-writeln(uno , dos, tres);
-writeln(nombre, ' ', apellido);
-writeln('ddddd');
-
+    total: integer;
+    condition: boolean;
+begin
+ 
+    total := var1 - var2;
+    restar := total;
 end;
+
+ 

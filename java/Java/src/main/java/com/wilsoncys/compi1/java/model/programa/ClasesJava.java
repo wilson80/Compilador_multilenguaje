@@ -68,6 +68,9 @@ public class ClasesJava extends Instruction{
     }
 
     public LinkedList<Instruction> getListaClasesJava() {
+        if(clasesJava == null){
+            clasesJava = new LinkedList<>();
+        }
         return clasesJava;
     }
     

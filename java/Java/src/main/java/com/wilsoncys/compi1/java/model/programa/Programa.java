@@ -49,8 +49,9 @@ public class Programa extends Instruction{
 
     @Override
     public Object createSym(Arbol arbol, TablaSimbolos tabla) {
-           //includes
-        
+   
+         
+       
         for (String ids : includes.getClaseJava()) {
             if(ids.equals("\"JAVA.*\"")){
                 includes.setJavaTodo(true);

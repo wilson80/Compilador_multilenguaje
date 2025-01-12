@@ -19,4 +19,10 @@ public enum Relational_LogicalOperations {
     OR,
     XOR,
     NOT,
+    ANDTHEN,
+    ORELSE,
+    
+    
+    
+    
 }

@@ -197,11 +197,15 @@ public class Arbol {
     }
     public ClasesJava getClasesJava(){
         ClasesJava clases = null;
+        
         for (Instruction ins : instrucciones) {
             if(ins instanceof ClasesJava cl){
                 clases = cl;
             }
         }   
+        if(clases == null){
+             clases = new ClasesJava(functionsPascal, 0, 0);
+        }
         
         return clases;
     } 

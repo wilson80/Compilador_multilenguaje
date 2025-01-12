@@ -92,13 +92,7 @@ public class Functionss extends Instruction{
     }
     
     public Object createSym(Arbol arbol, TablaSimbolos tabla) {
-        //dir ref
-        //retorno
-        //dir dir ret
-        //desde la clase se le hace set a la cantidad de params
-//        cantParams++;       //pte analisis 
-//                                (creo que es por la posicion de retorno o algo asi no me acuerdo)
-
+ 
         for (Instruction ins : instrucciones) {
             if(ins instanceof Statement st){
                 //ambito

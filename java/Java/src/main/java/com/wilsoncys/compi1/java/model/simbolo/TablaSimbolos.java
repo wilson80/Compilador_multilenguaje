@@ -13,7 +13,7 @@ import java.util.LinkedList;
  * @author yoyo
  */
 public class TablaSimbolos {
-
+ 
     private TablaSimbolos tablaAnterior;
     private HashMap<String, Object> tablaActual;
     private String nombre;
@@ -91,6 +91,19 @@ public class TablaSimbolos {
 //            tablaActual.put(newSymbol.getAmbito_enID(), newSymbol);
             
     }
+    public boolean addSsymbolPas(Simbolo newSymbol){
+//        Simbolo find = (Simbolo)this.tablaActual.get(newSymbol.getId());
+        Simbolo find = (Simbolo)this.tablaActual.get(newSymbol.getAmbito_enID().toLowerCase());
+        if(find==null){
+//            tablaActual.put(newSymbol.getId(), newSymbol);
+            tablaActual.put(newSymbol.getAmbito_enID().toLowerCase(), newSymbol);
+            return true;
+        }else{
+            return false;
+        }
+//            tablaActual.put(newSymbol.getAmbito_enID(), newSymbol);
+            
+    }
    
     
 //    public Simbolo getSsymbol(String id){
@@ -134,6 +147,7 @@ public class TablaSimbolos {
     }
     
     
+
     
     
     

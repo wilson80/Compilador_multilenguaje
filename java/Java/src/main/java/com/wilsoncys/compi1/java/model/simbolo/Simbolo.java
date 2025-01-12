@@ -13,6 +13,17 @@ import java.util.List;
  * @author yoyo
  */
 public class Simbolo {
+    
+    private int indI;    
+    private int indF;    
+     
+    private boolean isArr = false;
+
+    
+    
+    
+    
+    
     private Tipo tipo;
     private String id;
     private Object valor;
@@ -20,6 +31,7 @@ public class Simbolo {
     private String tipoStruct = "";
     private int linea = 0;
     private int colu = 0;
+    
     
     
     
@@ -156,5 +168,35 @@ public class Simbolo {
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    public int getIndI() {
+        return indI;
+    }
+
+    public int getIndF() {
+        return indF;
+    }
+
+    public void setIndF(int indF) {
+        this.indF = indF;
+    }
+
+    public void setIndI(int indI) {
+        this.indI = indI;
+    }
+
+    public void setIsArr(boolean isArr) {
+        this.isArr = isArr;
+    }
+
+      
+    
+            
     
 }

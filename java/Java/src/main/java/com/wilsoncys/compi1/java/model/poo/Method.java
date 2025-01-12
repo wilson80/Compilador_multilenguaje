@@ -101,12 +101,7 @@ public class Method extends Instruction{
     
     
     public Object createSym(Arbol arbol, TablaSimbolos tabla) {
-        //dir ref
-        //retorno
-        //dir dir ret
-        //desde la clase se le hace set a la cantidad de params
-//                cantParams++;       //pte analisis 
-
+ 
         for (Instruction ins : instrucciones) {
             if(ins instanceof Statement st){
                 //ambito

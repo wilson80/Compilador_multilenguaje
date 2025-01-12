@@ -12,6 +12,7 @@ import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.poo.*; 
 import com.wilsoncys.compi1.java.model.programa.ClasesJava;
 import com.wilsoncys.compi1.java.model.programa.Programa;
+import com.wilsoncys.compi1.java.model.programa.Subprog_pascal;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
 import com.wilsoncys.compi1.java.model.simbolo.*;
 
@@ -64,11 +65,16 @@ public class IniciarAnalizadores {
             
             
             
-
-             
+            LinkedList<Instruction> todasLasIns = ast.getInstrucciones();
+            if(todasLasIns == null){
+                todasLasIns = new LinkedList<Instruction>();
+            }
+            
+        
+            
             
             //UNA SOLA TABLA DE SIMBOLOS        suponiendo que todo llega sin problemas 
-            for (Instruction ins : ast.getInstrucciones()) { 
+            for (Instruction ins : todasLasIns) { 
                 if(ins ==null){
                     continue;
                 }
@@ -88,7 +94,12 @@ public class IniciarAnalizadores {
                 
               
             } 
-
+                                            //creacionde simbolos de pascal
+            Subprog_pascal subprogramasP = new Subprog_pascal();
+            subprogramasP.setTodasLasins(todasLasIns);
+            subprogramasP.createSym(ast, tabla);
+            
+            
             
               
             
@@ -109,7 +120,7 @@ public class IniciarAnalizadores {
                 
 
                 String bodyMain ="";
-                for (Instruction ins : ast.getInstrucciones()) {
+                for (Instruction ins : todasLasIns) {
                     if(ins ==null){
                         continue;
                     }

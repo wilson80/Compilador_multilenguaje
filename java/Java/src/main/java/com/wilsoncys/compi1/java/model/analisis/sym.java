@@ -10,10 +10,12 @@ public class sym {
   /* terminals */
   public static final int TIMES = 10;
   public static final int BOOL = 3;
+  public static final int REAL = 81;
   public static final int CONST = 55;
   public static final int PAR_CL = 47;
-  public static final int SCAN = 85;
+  public static final int SCAN = 96;
   public static final int PAR_OP = 46;
+  public static final int UNTIL = 77;
   public static final int INP_INT = 69;
   public static final int G_EQUALS = 16;
   public static final int ASSIGNMENT = 20;
@@ -23,29 +25,31 @@ public class sym {
   public static final int RAISED = 12;
   public static final int PROTECTED = 60;
   public static final int NOT = 33;
+  public static final int ARRAY = 75;
   public static final int DIFFERENT = 19;
   public static final int BRACK_R = 53;
-  public static final int PASCAL = 72;
+  public static final int PASCAL = 83;
   public static final int VAR = 54;
+  public static final int THEN = 73;
   public static final int UNEGATIVE = 34;
-  public static final int JAVATODO = 79;
+  public static final int JAVATODO = 90;
   public static final int BRACK_L = 52;
   public static final int PRINTLN = 67;
-  public static final int PASCALSIMP = 78;
+  public static final int PASCALSIMP = 89;
   public static final int MOD = 13;
   public static final int CLASS = 66;
-  public static final int INCLUDE = 80;
-  public static final int CLRSCR = 87;
+  public static final int INCLUDE = 91;
+  public static final int CLRSCR = 98;
   public static final int ENTERO = 5;
   public static final int PLUS = 8;
   public static final int L_EQUALS = 17;
   public static final int WHILE = 27;
-  public static final int PASCALUNO = 76;
+  public static final int PASCALUNO = 87;
   public static final int EXTENDS = 63;
   public static final int DECIMAL = 6;
   public static final int CHAR = 43;
   public static final int BOOLEAN = 42;
-  public static final int GETCH = 75;
+  public static final int GETCH = 86;
   public static final int SWITCH = 26;
   public static final int SEMIC = 50;
   public static final int DO = 21;
@@ -54,8 +58,9 @@ public class sym {
   public static final int VOID = 45;
   public static final int PUBLIC = 62;
   public static final int RETURN = 59;
+  public static final int READLN = 79;
   public static final int ELSE = 23;
-  public static final int JAVA = 73;
+  public static final int JAVA = 84;
   public static final int BREAK = 25;
   public static final int DOT = 58;
   public static final int PROCEDURE = 71;
@@ -64,25 +69,30 @@ public class sym {
   public static final int EOF = 0;
   public static final int THIS = 64;
   public static final int DEFAULT = 29;
+  public static final int FUNCTION = 82;
   public static final int PRINT = 39;
-  public static final int MASK_S = 84;
-  public static final int JAVAUNO = 77;
+  public static final int MASK_S = 95;
+  public static final int REPEAT = 72;
+  public static final int JAVAUNO = 88;
   public static final int K_CL = 49;
   public static final int MAIN = 65;
   public static final int MINUS = 9;
   public static final int K_OP = 48;
   public static final int OR = 30;
   public static final int error = 1;
-  public static final int MASK_F = 83;
-  public static final int MASK_D = 81;
-  public static final int MASK_C = 82;
-  public static final int ANDSIMPLE = 86;
+  public static final int MASK_F = 94;
+  public static final int MASK_D = 92;
+  public static final int MASK_C = 93;
+  public static final int ANDSIMPLE = 97;
   public static final int CONTINUE = 28;
   public static final int IF = 22;
   public static final int ID = 7;
   public static final int MINUSMINUS = 37;
+  public static final int OF = 80;
+  public static final int END = 78;
   public static final int COLON = 56;
-  public static final int CASE = 74;
+  public static final int CASE = 85;
+  public static final int BEGIN = 76;
   public static final int PLUSPLUS = 36;
   public static final int CADENA = 2;
   public static final int NEW = 57;
@@ -90,6 +100,7 @@ public class sym {
   public static final int LESS = 15;
   public static final int AND = 31;
   public static final int PRIVATE = 61;
+  public static final int TO = 74;
   public static final int POINTS = 51;
   public static final int UMINUS = 35;
   public static final int XOR = 32;
@@ -169,6 +180,17 @@ public class sym {
   "INP_INT",
   "INP_F",
   "PROCEDURE",
+  "REPEAT",
+  "THEN",
+  "TO",
+  "ARRAY",
+  "BEGIN",
+  "UNTIL",
+  "END",
+  "READLN",
+  "OF",
+  "REAL",
+  "FUNCTION",
   "PASCAL",
   "JAVA",
   "CASE",

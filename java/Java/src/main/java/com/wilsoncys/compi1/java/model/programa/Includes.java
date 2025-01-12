@@ -32,6 +32,9 @@ public class Includes {
     }
 
     public LinkedList<String> getClaseJava() {
+        if(claseJava == null){
+            claseJava = new LinkedList<>();
+        }
         return claseJava;
     }
 

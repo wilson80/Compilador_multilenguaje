@@ -101,14 +101,14 @@ public class VistaGeneral extends javax.swing.JFrame {
         labelCol = new javax.swing.JLabel();
         botonc = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        cajonConsola = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         panelReportes = new javax.swing.JPanel();
         panelSimbolo = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        cajonConsola = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuArchivo = new javax.swing.JMenu();
@@ -191,17 +191,6 @@ public class VistaGeneral extends javax.swing.JFrame {
             }
         });
 
-        jPanel2.setLayout(null);
-
-        cajonConsola.setColumns(20);
-        cajonConsola.setRows(5);
-        jScrollPane1.setViewportView(cajonConsola);
-
-        jPanel2.add(jScrollPane1);
-        jScrollPane1.setBounds(10, 10, 760, 800);
-
-        jTabbedPane1.addTab("C3d", jPanel2);
-
         jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel1MouseClicked(evt);
@@ -229,8 +218,19 @@ public class VistaGeneral extends javax.swing.JFrame {
         jPanel1.add(jLabel3);
         jLabel3.setBounds(10, 360, 520, 25);
 
-        jTabbedPane1.addTab("Errores", jPanel1);
-        jTabbedPane1.addTab("algo", jPanel3);
+        jTabbedPane1.addTab("Errores y tabla de simbolos", jPanel1);
+
+        jPanel2.setLayout(null);
+
+        cajonConsola.setColumns(20);
+        cajonConsola.setRows(5);
+        jScrollPane1.setViewportView(cajonConsola);
+
+        jPanel2.add(jScrollPane1);
+        jScrollPane1.setBounds(10, 10, 760, 800);
+
+        jTabbedPane1.addTab("C3d", jPanel2);
+        jTabbedPane1.addTab("Codigo optimizado", jPanel3);
 
         getContentPane().add(jTabbedPane1);
         jTabbedPane1.setBounds(670, 60, 1230, 840);

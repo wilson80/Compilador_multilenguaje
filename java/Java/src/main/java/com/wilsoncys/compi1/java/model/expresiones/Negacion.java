@@ -88,6 +88,8 @@ public class Negacion extends Instruction {
             
             @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
+        
+        
         return anterior;
     }
 }
