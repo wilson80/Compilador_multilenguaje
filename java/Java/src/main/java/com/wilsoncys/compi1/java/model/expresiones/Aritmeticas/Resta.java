@@ -5,6 +5,7 @@
 package com.wilsoncys.compi1.java.model.expresiones.Aritmeticas;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
+import com.wilsoncys.compi1.java.model.asbtracto.CreadorC3d;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.expresiones.Enums.OperadoresAritmeticos;
 import com.wilsoncys.compi1.java.model.expresiones.Nativo;
@@ -167,9 +168,21 @@ public class Resta extends Instruction {
         String op1 = "";
         String op2 = "";
           
-//        
-        C3d_Java c=  arbol.getJava();
-        c.varsParams = new LinkedList<>();
+        CreadorC3d c;
+        
+        if( anterior.getLenguaje().equals("java") ){
+             c = arbol.getJava();
+        }else{
+             c =  arbol.getC3d();
+        }  
+
+//        C3d_Java c=  arbol.getJava();
+//        c.varsParams = new LinkedList<>();
+
+
+
+
+
         
         if(operando1 instanceof Nativo){        
             operando1.createC3D(arbol, anterior);   //inser en la lista
@@ -201,7 +214,7 @@ public class Resta extends Instruction {
         
         c.setOPRT("-");
         armed+=c.c3d_operation(op1, op2);
-        c.varsParams.add("w"+(arbol.java.getContador()-1));  //guarda el id de la var q contiene el resultado
+        c.varsParams.add("w"+(c.getContador()-1));  //guarda el id de la var q contiene el resultado
 
         return armed;
     }

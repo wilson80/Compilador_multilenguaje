@@ -117,10 +117,10 @@ public class StatementPas extends Instruction{
                 return "";
             }
             case BOOLEANO->{
-                return  true;
+                return  0;
             }
             case CARACTER->{
-                return  '0';
+                return  '@';
             }
             default->{
                 return "";
@@ -143,7 +143,24 @@ public class StatementPas extends Instruction{
 
     @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+//        setPos(arbol);
+//        String armed = "";
+//        C3d c =  arbol.getC3d();
+//        String idArmed = "pas"+ arbol.getAmbito_asID() +this.id;
+//        
+//        
+//        int dir  = arbol.getSym(idArmed).getDir();
+//
+//        
+//                                            //valor por defecto conforme el tipo
+//            armed += c.c3d_statementNativoC("0", dir);
+
+            
+            
+            
+        
+        
+        return "";
     }
 
     public LinkedList<String> getIds() {

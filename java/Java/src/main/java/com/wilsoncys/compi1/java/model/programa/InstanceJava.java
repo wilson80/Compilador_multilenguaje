@@ -6,10 +6,10 @@ package com.wilsoncys.compi1.java.model.programa;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores; 
+import com.wilsoncys.compi1.java.model.expresiones.Nativo;
 import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.poo.Classs;
 import com.wilsoncys.compi1.java.model.programa.expresiones.AccessC;
-import com.wilsoncys.compi1.java.model.programa.expresiones.NativoC;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
@@ -94,7 +94,7 @@ public class InstanceJava extends Instruction{
         String id_constructor = "java" + idClase + idClase;
                                             //extrayendo los params
         for (Instruction exps : parametersExp) {
-            if(exps instanceof NativoC n){               
+            if(exps instanceof Nativo n){               
                 n.createC3D(arbol, anterior);
                 id_constructor += n.tipo.getTypeString();
                 

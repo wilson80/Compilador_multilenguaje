@@ -97,21 +97,8 @@ public class Raised extends Instruction {
     } 
    @Override
     public String generarast(Arbol arbol, String anterior) {
-        //exp op exp
-        String nodoExp1 = "n" + arbol.getCount();
-        String nodoOp = "n" + arbol.getCount();
-        String nodoExp2 = "n" + arbol.getCount();
-
-        String strinRes = anterior + " -> " + nodoExp1 + ";\n";
-        strinRes += anterior + " ->" + nodoOp + ";\n";
-        strinRes += anterior + " ->" + nodoExp2 + ";\n";
-
-        strinRes += nodoExp1 + "[label=\"EXP\"];\n";
-        strinRes += nodoOp + "[label=\"**\"];\n";
-        strinRes += nodoExp2 + "[label=\"EXP\"];\n";
-        strinRes += this.operando1.generarast(arbol, nodoExp1);
-        strinRes += this.operando2.generarast(arbol, nodoExp2);
-        return strinRes;
+    
+        return "";
     }
     
         public Object createSym(Arbol arbol, TablaSimbolos tabla) {

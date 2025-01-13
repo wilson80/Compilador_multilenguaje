@@ -20,6 +20,7 @@ import java.io.BufferedReader;
 import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
@@ -34,10 +35,11 @@ public class IniciarAnalizadores {
     private String mensaExp  = "";
     private String expStack  = "";
     private Exception ex;
-                StringWriter sw = new StringWriter();
+            StringWriter sw = new StringWriter();
                 
     private LinkedList<Errores> listaErrores = new LinkedList<>();
     private LinkedList<TablaSimbolos> tablaReport = new LinkedList<>();          //par la tabla de simbolos
+    private String ultimoErr  = "";
 
                 
 
@@ -97,8 +99,10 @@ public class IniciarAnalizadores {
                                             //creacionde simbolos de pascal
             Subprog_pascal subprogramasP = new Subprog_pascal();
             subprogramasP.setTodasLasins(todasLasIns);
-            subprogramasP.createSym(ast, tabla);
-            
+            var createSymPas = subprogramasP.createSym(ast, tabla);
+            if(createSymPas instanceof Errores subpp){
+                ast.addError(subpp);
+            } 
             
             
               
@@ -125,27 +129,48 @@ public class IniciarAnalizadores {
                         continue;
                     }
                     if(ins instanceof  Programa cl){            //  creacion del programa principal
-                        
-                        C3d c3d = ast.getC3d();
-                        int iniVars = c3d.contador;
-                        bodyMain += (String)cl.createC3D(ast, new AmbitoMetodo("", ""));
-                        int finVars = c3d.contador;
-                        String devVars = "";
-                        for (int i = iniVars; i < finVars; i++) {
-                            devVars += "int w" + i+  ";\n";
-                        }
-                        String temp = bodyMain;
-                        bodyMain = devVars + "\n";
-                        bodyMain += temp;
+                            try {
+                                    var result =  cl.createC3D(ast, new AmbitoMetodo
+                                    ("0", "", new ArrayList<String>() ));
+                                    if(result instanceof Errores err){
+                                        ast.addError(err);
+                                    }else{
+                                        bodyMain += result;
+                                    }
+                            } catch (Exception e) {
+                                identificarError(e, ast);
+                                StringWriter str = new StringWriter();
+                                e.printStackTrace(new PrintWriter(str ));
+                                System.out.println("programa: >>>>>\n\n" + str);
+                            }
                     }
 
-
                 }
+                
                 bodyMain= ast.java.c3d_main("main", bodyMain);
+                try {
+                    var subp_CreateC3D = subprogramasP.createC3D(ast, new AmbitoMetodo("", "", new ArrayList<String>()));
+                    if(subp_CreateC3D instanceof Errores er){
+                        ast.addError(er);
+                    }
                 ast.Print(bodyMain);
-            
-            
+                } catch (Exception e) {
+                    identificarError(e, ast);
+                    StringWriter str = new StringWriter();
+                    e.printStackTrace(new PrintWriter(str ));
+                    System.out.println("pascal: >>>>>\n\n" + str);
+                }                
+                
+                
+                
 
+                
+
+                
+                
+                
+                
+                
             
             
            
@@ -199,6 +224,37 @@ public class IniciarAnalizadores {
 
     public LinkedList<Errores> getListaErrores() {
         return listaErrores;
+    }
+
+    private  void identificarError( Exception e, Arbol ast) {
+        String stackE = "";
+        // Obtiene el stacktrace completo
+        StackTraceElement[] stackTrace = e.getStackTrace();
+        // Recorre desde el final buscando la última línea que pertenezca a tu paquete
+        for (int i = 0; i < stackTrace.length - 1; i++) {
+            if (stackTrace[i].getClassName().startsWith("com.wilsoncys")) {
+                stackE = stackTrace[i].toString();
+                break;
+            }
+        }
+        
+        String cadenaError = "";
+        String [] otro = stackE.split("\\.");
+        System.out.println("sta: " + stackE + " sise: " + otro.length);
+        
+        boolean salto = true;
+        for (String st : otro) {
+            if(st.equals("model")){
+                salto = false;
+            }
+            if(salto){
+                continue;
+            }
+            cadenaError += st + "_";
+        }
+        ast.addError(new Errores(
+                "semantic, instruction: ",  cadenaError
+                , ast.getCurrentLine(), ast.getCurrentCol()));
     }
         
             

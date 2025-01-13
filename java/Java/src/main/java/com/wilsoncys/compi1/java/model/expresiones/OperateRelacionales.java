@@ -494,7 +494,10 @@ public class OperateRelacionales extends Instruction {
         String op2 = "";
           
         C3d_Java c=  arbol.getJava();
-        c.varsParams = new LinkedList<>();
+        
+        
+        
+//        c.varsParams = new LinkedList<>();
         
         
         if(operando1 instanceof Nativo){        

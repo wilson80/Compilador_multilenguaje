@@ -494,19 +494,14 @@ callC::= PASCAL DOT ID:id PAR_OP paramssC:p PAR_CL SEMIC
 ;
 
 
-callExpC::= PASCAL DOT ID PAR_OP paramssC PAR_CL   
+callExpC::= PASCAL DOT ID:id PAR_OP paramssC:p PAR_CL 
+        {: RESULT = new call_to_pas(id, p, idleft, idright ); :}
         | JAVA DOT ID:id DOT ID:id1 PAR_OP paramssC:p PAR_CL  
                 {: RESULT = new call_to_java(id, id1, p, idleft, idright ); :}
 ;
 
 
- 
-
-
-
-
-
-
+  
 
 
 
@@ -531,11 +526,11 @@ EXPRESIONCC::= MINUS EXPRESIONCC:a             {:   RESULT = new Negacion(a, Ope
             | EXPRESIONCC:a OR:log EXPRESIONCC:b   {:   RESULT = new LogicalOperations(a, b, Relational_LogicalOperations.OR, aleft, aright);   :}
             | PAR_OP EXPRESIONCC:a PAR_CL    {:   RESULT = a;   :}  
 
-            | ENTERO:a      {:   RESULT = new NativoC(Integer.parseInt(a), new Tipo(tipoDato.ENTERO), aleft, aright );   :}
-            | CHARAC:a      {:   RESULT = new NativoC(a, new Tipo(tipoDato.CARACTER), aleft, aright );   :}
+            | ENTERO:a      {:   RESULT = new Nativo(Integer.parseInt(a), new Tipo(tipoDato.ENTERO), aleft, aright );   :}
+            | CHARAC:a      {:   RESULT = new Nativo(a, new Tipo(tipoDato.CARACTER), aleft, aright );   :}
 //float
-            | DECIMAL:a     {:   RESULT = new NativoC(new Double(a), new Tipo(tipoDato.DECIMAL), aleft, aright );   :}   
-            | CADENA:a      {:   RESULT = new NativoC(a, new Tipo(tipoDato.CADENA), aleft, aright );   :}
+            | DECIMAL:a     {:   RESULT = new Nativo(new Double(a), new Tipo(tipoDato.DECIMAL), aleft, aright );   :}   
+            | CADENA:a      {:   RESULT = new Nativo(a, new Tipo(tipoDato.CADENA), aleft, aright );   :}
             
             | ID:a      {:   RESULT = new AccessC(a, aleft, aright);   :}
 //arrs
@@ -1066,7 +1061,7 @@ printPas::= PRINTLN PAR_OP expresionessPas:a  PAR_CL
 inputPas::= READLN:r PAR_OP ids:idss  PAR_CL   {: RESULT = new ReadlnPas(idss, rleft, rright); :}
 ;
 
-expresionessPas::=   expPas:exp COLON expresionessPas:exps {: RESULT = exps;  RESULT.add(exp); :} 
+expresionessPas::=   expresionessPas:exps COLON expPas:exp   {: RESULT = exps;  RESULT.add(exp); :} 
                 | expPas:exp  {: RESULT = new LinkedList<>(); RESULT.add(exp); :}  
 ; 
 

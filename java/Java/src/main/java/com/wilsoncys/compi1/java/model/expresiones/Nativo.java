@@ -52,7 +52,13 @@ public class Nativo extends Instruction{
         
         @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
-        arbol.java.varsParams.add(valor.toString());
+        String lenguaje = "";
+        
+        if(anterior.getLenguaje().equals("java")){
+            arbol.java.varsParams.add(valor.toString());
+        }else{
+            arbol.cMain.varsParams.add(valor.toString());
+        }
         return valor.toString();
 //        return "";
     }

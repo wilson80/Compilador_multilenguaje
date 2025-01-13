@@ -5,6 +5,7 @@
 package com.wilsoncys.compi1.java.model.expresiones.Aritmeticas;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
+import com.wilsoncys.compi1.java.model.asbtracto.CreadorC3d;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.expresiones.Enums.OperadoresAritmeticos;
 import com.wilsoncys.compi1.java.model.expresiones.Nativo;
@@ -18,6 +19,7 @@ import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -181,35 +183,12 @@ public class Suma extends Instruction {
 
    @Override
     public String generarast(Arbol arbol, String anterior) {
-        // neg y exp sig exp
-//        if (this.operacion == OperadoresAritmeticos.NEGACION) {
-//            return "";
-//        }
+ 
 
-        //exp op exp
-//                String nodoExp1 = "n" + arbol.getCount();
-//                String nodoOp = "n" + arbol.getCount();
-//                String nodoExp2 = "n" + arbol.getCount();
-//
-//                String strinRes = anterior + " -> " + nodoExp1 + ";\n";
-//                strinRes += anterior + " ->" + nodoOp + ";\n";
-//                strinRes += anterior + " ->" + nodoExp2 + ";\n";
-//
-//                strinRes += nodoExp1 + "[label=\"EXP\"];\n";
-//                strinRes += nodoOp + "[label=\"+\"];\n";
-//                strinRes += nodoExp2 + "[label=\"EXP\"];\n";
-                String algo = anterior;
-                String op = "+";
-                String op1 = this.operando1.generarast(arbol, "");
-                String op2 = this.operando2.generarast(arbol, "");
-                algo+= op1 + op + op2;
-                
-
-                return algo;
+                return "";
     }
     
-    
-    
+     
     
     public Object createSym(Arbol arbol, TablaSimbolos tabla) {
         return null;
@@ -218,45 +197,52 @@ public class Suma extends Instruction {
     
         @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
+        setPos(arbol);
         String armed = "";
         String op1 = "";
         String op2 = "";
+        CreadorC3d c;
+        
+        if( anterior.getLenguaje().equals("java") ){
+             c = arbol.getJava();
+        }else{
+             c =  arbol.getC3d();
+        }
+        
           
-//        
-        C3d_Java c=  arbol.getJava();
-        c.varsParams = new LinkedList<>();
+        c.getVarsParams().clear();
         
         if(operando1 instanceof Nativo){        
             operando1.createC3D(arbol, anterior);   //inser en la lista
-            op1 = c.varsParams.get(0);
-            c.varsParams.removeFirst();
+            op1 = c.getVarsParams().get(0);
+            c.getVarsParams().removeFirst();
             armed+=c.c3d_asignAlone(op1);
-            op1 = c.varsParams.get(0);
-            c.varsParams.removeFirst();
+            op1 = c.getVarsParams().get(0);
+            c.getVarsParams().removeFirst();
             
         }else{
             armed+=operando1.createC3D(arbol, anterior);
-            op1 = c.varsParams.get(0);
-            c.varsParams.removeFirst();
+            op1 = c.getVarsParams().get(0);
+            c.getVarsParams().removeFirst();
             
         }
         
         if(operando2 instanceof Nativo){            
             operando2.createC3D(arbol, anterior);   //inser en la lista
-            op2 = c.varsParams.get(0);
-            c.varsParams.removeFirst();
+            op2 = c.getVarsParams().get(0);
+            c.getVarsParams().removeFirst();
             armed+=c.c3d_asignAlone(op2);
-            op2 = c.varsParams.get(0);
-            c.varsParams.removeFirst();
+            op2 = c.getVarsParams().get(0);
+            c.getVarsParams().removeFirst();
         }else{
             armed+=operando2.createC3D(arbol, anterior);
-            op2 = c.varsParams.get(0);
-            c.varsParams.removeFirst();
+            op2 = c.getVarsParams().get(0);
+            c.getVarsParams().removeFirst();
         }
         
         c.setOPRT("+");
         armed+=c.c3d_operation(op1, op2);
-        c.varsParams.add("w"+(arbol.java.getContador()-1));  //guarda el id de la var q contiene el resultado
+        c.getVarsParams().add("w"+(c.getContador()-1));  //guarda el id de la var q contiene el resultado
 
         return armed;
     }

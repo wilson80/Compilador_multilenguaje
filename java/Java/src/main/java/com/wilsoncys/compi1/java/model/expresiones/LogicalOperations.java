@@ -6,6 +6,7 @@ package com.wilsoncys.compi1.java.model.expresiones;
 
 
 
+import com.wilsoncys.compi1.java.model.asbtracto.CreadorC3d;
 import com.wilsoncys.compi1.java.model.expresiones.Enums.Relational_LogicalOperations;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
@@ -134,9 +135,16 @@ public class LogicalOperations extends Instruction{
         String op2 = "";
         String ope1 = "";
         String ope2 = "";
+        CreadorC3d c;
         
-        C3d_Java c=  arbol.getJava();
-        c.varsParams = new LinkedList<>();
+        if( anterior.getLenguaje().equals("java") ){
+             c = arbol.getJava();
+        }else{
+             c =  arbol.getC3d();
+        } 
+        
+//        C3d_Java c=  arbol.getJava();
+//        c.varsParams = new LinkedList<>();
         
         //op1
         armed+=operando1.createC3D(arbol, anterior);
@@ -152,8 +160,8 @@ public class LogicalOperations extends Instruction{
         c.varsParams.removeFirst();
         
         
-        String cmpOp2 = "cmpOp2" + c.countCreateVar;
-        c.countCreateVar++;
+        String cmpOp2 = "cmpOp2" + c.contador;
+        c.contador++;
         if(operator == Relational_LogicalOperations.AND){
             if(!elseIns  && !elifIns){
                 armed+= c.cond_If(op1, op2,cmpOp2, idSalida); 

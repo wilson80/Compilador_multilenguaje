@@ -122,10 +122,10 @@ public class Functionss extends Instruction{
         
         
         String devVars = "";
-        int iniVars = c.countCreateVar;
+        int iniVars = c.contador;
         
-        String idRetorno ="retorno" + c.countCreateVar;
-        c.countCreateVar++;
+        String idRetorno ="retorno" + c.contador;
+        c.contador++;
                                     //label de retorno
         arbol.setLabelRetorno(idRetorno);
         
@@ -143,7 +143,7 @@ public class Functionss extends Instruction{
                 continue;
             }
             String posPrepared = "" + this.cantParams;
-            this.ambitoContent = new AmbitoMetodo(posPrepared, idRetorno);
+            this.ambitoContent = new AmbitoMetodo(posPrepared, idRetorno, this.ambito);
             bodyMet += (String)ins.createC3D(arbol, this.ambitoContent);
             arbol.setCurrentAmbit(this.getAmbito());
 //            arbol.getCurrentAmbit().set(1, ambitoAnt);
@@ -159,7 +159,7 @@ public class Functionss extends Instruction{
         
          
                             //creando la declaracion de vars del ambito
-        int finVars = c.countCreateVar;
+        int finVars = c.contador;
         for (int i = iniVars; i < finVars; i++) {
             devVars += "int w" + i+  ";\n";
         }

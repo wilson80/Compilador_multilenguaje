@@ -4,6 +4,7 @@
  */
 package com.wilsoncys.compi1.java.model.sC3D;
 
+import com.wilsoncys.compi1.java.model.asbtracto.CreadorC3d;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -15,12 +16,11 @@ import javax.swing.JOptionPane;
  *
  * @author jonwilson
  */
-public class C3d {
-    public int contador = 0;
+public class C3d extends CreadorC3d{
     String var1 = "";
     String var2 = "";
     private String ptrTemp = "";
-    public LinkedList<String> varsParams;
+
     
  
     int DIR_RF = 0;
@@ -86,6 +86,12 @@ public class C3d {
         varsParams.removeFirst();
         return  armed;
     }   
+    
+    public String c3d_statementNativoC(String val, int dir){    //asignacion de nativos
+        String armed = c3d_newVar() + ASSIG + PTR +MAS+dir + SEMIC;
+        armed += c3d_stack("w" + (contador-1)) + ASSIG + val + SEMIC+saltoLinea;
+        return  armed;
+    }   
 //    t26 = t25 + 1;    
 //    stack[t26] = t22; 
     public String c3d_asignVar(String val, int dir){
@@ -94,7 +100,8 @@ public class C3d {
         varsParams.removeFirst();
         return  armed;
     }
-    public String c3d_asignAlone(String val){
+    @Override
+     public String c3d_asignAlone(String val){
         String armed = c3d_newVar() + ASSIG +  val+ SEMIC+saltoLinea;
         varsParams.add("w"+(contador-1));
         return  armed;
@@ -181,6 +188,23 @@ public class C3d {
         return  armed;
     }
      
+    
+    //  PTE
+    public String cond_If(String op1, String op2, String labelif, String labelSalida){
+        String armed = "";
+        armed =  "if" + PAR_L + op1;
+        armed+= OPRT + op2 + PAR_R + 
+                                "goto " + labelif+ SEMIC;
+        
+        armed+= "goto " + labelSalida + SEMIC;
+        
+        return armed;
+    }
+    
+    
+    
+    
+    
     
     
     

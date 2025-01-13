@@ -92,12 +92,18 @@ public class Subprog_pascal extends Instruction{
                     symPar.setDir(contador);
                     symPar.setAmbito(procedure.getAmbito());
                     symPar.armarAmbito((String)param.get("id"));
-                    tabla.addSsymbolPas(symPar);            //add symParam
+                    if(!tabla.addSsymbolPas(symPar)){            //add symParam
+                        return new Errores("SEMANTIC", "El simbolo ya existe: " + procedure.id , procedure.line, procedure.col);
+                    }
+                        
                     sym.setInstruction(subP);
                     contador++;
                 }
                 procedure.setCantParams(contador);
-                procedure.createSym(arbol, tabla);
+                var algo = procedure.createSym(arbol, tabla);
+                if(algo instanceof Errores){
+                    return algo;
+                }
             }
             
             //  FUNCTIONS
@@ -132,12 +138,20 @@ public class Subprog_pascal extends Instruction{
                     symPar.setDir(contador);
                     symPar.setAmbito(fun.getAmbito());
                     symPar.armarAmbito((String)param.get("id"));
-                    tabla.addSsymbolPas(symPar);            //add symParam
+                    if(!tabla.addSsymbolPas(symPar)){            //add symParam
+                        return new Errores("SEMANTIC", "El simbolo ya existe: " + fun.id , fun.line, fun.col);
+                    }
+                    
+                    
+                    
                     sym.setInstruction(fun);
                     contador++;
                 }
                 fun.setCantParams(contador);
-                fun.createSym(arbol, tabla);
+                var algo = fun.createSym(arbol, tabla);
+                if(algo instanceof Errores){
+                    return algo;
+                }
             }
             
         }
@@ -147,8 +161,31 @@ public class Subprog_pascal extends Instruction{
 
     @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        for (Instruction funs : funcionesPascal) {
+             if(funs instanceof FunctionssPas){
+                var algo =funs.createC3D(arbol, anterior);
+                if(algo instanceof  Errores){
+                    return algo;
+                }
+             }
+             if(funs instanceof MethodPas){
+                var algo =funs.createC3D(arbol, anterior);
+                if(algo instanceof  Errores){
+                    return algo;
+                }
+             }
+        }
+         
+        return null;
     }
+    
+    
+    
+    
+    
+    
+    
+    
 
     @Override
     public String generarast(Arbol arbol, String anterior) {

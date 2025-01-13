@@ -9,9 +9,14 @@ import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
+import com.wilsoncys.compi1.java.model.expresiones.Nativo;
 import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
+import com.wilsoncys.compi1.java.model.poo.Call;
+import com.wilsoncys.compi1.java.model.sC3D.C3d;
+import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 /**
@@ -61,31 +66,7 @@ public class PrintPass extends Instruction {
     
 @Override
     public String generarast(Arbol arbol, String anterior) {        // PRINTT -> PRINT ( EXP ) ;
-        String nodoPP = "n" + arbol.getCount();
-        String nodoP = "n" + arbol.getCount();
-        String nodoP1 = "n" + arbol.getCount();
-        String nodoExp = "n" + arbol.getCount();
-        String nodoP2 = "n" + arbol.getCount();
-        String nodoPC = "n" + arbol.getCount();
-
-        String resultado = nodoPP + "[label=\"PRIN`T\"];\n";
-        resultado += anterior + " -> " + nodoPP + ";\n";
-
-        resultado += nodoP + "[label=\"println\"];\n";
-        resultado += nodoP1 + "[label=\"(\"];\n";
-        resultado += nodoExp + "[label=\"EXPRESION\"];\n";
-        resultado += nodoP2 + "[label=\")\"];\n";
-        resultado += nodoPC + "[label=\";\"];\n";
-
-        resultado += nodoPP + " -> " + nodoP + ";\n";
-        resultado += nodoPP + " -> " + nodoP1 + ";\n";
-        resultado += nodoPP + " -> " + nodoExp + ";\n";
-        resultado += nodoPP + " -> " + nodoP2 + ";\n";
-        resultado += nodoPP + " -> " + nodoPC + ";\n";
-
-//        resultado += this.expresion.generarast(arbol, nodoExp);
-
-        return resultado;
+        return "";
     }
 
     @Override
@@ -95,7 +76,35 @@ public class PrintPass extends Instruction {
 
     @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        setPos(arbol);
+            String armed = "";
+            C3d c = arbol.getC3d();
+        
+            
+        for (Instruction exp : expresioness) {
+            if(exp instanceof Nativo){
+                String val = (String)exp.createC3D(arbol, anterior);
+                armed+=c.c3d_printNativo(val);
+                c.clearVarParams();
+            }else{
+                var algo  = exp.createC3D(arbol, anterior);
+                if(algo instanceof Errores){
+                    return algo;
+                }else{
+                    armed+= algo; 
+                }
+                 
+                armed+=c.c3d_printVar();
+                c.clearVarParams();
+            }
+        }   
+        
+ 
+            armed+= "cout<<endl;\n";
+  
+        
+        return armed;
+         
     }
     
     

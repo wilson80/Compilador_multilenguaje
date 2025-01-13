@@ -119,14 +119,14 @@ public class MethodPas extends Instruction{
                 for (String idx : st.getIds()) {
                     
                     //ambito
-                    Simbolo sym = new Simbolo(st.tipo, st.id, tabla, true);
+                    Simbolo sym = new Simbolo(st.tipo, st.id, tabla, false);
                     sym.setCat(categoria.VARL);
                     sym.setDir(cantParams);
                     sym.setInstruction(vars);
                     sym.setAmbito(ambito);
                     sym.armarAmbito(idx);
                     if( !tabla.addSsymbolPas(sym)){
-                        arbol.addError(new Errores("semantic", "el la variable con id: " + idx + " ya existe", line, col));
+                        return (new Errores("semantic", "el la variable con id: " + idx + " ya existe", line, col));
 
                     }
                     cantParams++;

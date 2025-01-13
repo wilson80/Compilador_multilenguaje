@@ -9,7 +9,10 @@ package com.wilsoncys.compi1.java.model.instruccionesPas;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
+import com.wilsoncys.compi1.java.model.sC3D.C3d;
+import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,6 +34,7 @@ public class FunctionssPas extends Instruction{
     private List<String>  ambito;   //idclase/metodo/params
     
     
+    private AmbitoMetodo ambitoContent;
     
     public FunctionssPas(String identificator, LinkedList<HashMap> parameters, LinkedList<Instruction> instrucciones,
             LinkedList<Instruction> localDec, Tipo tipo, int linea, int col) {
@@ -123,16 +127,15 @@ public class FunctionssPas extends Instruction{
         for (Instruction vars : localDeclaraTions) {
             if(vars instanceof StatementPas st){
                 for (String idx : st.getIds()) {
-                    
                     //ambito
-                    Simbolo sym = new Simbolo(st.tipo, st.id, tabla, true);
+                    Simbolo sym = new Simbolo(st.tipo, st.id, tabla, false);
                     sym.setCat(categoria.VARL);
                     sym.setDir(cantParams);
                     sym.setInstruction(vars);
                     sym.setAmbito(ambito);
                     sym.armarAmbito(idx);
                     if( !tabla.addSsymbolPas(sym)){
-                        arbol.addError(new Errores("semantic", "el la variable con id: " + idx + " ya existe", line, col));
+                        return (new Errores("semantic", "el la variable con id: " + idx + " ya existe", line, col));
 
                     }
                     cantParams++;
@@ -147,7 +150,57 @@ public class FunctionssPas extends Instruction{
 
     @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String armed = "";
+        C3d c = arbol.getC3d();
+        
+        String devVars = "";
+        int iniVars = c.contador;
+                        //ambito anterior
+        
+        String idRetorno ="retorno" + c.contador;
+        c.contador++;
+        
+        arbol.setCurrentAmbit(this.ambito);
+        String bodyMet = "";
+        for (Instruction ins : instrucciones) {
+            if(ins ==null){
+                continue;
+            }
+
+            String posPrepared = "" + this.cantParams;
+            this.ambitoContent = new AmbitoMetodo(posPrepared, idRetorno, this.ambito);
+            var result =ins.createC3D(arbol, this.ambitoContent);
+            if(result instanceof  Errores){
+                return result;
+            }else{
+                bodyMet += result; 
+            }
+        }
+        
+        bodyMet += idRetorno + ":\n";
+        bodyMet += "    cout<< \" \";";
+        
+        int finVars = c.contador;
+
+        for (int i = iniVars; i < finVars; i++) {
+            devVars += "int w" + i+  ";\n";
+        }
+            
+        armed = devVars + "\n";
+        armed += bodyMet;
+        
+        
+//        armed = c.c3d_metodo("java_" + arbol.getCurrentAmbit().get(1) +"_"+ id, armed);
+        armed = c.c3d_metodo(arbol.getAmbito_asID(), armed);
+        
+     
+        arbol.Print(armed);
+ 
+     
+        
+        
+        return armed;
+        
     }
 
     public int getCantParams() {

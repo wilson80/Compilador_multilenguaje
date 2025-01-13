@@ -53,6 +53,13 @@ public class Arbol {
     private String labelRetorno = "";
     
     
+    
+    private int currentLine = 0;
+    private int currentCol = 0;
+    
+    
+    
+    
     public int count;       //contador de las variables que se van creando
     
     
@@ -171,6 +178,10 @@ public class Arbol {
     public Simbolo getSym(String id){
         return  tablaGlobal.getSsymbol(id);
     }
+    
+    public Simbolo getSymPas(String id){
+        return  tablaGlobal.getSsymbol(id.toLowerCase());
+    }
 
     public C3d getC3d() {
         return cMain;
@@ -253,6 +264,22 @@ public class Arbol {
 
     public int getCurrentPos() {
         return currentPos;
+    }
+
+    public void setCurrentCol(int currentCol) {
+        this.currentCol = currentCol;
+    }
+
+    public void setCurrentLine(int currentLine) {
+        this.currentLine = currentLine;
+    }
+
+    public int getCurrentCol() {
+        return currentCol;
+    }
+
+    public int getCurrentLine() {
+        return currentLine;
     }
     
     

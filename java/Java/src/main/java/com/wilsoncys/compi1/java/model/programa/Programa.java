@@ -49,7 +49,7 @@ public class Programa extends Instruction{
 
     @Override
     public Object createSym(Arbol arbol, TablaSimbolos tabla) {
-   
+        setPos(arbol);
          
        
         for (String ids : includes.getClaseJava()) {
@@ -164,6 +164,7 @@ public class Programa extends Instruction{
     
        @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
+       setPos(arbol);
         String ArmedPrincipal = "";
         String ArmedJavas = "";
 
@@ -210,27 +211,27 @@ public class Programa extends Instruction{
          }
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+          
+        int iniVars = arbol.getC3d().contador;
         
         for (Instruction ins : instrucciones) {
                if(ins instanceof StatementC stt){
-                   ArmedPrincipal+= stt.createC3D(arbol, anterior);
+                   var result = stt.createC3D(arbol, anterior);
+                   if(result instanceof  Errores ){
+                       return result;
+                   }else{
+                       ArmedPrincipal+= result;
+                   }
                }
         }
        for (Instruction ins : instrucciones) {
            if(ins instanceof ReferenceC ref){
-               ArmedPrincipal+= ref.createC3D(arbol, anterior);
+               var result = ref.createC3D(arbol, anterior);
+                   if(result instanceof  Errores ){
+                       return result;
+                   }else{
+                       ArmedPrincipal+= result;
+                   }
            } 
        }
         
@@ -246,15 +247,30 @@ public class Programa extends Instruction{
 //                }
 //        }
         
+
+
+
+
                //instrucciones del programa principal
-       ArmedPrincipal +=  this.main.createC3D(arbol, anterior);  
+       var resutl =this.main.createC3D(arbol, anterior);  
+       if(resutl instanceof Errores){
+           return resutl;
+       }else{
+           ArmedPrincipal += resutl; 
+       }        
+       
+
+       String devVars = "";
+        int finVars = arbol.getC3d().contador;
+        for (int i = iniVars; i < finVars; i++) {
+            devVars += "int w" + i+  ";\n";
+        }
+            
+        String temp = ArmedPrincipal;
+        ArmedPrincipal = devVars + "\n";
+        ArmedPrincipal += temp;
        
        
-        
-        
-        
-        
-        
         return ArmedPrincipal;
     }
 

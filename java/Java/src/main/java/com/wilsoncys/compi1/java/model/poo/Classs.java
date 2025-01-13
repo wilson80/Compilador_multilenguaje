@@ -268,7 +268,7 @@ import javax.swing.JOptionPane;
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         String armed = ""; 
         C3d_Java c = arbol.getJava(); 
-        int iniVars = c.countCreateVar; 
+        int iniVars = c.contador; 
 
         arbol.setSizeHeap(this.cantAttb);
 

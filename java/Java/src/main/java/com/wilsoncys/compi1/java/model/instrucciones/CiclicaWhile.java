@@ -154,11 +154,11 @@ public Object doWhile(Arbol arbol, TablaSimbolos tabla){
         String armed = "";
         C3d_Java c = arbol.getJava();        
         
-        String finWhile = "finWhile" + c.countCreateVar;
-        c.countCreateVar++;
+        String finWhile = "finWhile" + c.contador;
+        c.contador++;
         
-        String idIns = "insDo" + c.countCreateVar;
-        c.countCreateVar++;
+        String idIns = "insDo" + c.contador;
+        c.contador++;
         
         
         //DO
@@ -189,10 +189,10 @@ public Object doWhile(Arbol arbol, TablaSimbolos tabla){
             }
          //WHILE   
         }else{
-             String  idWhile =  "while" + c.countCreateVar ; 
+             String  idWhile =  "while" + c.contador ; 
                     //label del while
              armed+= idWhile+ ":{}\n";
-             c.countCreateVar++;
+             c.contador++;
              
             //condicion
             if(this.expression instanceof OperateRelacionales){

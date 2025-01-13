@@ -94,16 +94,18 @@ public class MainnC extends Instruction{
     
             @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
+                setPos(arbol);
         String armed = "";
         C3d c = arbol.getC3d();
-        
-        String devVars = "";
-        int iniVars = c.contador;
-        
         for (Instruction ins : instrucciones) {
-            armed += ins.createC3D(arbol, anterior);
+            var result =ins.createC3D(arbol, anterior);
+            if(result instanceof Errores){
+                return result;
+            }else{
+                armed += result;
+            }
+            c.clearVarParams();
         }
-        
         return armed;
     }
     

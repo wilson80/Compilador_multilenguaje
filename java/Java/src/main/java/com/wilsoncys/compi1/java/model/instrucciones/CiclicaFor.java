@@ -124,12 +124,12 @@ public class CiclicaFor extends Instruction {
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         String armed = "";
         C3d_Java c = arbol.getJava();
-        String idLoop = "label_Loop" + c.countCreateVar;
-        c.countCreateVar++;
-        String idSalida = "salida" + c.countCreateVar;
-        c.countCreateVar++;
-        String idIns = "label_ins" + c.countCreateVar;
-        c.countCreateVar++;
+        String idLoop = "label_Loop" + c.contador;
+        c.contador++;
+        String idSalida = "salida" + c.contador;
+        c.contador++;
+        String idIns = "label_ins" + c.contador;
+        c.contador++;
         
         
         //realizar la asignacion 

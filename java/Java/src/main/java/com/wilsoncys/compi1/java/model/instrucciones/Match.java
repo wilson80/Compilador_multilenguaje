@@ -123,8 +123,8 @@ public class Match extends Instruction{
         String armed = "";
         C3d_Java c = arbol.getJava();
         
-        String idSalida = "salida" + c.countCreateVar;
-        c.countCreateVar++;
+        String idSalida = "salida" + c.contador;
+        c.contador++;
         String idDef = "";
                             //identificar el default del resto de casos
         CaseMatch caseDef = getDefault();
@@ -141,13 +141,13 @@ public class Match extends Instruction{
         
         
         
-        int idSwitch = c.countCreateVar;
-        c.countCreateVar++;
+        int idSwitch = c.contador;
+        c.contador++;
         
         if(caseDef!=null ){
             cazzos.remove(caseDef);
-            idDef = "deff"  + c.countCreateVar;
-            c.countCreateVar++;
+            idDef = "deff"  + c.contador;
+            c.contador++;
             caseDef.setIdLabel(idDef);
             caseDef.setIdSalida(idSalida);
             caseDef.setIdNextCase(idSalida);

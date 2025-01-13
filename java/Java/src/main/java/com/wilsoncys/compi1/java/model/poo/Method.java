@@ -9,7 +9,6 @@ import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.instrucciones.Statement;
 import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.instrucciones.transferReturn;
-import com.wilsoncys.compi1.java.model.sC3D.C3d;
 import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
@@ -129,11 +128,11 @@ public class Method extends Instruction{
         C3d_Java c = arbol.getJava();
         
         String devVars = "";
-        int iniVars = c.countCreateVar;
+        int iniVars = c.contador;
                         //ambito anterior
         
-        String idRetorno ="retorno" + c.countCreateVar;
-        c.countCreateVar++;
+        String idRetorno ="retorno" + c.contador;
+        c.contador++;
                                     //label de retorno
 //        arbol.setLabelRetorno(idRetorno);
                         
@@ -155,8 +154,8 @@ public class Method extends Instruction{
 //            }
 
             String posPrepared = "" + this.cantParams;
-            this.ambitoContent = new AmbitoMetodo(posPrepared, idRetorno);
-            bodyMet += (String)ins.createC3D(arbol, this.ambitoContent);
+            this.ambitoContent = new AmbitoMetodo(posPrepared, idRetorno, this.ambito);
+            bodyMet +=  ins.createC3D(arbol, this.ambitoContent);
             arbol.setCurrentAmbit(this.getAmbito());
 //            arbol.getCurrentAmbit().set(1, ambitoAnt);
 
@@ -167,7 +166,7 @@ public class Method extends Instruction{
 //        bodyMet += arbol.getLabelRetorno() + ":\n";
         bodyMet += "    cout<< \" \";";
         
-        int finVars = c.countCreateVar;
+        int finVars = c.contador;
 
         for (int i = iniVars; i < finVars; i++) {
             devVars += "int w" + i+  ";\n";

@@ -8,6 +8,7 @@ package com.wilsoncys.compi1.java.model.expresiones.Aritmeticas;
 
 
 
+import com.wilsoncys.compi1.java.model.asbtracto.CreadorC3d;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.expresiones.Enums.OperadoresAritmeticos;
@@ -189,14 +190,19 @@ import java.util.LinkedList;
          
          
              @Override
-    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {    
+    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
+         setPos(arbol);
         String armed = "";
         String op1 = "";
         String op2 = "";
           
-//        
-        C3d_Java c=  arbol.getJava();
-        c.varsParams = new LinkedList<>();
+         CreadorC3d c;
+        
+        if( anterior.getLenguaje().equals("java") ){
+             c = arbol.getJava();
+        }else{
+             c =  arbol.getC3d();
+        } 
         
         if(operando1 instanceof Nativo){        
             operando1.createC3D(arbol, anterior);   //inser en la lista
@@ -228,7 +234,7 @@ import java.util.LinkedList;
         
         c.setOPRT("/");
         armed+=c.c3d_operation(op1, op2);
-        c.varsParams.add("w"+(arbol.java.getContador()-1));  //guarda el id de la var q contiene el resultado
+        c.varsParams.add("w"+(c.getContador()-1));  //guarda el id de la var q contiene el resultado
 
         return armed;
     }

@@ -7,11 +7,11 @@ package com.wilsoncys.compi1.java.model.poo;
 import com.wilsoncys.compi1.java.model.programa.*;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores; 
+import com.wilsoncys.compi1.java.model.expresiones.Nativo;
 import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.poo.Functionss;
 import com.wilsoncys.compi1.java.model.poo.Method;
 import com.wilsoncys.compi1.java.model.programa.expresiones.AccessC;
-import com.wilsoncys.compi1.java.model.programa.expresiones.NativoC;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
 import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
@@ -111,7 +111,7 @@ public class call_Objetcts extends Instruction{
         String id_Methodo = "java" + idObject + idMethod;
                                             //extrayendo los params
         for (Instruction exps : parametersExp) {
-            if(exps instanceof NativoC n){               
+            if(exps instanceof Nativo n){               
 //                armed+=n.createC3D(arbol, anterior);
                 n.createC3D(arbol, anterior);
                 id_Methodo += n.tipo.getTypeString();

@@ -163,18 +163,18 @@ public class IF extends Instruction{
         C3d_Java c = arbol.getJava();
        
         if(idIf.isEmpty()){
-            idIf = "if" + c.countCreateVar;
-            c.countCreateVar++;
+            idIf = "if" + c.contador;
+            c.contador++;
         }
         
         if(idSalida.isEmpty()){
-            idSalida= "salida" + c.countCreateVar;
-            c.countCreateVar++;
+            idSalida= "salida" + c.contador;
+            c.contador++;
         }
-        String idElse= "else" + c.countCreateVar;
-        c.countCreateVar++;
-        String idElif= "elif" + c.countCreateVar;
-        c.countCreateVar++;
+        String idElse= "else" + c.contador;
+        c.contador++;
+        String idElif= "elif" + c.contador;
+        c.contador++;
           
         
         //create a la condicion 

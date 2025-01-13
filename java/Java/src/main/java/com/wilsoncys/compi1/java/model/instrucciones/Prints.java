@@ -106,8 +106,6 @@ public class Prints extends Instruction {
     
         @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {  
-
-
         String armed = "";
             C3d_Java c = arbol.getJava();
         
@@ -115,19 +113,16 @@ public class Prints extends Instruction {
             if(exp instanceof Call){
                 armed+= exp.createC3D(arbol, anterior);
                 armed+=c.c3d_printVar();
-//                c.varsParams.removeFirst();
                 c.clearVarParams();
 
             }else if(exp instanceof Nativo){
                 String val = (String)exp.createC3D(arbol, anterior);
                 armed+=c.c3d_printNativo(val);
                 c.clearVarParams();
-//                c.varsParams.removeFirst();
             }else{
                 armed+= exp.createC3D(arbol, anterior);
                 armed+=c.c3d_printVar();
                 c.clearVarParams();
-//                c.varsParams.removeFirst();
             }
         }   
         

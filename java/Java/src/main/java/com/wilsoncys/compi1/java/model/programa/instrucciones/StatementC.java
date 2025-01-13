@@ -10,7 +10,6 @@ import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.expresiones.Input;
 import com.wilsoncys.compi1.java.model.expresiones.Nativo;
-import com.wilsoncys.compi1.java.model.programa.expresiones.NativoC;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
 import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
@@ -147,6 +146,7 @@ public class StatementC extends Instruction{
  
             @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
+        setPos(arbol);
         String armed = "";
         C3d c =  arbol.getC3d();
         String idArmed = "PROGRAMA"+ this.id;
@@ -156,13 +156,8 @@ public class StatementC extends Instruction{
         
         
         if(whatConstruct == 0){
-            //dep el tipo dar el valor por defecto
-                                            //dif ref
-            armed += c.c3d_acces("ptr", 0);
-            
-//            armed += c.c3d_asignHeap("0", 0);
-            
-            
+                                            //valor por defecto conforme el tipo
+            armed += c.c3d_statementNativoC("0", dir);
         }
         if(whatConstruct == 1){
             
@@ -172,18 +167,14 @@ public class StatementC extends Instruction{
                     armed+=c.c3d_asignVal("", dir);
                     c.varsParams = new LinkedList<>();
                 
-            }else if(exp instanceof NativoC n){
+            }else if(exp instanceof Nativo n){
                  n.createC3D(arbol, anterior); //create exp
 //                                                            //asignacion
-                armed+=c.c3d_asignVal(c.varsParams.get(0), dir);
-                c.varsParams = new LinkedList<>();
-                
-                
+                armed+=c.c3d_asignVal("", dir);
             }else{
                 armed+=this.exp.createC3D(arbol, anterior); //create exp
                                                             //asignacion
-                armed+=c.c3d_asignVal(c.varsParams.get(0), dir);
-                c.varsParams = new LinkedList<>();
+                armed+=c.c3d_asignVal("", dir);
             }
             
             
@@ -193,6 +184,7 @@ public class StatementC extends Instruction{
         
         return armed;
     }
+    
 }
 
 

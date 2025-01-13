@@ -2,11 +2,15 @@
 %%PASCAL
 %%PASCAL
 Function SUMAR(Op1 , Op2 : Integer) : Integer;
-var Respuesta : Integer;
+var Respuesta, total: Integer;
 Begin
- Respuesta := 0;
- Respuesta := Op1 + Op2;
- SUMAR := Respuesta;
+ println('impresion desde pascal sumar', Op1);
+ println('impresion desde pascal sumar', OP2);
+
+Respuesta := 0;
+Respuesta := Op1 + Op2;
+SUMAR := Respuesta;
+
 End;
 
  
@@ -16,14 +20,14 @@ End;
 %%PROGRAMA
 #include "JAVA.*"  
 #include "PASCAL"  
-
+int total;
   
 void main()
 { 	   
  
 
-PASCAL.sumar(77,88);
-// printf("TototalllllXl: %d", total); 
+total = PASCAL.sumar(77,88);
+printf("Tototal des de C (Pascal.sumar): %d", total); 
 
 
 

@@ -38,4 +38,9 @@ public abstract class Instruction {
     
     public abstract String generarast(Arbol arbol, String anterior);
 
+    public void setPos(Arbol arbol){
+        arbol.setCurrentLine(this.line);
+        arbol.setCurrentCol(this.col);
+    }
+     
 }

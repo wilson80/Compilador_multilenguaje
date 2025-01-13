@@ -107,8 +107,8 @@ public class CaseMatch extends Instruction{
         String armed = "";
         C3d_Java c = arbol.getJava();
         
-        String idCase = "caseIns" + c.countCreateVar;
-        c.countCreateVar++;
+        String idCase = "caseIns" + c.contador;
+        c.contador++;
             
         
         armed += idLabel + ":\n";
