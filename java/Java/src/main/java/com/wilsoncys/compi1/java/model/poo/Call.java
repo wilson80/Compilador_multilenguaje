@@ -256,22 +256,15 @@ public class Call extends Instruction{
                 sym0 = arbol.getSym(armedId);
                 if(sym0 == null){        //revisar esto
 
-                    JOptionPane.showMessageDialog(null,
-                            "error en llamada OBJ no se ha encontrado el symbolo" + armedId);
+                    arbol.addError(new Errores("semantic", 
+                            "error en llamada no se ha encontrado la instancia" + this.id, line, col));
+//                    JOptionPane.showMessageDialog(null,
+//                            "error en llamada no se ha encontrado la instancia" + this.id);
 //                    return new Errores(id, "no se ha encontrado el simboloooooooooooooo", line, col);
                 }
             }
              
-            
-//            String currentAmbit = arbol.getCurrentAmbit().get(1);  
-                                            //buscando el tipo del objeto
-//            if(sym0.getInstruction() instanceof Statement met){
-//                arbol.getCurrentAmbit().set(1, met.tipo.getTypeString());
-////                JOptionPane.showMessageDialog(null, "call277: " + met.tipo.getTypeString());
-////                arbol.setSizeHeap(3);
-//            }else{
- 
-
+             
             
         llamada.setNombreObjeto(sym0.getTipo().getTypeString());
  
@@ -371,8 +364,9 @@ public class Call extends Instruction{
             symMethod = arbol.getSym(id_Methodo2);
             id_to_call = id_Methodo2;
             if(symMethod ==null){
-                JOptionPane.showMessageDialog(null, "error en  simpleCall"
-                    + "no se ha encontrado el symbolo: " + this.id );
+//                JOptionPane.showMessageDialog(null, "error en  simpleCall"
+//                    + "no se ha encontrado el symbolo: " + this.id );
+                arbol.addError(new Errores("semantic", "no se ha encontrado el symbolo: " + this.id , line, col));
             }
 //            return new Errores("SEMANTIC", "id no definido: " + this.id, line, col);
         } 

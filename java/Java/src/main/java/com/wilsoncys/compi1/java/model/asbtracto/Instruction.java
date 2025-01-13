@@ -35,7 +35,6 @@ public abstract class Instruction {
    
     
     
-    
     public abstract String generarast(Arbol arbol, String anterior);
 
     public void setPos(Arbol arbol){

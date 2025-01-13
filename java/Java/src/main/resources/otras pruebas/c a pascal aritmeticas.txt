@@ -1,0 +1,74 @@
+  
+%%PASCAL
+{OPERACIONES ARITMETICASSSSSS}
+Function RESTAR(Op1 , Op2 : Integer) : Integer;
+var Respuesta : Integer;
+Begin
+Respuesta := Op1 - Op2;
+RESTAR := Respuesta;
+End;
+
+
+Function MULTIPLICAR(Op1 , Op2 : Integer) : Integer;
+var Respuesta : Integer;
+Begin
+Respuesta := Op1 * Op2;
+MULTIPLICAR := Respuesta;
+End;
+
+Function DIVIDIR(Op1,Op2: Integer) : Integer;
+var Respuesta : Integer;
+begin
+  DIVIDIR := Op1 div Op2;
+end; 
+
+Function MODULO(Op1,Op2: Integer) : Integer;
+var Respuesta : Integer;
+begin
+  MODULO := Op1 mod Op2;
+end;
+
+
+Function SUMAR(Op1 , Op2 : Integer) : Integer;
+var Respuesta, total: Integer;
+Begin
+println('impresion desde pascal sumar', Op1);
+println('impresion desde pascal sumar', OP2);
+Respuesta := Op1 + Op2;
+SUMAR := Respuesta;
+
+End;
+
+
+
+%%JAVA
+
+%%PROGRAMA
+#include "JAVA.*"  
+#include "PASCAL"  
+int uno=10;
+int dos=20;
+int tres=30;
+int cuatro=40;
+int cinco=50;
+int total;
+
+void main()
+{ 	   
+
+
+total = PASCAL.sumar(uno,dos);
+printf("Tototal de sumar %d   con %d es: %d", uno, dos, total); 
+total = PASCAL.restar(dos,uno);
+printf("Tototal de restar  %d con %d es: %d", dos, uno, total); 
+total = PASCAL.MULTIPLICAR(cinco,dos);
+printf("Tototal de multip %d con %d es: %d", cinco,dos,total); 
+total = PASCAL.MODULO(cinco,tres);
+printf("Tototal de modddd %d con %d es: %d", cinco, tres,total); 
+total = PASCAL.DIVIDIR(cinco,uno);
+printf("Tototal de dividir %d con %d es: %d", cinco, uno, total); 
+
+
+
+
+}

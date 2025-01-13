@@ -18,6 +18,7 @@ import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.java.model.simbolo.categoria;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -94,11 +95,22 @@ public class MainnC extends Instruction{
     
             @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
-                setPos(arbol);
+        List<String> ambito = new ArrayList<>();
+        ambito.add("PROGRAMA");
+        
+        String idRetorno = "labelReturn" + arbol.getC3d().contador;
+        arbol.getC3d().contador++;
+        
+        
+        setPos(arbol);
         String armed = "";
         C3d c = arbol.getC3d();
         for (Instruction ins : instrucciones) {
-            var result =ins.createC3D(arbol, anterior);
+            if(ins ==null){
+                continue;
+            }
+            
+            var result =ins.createC3D(arbol, new AmbitoMetodo(arbol.attbPrincipal + "", idRetorno, ambito));
             if(result instanceof Errores){
                 return result;
             }else{
@@ -106,6 +118,12 @@ public class MainnC extends Instruction{
             }
             c.clearVarParams();
         }
+        
+        armed += idRetorno + ":\n";
+        armed += "\ncout<<endl;";
+        
+        
+        
         return armed;
     }
     

@@ -4,6 +4,7 @@
  */
 package com.wilsoncys.compi1.java.model.expresiones;
 
+import com.wilsoncys.compi1.java.model.asbtracto.CreadorC3d;
 import com.wilsoncys.compi1.java.model.expresiones.Enums.Relational_LogicalOperations;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
@@ -489,42 +490,57 @@ public class OperateRelacionales extends Instruction {
     
         @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
+        setPos(arbol);
          String armed = "";
         String op1 = "";
         String op2 = "";
           
-        C3d_Java c=  arbol.getJava();
+//        C3d_Java c=  arbol.getJava();
+    
+        CreadorC3d c; 
+        if(anterior.getLenguaje().equals("java")){
+            c = arbol.getJava();
+        }else{
+            c = arbol.getC3d();
+        }
         
-        
-        
-//        c.varsParams = new LinkedList<>();
-        
-        
+          
         if(operando1 instanceof Nativo){        
-            operando1.createC3D(arbol, anterior);   //inser en la lista
+            var result = operando1.createC3D(arbol, anterior);   //inser en la lista
+            if(result instanceof Errores){
+                return result;
+            }
             op1 = c.varsParams.get(0);
             c.varsParams.removeFirst();
-//            armed+=c.c3d_asignAlone(op1);
-//            op1 = c.varsParams.get(0);
-//            c.varsParams.removeFirst();
             
         }else{
-            armed+=operando1.createC3D(arbol, anterior);
+            var res = operando1.createC3D(arbol, anterior);
+            if(res instanceof Errores){
+                return res;
+            }else{
+                armed +=res;  
+            }
+            
             op1 = c.varsParams.get(0);
             c.varsParams.removeFirst();
             
         }
         
         if(operando2 instanceof Nativo){            
-            operando2.createC3D(arbol, anterior);   //inser en la lista
+            var res = operando2.createC3D(arbol, anterior);   //inser en la lista
+            if(res instanceof Errores){
+                return res;
+            }
             op2 = c.varsParams.get(0);
             c.varsParams.removeFirst();
-//            armed+=c.c3d_asignAlone(op2);
-//            op2 = c.varsParams.get(0);
-//            c.varsParams.removeFirst();
         }else{
-            armed+=operando2.createC3D(arbol, anterior);
-            op2 = c.varsParams.get(0);
+            var res =operando2.createC3D(arbol, anterior);
+            if(res instanceof Errores){
+                return res;
+            }else{
+                armed+= res;
+            }
+            op2 = c.varsParams.get(0    );
             c.varsParams.removeFirst();
         }
            
@@ -558,9 +574,9 @@ public class OperateRelacionales extends Instruction {
  
                             }
                         }
-        
-//        armed+=c.c3d_operationRelation(op1, op2);
-        c.clearVarParams();
+
+         
+        c.getVarsParams().clear();
         c.varsParams.add(op1);   
         c.varsParams.add(op2);
         

@@ -77,7 +77,7 @@ terminal GREATER, LESS, G_EQUALS, L_EQUALS, EQUALS, DIFFERENT;
 terminal ASSIGNMENT;
 terminal DO, IF, ELSE, FOR, BREAK, SWITCH, WHILE, CONTINUE, DEFAULT;
 
-terminal OR, AND, XOR, NOT;
+terminal OR, AND, NOT;
 terminal UNEGATIVE, UMINUS;
 terminal PLUSPLUS, MINUSMINUS;
 terminal NULL;
@@ -255,7 +255,7 @@ java_C::= claass:j cPrincipal:c {:
         if(c!=null){
                 RESULT.add(c); 
         }:}
-|error        
+|error {: RESULT = new LinkedList<>(); :} 
 ;
 
  
@@ -318,7 +318,6 @@ declaracionC::= declaracionC:decs decConstC:dec
 ;
 
 instructionsC::=  instructionsC:ins insC:in {: RESULT = ins; RESULT.add(in); :}
-                | error SEMIC
                 | {: RESULT = new LinkedList<>(); :}
 ;
 
@@ -332,7 +331,8 @@ typeC::= INT {: RESULT = new Tipo(tipoDato.ENTERO); :}
 
   
 
-printf::= PRINT:a PAR_OP CADENA PAR_CL SEMIC
+printf::= PRINT:a PAR_OP CADENA:w PAR_CL SEMIC
+                {:RESULT = new PrintsC(w, wleft, wright);  :}
         | PRINT:a PAR_OP CADENA:c varsPrintf:ids PAR_CL SEMIC {: RESULT = new PrintsC(c, ids, aleft, aright); :}
 ;
 //scanf   printf("Integer: %d, Character: %c, Float: %.2f", 10, 'B', 2.718);
@@ -358,14 +358,15 @@ insC::= PRINT PAR_OP PAR_CL SEMIC
 | scanf
 | asignacionC:c {: RESULT = c; :}
 | printf:c {: RESULT = c; :}
-|whileC
-|forC
-|DOC
+|whileC:w {: RESULT = w; :}
+|forC:w {: RESULT = w;  :}
+|DOC:w {: RESULT = w;  :}
 |BREAK SEMIC
 |CONTINUE SEMIC
-|ifC
+|ifC:w {: RESULT = w; :}
 |switchC
 |callC:c {: RESULT = c; :}
+| error SEMIC {:  :}
 ;
 
 
@@ -375,17 +376,17 @@ inSwC::= PRINT PAR_OP PAR_CL SEMIC
 | scanf
 | asignacionC
 | printf
-|whileC
-|forC
-|DOC
-|ifC
-|switchC 
-|callC
+|whileC:w {: RESULT = w; :}
+|forC:w {: RESULT = w;  :}
+|DOC:w {: RESULT = w;  :}
+|ifC:w {: RESULT = w;  :}
+|switchC:w   
+|callC:w {: RESULT = w; :}
 // |error SEMIC
 ;
-
+ 
 insSwC::= inSwC insSwC
-|
+| 
 ;
 
 
@@ -413,18 +414,19 @@ instancesC::= ID:id PAR_OP paramssC:p PAR_CL COLON  instancesC:ins
 ;
 
 
- 
-
-whileC::= WHILE PAR_OP EXPRESIONCC PAR_CL
-        K_OP  instructionsC K_CL
+whileC::= WHILE:a PAR_OP EXPRESIONCC:exp PAR_CL
+        K_OP  instructionsC:ins K_CL
+        {: RESULT = new CiclicaWhileC(exp, ins, false, aleft, aright); :}
 ;
 
 
-DOC::= DO K_OP  instructionsC K_CL
-        WHILE PAR_OP EXPRESIONCC PAR_CL SEMIC
+DOC::= DO:a K_OP  instructionsC:ins K_CL
+        WHILE PAR_OP EXPRESIONCC:exp PAR_CL SEMIC
+        {: RESULT = new CiclicaWhileC(exp, ins, false, aleft, aright); :}
 ;
  
-ifC::=   IF PAR_OP EXPRESIONCC:exp PAR_CL  K_OP instructionsC:ins K_CL ELSE  ifC:elif {: RESULT = new IFC(exp, ins, elif, expleft, expright);    :}
+ifC::=   IF PAR_OP EXPRESIONCC:exp PAR_CL  K_OP instructionsC:ins K_CL ELSE  ifC:elif
+         {: RESULT = new IFC(exp, ins, elif, expleft, expright);    :}
         |elseesC:w {: RESULT = w; :}
         |simpleIfC:w {: RESULT = w; :}
 ; 
@@ -433,26 +435,26 @@ cierreElseC::= ELSE K_OP instructionsC:ins {: RESULT = ins;  :} K_CL
 ;
 
 simpleIfC::=  IF PAR_OP EXPRESIONCC:a PAR_CL  K_OP instructionsC:ins K_CL   
-                                {: RESULT = new IF(a, ins, aleft, aright); :}
+                        {: RESULT = new IFC(a, ins, aleft, aright); :}
 ; 
 
 //     public IF(Instruction expression, LinkedList<Instruction> instructionss, LinkedList<Instruction> instructionsElse, int linea, int col) {
 elseesC::=  IF PAR_OP EXPRESIONCC:exp PAR_CL  K_OP instructionsC:ins K_CL cierreElseC:insEls   
-                {: RESULT = new IF(exp, ins, insEls, expleft, expright); :}
+                {: RESULT = new IFC(exp, ins, insEls, expleft, expright); :}
 ;
 
 
-
-forC::= FOR PAR_OP declaraAsignaC:a  EXPRESIONCC:b SEMIC     updateVarForC:c PAR_CL K_OP  instructionsC:ins K_CL
-                {: RESULT = new CiclicaFor(a, b, c, ins, aleft, aright); :}
+forC::= FOR PAR_OP asignacionC:a  EXPRESIONCC:b SEMIC     updateVarForC:c PAR_CL K_OP  instructionsC:ins K_CL
+                {: RESULT = new CiclicaForC(a, b, c, ins, aleft, aright); :}
 ;
 
 
 //     public CiclicaFor(Instruction asignacion, Instruction condicion, Instruction actualizacion, LinkedList<Instruction> instrucciones, int linea, int col) {
-updateVarForC::=  ID:id PLUSPLUS  {: RESULT = new IncreaseDecrease(id, true, idleft, idright); :}
-        |ID:id  MINUSMINUS  {: RESULT = new IncreaseDecrease(id, false, idleft, idright); :}
-        |ID:id ASSIGNMENT EXPRESIONCC:exp {:  RESULT = new Assignmentt(id, exp, idleft, idright);  :}
+updateVarForC::=  ID:id PLUSPLUS  {: RESULT = new IncreaseDecreaseC(id, true, idleft, idright); :}
+        |ID:id  MINUSMINUS  {: RESULT = new IncreaseDecreaseC(id, false, idleft, idright); :}
+        |ID:id ASSIGNMENT EXPRESIONCC:exp {:  RESULT = new AssignmenttC(id, exp, idleft, idright);  :}
         ;
+        
 //esto es para los ciclos 
 declaraAsignaC::= asignacionC 
                 | typeC ID ASSIGNMENT EXPRESIONCC SEMIC

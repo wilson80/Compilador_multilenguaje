@@ -10,7 +10,6 @@ com/wilsoncys/compi1/java/model/programa/instrucciones/StatementC$1.class
 com/wilsoncys/compi1/java/model/expresiones/Input$1.class
 com/wilsoncys/compi1/java/model/programa/instrucciones/IncreaseDecreaseC$1.class
 com/wilsoncys/compi1/java/model/instruccionesPas/StatementPas$1.class
-com/wilsoncys/compi1/java/model/programa/expresiones/OperateRelacionalesC$1.class
 com/wilsoncys/compi1/java/model/expresiones/Aritmeticas/Raised$1.class
 com/wilsoncys/compi1/java/model/expresiones/OperateRelacionales$1.class
 com/wilsoncys/compi1/java/model/expresiones/Aritmeticas/Resta$1.class

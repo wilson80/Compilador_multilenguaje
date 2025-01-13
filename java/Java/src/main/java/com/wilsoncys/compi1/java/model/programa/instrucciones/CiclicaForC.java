@@ -4,15 +4,19 @@
  */
 package com.wilsoncys.compi1.java.model.programa.instrucciones;
 
+import com.wilsoncys.compi1.java.model.asbtracto.CreadorC3d;
 import com.wilsoncys.compi1.java.model.instrucciones.*;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
- 
+import com.wilsoncys.compi1.java.model.expresiones.LogicalOperations;
+import com.wilsoncys.compi1.java.model.expresiones.OperateRelacionales;
+import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -67,26 +71,30 @@ public class CiclicaForC extends Instruction {
                 if(i==null){        //validacion por si hay una instruccion nula
                     continue;
                 }
-                if (i instanceof transferBreakC) {
+                if (i instanceof transferBreak) {
                     return null;
                 }
-                if (i instanceof transferContinueC) {
+                if (i instanceof transferContinue) {
                     System.out.println("continue1");
                     break;
                 }
-          
+                if (i instanceof transferReturn) {
+                    return i;
+                }
                 var resIns = i.interpretar(arbol, newTabla2);   //Instrucciones del ciclo
                 
-             
+                if (resIns instanceof transferReturn) {
+                    return resIns;
+                }
 
                 if (resIns instanceof Errores) {        //identificar el error
                     return resIns;
                 }
-                if (resIns instanceof transferContinueC) {
+                if (resIns instanceof transferContinue) {
                     System.out.println("continue2");
                     break;
                 }
-                if (resIns instanceof transferBreakC) {
+                if (resIns instanceof transferBreak) {
                     return null;
                 }
                 
@@ -116,7 +124,69 @@ public class CiclicaForC extends Instruction {
     }
             @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
-        return anterior;
+        setPos(arbol);
+        String armed = "";
+        
+//        C3d c = arbol.getC3d();   
+        CreadorC3d c;   
+        if(anterior.getLenguaje().equals("java")){
+            c = arbol.getJava();
+        }else{
+            c = arbol.getC3d();
+        }
+        
+        
+//        C3d_Java c = arbol.getJava();
+        String idLoop = "label_Loop" + c.contador;
+        c.contador++;
+        String idSalida = "salida" + c.contador;
+        c.contador++;
+        String idIns = "label_ins" + c.contador;
+        c.contador++;
+        
+        
+        //realizar la asignacion 
+        armed+=this.assignment.createC3D(arbol, anterior);
+       
+        //label loop
+        armed +=  idLoop+ ":{}\n" ;
+
+        
+        //evalular la condicion
+        if(this.condicion instanceof OperateRelacionales){
+ 
+          armed+= this.condicion.createC3D(arbol, anterior);
+          String op1 = c.varsParams.get(0); 
+          c.varsParams.removeFirst();
+          String op2 = c.varsParams.get(0);  
+          c.varsParams.removeFirst();
+          
+          armed+= c.cond_If(op1, op2, idIns, idSalida);
+        } 
+
+        
+        //INSTRUCCIONES
+        //label INS
+        armed +=  idIns+ ":{}\n" ;
+
+        for (Instruction ins : instrucciones) {
+            if(ins ==null){
+                continue;
+            }
+            armed += ins.createC3D(arbol, anterior);
+        }
+        
+        
+        //realizar el incremento
+        armed += this.actualizacion.createC3D(arbol, anterior);
+        
+        armed +=  "goto " + idLoop+ ";\n" ;
+        
+        armed +=  idSalida+ ":{}\n" ;
+
+         
+        
+        return armed;
     }
     
 }

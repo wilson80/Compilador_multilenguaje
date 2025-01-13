@@ -4,10 +4,12 @@
  */
 package com.wilsoncys.compi1.java.model.instrucciones;
 
+import com.wilsoncys.compi1.java.model.asbtracto.CreadorC3d;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.expresiones.LogicalOperations;
 import com.wilsoncys.compi1.java.model.expresiones.OperateRelacionales;
+import com.wilsoncys.compi1.java.model.sC3D.C3d;
 import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
@@ -151,8 +153,15 @@ public Object doWhile(Arbol arbol, TablaSimbolos tabla){
     
             @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
+        setPos(arbol);
         String armed = "";
-        C3d_Java c = arbol.getJava();        
+        
+        CreadorC3d c;   
+        if(anterior.getLenguaje().equals("java")){
+            c = arbol.getJava();
+        }else{
+            c = arbol.getC3d();
+        }        
         
         String finWhile = "finWhile" + c.contador;
         c.contador++;

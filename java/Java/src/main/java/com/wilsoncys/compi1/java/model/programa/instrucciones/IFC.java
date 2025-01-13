@@ -4,16 +4,23 @@
  */
 package com.wilsoncys.compi1.java.model.programa.instrucciones;
 
+import com.wilsoncys.compi1.java.model.asbtracto.CreadorC3d;
 import com.wilsoncys.compi1.java.model.programa.instrucciones.*;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
+import com.wilsoncys.compi1.java.model.expresiones.LogicalOperations;
+import com.wilsoncys.compi1.java.model.expresiones.OperateRelacionales;
 import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
+import com.wilsoncys.compi1.java.model.instrucciones.IF;
+import com.wilsoncys.compi1.java.model.sC3D.C3d;
+import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
  
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,6 +32,12 @@ public class IFC extends Instruction{
     private LinkedList<Instruction> instructionsElse;
 
     private Instruction  elif;
+    
+    private String idIf = "";
+    private String idSalida = "";
+    private boolean isElif = false;
+    
+    
                                                      //simple IF
     public IFC(Instruction expression, LinkedList<Instruction> instructionss, int linea, int col) {
         super(new Tipo(tipoDato.VOID), linea, col);
@@ -141,7 +154,168 @@ public class IFC extends Instruction{
     
             @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
-        return anterior;
+        setPos(arbol);
+        String armed = "";
+        CreadorC3d c; 
+        if(anterior.getLenguaje().equals("java")){
+            c = arbol.getJava();
+        }else{
+            c = arbol.getC3d();
+        }
+        
+        if(idIf.isEmpty()){
+            idIf = "if" + c.contador;
+            c.contador++;
+        }
+        
+        if(idSalida.isEmpty()){
+            idSalida= "salida" + c.contador;
+            c.contador++;
+        }
+        String idElse= "else" + c.contador;
+        c.contador++;
+        String idElif= "elif" + c.contador;
+        c.contador++;   
+          
+        
+        //create a la condicion 
+        if(this.expression instanceof OperateRelacionales){
+            var res =expression.createC3D(arbol, anterior);
+            if(res instanceof Errores){
+                return  res;
+            }else{
+              armed+= res;
+            }
+          String op1 = c.varsParams.get(0); 
+          c.varsParams.removeFirst();
+          String op2 = c.varsParams.get(0);  
+          c.varsParams.removeFirst();
+          
+          if(instructionsElse==null && elif==null){//simple if
+              armed+= c.cond_If(op1, op2, idIf, idSalida);
+          }else{
+              if(elif!=null){           //elif
+                  armed+= c.cond_If(op1, op2, idIf, "label" + idElif);
+              }else{                //else
+                  armed+= c.cond_If(op1, op2, idIf, idElse);
+              }
+          } 
+          if(isElif){
+//            armed+= "}\n";
+            armed+= "\n";
+          }
+                                            //LOGICAL op
+        }else if(this.expression instanceof LogicalOperations log){
+            if(instructionsElse!=null){
+                log.setElseIns(true);
+            }
+            if(elif!=null){
+                log.setElifIns(true);
+            }
+            log.setIdIf(idIf);
+            log.setIdSalida(idSalida);
+            log.setIdElse(idElse);
+            log.setIdElif(idElif);
+            var res= log.createC3D(arbol, anterior);
+            if(res instanceof Errores){
+                return res;
+            }else{
+                armed += res;
+            }
+            //            armed+= "}\n";
+
+        }
+        
+        
+//        label if
+        armed+= idIf +  ":\n";
+        
+ 
+        
+                                          //INS del IF
+ 
+        for (Instruction instructions : instructionss) {
+            if(instructions ==null){
+                continue;
+            }
+            var res =instructions.createC3D(arbol, anterior);
+            if(res instanceof Errores){
+                return res;
+            }else{
+                armed+= res; 
+            }
+//            arbol.getCurrentAmbit().set(1, ambitoAnt);
+       
+        }
+        armed += "\n";
+        armed+= "goto " + idSalida + ";\n";
+//        arbol.setCurrentAmbit(ambitoAntList);
+        
+        
+        
+        
+        
+        if(instructionsElse!=null){         //INS del ELSE 
+            //label else
+            armed+= idElse +  ":\n";      
+            for (Instruction instructions : instructionsElse) {
+                if(instructions ==null){
+                    continue;
+                }
+                var res = instructions.createC3D(arbol, anterior);
+                if(res instanceof  Errores){
+                    return res;
+                }else{
+                    armed+=res; 
+                }
+ 
+            }
+            
+            armed += "\n";
+
+    //                      label salida
+            armed+= idSalida +  ":\n";
+
+        }else if(elif!=null){                        //INS del Elif
+            armed+= "label"+idElif+":\n";
+                    
+            ((IFC)elif).setIsElif(true);
+            ((IFC)elif).setIdIf(idElif);
+            ((IFC)elif).setIdSalida(idSalida);
+            var res =elif.createC3D(arbol, anterior);
+            if(res instanceof Errores){
+                return res;
+            }else{
+                armed += res; 
+            }
+            
+        }else{
+//                      label salida
+            armed+= idSalida +  ":\n";
+        }
+        
+        return armed;
     }
+
+    public void setIdIf(String idIf) {
+        this.idIf = idIf;
+    }
+
+    public void setIdSalida(String idSalida) {
+        this.idSalida = idSalida;
+    }
+
+    public void setIsElif(boolean isElif) {
+        this.isElif = isElif;
+    }
+
+
+    
+    
+    
+    
+    
+    
     
 }
+

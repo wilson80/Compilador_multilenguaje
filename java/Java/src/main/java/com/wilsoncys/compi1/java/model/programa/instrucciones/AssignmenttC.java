@@ -129,10 +129,18 @@ public class AssignmenttC extends Instruction{
         
         String armed = "";
         C3d c =  arbol.getC3d();
-        int dir = arbol.getSym("PROGRAMA" + id).getDir();            //pdt
-        String varr = "";
-   
-         if(expr instanceof Input inp){
+        Simbolo sym = arbol.getSym("PROGRAMA" + id);            //pdt
+        int dir = 0;
+        
+        if(sym == null){
+            arbol.addError(new Errores("semantic", 
+                    "no existe la variable con id: " + this.id, line, col));
+        }else{
+            dir = sym.getDir();
+        }
+        
+        
+        if(expr instanceof Input inp){
                 inp.createC3D(arbol, anterior);
                 armed+= c.c3d_Input();          //new var  
                 armed+=c.c3d_asignVal("", dir);     //Entrada cin

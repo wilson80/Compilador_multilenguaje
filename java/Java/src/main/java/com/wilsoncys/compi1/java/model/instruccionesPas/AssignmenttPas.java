@@ -137,7 +137,7 @@ import java.util.LinkedList;
             if(sym != null){
                dir = 1;
             }else{
-                return  new Errores("semantic", "no existe la variable: " + this.id, line, col);
+                arbol.addError(new Errores("semantic", "no existe la variable: " + this.id, line, col));
             }
         }else{
            dir = sym.getDir();

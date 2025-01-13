@@ -94,7 +94,7 @@ public class AccessPas extends Instruction{
         sym = arbol.getSymPas(armedId);
        
         if(sym==null){       
-            return (new Errores("semantic", "la variable con id: "
+            arbol.addError(new Errores("semantic", "la variable con id: "
                     + id + " no existe", line, col));
         }
         int dir = sym.getDir();

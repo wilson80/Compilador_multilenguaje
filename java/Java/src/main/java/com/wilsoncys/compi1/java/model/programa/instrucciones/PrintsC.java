@@ -34,6 +34,12 @@ public class PrintsC extends Instruction {
         this.cadena = cadena;
         this.ids = ids;
     }
+                            //print simple
+    public PrintsC(String cadena, int linea, int col) {
+        super(new Tipo(tipoDato.VOID), linea, col);
+        this.cadena = cadena;
+        this.ids = null;
+    }
     
     
     @Override
@@ -108,23 +114,30 @@ public class PrintsC extends Instruction {
 //    printf("la suma de %d mas %d es igual a %d", x, y, total );
       
     @Override
-    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {        
+    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
+        setPos(arbol);
         String armed = "";
         C3d c = arbol.getC3d();
         
-        String [] cadenas = cadena.split("%c|%d|%f"); 
-        
         int contador = 0;
-        for (String vars : ids) {
-            //encontrar el simbolo
-            Simbolo sim = arbol.getSym("PROGRAMA" + vars);
-            //crear el acceso
-            armed += c.c3d_acces(vars, sim.getDir());
-            armed += c.c3d_printNativo(cadenas[contador]);
-            armed += c.c3d_printVar();
-            c.clearVarParams();
-            contador++;
-        }   
+        
+        if(ids == null){
+            armed += c.c3d_printNativo(cadena);
+        }else{
+            String [] cadenas = cadena.split("%c|%d|%f"); 
+            for (String vars : ids) {
+                //encontrar el simbolo
+                Simbolo sim = arbol.getSym("PROGRAMA" + vars);
+                //crear el acceso
+                armed += c.c3d_acces(vars, sim.getDir());
+                armed += c.c3d_printNativo(cadenas[contador]);
+                armed += c.c3d_printVar();
+                c.clearVarParams();
+                contador++;
+            }
+        }
+        
+        
         
         
         

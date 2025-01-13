@@ -91,9 +91,6 @@ public class Access extends Instruction{
 //            this.tipo = sym.getTipo();
 
 
-
-
-
         }else{      // si no se usa this.
 
             String armedId = "";
@@ -112,10 +109,10 @@ public class Access extends Instruction{
                 sym = arbol.getSym(armedId);
                        
                 if(sym == null){        //revisar esto
-                    JOptionPane.showMessageDialog(null, "acces no sym: " +armedId);
-                    return new Errores(id, "no se ha encontrado el simboloooooooooooooo", line, col);
+//                    JOptionPane.showMessageDialog(null, "acces no sym: " +armedId);
+                    arbol.addError(new Errores(id, "no se ha encontrado la variable con id: " + this.id, line, col));
                 }else{
-//                    this.tipo = sym.getTipo();
+                    this.tipo = sym.getTipo();
                 }
             }
 

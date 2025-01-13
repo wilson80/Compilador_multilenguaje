@@ -86,7 +86,7 @@ public class call_to_java extends Instruction{
 
         Simbolo sym = arbol.getSym(idSimm);
         if(sym == null){
-            return new Errores("SEMANTIC", "id no definido: " + idMethod, line, col);
+            arbol.addError(new Errores("SEMANTIC", "id no definido: " + idRef, line, col));
         }
         
         idObject = ((InstanceJava)sym.getInstruction()).getIdClase();
@@ -112,6 +112,7 @@ public class call_to_java extends Instruction{
         
         
         String id_Methodo = "java" + idObject + idMethod;
+        
                                             //extrayendo los params
         for (Instruction exps : parametersExp) {
             if(exps instanceof Nativo n){               
@@ -136,6 +137,10 @@ public class call_to_java extends Instruction{
     //        arbol.setAmbito(ambito);
                                     //create al metodo/funcion
         Simbolo symMethod = arbol.getSym(id_Methodo);
+        if(symMethod == null){
+            arbol.addError(new Errores("semantic", "el metodo del objeto no existe: " + this.idMethod, line, col));
+        }
+        
         int posIni = 0;
         if(symMethod.getCat().equals(categoria.FUNCTION) ){
             ((Functionss)symMethod.getInstruction()).setIdClase(idObject);

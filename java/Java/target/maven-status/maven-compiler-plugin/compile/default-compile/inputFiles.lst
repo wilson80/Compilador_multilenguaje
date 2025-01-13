@@ -22,7 +22,6 @@
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Enums/Relational_LogicalOperations.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Enums/TypeVar.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Input.java
-/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/InstanceStruct.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/LogicalOperations.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Nativo.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/expresiones/Negacion.java
@@ -87,7 +86,6 @@
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/expresiones/InputC.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/expresiones/LogicalOperationsC.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/expresiones/NegacionC.java
-/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/expresiones/OperateRelacionalesC.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/AssignmentVectoresC.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/AssignmenttC.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/CaseMatchC.java
@@ -98,7 +96,6 @@
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/MatchC.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/PrintsC.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/StatementC.java
-/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/StructsC.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/VectorsStatementC.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/transferBreakC.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/transferContinueC.java

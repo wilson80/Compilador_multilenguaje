@@ -9,6 +9,7 @@ import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.instrucciones.Statement;
+import com.wilsoncys.compi1.java.model.sC3D.C3d;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
@@ -29,6 +30,9 @@ public class MethodPas extends Instruction{
     public LinkedList<Instruction> instrucciones;
     private int cantParams = 0;
     private List<String>  ambito;   //idclase/metodo/params
+    
+    
+    private AmbitoMetodo ambitoContent;
 
     
    public MethodPas(String identificator, LinkedList<HashMap> parameters, LinkedList<Instruction> instrucciones,
@@ -143,7 +147,66 @@ public class MethodPas extends Instruction{
 
     @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        setPos(arbol);
+        String armed = "";
+        C3d c = arbol.getC3d();
+        
+        String devVars = "";
+        int iniVars = c.contador;
+                        //ambito anterior
+        
+        String idRetorno ="retorno" + c.contador;
+        c.contador++;
+        
+        arbol.setCurrentAmbit(this.ambito);
+        String bodyMet = "";
+        for (Instruction ins : instrucciones) {
+            if(ins ==null){
+                continue;
+            }
+
+            String posPrepared = "" + this.cantParams;
+            this.ambitoContent = new AmbitoMetodo(posPrepared, idRetorno, this.ambito);
+            var result =ins.createC3D(arbol, this.ambitoContent);
+            if(result instanceof  Errores){
+                return result;
+            }else{
+                bodyMet += result; 
+            }
+        }
+        
+        bodyMet += idRetorno + ":\n";
+        bodyMet += "    cout<< \" \";";
+        
+        int finVars = c.contador;
+
+        for (int i = iniVars; i < finVars; i++) {
+            devVars += "int w" + i+  ";\n";
+        }
+            
+        armed = devVars + "\n";
+        armed += bodyMet;
+        
+        
+//        armed = c.c3d_metodo("java_" + arbol.getCurrentAmbit().get(1) +"_"+ id, armed);
+        armed = c.c3d_metodo(arbol.getAmbito_asID(), armed);
+        
+     
+        arbol.Print(armed);
+ 
+     
+        
+        
+        return armed;
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
 
     public void setAmbito(List<String> ambito) {

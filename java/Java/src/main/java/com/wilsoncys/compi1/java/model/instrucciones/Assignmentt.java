@@ -159,7 +159,7 @@ public class Assignmentt extends Instruction{
                 armedId += arbol.getCurrentAmbit().get(1) + id;
                 sym = arbol.getSym(armedId);
                 if(sym == null){        //revisar esto
-                    return new Errores(id, "no se ha encontrado el simboloooooooooooooo", line, col);
+                    arbol.addError(new Errores(id, "no se ha encontrado la variable con id:  " + this.id, line, col));
                 }else{
                     dir = sym.getDir();
                 }

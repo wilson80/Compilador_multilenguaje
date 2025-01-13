@@ -137,13 +137,15 @@ public class AccessC extends Instruction{
         
             @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
+        setPos(arbol);
         String armed = "";
         C3d c =  arbol.getC3d();
         String ids = "PROGRAMA"+id;
         Simbolo sym = arbol.getSym(ids);
          if(sym == null){
-            return new Errores("SEMANTIC", "id no definido: " + id, line, col);
-        }
+            arbol.addError( new Errores("SEMANTIC", "id no definido: " + id, line, col));
+            return "";
+        } 
  
         int dir = sym.getDir();
         

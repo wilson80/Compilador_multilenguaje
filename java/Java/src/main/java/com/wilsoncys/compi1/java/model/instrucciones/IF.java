@@ -159,6 +159,7 @@ public class IF extends Instruction{
     
             @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
+        setPos(arbol);
         String armed = "";
         C3d_Java c = arbol.getJava();
        

@@ -1,0 +1,120 @@
+ 
+%%PASCAL
+Function SUMAR(Op1 , Op2 : Integer) : Integer;
+var Respuesta, total: Integer;
+Begin
+println('impresion desde pascal sumar', Op1);
+println('impresion desde pascal sumar', OP2);
+Respuesta := Op1 + Op2;
+SUMAR := Respuesta;
+
+End;
+
+ 
+procedure hellow(dia, mes : integer);
+var uno, dos : Integer;
+begin 
+    println('Hello, World!');
+    println('hos es /', dia, '/', mes);
+    println('uno + dos) por 3: ', (uno + dos)*3 );
+end;
+
+
+%%JAVA
+
+%%PROGRAMA
+#include "JAVA.*"   
+#include "PASCAL"  
+int uno=10;
+int dos=20;
+int tres=30;
+int cuatro=40;
+int cinco=50;
+int total;
+int a=50;
+int b = 5;
+		int valocal = 10;
+
+
+void main()
+{ 	   
+
+PASCAL.hellow(12,01);    
+
+// total = PASCAL.sumar(uno,dos);
+// printf("Tototal de sumar %d   con %d es: %d", uno, dos, total); 
+// total = PASCAL.restar(dos,uno);
+// printf("Tototal de restar  %d con %d es: %d", dos, uno, total); 
+
+ 
+
+		
+printf("test de AND"); 
+if(15>b && a>b){
+    printf("444 es mayor que 2");
+}else{
+    printf("else and");
+    
+}
+
+printf("test de OR");
+if(1>1 || a>2){
+    printf("444 es mayor que 2");
+}else{
+    printf("else ORR");
+}
+
+printf("test de elifff");
+if(a>b || b>a){
+// if(1>2){
+    printf("444 es mayor que 2");
+}else if(2>3){
+    printf("elifff");
+}else{
+    printf("else despues del elif");
+}
+
+
+
+
+ 
+ 
+printf("test  Do while"); 
+do{
+    a = a-1;
+    if(a==7){
+        printf("if dentro de un Do-while");
+        a =5;
+        if(a!=5){
+            printf("if dentro de if dentro de Do-while");
+        }else{
+             
+            while(valocal>0){
+                valocal = valocal-1;
+                printf("while anidado: %d", a);
+            }
+            
+        }	
+
+        
+    }
+    printf("dentro de while: %d", a ); 
+
+}while(a>0 && a!=5);
+
+
+printf("test while"); 
+while(a>0){
+    a = a-1;
+    printf("a es =  %d",a ); 
+} 
+
+
+
+
+
+
+
+
+
+}

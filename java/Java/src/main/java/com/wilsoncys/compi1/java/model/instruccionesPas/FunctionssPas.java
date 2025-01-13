@@ -150,6 +150,7 @@ public class FunctionssPas extends Instruction{
 
     @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
+        setPos(arbol);
         String armed = "";
         C3d c = arbol.getC3d();
         

@@ -53,7 +53,7 @@ public class IniciarAnalizadores {
             scanner s = new scanner(new BufferedReader(new StringReader(texto)));
             parser p = new parser(s);
             var resultado = p.parse();
-             
+
             var ast = new Arbol((LinkedList<Instruction>) resultado.value);
 
             TablaSimbolos tabla = new TablaSimbolos();
@@ -124,12 +124,12 @@ public class IniciarAnalizadores {
                 
 
                 String bodyMain ="";
+            try {
                 for (Instruction ins : todasLasIns) {
                     if(ins ==null){
                         continue;
                     }
                     if(ins instanceof  Programa cl){            //  creacion del programa principal
-                            try {
                                     var result =  cl.createC3D(ast, new AmbitoMetodo
                                     ("0", "", new ArrayList<String>() ));
                                     if(result instanceof Errores err){
@@ -137,15 +137,16 @@ public class IniciarAnalizadores {
                                     }else{
                                         bodyMain += result;
                                     }
-                            } catch (Exception e) {
-                                identificarError(e, ast);
-                                StringWriter str = new StringWriter();
-                                e.printStackTrace(new PrintWriter(str ));
-                                System.out.println("programa: >>>>>\n\n" + str);
-                            }
                     }
 
                 }
+            } catch (Exception e) {
+                identificarError(e, ast);
+                StringWriter str = new StringWriter();
+                e.printStackTrace(new PrintWriter(str ));
+                System.out.println("programa: >>>>>\n\n" + str);
+            }
+            
                 
                 bodyMain= ast.java.c3d_main("main", bodyMain);
                 try {
