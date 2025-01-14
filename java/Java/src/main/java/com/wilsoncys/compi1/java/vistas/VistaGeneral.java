@@ -409,6 +409,7 @@ public class VistaGeneral extends javax.swing.JFrame {
         llenandoJtable();
         panelReportes.updateUI();
         panelSimbolo.updateUI();
+        
     }//GEN-LAST:event_botonEjecutarActionPerformed
 
     public void llenarTablaSimbolos(){
@@ -595,15 +596,7 @@ public class VistaGeneral extends javax.swing.JFrame {
     }
     
     private void botonNuevoArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonNuevoArchivoActionPerformed
-        addTabbb("START_WITH main();\n" +
-                               "\n" +
-                               "var global: int = 10;\n" +
-                               "\n" +
-                               "void main(){\n" +
-                               "    println(\"Hello Word\");\n" +
-                               "\n" +
-                               "\n" +
-                               "}");
+        addTabbb("");
     }//GEN-LAST:event_botonNuevoArchivoActionPerformed
 
     public void addTabbb(String algo){

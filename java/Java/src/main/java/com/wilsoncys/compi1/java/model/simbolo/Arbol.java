@@ -28,6 +28,7 @@ import javax.swing.JOptionPane;
 public class Arbol {
 
     private String consola;     //contiene el texto de las salidas de la funcion println
+    private String prototipos = "";     //contiene el texto de las salidas de la funcion println
     
     private TablaSimbolos tablaGlobal;              //contiene las variables declaradas globalmente
 
@@ -56,6 +57,7 @@ public class Arbol {
     
     private int currentLine = 0;
     private int currentCol = 0;
+    private boolean thereGetch = false;
     
     
     
@@ -281,8 +283,22 @@ public class Arbol {
     public int getCurrentLine() {
         return currentLine;
     }
+
+    public boolean isThereGetch() {
+        return thereGetch;
+    }
+
+    public void setThereGetch(boolean thereGetch) {
+        this.thereGetch = thereGetch;
+    }
+
+    public String getPrototipos() {
+        return prototipos;
+    }
     
-    
+    public void addPrototipo(String pro){
+        this.prototipos += "void " + pro + "();\n";
+    }
     
     
     

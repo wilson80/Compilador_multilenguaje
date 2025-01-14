@@ -222,7 +222,7 @@ public class Reference extends Instruction{
         }
 
 
-        arbol.getClasesJava().getclase(this.id).setId_constructor(id_constructor);
+//        arbol.getClasesJava().getclase(this.id).setId_constructor(id_constructor);
            
                                                     //stack temp
         armed+=c.c3d_ptrTemp(posTemp.getPosTemp());
@@ -239,15 +239,15 @@ public class Reference extends Instruction{
 
                                                 //ejecutar el metodo
         armed+= c.c3d_moveToStack(true, posTemp.getPosTemp());
-        armed+= c.callJava(this.id + "_" + this.id);
+//        armed+= c.callJava(this.id + "_" + this.id);
+        armed+= c.callJava(id_constructor);
         armed+=c.c3d_moveToStack(false, posTemp.getPosTemp());
         
            
         c.clearVarParams();
                             //create a la Clase
         Simbolo symClass = arbol.getSym("java" + this.id);
-//        arbol.setSizeHeap(((Classs)symClass.getInstruction()).getCantAttb());
-        symClass.getInstruction().createC3D(arbol, posTemp);
+//        symClass.getInstruction().createC3D(arbol, posTemp);
         c.clearVarParams();
         
         

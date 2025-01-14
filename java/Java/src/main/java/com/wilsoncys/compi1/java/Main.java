@@ -5,16 +5,8 @@
 
 package com.wilsoncys.compi1.java;
 
-
-import com.formdev.flatlaf.intellijthemes.FlatArcOrangeIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatCarbonIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatCobalt2IJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatGradiantoDeepOceanIJTheme;
-import com.formdev.flatlaf.intellijthemes.FlatGradiantoMidnightBlueIJTheme;
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatLightOwlIJTheme;
-import com.formdev.flatlaf.themes.FlatMacDarkLaf;
-import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import com.formdev.flatlaf.ui.FlatNativeMacLibrary;
+ 
+import com.formdev.flatlaf.themes.FlatMacDarkLaf; 
 import com.wilsoncys.compi1.java.control.Control;
 
 /**

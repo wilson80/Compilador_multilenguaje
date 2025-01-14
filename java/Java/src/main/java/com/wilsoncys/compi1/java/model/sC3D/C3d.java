@@ -5,6 +5,7 @@
 package com.wilsoncys.compi1.java.model.sC3D;
 
 import com.wilsoncys.compi1.java.model.asbtracto.CreadorC3d;
+import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class C3d extends CreadorC3d{
     
  
     public String callJava(String id){
-        return  "java_" + id + "()" +  SEMIC;
+        return  "" + id + "()" +  SEMIC;
     }
     public String callPas(String id){
         return  id + "()" +  SEMIC;
@@ -238,6 +239,15 @@ public class C3d extends CreadorC3d{
 
     public int getContador() {
         return contador;
+    }
+
+    @Override
+    public String c3d_newNativo(tipoDato tipo) {
+        
+        
+        
+        
+        return "";
     }
     
     

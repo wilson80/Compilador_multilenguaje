@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  */
 public class Tipo {
     private tipoDato tipo;
-    private String idObjeto = "OBJECTT";
+    private String idObjeto = "OBJECT";
     
     public Tipo(tipoDato tipo) {
         this.tipo = tipo;
@@ -46,7 +46,7 @@ public class Tipo {
                 return idObjeto;
                 
             default:
-                System.out.println("Error(al crear la tabla(clase tipos))");
+                System.out.println("default en typeStringgg");
                 return "";
                     
         }

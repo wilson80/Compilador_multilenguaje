@@ -41,10 +41,10 @@ import javax.swing.JOptionPane;
    // private TablaSimbolos tablaGlobal;              //contiene las variables declaradas globalmente
     
     public Classs(String id, LinkedList<Instruction> instrucciones, int linea, int col) {
-        super(new Tipo(tipoDato.VOID), linea, col);
+        super(new Tipo(tipoDato.OBJECT), linea, col);
         this.id = id;
         this.instrucciones = instrucciones;
-        
+        this.tipo.setIdObjeto(this.id);
     }
     
      
@@ -121,7 +121,7 @@ import javax.swing.JOptionPane;
             if(ins instanceof  Mainn mainn){
                 mainn.setCantAttb(this.cantAttb);
                 contador = 2;
-                Simbolo sym = new Simbolo(mainn.tipo, mainn.id, tabla, false);
+                Simbolo sym = new Simbolo(this.tipo, mainn.id, tabla, false);
                 sym.setCat(categoria.CONSTRUCTOR);
                 sym.setDir(contador);
                 sym.setInstruction(ins);
@@ -270,29 +270,29 @@ import javax.swing.JOptionPane;
         C3d_Java c = arbol.getJava(); 
         int iniVars = c.contador; 
 
-        arbol.setSizeHeap(this.cantAttb);
+//        arbol.setSizeHeap(this.cantAttb);
 
         arbol.setAmbito(this.ambito);
-        //interpretar todos lo funciones/funciones de esta clase
-//                            for (Instruction fun : instrucciones) {
-//                                if(fun instanceof Functionss funn){
-//                                    funn.createC3D(arbol, anterior);
-//                                }
-//                            }
-//
-//                            for (Instruction fun : instrucciones) {
-//                                if(fun instanceof Method met){
-//                                    met.createC3D(arbol, anterior);
-//                                }
-//                            }
-//                            for (Instruction fun : instrucciones) {
-//                                if(fun instanceof Mainn constr){
-//                                    constr.createC3D(arbol, anterior);
-//                                }
-//                            }
-         
         
-        arbol.getSym(id_constructor).getInstruction().createC3D(arbol, anterior);
+//        interpretar todos lo funciones/funciones de esta clase
+                            for (Instruction fun : instrucciones) {
+                                if(fun instanceof Functionss funn){
+                                    funn.createC3D(arbol, anterior);
+                                }
+                            }
+
+                            for (Instruction fun : instrucciones) {
+                                if(fun instanceof Method met){
+                                    met.createC3D(arbol, anterior);
+                                }
+                            }
+                            for (Instruction fun : instrucciones) {
+                                if(fun instanceof Mainn constr){
+                                    constr.createC3D(arbol, anterior);
+                                }
+                            }
+        
+//        arbol.getSym(id_constructor).getInstruction().createC3D(arbol, anterior);
         
 
 

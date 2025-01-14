@@ -139,9 +139,7 @@ public class Method extends Instruction{
                         
         
         List<String> ambitoAntList = new ArrayList<>(arbol.getCurrentAmbit());
-//        String ambitoAnt = arbol.getCurrentAmbit().get(1);
         arbol.setCurrentAmbit(this.ambito);
-//        arbol.setCurrentPos(this.cantParams);
 
         
         String bodyMet = "";
@@ -149,15 +147,11 @@ public class Method extends Instruction{
             if(ins ==null){
                 continue;
             }
-//            if(this.id.equals("agregar")){
-//                JOptionPane.showMessageDialog(null, "ambito: " + this.getAmbito().get(2));
-//            }
 
             String posPrepared = "" + this.cantParams;
             this.ambitoContent = new AmbitoMetodo(posPrepared, idRetorno, this.ambito);
             bodyMet +=  ins.createC3D(arbol, this.ambitoContent);
             arbol.setCurrentAmbit(this.getAmbito());
-//            arbol.getCurrentAmbit().set(1, ambitoAnt);
 
         }
         arbol.setCurrentAmbit(ambitoAntList);
@@ -177,7 +171,8 @@ public class Method extends Instruction{
         
         
 //        armed = c.c3d_metodo("java_" + arbol.getCurrentAmbit().get(1) +"_"+ id, armed);
-        armed = c.c3d_metodo("java_" + this.ambito.get(1) +"_"+ id, armed);
+        armed = c.c3d_metodo(this.getAmbito_asID(), armed);
+        arbol.addPrototipo(getAmbito_asID());
         
         
         
@@ -223,6 +218,13 @@ public class Method extends Instruction{
     public void setCantAttb(int cantAttb) {
         this.cantAttb = cantAttb;
     }
-    
+        public String getAmbito_asID(){
+        String ambi = "";
+        for (String st : this.ambito) {
+            ambi +=st;
+        }
+        return ambi; 
+                
+    }
       
 }

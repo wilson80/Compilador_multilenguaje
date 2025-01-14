@@ -157,8 +157,8 @@ nonterminal Instruction pascalCode;
 nonterminal LinkedList<Instruction>  callsParametersC
         ,instancesC, cierreElseC, paramssC, insSwC
         , declaracionC;
-nonterminal LinkedList<CaseMatch>  listCasesC;
-nonterminal CaseMatch  caseC;
+nonterminal LinkedList<CaseMatchC>  listCasesC;
+nonterminal CaseMatchC  caseC;
 nonterminal Tipo typeC;
 
 
@@ -354,7 +354,7 @@ asignacionC::= ID:id ASSIGNMENT EXPRESIONCC:exp SEMIC
 
 insC::= PRINT PAR_OP PAR_CL SEMIC
 |CLRSCR PAR_OP  PAR_CL SEMIC
-|GETCH PAR_OP PAR_CL SEMIC
+|GETCH:a PAR_OP PAR_CL SEMIC {:RESULT = new getchC(true, aleft, aright); :}
 | scanf
 | asignacionC:c {: RESULT = c; :}
 | printf:c {: RESULT = c; :}
@@ -364,7 +364,7 @@ insC::= PRINT PAR_OP PAR_CL SEMIC
 |BREAK SEMIC
 |CONTINUE SEMIC
 |ifC:w {: RESULT = w; :}
-|switchC
+|switchC:w {: RESULT = w; :}
 |callC:c {: RESULT = c; :}
 | error SEMIC {:  :}
 ;
@@ -372,23 +372,23 @@ insC::= PRINT PAR_OP PAR_CL SEMIC
 
 inSwC::= PRINT PAR_OP PAR_CL SEMIC
 |CLRSCR PAR_OP  PAR_CL SEMIC
-|GETCH PAR_OP PAR_CL SEMIC
+|GETCH:a PAR_OP PAR_CL SEMIC {:RESULT = new getchC(true, aleft, aright); :}
 | scanf
-| asignacionC
-| printf
+| asignacionC:w {: RESULT = w; :} 
+| printf:w {: RESULT = w; :}
 |whileC:w {: RESULT = w; :}
 |forC:w {: RESULT = w;  :}
 |DOC:w {: RESULT = w;  :}
 |ifC:w {: RESULT = w;  :}
-|switchC:w   
+|switchC:w   {: RESULT = w; :}
 |callC:w {: RESULT = w; :}
 // |error SEMIC
 ;
  
-insSwC::= inSwC insSwC
-| 
+insSwC::=  insSwC:ins inSwC:in
+         {: RESULT=ins;  RESULT.add(in); :}
+| {: RESULT = new LinkedList<>(); :}
 ;
-
 
 
 
@@ -455,14 +455,14 @@ updateVarForC::=  ID:id PLUSPLUS  {: RESULT = new IncreaseDecreaseC(id, true, id
         |ID:id ASSIGNMENT EXPRESIONCC:exp {:  RESULT = new AssignmenttC(id, exp, idleft, idright);  :}
         ;
         
-//esto es para los ciclos 
-declaraAsignaC::= asignacionC 
-                | typeC ID ASSIGNMENT EXPRESIONCC SEMIC
-;
+// //esto es para los ciclos 
+// declaraAsignaC::= asignacionC 
+//                 | typeC ID ASSIGNMENT EXPRESIONCC SEMIC
+// ;
 
 
-switchC::= SWITCH PAR_OP ID PAR_CL K_OP  listCasesC:cazzoz K_CL
-                // {: RESULT = new Match(exp, cazzoz, expleft, expright); :}
+switchC::= SWITCH PAR_OP EXPRESIONCC:exp PAR_CL K_OP  listCasesC:cazzoz K_CL
+                 {: RESULT = new MatchC(exp, cazzoz, expleft, expright); :}
 ;
 
 listCasesC::=  listCasesC:b  caseC:a {: RESULT = b; RESULT.add(a); :}
@@ -471,9 +471,9 @@ listCasesC::=  listCasesC:b  caseC:a {: RESULT = b; RESULT.add(a); :}
 
 
 caseC::=  CASE  EXPRESIONCC:a POINTS insSwC:ins BREAK SEMIC
-        {: RESULT = new CaseMatch(a, ins, false, aleft, aright); :}
+        {: RESULT = new CaseMatchC(a, ins, false, aleft, aright); :}
         | DEFAULT:a  POINTS insSwC:ins BREAK SEMIC
-        {: RESULT = new CaseMatch(null, ins, true, aleft, aright); :}
+        {: RESULT = new CaseMatchC(null, ins, true, aleft, aright); :}
 ;
 
 callsParametersC ::= callsParametersC:a COLON EXPRESIONCC:e    {:  RESULT = a;
@@ -540,7 +540,7 @@ EXPRESIONCC::= MINUS EXPRESIONCC:a             {:   RESULT = new Negacion(a, Ope
             | ID:a BRACK_L EXPRESIONCC:indx1 BRACK_R BRACK_L  EXPRESIONCC:indx2 BRACK_R      {:   RESULT = new AccesVector(a, indx1, indx2, aleft, aright);   :}
 
 
-            | GETCH PAR_OP PAR_CL SEMIC    
+            | GETCH:a PAR_OP PAR_CL {:RESULT = new getchC(false,aleft, aright); :}   
             | callExpC:c {: RESULT = c; :} 
 ;
 

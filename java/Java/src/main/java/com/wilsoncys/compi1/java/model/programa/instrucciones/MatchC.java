@@ -23,12 +23,12 @@ import javax.swing.JOptionPane;
  */
 public class MatchC extends Instruction{
     private Instruction expression;
-    private LinkedList<CaseMatch> cazzos;
+    private LinkedList<CaseMatchC> cazzos;
     private LinkedList<Instruction> insOfDefault;
 
 //    private CaseMatch defaultCase;
     
-    public MatchC(Instruction expression, LinkedList<CaseMatch> cazzos, int linea, int col) {
+    public MatchC(Instruction expression, LinkedList<CaseMatchC> cazzos, int linea, int col) {
         super(new Tipo(tipoDato.VOID), linea, col);
         this.expression = expression;
         this.cazzos = cazzos;
@@ -54,7 +54,7 @@ public class MatchC extends Instruction{
         
         //al hacerle interpretar  a la lista de casos se le va pasando el valor de la exp del match y se va comparando
         boolean noMatch = false;
-        for (CaseMatch cazzo : cazzos) {
+        for (CaseMatchC cazzo : cazzos) {
             if(!cazzo.isDefault()){
                 cazzo.setExpressionMatch(valorMatch);
                 cazzo.setTipoValorMatch(this.expression.tipo.getTipo()  );
@@ -92,16 +92,16 @@ public class MatchC extends Instruction{
     }
 
     public void setDefault() {
-        for (CaseMatch cazzo : this.cazzos) {
+        for (CaseMatchC cazzo : this.cazzos) {
             if(cazzo.isDefault()){
                 this.insOfDefault = cazzo.getInstructionss();
             }
         }
         
     }
-    public CaseMatch getDefault() {
-        CaseMatch casee = null;
-        for (CaseMatch cazzo : this.cazzos) {
+    public CaseMatchC getDefault() {
+        CaseMatchC casee = null;
+        for (CaseMatchC cazzo : this.cazzos) {
             if(cazzo.isDefault()){
                 casee = cazzo;
             }
@@ -135,7 +135,7 @@ public class MatchC extends Instruction{
         c.contador++;
         String idDef = "";
                             //identificar el default del resto de casos
-        CaseMatch caseDef = getDefault();
+        CaseMatchC caseDef = getDefault();
 
         
                                     //create a la expression
@@ -189,7 +189,7 @@ public class MatchC extends Instruction{
          
         
                                 //crear el codigo 3D
-        for (CaseMatch cazzo : cazzos) {
+        for (CaseMatchC cazzo : cazzos) {
             armed += cazzo.createC3D(arbol, anterior);
 
         }

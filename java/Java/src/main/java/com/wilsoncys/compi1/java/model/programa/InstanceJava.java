@@ -131,15 +131,16 @@ public class InstanceJava extends Instruction{
         
                                             //ejecutar el metodo
         armed+=c.c3d_moveToStack(true, arbol.attbPrincipal);
-        armed+= c.callJava(idClase + "_" + idClase);
+//        armed+= c.callJava(idClase + "_" + idClase);
+        armed+= c.callJava(id_constructor);
         armed+=c.c3d_moveToStack(false, arbol.attbPrincipal);
          
         
                             //create a la Clase
         c.clearVarParams();
 //        arbol.attbClassJava = (((Classs)arbol.getSym("java" + this.idClase).getInstruction()).getCantAttb());
-        arbol.getSym("java" + this.idClase).getInstruction().createC3D(arbol, anterior);
-        c.clearVarParams();
+//        arbol.getSym("java" + this.idClase).getInstruction().createC3D(arbol, anterior);
+//        c.clearVarParams();
         
         
         

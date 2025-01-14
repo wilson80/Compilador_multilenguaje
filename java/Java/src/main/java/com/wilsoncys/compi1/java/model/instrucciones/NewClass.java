@@ -18,6 +18,7 @@ public class NewClass {
     }
      
      public void agregar(int contenido) {
+         
         Nodo nuevoNodo = new Nodo(contenido);
         if (esVacia()) {
             primero = nuevoNodo;

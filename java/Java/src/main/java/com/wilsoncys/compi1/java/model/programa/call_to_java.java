@@ -143,15 +143,15 @@ public class call_to_java extends Instruction{
         
         int posIni = 0;
         if(symMethod.getCat().equals(categoria.FUNCTION) ){
-            ((Functionss)symMethod.getInstruction()).setIdClase(idObject);
-            symMethod.getInstruction().createC3D(arbol, anterior);
+//            ((Functionss)symMethod.getInstruction()).setIdClase(idObject);
+//            symMethod.getInstruction().createC3D(arbol, anterior);
             posIni = 3;   
         }else if(symMethod.getCat().equals(categoria.METHOD)){
            
         
             
-            ((Method)symMethod.getInstruction()).setIdClase(idObject);
-            symMethod.getInstruction().createC3D(arbol, anterior);
+//            ((Method)symMethod.getInstruction()).setIdClase(idObject);
+//            symMethod.getInstruction().createC3D(arbol, anterior);
             posIni = 2;   
         }
          
@@ -164,7 +164,7 @@ public class call_to_java extends Instruction{
         c.clearPtrTemp();   
                                             //ejecutar el metodo
         armed+=c.c3d_moveToStack(true, arbol.attbPrincipal);
-        armed+= c.callJava(idObject+"_"+idMethod);
+        armed+= c.callJava(id_Methodo);
         armed+=c.c3d_moveToStack(false, arbol.attbPrincipal);
         
         //dejar el retorno

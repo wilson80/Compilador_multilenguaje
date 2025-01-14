@@ -76,10 +76,6 @@ public class Access extends Instruction{
         
              @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
-
-
-
-
         
         String armed = "";
         C3d_Java c =  arbol.getJava();
@@ -133,7 +129,7 @@ public class Access extends Instruction{
             
         }
 
-
+        
         if(sym!=null){
             this.tipo = sym.getTipo();
         } 

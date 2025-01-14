@@ -14,6 +14,7 @@ import com.wilsoncys.compi1.java.model.programa.ClasesJava;
 import com.wilsoncys.compi1.java.model.programa.Programa;
 import com.wilsoncys.compi1.java.model.programa.Subprog_pascal;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
+import com.wilsoncys.compi1.java.model.sC3D.CabeceraCod;
 import com.wilsoncys.compi1.java.model.simbolo.*;
 
 import java.io.BufferedReader;
@@ -93,8 +94,6 @@ public class IniciarAnalizadores {
                         listaErrores.add(err);
                     }
                 }
-                
-              
             } 
                                             //creacionde simbolos de pascal
             Subprog_pascal subprogramasP = new Subprog_pascal();
@@ -108,22 +107,10 @@ public class IniciarAnalizadores {
               
             
 //            Generate C3D             
-//            valid si no se encuentra el programa Principan y el Main
-                String c3d_Main = "";
-                c3d_Main = "#include <iostream>\n" +
-                            "\n" +
-                            "using namespace std;\n" +
-                            "\n" +
-                            "int stack[1000];\n" +
-                            "int heap[1000];\n" +
-                            "int ptr = 0;\n" +
-                            "int h = 0;\n\n";
-                ast.Print(c3d_Main);
-                
-                
-                
-
-                String bodyMain ="";
+            String bodyMain ="";
+            String subPass = "";
+            String voids = "";
+            
             try {
                 for (Instruction ins : todasLasIns) {
                     if(ins ==null){
@@ -146,48 +133,40 @@ public class IniciarAnalizadores {
                 e.printStackTrace(new PrintWriter(str ));
                 System.out.println("programa: >>>>>\n\n" + str);
             }
+            bodyMain= ast.java.c3d_main("main", bodyMain);
             
-                
-                bodyMain= ast.java.c3d_main("main", bodyMain);
-                try {
-                    var subp_CreateC3D = subprogramasP.createC3D(ast, new AmbitoMetodo("", "", new ArrayList<String>()));
-                    if(subp_CreateC3D instanceof Errores er){
-                        ast.addError(er);
-                    }
-                ast.Print(bodyMain);
-                } catch (Exception e) {
-                    identificarError(e, ast);
-                    StringWriter str = new StringWriter();
-                    e.printStackTrace(new PrintWriter(str ));
-                    System.out.println("pascal: >>>>>\n\n" + str);
-                }                
-                
-                
-                
 
-                
+            try {
+                var subp_CreateC3D = subprogramasP.createC3D(ast, new AmbitoMetodo("", "", new ArrayList<String>()));
+                if(subp_CreateC3D instanceof Errores er){
+                    ast.addError(er);
+                }
 
-                
-                
-                
-                
-                
+            } catch (Exception e) {
+                identificarError(e, ast);
+                StringWriter str = new StringWriter();
+                e.printStackTrace(new PrintWriter(str ));
+                System.out.println("pascal: >>>>>\n\n" + str);
+            }                
+
+            voids = ast.getConsola();
+            ast.setConsola("");
+            ast.Print( new CabeceraCod().getCabezera());
+            ast.Print("\n\n\n "+ ast.getPrototipos() + "\n\n\n");
+            ast.Print("\n\n" + voids + "\n\n");
+            ast.Print(bodyMain);
             
             
-           
- 
             
             listaErrores.addAll(ast.getListaErrores());
             
-//                        System.out.println(ast.getConsola());
                                             mensajeEjecucion = ast.getConsola();
             for (var i : listaErrores) {
                 mensajeErrores += i + "\n";
-                //                System.out.println(i);
             }
             
-                                     ast.addTablaReport(tabla);
-                                    this.tablaReport = ast.getTablaReport();
+            ast.addTablaReport(tabla);
+            this.tablaReport = ast.getTablaReport();
             
         } catch (Exception ex) {
             System.out.println("Algo salio mal");

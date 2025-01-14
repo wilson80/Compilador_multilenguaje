@@ -35,7 +35,7 @@ public class MainnC extends Instruction{
 
     
     public MainnC(String id, LinkedList<Instruction> instrucciones, int linea, int col) {
-        super(new Tipo(tipoDato.VOID), linea, col);
+        super(new Tipo(tipoDato.OBJECT), linea, col);
 //        this.id = id;
         this.instrucciones = instrucciones;
     }
@@ -119,7 +119,7 @@ public class MainnC extends Instruction{
             c.clearVarParams();
         }
         
-        armed += idRetorno + ":\n";
+        armed += "\n" + idRetorno + ":\n";
         armed += "\ncout<<endl;";
         
         
