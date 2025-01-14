@@ -95,8 +95,7 @@ public class call_to_java extends Instruction{
  
                                         //buscando el tipo del objeto
         if(sym.getInstruction() instanceof InstanceJava met){
-            arbol.getCurrentAmbit().set(1, met.tipo.getTypeString());
-//                arbol.setSizeHeap(3);
+//            arbol.getCurrentAmbit().set(1, met.tipo.getTypeString());
         }        
         
         

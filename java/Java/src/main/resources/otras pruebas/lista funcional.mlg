@@ -132,6 +132,7 @@ public class ListaE {
 
     public void eliminarUltimo() {
         Nodo penultimo = null;
+        Nodo nodoNul = null;
         // if (esVacia()) {
         if (primero ==null) {
             println("La lista esta vacia");
@@ -141,8 +142,8 @@ public class ListaE {
                 ultimo = null;
             } else {
                 penultimo = ultimo.getAnterior();
-                penultimo.setSiguiente(null);
-                ultimo.setAnterior(null);
+                penultimo.setSiguiente(nodoNul);
+                ultimo.setAnterior(nodoNul);
                 ultimo = penultimo;
             }
         
@@ -238,6 +239,7 @@ public class sumar {
 		lista1.agregar(76);
 		lista1.agregar(77);
 		lista1.agregar(78);
+		lista1.agregar(79);
 		lista1.imprimirLista();
 		println("eliminando algunos:  " );
 		lista1.eliminarUltimo();
@@ -248,7 +250,7 @@ public class sumar {
 		
 
 		println("lista: ", lista1.getSize() );
-		println("obtener modo pro pos(5): ", lista1.getContent(5));
+		println("obtener modo pro pos(3): ", lista1.getContent(4));
 		Nodo nodo1 =  lista1.obtenerNodo(3);
 		println("obteniendo contenido de un nodo: en pos 3: ", nodo1.getContenido());
 	}

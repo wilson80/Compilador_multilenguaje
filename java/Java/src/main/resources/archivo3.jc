@@ -1,275 +1,84 @@
+ 
 %%PASCAL
+Function SUMAR(Op1 , Op2 : Integer) : Integer;
+var Respuesta, total: Integer;
+Begin
+println('impresion desde pascal sumar', Op1);
+println('impresion desde pascal sumar', OP2);
+Respuesta := Op1 + Op2;
+SUMAR := Respuesta;
+
+End;
+
+ 
+procedure hellow(dia, mes : integer);
+var uno, dos : Integer;
+begin 
+    println('Hello, World!');
+    println('hos es /', dia, '/', mes);
+    println('uno + dos) por 3: ', (uno + dos)*3 );
+end;
+
+
 %%JAVA
 
-public class Nodo {
-	 
-		int contenido;
-		Nodo siguiente;
-		Nodo anterior;
-	
-		public Nodo(int contenido) {
-			this.contenido = 0;
-			this.siguiente = null;
-			this.anterior = null;
-			this.contenido = contenido;
-		}
-		
-		// public void setContenido(String contenido) {
-		//     this.contenido = contenido;
-		// }
-	
-		public int getContenido() {
-			return contenido;
-		}
-		 public Nodo getSiguiente() {
-			 return siguiente;
-		 }
-	
-		public void setSiguiente(Nodo siguiente) {
-			this.siguiente = siguiente;
-		}
-		
-		public void setAnterior(Nodo anterior) {
-			this.anterior = anterior;
-		}
-		  
-	
-		public Nodo getAnterior() {
-		    return anterior;
-		}
-		
-		 
-}
-
-
-
-
-
-
-public class ListaE {
-
-	Nodo primero;
-	Nodo ultimo;
-	int size;
-	int numero;
-	public ListaE(){
-		primero =null;
-		ultimo =null;
-		size = 0;
-		numero = 0;
-		// println("desde lista: " , numero);
-	}
-  
-   public void agregar(int contenido) {
-	   	// println("intanciacion");	
-		// println("intanciacion");	
-		Nodo nuevoNodo = new Nodo(contenido);
-		
-		if (primero ==null) {
-			println("agregando el primero");	
-			primero = nuevoNodo;
-			ultimo = nuevoNodo;
-		} else {
-			println("agregando el otro");	
-			ultimo.setSiguiente(nuevoNodo); 
-			nuevoNodo.setAnterior(ultimo);
-			ultimo = nuevoNodo;
- 		}
-		
-	  size++;
-  }
-  
-   public int getSize(){
-	return size;
-  }
-   public int getNum(){
-	return numero;
-  }
-//   public boolean esVacia() { 
-// 	  return primero == null;
-//   }
-
-
-  
-  public void imprimirLista() {
-	// Nodo actual = primero; 
-	// // if (esVacia()) {
-	// if (primero == null) {
-	// 	println("La lista esta vacia");
-	// } else {
-	
-	// 	while(actual.getSiguiente() != null) {
-	// 		 println("contenido: " , actual.getContenido());
-	// 		actual = actual.getSiguiente();
-	// 	}
-	// 	 println("contenido: " , actual.getContenido());
-	// }
-	Nodo actual = primero;
-	// if (esVacia()) {
-	int i;
-	// actual = primero;
-	for(i = 0; i<size; i++){
-		println("contenido: " , actual.getContenido());
-			actual = actual.getSiguiente();
-	}
-
- 
-}
-
-				//da un nodo en indice indicado
-	public Nodo obtenerNodo(int index) {
-
-		// println("indice: ", index);
-		Nodo actual = this.primero;
-		
-		int i;
-		for ( i = 0; i < index; i++) {
-
-			actual = actual.getSiguiente();
-		}
-		return actual;
-	}
-
-    public void eliminarUltimo() {
-        Nodo penultimo = null;
-        // if (esVacia()) {
-        if (primero ==null) {
-            println("La lista esta vacia");
-        } else {
-            if (size == 1) {
-                primero = null;
-                ultimo = null;
-            } else {
-                penultimo = ultimo.getAnterior();
-                penultimo.setSiguiente(null);
-                ultimo.setAnterior(null);
-                ultimo = penultimo;
-            }
-        
-            size--;
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-    public int getContent(int index) {
-		Nodo nodo1 = obtenerNodoPRO(index); 
-        return nodo1.getContenido();
-    }
-
-	private Nodo obtenerNodoPRO(int index) {
-        // if (esVacia()) {
-        if (primero == null) {
-             println("La lista esta vacia.");
-            return null;
-        }
-        if (index >= size || index < 0) {
-             println("El indice esta fuera del tama;o de la lista.");
-            return null;
-        }
-        
-        int medio = size / 2;
-        if (index < medio) {
-            return obtenerNodoAvanzando(index);
-        } else {
-            return  obtenerNodoRetrocediendo(index);
-        }
-        
-    }
-    private Nodo obtenerNodoAvanzando(int index) {
-        Nodo actual = primero;
-        int i;
-        for ( i = 0; i < index; i++) {
-
-            actual = actual.getSiguiente();
-        }
-
-        return actual;
-    }
-    
-    private Nodo obtenerNodoRetrocediendo(int index) {
-        int indiceFinal = size - 1;
-        int limite = indiceFinal - index;
-        Nodo actual = ultimo;
-        int i;
-        for ( i = 0; i < limite; i++) {
-            actual = actual.getAnterior();
-        }
-
-        return actual;
-    }
-
-
- 
-
-
-
-}
-
-
-
-
-public class sumar {
-
-	int algo;
-	int dos;
-	ListaE lista1; 
-	// Simpl 
-	public sumar() {
-		lista1 = null;
- 	} 
-
-
-	public void iniciar(){
-		lista1 = new ListaE();
-
-		lista1.agregar(71);
-		lista1.agregar(72);
-		lista1.agregar(73);
-		lista1.agregar(74);
-		lista1.agregar(75);
-		lista1.agregar(76);
-		lista1.agregar(77);
-		lista1.agregar(78);
-		lista1.imprimirLista();
-		println("eliminando algunos:  " );
-		lista1.eliminarUltimo();
-		lista1.eliminarUltimo();
-		lista1.eliminarUltimo();
-
-		lista1.imprimirLista();
-		
-
-		println("lista: ", lista1.getSize() );
-		println("obtener modo pro pos(5): ", lista1.getContent(5));
-		Nodo nodo1 =  lista1.obtenerNodo(3);
-		println("obteniendo contenido de un nodo: en pos 3: ", nodo1.getContenido());
-	}
-} 
-
-
-
 %%PROGRAMA
-#include "JAVA.*"  
-int x = 12;
-int y = 6;
-int z = 9;
-int total = 88;
-
-	JAVA.sumar call1();
-
+#include "JAVA.*"   
+#include "PASCAL"  
+int uno=10;
+int dos=20;
+int tres=30;
+int cuatro=40;
+int cinco=50;
+int total;
+int a=50;
+int b = 5;
+		int valocal = 10;
+int i;
+int suma;
 
 void main()
-{ 	 
-	//JAVA.call1.setObjeto(JAVA.call1.darObjeto());
-	 JAVA.call1.iniciar();
-	
-	
+{ 	   
+
+PASCAL.hellow(12,01);    
+
+// total = PASCAL.sumar(uno,dos);
+// printf("Tototal de sumar %d   con %d es: %d", uno, dos, total); 
+// total = PASCAL.restar(dos,uno);
+// printf("Tototal de restar  %d con %d es: %d", dos, uno, total); 
+
+
+printf("un for ");
+for (  i = 0; i < a; i++) {
+    printf("Número: %d" , i);
+}
+    
+for (  i = 10; i >= 0; i--) {
+     printf("Cuenta regresiva: %d" , i);
+}
+
+
+printf("otro for: ");
+ 
+for (  i = 1; i <= 10; i++) {
+    suma = suma + i;
+    printf("Suma acumulada: %d", suma);
+}
+
+printf("otro for: ");
+
+for (  i = 1; i <= 10; i++) {
+    a = 5*i;
+    printf("Multiplicación de 5 por %d es igual a %d" , i ,a);
+}
+
+
+
+
+
+
+
+
+
+
 }

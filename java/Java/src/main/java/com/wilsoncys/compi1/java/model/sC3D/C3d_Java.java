@@ -160,6 +160,7 @@ public class C3d_Java extends CreadorC3d{
 //        return  armed;
 //    }
     
+ 
     public String c3d_printVar(){
         String armed = "";  
             armed = "cout<<" + varsParams.get(0) + SEMIC ;

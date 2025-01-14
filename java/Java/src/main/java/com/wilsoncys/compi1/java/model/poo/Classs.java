@@ -198,7 +198,7 @@ import javax.swing.JOptionPane;
                     symPar.setAmbito(fun.getAmbito());
                     symPar.armarAmbito((String)param.get("id"));
                     tabla.addSsymbolPre(symPar);            //add symParam
-//                    sym.setInstruction(ins);
+                    symPar.setInstruction(ins);
                     contador++;
                 }
                 fun.setCantParams(contador);
@@ -244,7 +244,7 @@ import javax.swing.JOptionPane;
                     symPar.setAmbito(fun.getAmbito());
                     symPar.armarAmbito((String)param.get("id"));
                     tabla.addSsymbolPre(symPar);            //add symParam
-//                    sym.setInstruction(ins);
+                    symPar.setInstruction(ins);
                     contador++;
                 }
                 fun.setCantParams(contador);
@@ -270,7 +270,7 @@ import javax.swing.JOptionPane;
         C3d_Java c = arbol.getJava(); 
         int iniVars = c.contador; 
 
-//        arbol.setSizeHeap(this.cantAttb);
+        arbol.setSizeHeap(this.cantAttb);
 
         arbol.setAmbito(this.ambito);
         

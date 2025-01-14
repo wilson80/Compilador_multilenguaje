@@ -135,6 +135,7 @@ public class Assignmentt extends Instruction{
         
             @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
+        setPos(arbol);
         String armed = "";
         C3d_Java c =  arbol.getJava();
         
@@ -183,20 +184,7 @@ public class Assignmentt extends Instruction{
             varr = c.varsParams.getFirst();
             c.varsParams.removeFirst();
         
-//         else if(this.expr instanceof Call call){                          //declaracion y asignacion
-//                                                  //create a la llamada
-//              armed+= call.createC3D(arbol, anterior);
-//              varr = c.varsParams.get(0);
-//              c.clearVarParams();
-//         }else if(expr instanceof Access a){
-//             armed+= a.createC3D(arbol, anterior);
-//            varr = c.varsParams.getFirst();
-//            c.varsParams.removeFirst();
-//        }else if(this.expr instanceof Reference ref){
-//                                                  //create a la llamada
-//              armed+= ref.createC3D(arbol, anterior);
-//              varr = c.varsParams.get(0);
-//              c.clearVarParams();
+ 
 //            
         }else{
             armed +=this.expr.createC3D(arbol, anterior);

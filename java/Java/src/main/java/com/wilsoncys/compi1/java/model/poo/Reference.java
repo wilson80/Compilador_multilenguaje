@@ -201,6 +201,7 @@ public class Reference extends Instruction{
         
             @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo posTemp) {
+        setPos(arbol);
         String armed = "";
         int posIniParam = 2;
         
@@ -219,6 +220,11 @@ public class Reference extends Instruction{
                 armed += exps.createC3D(arbol, posTemp);
                 id_constructor += exps.tipo.getTypeString();
             }
+        }
+        Simbolo symClass = arbol.getSym(id_constructor);
+        if(symClass == null){
+            arbol.addError(new Errores("semantic", "No existe la clase o parametros incorrectos", line, col));
+            JOptionPane.showMessageDialog(null, "No existe la clase o parametros incorrectos");
         }
 
 
@@ -244,9 +250,8 @@ public class Reference extends Instruction{
         armed+=c.c3d_moveToStack(false, posTemp.getPosTemp());
         
            
-        c.clearVarParams();
+        
                             //create a la Clase
-        Simbolo symClass = arbol.getSym("java" + this.id);
 //        symClass.getInstruction().createC3D(arbol, posTemp);
         c.clearVarParams();
         

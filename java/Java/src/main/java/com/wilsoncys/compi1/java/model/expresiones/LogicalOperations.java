@@ -153,11 +153,7 @@ public class LogicalOperations extends Instruction{
         op2 = c.varsParams.get(0);
         c.varsParams.removeFirst();
 
-        armed+=operando2.createC3D(arbol, anterior);
-        ope1 = c.varsParams.get(0);
-        c.varsParams.removeFirst();
-        ope2 = c.varsParams.get(0);
-        c.varsParams.removeFirst();
+
         
         
         String cmpOp2 = "cmpOp2" + c.contador;
@@ -180,6 +176,13 @@ public class LogicalOperations extends Instruction{
  
 
         //op2
+                armed+=operando2.createC3D(arbol, anterior);
+        ope1 = c.varsParams.get(0);
+        c.varsParams.removeFirst();
+        ope2 = c.varsParams.get(0);
+        c.varsParams.removeFirst();
+        
+        
         armed += cmpOp2 + ":\n";
         
         if(!elifIns && !elseIns){

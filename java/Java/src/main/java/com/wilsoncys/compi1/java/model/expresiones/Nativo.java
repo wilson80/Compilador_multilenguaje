@@ -56,14 +56,14 @@ public class Nativo extends Instruction{
         String idVAr = "w" + c.getContador();
         c.contador++;
         
-        armed += c.c3d_newNativo(this.tipo.getTipo());
+//        armed += c.c3d_newNativo(this.tipo.getTipo());
         
         
-        if(tipo.getTipo() == tipoDato.CADENA){
-            armed += valor.toString();
-        }else{
-            armed += ""+idVAr + " = " +valor.toString() + ";"+ "\n //nativ\n";
-        }
+//        if(tipo.getTipo() == tipoDato.CADENA){
+//            armed += valor.toString();
+//        }else{
+//            armed += ""+idVAr + " = " +valor.toString() + ";"+ "\n //nativ\n";
+//        }
         
         
         c.varsParams.add(valor.toString());

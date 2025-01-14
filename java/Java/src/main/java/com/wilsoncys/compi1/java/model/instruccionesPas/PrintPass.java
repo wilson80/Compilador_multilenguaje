@@ -82,21 +82,15 @@ public class PrintPass extends Instruction {
         
             
         for (Instruction exp : expresioness) {
-            if(exp instanceof Nativo){
-                String val = (String)exp.createC3D(arbol, anterior);
-                armed+=c.c3d_printNativo(val);
-                c.clearVarParams();
-            }else{
                 var algo  = exp.createC3D(arbol, anterior);
                 if(algo instanceof Errores){
                     return algo;
                 }else{
                     armed+= algo; 
                 }
-                 
                 armed+=c.c3d_printVar();
                 c.clearVarParams();
-            }
+            
         }   
         
  

@@ -15,6 +15,7 @@ import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Jonwil
