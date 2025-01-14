@@ -95,9 +95,7 @@ public class MainnC extends Instruction{
     
             @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
-        List<String> ambito = new ArrayList<>();
-        ambito.add("PROGRAMA");
-        
+
         String idRetorno = "labelReturn" + arbol.getC3d().contador;
         arbol.getC3d().contador++;
         
@@ -110,7 +108,8 @@ public class MainnC extends Instruction{
                 continue;
             }
             
-            var result =ins.createC3D(arbol, new AmbitoMetodo(arbol.attbPrincipal + "", idRetorno, ambito));
+//            var result =ins.createC3D(arbol, new AmbitoMetodo(arbol.attbPrincipal + "", idRetorno, ambito));
+            var result =ins.createC3D(arbol, anterior);
             if(result instanceof Errores){
                 return result;
             }else{

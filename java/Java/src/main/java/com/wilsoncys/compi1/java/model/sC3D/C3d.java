@@ -22,6 +22,10 @@ public class C3d extends CreadorC3d{
     String var2 = "";
     private String ptrTemp = "";
 
+    public LinkedList<String> varsParams;
+    
+    
+    
     
  
     int DIR_RF = 0;
@@ -101,6 +105,9 @@ public class C3d extends CreadorC3d{
         varsParams.removeFirst();
         return  armed;
     }
+    
+    
+    
     @Override
      public String c3d_asignAlone(String val){
         String armed = c3d_newVar() + ASSIG +  val+ SEMIC+saltoLinea;
@@ -154,7 +161,7 @@ public class C3d extends CreadorC3d{
         }
         return arm; 
     }
-    public String c3d_ptrTemp(int size){       
+    public String c3d_ptrTemp(LinkedList<String> vars, int size){       
                         //preparar, temporalmente
         String arm = "";
             arm+="\n";
@@ -242,16 +249,12 @@ public class C3d extends CreadorC3d{
     }
 
     @Override
-    public String c3d_newNativo(tipoDato tipo) {
-        
-        
-        
-        
-        return "";
+    public String c3d_newNativo(String tipo, String val, LinkedList<String> vars) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    
-     
+ 
+        
+         
         
     
 }

@@ -115,24 +115,25 @@ public class Access extends Instruction{
         }
  
 
+        if(sym!=null){
+            this.tipo = sym.getTipo();
+        }
         
         int dir = sym.getDir();
         
         if(sym.getCat()==categoria.PARAM){  
-            armed+= c.c3d_accesParam(id, dir);
+            armed+= c.c3d_accesParam(this.getTyStr(), anterior.getVars(), dir);
         }else if(sym.getCat()==categoria.ATRIBUTO){ 
                 armed+= c.c3d_accesRef("", 0);
                 armed+= c.c3d_accesAttVarl("", dir);
 
         }else if(sym.getCat()==categoria.VARL){
-            armed+= c.c3d_acces("", sym.getDir());
+            armed+= c.c3d_accesParam(this.getTyStr(), anterior.getVars(), dir);
             
         }
 
         
-        if(sym!=null){
-            this.tipo = sym.getTipo();
-        } 
+
                  
         return armed;
     }

@@ -146,10 +146,10 @@ public class Mainn extends Instruction{
 //        String ambitoAnt = arbol.getCurrentAmbit().get(1);
     
          //reservar el espacio en el  heap
-        bodyMet += c.c3d_reserveHeap(arbol.getSizeHeap());
+        bodyMet += c.c3d_reserveHeap(anterior.getVars(), arbol.getSizeHeap());
         
         //set a la referencia (stack[0])
-        bodyMet += c.c3d_asignVal("", 0);
+        bodyMet += c.c3d_asignVal("int", anterior.getVars(), 0);
         
         
         

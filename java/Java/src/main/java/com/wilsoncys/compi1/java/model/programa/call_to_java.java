@@ -13,6 +13,7 @@ import com.wilsoncys.compi1.java.model.poo.Functionss;
 import com.wilsoncys.compi1.java.model.poo.Method;
 import com.wilsoncys.compi1.java.model.programa.expresiones.AccessC;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
+import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
@@ -79,7 +80,7 @@ public class call_to_java extends Instruction{
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
                
         String armed = "";
-        C3d c =  arbol.getC3d();
+        C3d_Java c =  arbol.getJava();
         
         String idSimm = "PROGRAMA"+idRef;
         String idObject  = "";
@@ -94,46 +95,39 @@ public class call_to_java extends Instruction{
         
  
                                         //buscando el tipo del objeto
-        if(sym.getInstruction() instanceof InstanceJava met){
-//            arbol.getCurrentAmbit().set(1, met.tipo.getTypeString());
-        }        
+//        if(sym.getInstruction() instanceof InstanceJava met){
+////            arbol.getCurrentAmbit().set(1, met.tipo.getTypeString());
+//        }        
         
         
         
                 //set a la referencia (stack[0]) 
-        armed+= c.c3d_acces(armed, sym.getDir());
+//        armed+= c.c3d_accesParam(armed, sym.getDir());
+        armed+= c.c3d_accesParam("int", anterior.getVars(), sym.getDir());
 
-        armed+=c.c3d_ptrTemp(arbol.attbPrincipal);
+        armed+=c.c3d_ptrTemp(anterior.getVars(),arbol.attbPrincipal);
 
-        armed+= c.c3d_asignVar("", 0);
-        
+        armed+= c.c3d_asignTemp("int", anterior.getVars(), 0);
+            
         
         
         
         String id_Methodo = "java" + idObject + idMethod;
+        LinkedList<String> tipos = new LinkedList<>();
         
                                             //extrayendo los params
         for (Instruction exps : parametersExp) {
-            if(exps instanceof Nativo n){               
-//                armed+=n.createC3D(arbol, anterior);
-                n.createC3D(arbol, anterior);
-                id_Methodo += n.tipo.getTypeString();
-                
-                
-            }else if(exps instanceof AccessC cs){
-                    armed+=cs.createC3D(arbol, anterior);
-                id_Methodo += cs.tipo.getTypeString();
-            }else{
                 armed += exps.createC3D(arbol, anterior);
-                id_Methodo += exps.tipo.getTypeString();
-            }
+                  tipos.add(exps.tipo.getTypeString());
+            
+        }       
+        for (String typs : tipos) {
+            id_Methodo += typs;
         }
-                                                            //stack temp
-        armed+=c.c3d_ptrTemp(arbol.attbPrincipal);
         
-           
- 
-    //        arbol.setAmbito(ambito);
+                                                            //stack temp
+        armed+=c.c3d_ptrTemp(anterior.getVars(), arbol.attbPrincipal);
+  
                                     //create al metodo/funcion
         Simbolo symMethod = arbol.getSym(id_Methodo);
         if(symMethod == null){
@@ -142,34 +136,34 @@ public class call_to_java extends Instruction{
         
         int posIni = 0;
         if(symMethod.getCat().equals(categoria.FUNCTION) ){
-//            ((Functionss)symMethod.getInstruction()).setIdClase(idObject);
-//            symMethod.getInstruction().createC3D(arbol, anterior);
             posIni = 3;   
         }else if(symMethod.getCat().equals(categoria.METHOD)){
-           
-        
-            
-//            ((Method)symMethod.getInstruction()).setIdClase(idObject);
-//            symMethod.getInstruction().createC3D(arbol, anterior);
             posIni = 2;   
         }
-         
+        int contador = 0; 
                                             //PREPARED params en el stack
         for (Instruction exps : parametersExp) {
-                armed += c.c3d_asignVar("", posIni);
-                posIni++;
+                armed += c.c3d_asignVar(tipos.get(contador), c.getPtrTemp(), anterior.getVars(), posIni);
+                posIni++; contador++;
         }
          
         c.clearPtrTemp();   
                                             //ejecutar el metodo
-        armed+=c.c3d_moveToStack(true, arbol.attbPrincipal);
+        armed+=c.c3d_moveToStack(true, arbol.attbPrincipal + "");
         armed+= c.callJava(id_Methodo);
-        armed+=c.c3d_moveToStack(false, arbol.attbPrincipal);
+        armed+=c.c3d_moveToStack(false, arbol.attbPrincipal + "");
         
         //dejar el retorno
         if(symMethod.getCat().equals(categoria.FUNCTION) ){
-          armed += c.c3d_ptrTemp(arbol.attbPrincipal);
-          armed += c.c3d_accesTemp(armed, 1);
+          armed += c.c3d_ptrTemp(anterior.getVars(), arbol.attbPrincipal);
+          //tipo del retorno
+          String tipoRe = "";
+          if(sym.getTipo().getTipo() == tipoDato.OBJECT){
+              tipoRe = "int";
+          }else{
+              tipoRe = sym.getInstruction().getTyStr();
+          }
+          armed += c.c3d_accesTemp(tipoRe, anterior.getVars(), 1);
             
         }
         

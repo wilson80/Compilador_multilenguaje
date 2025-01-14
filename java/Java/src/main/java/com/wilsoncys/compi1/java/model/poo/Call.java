@@ -273,7 +273,8 @@ public class Call extends Instruction{
                 armed+= c.c3d_accesRef("", 0);
                 armed+= c.c3d_accesAttVarl("", sym0.getDir());
             }else if(sym0.getCat() == categoria.PARAM || sym0.getCat()== categoria.VARL){
-                armed+= c.c3d_acces("", sym0.getDir()); 
+//                armed+= c.c3d_acces("", sym0.getDir()); 
+                armed+= c.c3d_accesParam("int", anterior.getVars(), sym0.getDir()); 
              } 
              
                          //interpretar la llamada
@@ -373,15 +374,15 @@ public class Call extends Instruction{
         }else if(symMethod.getInstruction() instanceof Method me){
             posIniParam = 2;
         }
-         
+          
  
         
                                         //stack temp
-            armed+=c.c3d_ptrTemp(ptrTemp);
+//            armed+=c.c3d_ptrTemp(ptrTemp);
 
                                 //dando la direccion de referencia
         if(!callPoo){
-            armed+= c.c3d_acces("", 0);
+            armed+= c.c3d_accesParam("int", anterior.getVars(), 0);
             String simpleRef = c.varsParams.getLast();
             c.varsParams.removeLast();
             c.varsParams.add(0, simpleRef);
@@ -389,14 +390,16 @@ public class Call extends Instruction{
             c.varsParams.addFirst(ref);
         }                     
                                      //dando la ref en el stack del metodo llamado
-        armed+= c.c3d_asignVar(c.getPtrTemp(), 0);
+//        armed+= c.c3d_asignVar(c.getPtrTemp(), 0);
+        armed+= c.c3d_asignVar("int", c.getPtrTemp(), anterior.getVars(), 0);
  
         
         
                    
                                             //PREPARED params en el stack
         for (Instruction exps : parametersExp) {
-                armed += c.c3d_asignVar(c.getPtrTemp(), posIniParam);
+//                armed += c.c3d_asignVar(c.getPtrTemp(), posIniParam);
+//                armed += c.c3d_asignVar("", ref, vars, line)
                 posIniParam++;
         }
         c.clearPtrTemp();   
@@ -424,8 +427,8 @@ public class Call extends Instruction{
                                            //dejar el retorno
             if(symMethod.getCat() == categoria.FUNCTION  ){
                 armed += "\n//retorno\n";
-                armed += c.c3d_ptrTemp(ptrTemp);
-                armed += c.c3d_accesTemp("", 1);
+//                armed += c.c3d_ptrTemp(ptrTemp);
+//                armed += c.c3d_accesTemp("", 1);
                 armed += "\n//retorno\n";
 
             } 

@@ -13,6 +13,7 @@ import com.wilsoncys.compi1.java.model.poo.Functionss;
 import com.wilsoncys.compi1.java.model.poo.Method;
 import com.wilsoncys.compi1.java.model.programa.expresiones.AccessC;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
+import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
@@ -75,12 +76,12 @@ public class call_to_pas extends Instruction{
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         String armed = "";
         armed+= "\n\n//invocacion a subP de pascal, id: " + idMethod + "\n";
-        C3d c =  arbol.getC3d();
+        C3d_Java c =  arbol.getJava();
                
         String armedId = "pas"+idMethod.toLowerCase();
  
         
-        armed+=c.c3d_ptrTemp(arbol.attbPrincipal);
+        armed+=c.c3d_ptrTemp(anterior.getVars(), arbol.attbPrincipal);
 
                                             //extrayendo los params
         for (Instruction exps : parametersExp) {
@@ -112,21 +113,23 @@ public class call_to_pas extends Instruction{
          
                                             //PREPARED params en el stack
         for (Instruction exps : parametersExp) {
-                armed += c.c3d_asignVar("", posIni);
+//                armed += c.c3d_asignVar("", posIni);
                 posIni++;
         }
         
         
         c.clearPtrTemp();   
                                             //crear la llamada
-        armed+=c.c3d_moveToStack(true, arbol.attbPrincipal);
-        armed+= c.callPas(symMethod.getAmbito_enID());
-        armed+=c.c3d_moveToStack(false, arbol.attbPrincipal);
+//        armed+=c.c3d_moveToStack(true, arbol.attbPrincipal);
+//        armed+= c.callPas(symMethod.getAmbito_enID());
+//        armed+=c.c3d_moveToStack(false, arbol.attbPrincipal);
         
         //dejar el retorno
+        
+        //identi tipo del retorno
         if(symMethod.getCat().equals(categoria.FUNCTION) ){
-          armed += c.c3d_ptrTemp(arbol.attbPrincipal);
-          armed += c.c3d_accesTemp(armed, 1);
+          armed += c.c3d_ptrTemp(anterior.getVars(), arbol.attbPrincipal);
+//          armed += c.c3d_accesTemp(armed, 1);
             
         }
         return armed;

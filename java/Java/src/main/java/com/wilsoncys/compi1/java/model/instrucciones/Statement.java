@@ -177,11 +177,11 @@ public class Statement extends Instruction{
                                             //val por defecto asignar
             if(sym.getCat() == categoria.ATRIBUTO){
                                                             //dir ref
-                armed += c.c3d_acces("ptr", 0);
+//                armed += c.c3d_acces("ptr", 0);
                 armed += c.c3d_asignHeap(valDefault, dir);
             }else if(sym.getCat() == categoria.VARL){
                 armed += c.c3d_asignAlone(valDefault);
-                armed += c.c3d_asignVal(id, dir);
+//                armed += c.c3d_asignVal(id, dir);
             }
             
             
@@ -193,13 +193,13 @@ public class Statement extends Instruction{
             if(exp instanceof Input inp){
                     inp.createC3D(arbol, anterior);
                     armed+= c.c3d_Input();  
-                    armed+=c.c3d_asignVal("", dir);
+//                    armed+=c.c3d_asignVal("", dir);
                     c.varsParams = new LinkedList<>();
                 
             }else if(exp instanceof Nativo n){
                  n.createC3D(arbol, anterior); //create exp
                                                             //asignacion
-                armed+=c.c3d_asignVal("", dir);
+//                armed+=c.c3d_asignVal("", dir);
                 c.varsParams = new LinkedList<>();
                 
                 
@@ -209,7 +209,7 @@ public class Statement extends Instruction{
 //                armed+=c.c3d_asignVal(c.varsParams.get(0), dir);
 //                for (String vaa : c.varsParams) {
 //               }
-                armed+=c.c3d_asignVal("", dir);
+//                armed+=c.c3d_asignVal("", dir);
                 
                 c.varsParams = new LinkedList<>();
             }

@@ -231,11 +231,11 @@ public class Reference extends Instruction{
 //        arbol.getClasesJava().getclase(this.id).setId_constructor(id_constructor);
            
                                                     //stack temp
-        armed+=c.c3d_ptrTemp(posTemp.getPosTemp());
+//        armed+=c.c3d_ptrTemp(posTemp.getPosTemp());
 
                                                     //PREPARED params en el stack
         for (Instruction exps : parametersExp) {
-                armed += c.c3d_asignTemp("", posIniParam);
+//                armed += c.c3d_asignTemp("", posIniParam);
                 posIniParam++;
         }
         
@@ -249,18 +249,15 @@ public class Reference extends Instruction{
         armed+= c.callJava(id_constructor);
         armed+=c.c3d_moveToStack(false, posTemp.getPosTemp());
         
-           
         
-                            //create a la Clase
-//        symClass.getInstruction().createC3D(arbol, posTemp);
         c.clearVarParams();
         
         
         arbol.setSizeHeap(cantAttbCurrent);
                                             //mover el ptrtemp Temporal
-        armed+=c.c3d_ptrTemp(posTemp.getPosTemp());
+//        armed+=c.c3d_ptrTemp(posTemp.getPosTemp());
                                             //obtener valor de la referencia
-        armed+=c.c3d_accesTemp("", 0);
+//        armed+=c.c3d_accesTemp("", 0);
         
  
         

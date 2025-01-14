@@ -11,13 +11,14 @@ import java.util.LinkedList;
 import java.util.List;
 
 import java.util.List;
+import javax.sound.sampled.Line;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author jonwilson
  */
-public class C3d_Java extends CreadorC3d{
+public class C3d_Java {
     private final String STACK = "stack";
     private final String HEAP = "heap";
     private final String MAS = " + ";
@@ -32,10 +33,13 @@ public class C3d_Java extends CreadorC3d{
     String var1 = "";
     String var2 = "";
     public LinkedList<String> varsRef;
+    public LinkedList<String> varsParams;
     
+
  
     String OPRT = " + ";
     private String ptrTemp = "";
+    public int contador = 0;
     int DIR_RF = 0;
     int RETURN = 0;
     int RETURNPoo = 1;
@@ -63,12 +67,22 @@ public class C3d_Java extends CreadorC3d{
         return  armed;
     }
     
-    public String c3d_accesParam(String val, int dir){
-        String armed = c3d_newVar() + ASSIG + PTR +MAS+dir + SEMIC;
-        armed += c3d_newVar() + ASSIG + c3d_stack("w" + (contador-2))  + SEMIC +saltoLinea;
-        varsParams.add("w" + (contador-1));
+    public String c3d_accesParam(String tipo, LinkedList<String> vars, int dir){
+        String armed = c3d_newVar("int", vars) + ASSIG + PTR +MAS+dir + SEMIC;
+        armed += c3d_newVar(tipo, vars) + ASSIG + c3d_stack(tipo,"int" + (contador-2))  + SEMIC +saltoLinea;
+        varsParams.add(tipo + (contador-1));
         return  armed;
     }
+//    public String c3d_acces(String val, int dir){
+//        String armed = c3d_newVar() + ASSIG + PTR +MAS+dir + SEMIC;
+//        armed += c3d_newVar() + ASSIG + c3d_stack("w" + (contador-2))  + SEMIC +saltoLinea;
+//        varsParams.add("w" + (contador-1));
+//        return  armed;
+//    }
+     
+    
+    
+    
     
     int dirRef = 0;
     
@@ -81,49 +95,44 @@ public class C3d_Java extends CreadorC3d{
         return  armed;
     }
     
-     public String c3d_acces(String val, int dir){
-        String armed = c3d_newVar() + ASSIG + PTR +MAS+dir + SEMIC;
-        armed += c3d_newVar() + ASSIG + c3d_stack("w" + (contador-2))  + SEMIC +saltoLinea;
-        varsParams.add("w" + (contador-1));
-//        varsParams.addFirst("w" + (countCreateVar-1));
-        return  armed;
-    }
+
+     
      public String c3d_accesRef(String val, int dir){
-        String armed = c3d_newVar() + ASSIG + PTR +MAS+dir + SEMIC;
-        armed += c3d_newVar() + ASSIG + c3d_stack("w" + (contador-2))  + SEMIC +saltoLinea;
-        varsRef.add("w" + (contador-1));
+        String armed = c3d_newVar("int", varsParams) + ASSIG + PTR +MAS+dir + SEMIC;
+        armed += c3d_newVar() + ASSIG + c3d_stack("int","int" + (contador-2))  + SEMIC +saltoLinea;
+        varsRef.add("int" + (contador-1));
 //        varsParams.addFirst("w" + (countCreateVar-1));
         return  armed;
     }
     
     
-    public String c3d_accesTemp(String val, int dir){
+    public String c3d_accesTemp(String tipo, LinkedList<String> vars, int dir){
                                                     //    t28 = t27 + 0;
                                                     //    t29 = stack[t28];
-        String armed = c3d_newVar() + ASSIG + ptrTemp +MAS+dir + SEMIC;
-        armed += c3d_newVar() + ASSIG + c3d_stack("w" + (contador-2))  + SEMIC+saltoLinea;
-        varsParams.add("w" + (contador-1));
+        String armed = c3d_newVar("int", vars) + ASSIG + ptrTemp +MAS+dir + SEMIC;
+        armed += c3d_newVar(tipo, vars) + ASSIG + c3d_stack(tipo,"int" + (contador-2))  + SEMIC+saltoLinea;
+        varsParams.add(tipo + (contador-1));
         return  armed;
     }
-    
-    public String c3d_asignVal(String val, int dir){    //asignacion de nativos
-        String armed = c3d_newVar() + ASSIG + PTR +MAS+dir + SEMIC;
-        armed += c3d_stack("w" + (contador-1)) + ASSIG + varsParams.get(0) + SEMIC+saltoLinea;
+                                        //simple
+    public String c3d_asignVal(String tipo,  LinkedList<String> vars , int dir){    //asignacion de nativos
+        String armed = c3d_newVar("int", vars) + ASSIG + PTR +MAS+dir + SEMIC;
+        armed += c3d_stack(tipo,"int" + (contador-1)) + ASSIG + varsParams.get(0) + SEMIC+saltoLinea;
         varsParams.removeFirst();
         return  armed;
     }   
 //    t26 = t25 + 1;    
-//    stack[t26] = t22;     
-    public String c3d_asignVar(String val, int dir){
-        String armed = c3d_newVar() + ASSIG +  val +MAS+dir + SEMIC;
-        armed += c3d_stack("w" + (contador-1)) + ASSIG + varsParams.get(0) + SEMIC+saltoLinea;
+//    stack[t26] = t22;                         
+    public String c3d_asignVar(String tipo, String val, LinkedList<String> vars,int dir){
+        String armed = c3d_newVar("int", vars) + ASSIG +  val +MAS+dir + SEMIC;
+        armed += c3d_stack(tipo, "w" + (contador-1)) + ASSIG + varsParams.get(0) + SEMIC+saltoLinea;
         varsParams.removeFirst();
         return  armed;
     }
     
-    public String c3d_asignTemp(String val, int dir){
-        String armed = c3d_newVar() + ASSIG +  ptrTemp +MAS+dir + SEMIC;
-        armed += c3d_stack("w" + (contador-1)) + ASSIG + varsParams.get(0) + SEMIC+saltoLinea;
+    public String c3d_asignTemp(String tipo, LinkedList<String> vars, int dir){
+        String armed = c3d_newVar("int", vars)+ ASSIG +  ptrTemp +MAS+dir + SEMIC;
+        armed += c3d_stack(tipo,"int" + (contador-1)) + ASSIG + varsParams.get(0) + SEMIC+saltoLinea;
         varsParams.removeFirst();
         return  armed;
     }
@@ -146,10 +155,10 @@ public class C3d_Java extends CreadorC3d{
         varsParams.add("w"+(contador-1));
         return  armed;
     }
-    public String c3d_reserveHeap(int stackSize){
-        String armed = c3d_newVar() + ASSIG + H + SEMIC;
-        armed += H + ASSIG +  "w" + (contador -1)+MAS +stackSize+ SEMIC+saltoLinea;
-        varsParams.add("w"+(contador-1));
+    public String c3d_reserveHeap(LinkedList<String> vars, int stackSize){
+        String armed = c3d_newVar("int", vars) + ASSIG + H + SEMIC;
+        armed += H + ASSIG +  "int" + (contador -1)+MAS +stackSize+ SEMIC+saltoLinea;
+        varsParams.add("int"+(contador-1));
         return  armed;
     }
     
@@ -163,15 +172,42 @@ public class C3d_Java extends CreadorC3d{
  
     public String c3d_printVar(){
         String armed = "";  
-            armed = "cout<<" + varsParams.get(0) + SEMIC ;
+            armed = "\ncout<<" + varsParams.get(0) + SEMIC ;
         return armed; 
     }
     
+    
     public String c3d_printNativo(String val){
         String armed = "";  
-            armed = "cout<<" + "\""+val + "\"" + SEMIC ;
+            armed = "\ncout<<" + "\""+val + "\"" + SEMIC ;
         return armed; 
     }
+ 
+    
+     
+    public String c3d_newNativo(String tipo, String val, LinkedList<String> vars) {
+        String id = c3d_newVar(tipo, vars);
+        varsParams.add(id);
+        return   id + ASSIG +  val + SEMIC;
+        
+    }
+    
+    
+    private String c3d_newVar(String s, LinkedList<String> vars){
+        String id =   s + contador;
+        String dec = s +" "+ id + SEMIC;
+        contador++;
+        vars.add(dec + "\n");
+        return id;
+    } 
+    
+    
+    
+    
+    
+    
+    
+    
     
 //    public String c3d_statement(String val, int dir){
 //        String armed = c3d_newVar() + ASSIG + PTR +dir + saltoLinea;
@@ -189,6 +225,8 @@ public class C3d_Java extends CreadorC3d{
         contador++;
         return varInt;
     } 
+    
+    
     private String c3d_newVarCond(){
 //        String varInt = "bool w" + countCreateVar;
         String varInt = " w" + contador;
@@ -197,10 +235,10 @@ public class C3d_Java extends CreadorC3d{
         return varInt;
     } 
     
-    public String c3d_stack(String i){
+    public String c3d_stack(String ty, String dir){
         String BR_L = "[";
         String BR_R = "]";
-        String arm = STACK + BR_L +i+ BR_R;
+        String arm = STACK+ ty + BR_L +dir+ BR_R;
         return arm; 
     }    
     public String c3d_heap(String i){
@@ -220,13 +258,13 @@ public class C3d_Java extends CreadorC3d{
         }
         return arm; 
     }
-    public String c3d_ptrTemp(String size){       
+    public String c3d_ptrTemp(LinkedList<String> vars, int size){       
                         //preparar, temporalmente
         String arm = "";
             arm+="\n";
         ptrTemp = "";
-        ptrTemp += "w" + contador;
-            arm = c3d_newVar() + ASSIG  + PTR + MAS +size + SEMIC;
+        ptrTemp += "int" + contador;
+            arm = c3d_newVar("int", vars) + ASSIG  + PTR + MAS +size + SEMIC;
             arm+="\n";
         return arm; 
     }
@@ -271,15 +309,7 @@ public class C3d_Java extends CreadorC3d{
     }
     
     
-        @Override
-    public String c3d_newNativo(tipoDato tipo) {
-        
-        
-        
-        
-        
-        return "";
-    }
+
     
     
     

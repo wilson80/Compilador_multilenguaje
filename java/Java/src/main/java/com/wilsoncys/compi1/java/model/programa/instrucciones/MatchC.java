@@ -123,12 +123,11 @@ public class MatchC extends Instruction{
         @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         String armed = "";
-        CreadorC3d c;   
-        if(anterior.getLenguaje().equals("java")){
-            c = arbol.getJava();
-        }else{
-            c = arbol.getC3d();
-        }
+        C3d_Java c= arbol.getJava();
+//        if(anterior.getLenguaje().equals("java")){
+//        }else{
+//            c = arbol.getC3d();
+//        }
         
         
         String idSalida = "salida" + c.contador;

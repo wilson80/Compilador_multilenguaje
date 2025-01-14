@@ -12,6 +12,7 @@ import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.expresiones.Enums.OperadoresAritmeticos;
 import com.wilsoncys.compi1.java.model.expresiones.Nativo;
 import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
+import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
@@ -118,13 +119,10 @@ public class Modulee extends Instruction {
         String op1 = "";
         String op2 = "";
           
-        CreadorC3d c;
-        
-        if( anterior.getLenguaje().equals("java") ){
-             c = arbol.getJava();
-        }else{
-             c =  arbol.getC3d();
-        } 
+            C3d_Java c=arbol.getJava();
+//        }else{
+//             c =  arbol.getC3d();
+//        } 
         
         if(operando1 instanceof Nativo){        
             operando1.createC3D(arbol, anterior);   //inser en la lista

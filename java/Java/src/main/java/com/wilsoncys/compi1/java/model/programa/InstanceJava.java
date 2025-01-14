@@ -11,6 +11,7 @@ import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.poo.Classs;
 import com.wilsoncys.compi1.java.model.programa.expresiones.AccessC;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
+import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
@@ -80,7 +81,7 @@ public class InstanceJava extends Instruction{
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         setPos(arbol);
         String armed = "";
-        C3d c =  arbol.getC3d();
+        C3d_Java c =  arbol.getJava();
         
         int posIni = 2;
         String idSimm = "PROGRAMA"+id;
@@ -93,72 +94,65 @@ public class InstanceJava extends Instruction{
 
         String id_constructor = "java" + idClase + idClase;
                                             //extrayendo los params
+         LinkedList<String> tipos = new LinkedList<>();
+                                   
         for (Instruction exps : parametersExp) {
-            if(exps instanceof Nativo n){               
-                n.createC3D(arbol, anterior);
-                id_constructor += n.tipo.getTypeString();
-                
-            }else if(exps instanceof AccessC cs){
-                    armed+=cs.createC3D(arbol, anterior);
-                id_constructor += cs.tipo.getTypeString();
-            }else{
-                armed += exps.createC3D(arbol, anterior);
-                id_constructor += exps.tipo.getTypeString();
-            }
+                armed+= exps.createC3D(arbol, anterior);
+                tipos.add(exps.tipo.getTypeString());
         }
-
+        for (String typs : tipos) {
+            id_constructor += typs;
+        }
         
-        arbol.getClasesJava().getclase(idClase).setId_constructor(id_constructor);
-        this.tipo.setTipo(tipoDato.OBJECT);
-        this.tipo.setIdObjeto(idClase);
+        Simbolo constSim = arbol.getSym(id_constructor);
+        if(constSim == null){
+            arbol.addError(new Errores("semantic", 
+                    "no se encontro el constructor o los parametros son incorrectos", line, col));
+        }
+        
+//        arbol.getClasesJava().getclase(idClase).setId_constructor(id_constructor);
+//        this.tipo.setTipo(tipoDato.OBJECT);
+//        this.tipo.setIdObjeto(idClase);
         
         
         
         
                                                             //stack temp
-        armed+=c.c3d_ptrTemp(arbol.attbPrincipal);
-        
+        armed+=c.c3d_ptrTemp(anterior.getVars(), arbol.attbPrincipal);
+
           
                                             //PREPARED params en el stack
+         
+        int contador = 0; 
+                                            //PREPARED params en el stack
         for (Instruction exps : parametersExp) {
-                armed += c.c3d_asignVar("", posIni);
-                posIni++;
+                armed += c.c3d_asignVar(tipos.get(contador), c.getPtrTemp(), anterior.getVars(), posIni);
+                posIni++; contador++;
         }
+        
         
         
         
         c.clearPtrTemp();   
         
                                             //ejecutar el metodo
-        armed+=c.c3d_moveToStack(true, arbol.attbPrincipal);
-//        armed+= c.callJava(idClase + "_" + idClase);
+        armed+=c.c3d_moveToStack(true, arbol.attbPrincipal + "");
         armed+= c.callJava(id_constructor);
-        armed+=c.c3d_moveToStack(false, arbol.attbPrincipal);
+        armed+=c.c3d_moveToStack(false, arbol.attbPrincipal + "");
          
-        
-                            //create a la Clase
         c.clearVarParams();
-//        arbol.attbClassJava = (((Classs)arbol.getSym("java" + this.idClase).getInstruction()).getCantAttb());
-//        arbol.getSym("java" + this.idClase).getInstruction().createC3D(arbol, anterior);
-//        c.clearVarParams();
-        
-        
-        
-//        if(otrosim == null){
-//                 JOptionPane.showMessageDialog(null, "nulll");
-//            
-//        }
 
-
+        
 //                    mover el ptr temporal
-        armed+=c.c3d_ptrTemp(arbol.attbPrincipal);
-            //obtener valor de la referencia
-        armed+=c.c3d_accesTemp(id, 0);
+        armed+=c.c3d_ptrTemp(anterior.getVars(), arbol.attbPrincipal);
 
-        
+            //obtener valor de la referencia
+        armed+=c.c3d_accesTemp("int", anterior.getVars(), 0);
+
         // realizar la asignacion 
-        armed+=c.c3d_asignVal(id, sym.getDir());
+        armed+=c.c3d_asignVal("int", anterior.getVars(), sym.getDir());
             
+        
         return armed;
     }
     

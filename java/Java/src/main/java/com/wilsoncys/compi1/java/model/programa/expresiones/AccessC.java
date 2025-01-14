@@ -139,30 +139,22 @@ public class AccessC extends Instruction{
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         setPos(arbol);
         String armed = "";
-        C3d c =  arbol.getC3d();
+        C3d_Java c =  arbol.getJava();
+        int dir = 0;
         String ids = "PROGRAMA"+id;
         Simbolo sym = arbol.getSym(ids);
          if(sym == null){
             arbol.addError( new Errores("SEMANTIC", "id no definido: " + id, line, col));
             return "";
         } 
- 
-        int dir = sym.getDir();
-        
-        
-
-        if(sym.getCat()==categoria.ATRIBUTO){
-                armed+= c.c3d_acces("", dir);
-//                armed+= c.c3d_asignVar("", dir);
-                
-        } 
-        
-
         if(sym!=null){
             this.tipo = sym.getTipo();
+             dir = sym.getDir();
         }
+        
+        armed+= c.c3d_accesParam(getTyStr(), anterior.getVars(), dir);
 
-
+        
         return armed;
     }
 }

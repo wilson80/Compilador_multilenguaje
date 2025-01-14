@@ -135,13 +135,10 @@ public class LogicalOperations extends Instruction{
         String op2 = "";
         String ope1 = "";
         String ope2 = "";
-        CreadorC3d c;
-        
-        if( anterior.getLenguaje().equals("java") ){
-             c = arbol.getJava();
-        }else{
-             c =  arbol.getC3d();
-        } 
+        C3d_Java c = arbol.getJava();
+//        }else{
+//             c =  arbol.getC3d();
+//        } 
         
 //        C3d_Java c=  arbol.getJava();
 //        c.varsParams = new LinkedList<>();

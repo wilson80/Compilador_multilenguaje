@@ -46,28 +46,7 @@ public class PrintsC extends Instruction {
     public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
         String concatenacion  = "";
         
-//        for (int i = 0; i <= ids.size()-1; i++) {
-//            var resultado = ids.get(i).interpretar(arbol, tabla);
-//            
-//            if (resultado instanceof Errores) {
-//    //            arbol.Print(resultado.toString());
-//                return resultado;
-//            }
-//            if(resultado  == null ){
-//                return new Errores("SEMANTIC", "recibiendo valor Null en Print", line, col);
-//            }
-//            concatenacion += resultado.toString();
-//            
-//        }
-//        
-////        for (Instruction expr : expresioness) {
-//            
-////        }
-//        
-//        
-//
-////        arbol.Print(resultado.toString());
-//        arbol.Print(StringEscapeUtils.unescapeJava(concatenacion));
+ 
         return null;
     }
     
@@ -117,7 +96,7 @@ public class PrintsC extends Instruction {
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         setPos(arbol);
         String armed = "";
-        C3d c = arbol.getC3d();
+        C3d_Java c = arbol.getJava();
         
         int contador = 0;
         
@@ -128,8 +107,9 @@ public class PrintsC extends Instruction {
             for (String vars : ids) {
                 //encontrar el simbolo
                 Simbolo sim = arbol.getSym("PROGRAMA" + vars);
+                this.tipo = sim.getTipo();
                 //crear el acceso
-                armed += c.c3d_acces(vars, sim.getDir());
+                armed += c.c3d_accesParam(getTyStr(), anterior.getVars(), sim.getDir());
                 armed += c.c3d_printNativo(cadenas[contador]);
                 armed += c.c3d_printVar();
                 c.clearVarParams();

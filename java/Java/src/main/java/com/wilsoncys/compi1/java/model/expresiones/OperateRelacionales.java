@@ -498,12 +498,10 @@ public class OperateRelacionales extends Instruction {
           
 //        C3d_Java c=  arbol.getJava();
     
-        CreadorC3d c; 
-        if(anterior.getLenguaje().equals("java")){
-            c = arbol.getJava();
-        }else{
-            c = arbol.getC3d();
-        }
+        C3d_Java c = arbol.getJava();
+//        }else{
+//            c = arbol.getC3d();
+//        }
         
           
         if(operando1 instanceof Nativo){        
@@ -577,7 +575,7 @@ public class OperateRelacionales extends Instruction {
                         }
 
          
-        c.getVarsParams().clear();
+        c.varsParams.clear();
         c.varsParams.add(op1);   
         c.varsParams.add(op2);
         

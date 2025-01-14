@@ -196,13 +196,10 @@ import java.util.LinkedList;
         String op1 = "";
         String op2 = "";
           
-         CreadorC3d c;
-        
-        if( anterior.getLenguaje().equals("java") ){
-             c = arbol.getJava();
-        }else{
-             c =  arbol.getC3d();
-        } 
+         C3d_Java c = arbol.getJava();
+//        }else{
+//             c =  arbol.getC3d();
+//        } 
         
         if(operando1 instanceof Nativo){        
             operando1.createC3D(arbol, anterior);   //inser en la lista

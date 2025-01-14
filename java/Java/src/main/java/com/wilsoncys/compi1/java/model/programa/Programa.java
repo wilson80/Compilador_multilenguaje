@@ -16,7 +16,9 @@ import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.categoria;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java_cup.runtime.Symbol;
 import javax.swing.JOptionPane;
 
@@ -211,7 +213,11 @@ public class Programa extends Instruction{
          }
         
         
+         
+         
+     
           
+    
         int iniVars = arbol.getC3d().contador;
         
         for (Instruction ins : instrucciones) {
@@ -234,34 +240,33 @@ public class Programa extends Instruction{
                    }
            } 
        }
-        
-                    //JAVA
-        for (Instruction clss : clasesJ.getListaClasesJava()) {
-                if(clss instanceof Classs cl){
-                    cl.createC3D(arbol, anterior);
-                }
-        }
-
-
-               //instrucciones del programa principal
+                      //instrucciones del programa principal
        var resutl =this.main.createC3D(arbol, anterior);  
        if(resutl instanceof Errores){
            return resutl;
        }else{
            ArmedPrincipal += resutl; 
-       }        
+       }          
        
-
-       String devVars = "";
-        int finVars = arbol.getC3d().contador;
-        for (int i = iniVars; i < finVars; i++) {
-            devVars += "int w" + i+  ";\n";
-        }
-            
+       
+    
         String temp = ArmedPrincipal;
-        ArmedPrincipal = devVars + "\n";
+        ArmedPrincipal = anterior.getDeclar() + "\n\n";
         ArmedPrincipal += temp;
+        
        
+        
+                            //JAVA
+        for (Instruction clss : clasesJ.getListaClasesJava()) {
+                if(clss instanceof Classs cl){
+                    cl.createC3D(arbol, anterior);
+                }
+        }
+        
+
+
+
+
        
         return ArmedPrincipal;
     }

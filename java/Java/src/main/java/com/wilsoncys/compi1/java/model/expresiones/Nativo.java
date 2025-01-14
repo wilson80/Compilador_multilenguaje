@@ -6,8 +6,8 @@ package com.wilsoncys.compi1.java.model.expresiones;
 
 import com.wilsoncys.compi1.java.model.asbtracto.CreadorC3d;
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
-import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
+import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
@@ -46,37 +46,25 @@ public class Nativo extends Instruction{
         @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         String armed = "";
-        CreadorC3d c;
-        if(anterior.getLenguaje().equals("java")){
-            c = arbol.getJava();
-        }else{
-            c = arbol.getC3d();
-        } 
+            C3d_Java c=arbol.getJava();
+//        }else{
+//            c = arbol.getC3d();
+//        }
+        String nuevoVAl = "";
+        if(this.getTyStr().equals("string")){
+            nuevoVAl  = "\""+valor.toString() + "\"";
+        }else if(this.getTyStr().equals("char")){
+            nuevoVAl  = "\'"+valor.toString() + "\'";
+        }else if (this.getTyStr().equals("float")){
+            nuevoVAl = valor.toString();
+        }else if (this.getTyStr().equals("int")){
+            nuevoVAl = valor.toString();
+        }
 
-        String idVAr = "w" + c.getContador();
-        c.contador++;
         
-//        armed += c.c3d_newNativo(this.tipo.getTipo());
+        armed += c.c3d_newNativo(this.getTyStr(), nuevoVAl, anterior.getVars());
         
-        
-//        if(tipo.getTipo() == tipoDato.CADENA){
-//            armed += valor.toString();
-//        }else{
-//            armed += ""+idVAr + " = " +valor.toString() + ";"+ "\n //nativ\n";
-//        }
-        
-        
-        c.varsParams.add(valor.toString());
-        
-        
-        
-//        if(anterior.getLenguaje().equals("java")){
-//            arbol.java.varsParams.add(valor.toString());
-//        }else{
-//            arbol.cMain.varsParams.add(valor.toString());
-//        }
         return armed;
-//        return "";
     }
     
     

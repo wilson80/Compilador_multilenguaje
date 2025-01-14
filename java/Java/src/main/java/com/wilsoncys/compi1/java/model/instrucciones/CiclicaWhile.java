@@ -156,12 +156,11 @@ public Object doWhile(Arbol arbol, TablaSimbolos tabla){
         setPos(arbol);
         String armed = "";
         
-        CreadorC3d c;   
-        if(anterior.getLenguaje().equals("java")){
-            c = arbol.getJava();
-        }else{
-            c = arbol.getC3d();
-        }        
+        C3d_Java c = arbol.getJava();
+//        if(anterior.getLenguaje().equals("java")){
+//        }else{
+//            c = arbol.getC3d();
+//        }        
         
         String finWhile = "finWhile" + c.contador;
         c.contador++;

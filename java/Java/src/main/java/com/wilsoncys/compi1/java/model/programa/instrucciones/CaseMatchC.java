@@ -108,12 +108,12 @@ public class CaseMatchC extends Instruction{
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         setPos(arbol);
         String armed = "";
-        CreadorC3d c;   
-        if(anterior.getLenguaje().equals("java")){
-            c = arbol.getJava();
-        }else{
-            c = arbol.getC3d();
-        }
+        C3d_Java c = arbol.getJava();   
+//        if(anterior.getLenguaje().equals("java")){
+//            c = arbol.getJava();
+//        }else{
+//            c = arbol.getC3d();
+//        }
 //        C3d_Java c = arbol.getJava();
         
         String idCase = "caseIns" + c.contador;

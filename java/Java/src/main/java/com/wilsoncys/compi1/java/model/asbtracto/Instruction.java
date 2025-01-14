@@ -41,5 +41,30 @@ public abstract class Instruction {
         arbol.setCurrentLine(this.line);
         arbol.setCurrentCol(this.col);
     }
-     
+
+    public String getTyStr() {
+        switch (tipo.getTipo()) {
+            case CADENA:
+                    return "string";
+            case ENTERO:
+                    return "int";
+            case DECIMAL:
+                    return "float";
+            case CARACTER:
+                    return "char";
+                
+            default:
+                    return "";
+        }
+        
+        
+        
+    }
+
+    
+    
+    
+    
+    
 }
+

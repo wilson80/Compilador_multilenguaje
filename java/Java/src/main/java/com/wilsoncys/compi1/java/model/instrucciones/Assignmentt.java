@@ -166,6 +166,7 @@ public class Assignmentt extends Instruction{
                 }
             }else{
                 dir = sym.getDir();
+                
             }
             
 
@@ -174,10 +175,10 @@ public class Assignmentt extends Instruction{
  
                                                       // create a la expresion
          if(expr instanceof Input inp){
-                inp.createC3D(arbol, anterior);
-                armed+= c.c3d_Input();          //new var  
-                armed+=c.c3d_asignVal("", dir);     //Entrada cin
-                c.varsParams = new LinkedList<>();  //limpiar despues de agregar
+//                inp.createC3D(arbol, anterior);
+//                armed+= c.c3d_Input();          //new var  
+//                armed+=c.c3d_asignVal("", dir);     //Entrada cin
+//                c.varsParams = new LinkedList<>();  //limpiar despues de agregar
              
          }else if(this.expr instanceof Nativo n){    //declaracion con valor vativo
             n.createC3D(arbol, anterior);   
@@ -198,7 +199,7 @@ public class Assignmentt extends Instruction{
                                             //realizando la asignacion
         if(sym.getCat() == categoria.ATRIBUTO){
                                             //instance dir
-            armed+= c.c3d_acces("", 0);            
+            armed+= c.c3d_accesParam("int", anterior.getVars(), 0);            
                                                    //insert en heap
             armed+= c.c3d_asignHeap(varr, dir);
          
@@ -207,7 +208,7 @@ public class Assignmentt extends Instruction{
                                                    //insert en stack
             armed+= c.c3d_asignAlone(varr);
             
-            armed+= c.c3d_asignVal("", dir);
+            armed+= c.c3d_asignVal(sym.getInstruction().getTyStr(), anterior.getVars(), dir);
 
         }
 

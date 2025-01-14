@@ -148,33 +148,33 @@ public class StatementC extends Instruction{
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         setPos(arbol);
         String armed = "";
-        C3d c =  arbol.getC3d();
+        C3d_Java c =  arbol.getJava();
         String idArmed = "PROGRAMA"+ this.id;
         
-        
-        int dir  = arbol.getSym(idArmed).getDir();
+        Simbolo sym = arbol.getSym(idArmed);
+        int dir  = sym.getDir();
         
         
         if(whatConstruct == 0){
                                             //valor por defecto conforme el tipo
-            armed += c.c3d_statementNativoC("0", dir);
+//            armed += c.c3d_statementNativoC("0", dir);
         }
         if(whatConstruct == 1){
             
             if(exp instanceof Input inp){
                     inp.createC3D(arbol, anterior);
                     armed+= c.c3d_Input();  
-                    armed+=c.c3d_asignVal("", dir);
+//                    armed+=c.c3d_asignVal("", dir);
                     c.varsParams = new LinkedList<>();
                 
             }else if(exp instanceof Nativo n){
-                 n.createC3D(arbol, anterior); //create exp
+                    armed += n.createC3D(arbol, anterior); //create exp
 //                                                            //asignacion
-                armed+=c.c3d_asignVal("", dir);
+                armed+=c.c3d_asignVal(this.getTyStr(), anterior.getVars(), dir);
             }else{
                 armed+=this.exp.createC3D(arbol, anterior); //create exp
                                                             //asignacion
-                armed+=c.c3d_asignVal("", dir);
+                armed+=c.c3d_asignVal(this.getTyStr(), anterior.getVars(), dir);
             }
             
             

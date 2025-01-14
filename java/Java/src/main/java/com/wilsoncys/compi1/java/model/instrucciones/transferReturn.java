@@ -75,7 +75,7 @@ public class transferReturn extends Instruction{
        
 //        c.varsParams.remove(0);
 //        JOptionPane.showMessageDialog(null, "");
-        armed+=c.c3d_asignVal("", 1);
+//        armed+=c.c3d_asignVal("", 1);
         
         armed += "goto " + ambito.getLabelReturn()+ ";\n";
          

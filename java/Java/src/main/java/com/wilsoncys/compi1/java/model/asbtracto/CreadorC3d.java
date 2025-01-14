@@ -4,7 +4,10 @@
  */
 package com.wilsoncys.compi1.java.model.asbtracto;
 
+import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
+import static com.wilsoncys.compi1.java.model.simbolo.tipoDato.CADENA;
+import static com.wilsoncys.compi1.java.model.simbolo.tipoDato.ENTERO;
 import java.util.LinkedList;
 
 /**
@@ -13,15 +16,17 @@ import java.util.LinkedList;
  */
 public abstract class CreadorC3d {
     public int contador = 0;
-    public String currentTipo = "";
+    public String currentTy = "";
     public LinkedList<String> varsParams;
+   
+
     
     
     public abstract String c3d_asignAlone(String val); 
     public abstract String c3d_operation(String val1, String val2);
     public abstract void setOPRT(String OPRT);
     public abstract String cond_If(String op1, String op2, String labelif, String labelSalida);
-    public abstract String c3d_newNativo(tipoDato tipo);
+    public abstract String c3d_newNativo(String tipo, String val, LinkedList<String> vars);
 
         
     
@@ -33,27 +38,8 @@ public abstract class CreadorC3d {
     public LinkedList<String> getVarsParams() {
         return varsParams;
     }
-
-    public void setCurrentTipo(String currentTipo) {
-        this.currentTipo = currentTipo;
-    }
-
-    public String getCurrentTipo() {
-        return currentTipo;
-    }
-    
-    
-    
-//    private String c3d_newVar(){
-////        String varInt = "int w" + contador;
-//        String varInt = "w" + contador;
-////        ptrTemp = varInt;
-//        contador++;
-//        return varInt;
-//    }
-    
-    
-    
+  
+     
     
     
 }

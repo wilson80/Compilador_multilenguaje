@@ -201,48 +201,45 @@ public class Suma extends Instruction {
         String armed = "";
         String op1 = "";
         String op2 = "";
-        CreadorC3d c;
-        
-        if( anterior.getLenguaje().equals("java") ){
-             c = arbol.getJava();
-        }else{
-             c =  arbol.getC3d();
-        }
+        C3d_Java c = arbol.getJava();
+//        }else{
+//             c =  arbol.getC3d();
+//        }
         
           
-        c.getVarsParams().clear();
-        
-        if(operando1 instanceof Nativo){        
-            operando1.createC3D(arbol, anterior);   //inser en la lista
-            op1 = c.getVarsParams().get(0);
-            c.getVarsParams().removeFirst();
-            armed+=c.c3d_asignAlone(op1);
-            op1 = c.getVarsParams().get(0);
-            c.getVarsParams().removeFirst();
-            
-        }else{
-            armed+=operando1.createC3D(arbol, anterior);
-            op1 = c.getVarsParams().get(0);
-            c.getVarsParams().removeFirst();
-            
-        }
-        
-        if(operando2 instanceof Nativo){            
-            operando2.createC3D(arbol, anterior);   //inser en la lista
-            op2 = c.getVarsParams().get(0);
-            c.getVarsParams().removeFirst();
-            armed+=c.c3d_asignAlone(op2);
-            op2 = c.getVarsParams().get(0);
-            c.getVarsParams().removeFirst();
-        }else{
-            armed+=operando2.createC3D(arbol, anterior);
-            op2 = c.getVarsParams().get(0);
-            c.getVarsParams().removeFirst();
-        }
-        
-        c.setOPRT("+");
-        armed+=c.c3d_operation(op1, op2);
-        c.getVarsParams().add("w"+(c.getContador()-1));  //guarda el id de la var q contiene el resultado
+//        c.getVarsParams().clear();
+//        
+//        if(operando1 instanceof Nativo){        
+//            operando1.createC3D(arbol, anterior);   //inser en la lista
+//            op1 = c.getVarsParams().get(0);
+//            c.getVarsParams().removeFirst();
+//            armed+=c.c3d_asignAlone(op1);
+//            op1 = c.getVarsParams().get(0);
+//            c.getVarsParams().removeFirst();
+//            
+//        }else{
+//            armed+=operando1.createC3D(arbol, anterior);
+//            op1 = c.getVarsParams().get(0);
+//            c.getVarsParams().removeFirst();
+//            
+//        }
+//        
+//        if(operando2 instanceof Nativo){            
+//            operando2.createC3D(arbol, anterior);   //inser en la lista
+//            op2 = c.getVarsParams().get(0);
+//            c.getVarsParams().removeFirst();
+//            armed+=c.c3d_asignAlone(op2);
+//            op2 = c.getVarsParams().get(0);
+//            c.getVarsParams().removeFirst();
+//        }else{
+//            armed+=operando2.createC3D(arbol, anterior);
+//            op2 = c.getVarsParams().get(0);
+//            c.getVarsParams().removeFirst();
+//        }
+//        
+//        c.setOPRT("+");
+//        armed+=c.c3d_operation(op1, op2);
+//        c.getVarsParams().add("w"+(c.getContador()-1));  //guarda el id de la var q contiene el resultado
 
         return armed;
     }

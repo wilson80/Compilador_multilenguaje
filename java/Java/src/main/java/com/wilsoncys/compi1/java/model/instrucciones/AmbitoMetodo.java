@@ -4,6 +4,7 @@
  */
 package com.wilsoncys.compi1.java.model.instrucciones;
 
+import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -20,24 +21,25 @@ public class AmbitoMetodo {
     
     private List<String> ambito;
     
-    
-    
-    
-    
+    private LinkedList<String> vars;
+     
     
     private String posTemp = "";
     private String labelReturn = "";
-
+    
+ 
+    
+    
     public AmbitoMetodo(String pos, String labelR, List<String> ambito ) {
         this.posTemp = pos;
         this.labelReturn = labelR;
         this.ambito = ambito;
+        this.vars = new LinkedList<>();
         if(ambito.size() != 0){
             setLenguaje(ambito.get(0));
+                
         }
     }
-    
-    
     
     
     
@@ -64,7 +66,29 @@ public class AmbitoMetodo {
     public void setLenguaje(String lenguaje) {
         this.lenguaje = lenguaje;
     }
+
+    public LinkedList<String> getVars() {
+        return vars;
+    }
+
+    
+    public String getDeclar(){
+        String al = "";
+        for (String var : vars) {
+            al += var;
+        }
+        return al;
+    }
     
     
-            
-}
+ 
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+     

@@ -1,84 +1,73 @@
- 
 %%PASCAL
-Function SUMAR(Op1 , Op2 : Integer) : Integer;
-var Respuesta, total: Integer;
-Begin
-println('impresion desde pascal sumar', Op1);
-println('impresion desde pascal sumar', OP2);
-Respuesta := Op1 + Op2;
-SUMAR := Respuesta;
+%%JAVA
+public class sumar {
+  
+	// Simple objeto2;
+	int edad; 
+	int nombre;
+	int inicial;
+	int total;
 
-End;
+	public sumar(int a ,int b ) {
+		edad = a;
+		nombre = b;
+		// info();
+	} 
+	public void info(){
+		 println("edad: ", edad); 
+		 println("nombre: ", nombre); 
+		 println("inicial: ", inicial); 
+		 println("totall: ", total); 
+		   edad = 77;
+		   nombre = 78;
+		   inicial = 79;
+		   total = 80;
+		//  int total = adicion(atri, varl, uno, varl2 );
+		 println("edad: ", edad); 
+		 println("nombre: ", nombre); 
+		 println("inicial: ", inicial); 
+		 println("totall: ", total); 
+		//  println("restar: ", restar(varl, uno) ); 
+		// println("varL: ", varl); 	
+ 
+	}
+
+	public int multiplicar(int a, int b){
+		return a*b;
+	}
+ 
+ 
+	// public int div(int a, int b){
+	// 	return a/b;
+	// }
+
+} 
+ //seguir probando
 
  
-procedure hellow(dia, mes : integer);
-var uno, dos : Integer;
-begin 
-    println('Hello, World!');
-    println('hos es /', dia, '/', mes);
-    println('uno + dos) por 3: ', (uno + dos)*3 );
-end;
 
+ 
 
-%%JAVA
 
 %%PROGRAMA
-#include "JAVA.*"   
-#include "PASCAL"  
-int uno=10;
-int dos=20;
-int tres=30;
-int cuatro=40;
-int cinco=50;
-int total;
-int a=50;
-int b = 5;
-		int valocal = 10;
-int i;
-int suma;
+#include "JAVA.*"  
+int x = 12;
+int y = 6;
+int z = 9;
+int total = 88;
 
+	JAVA.sumar call1(x,total);
+	
+	
 void main()
-{ 	   
-
-PASCAL.hellow(12,01);    
-
-// total = PASCAL.sumar(uno,dos);
-// printf("Tototal de sumar %d   con %d es: %d", uno, dos, total); 
-// total = PASCAL.restar(dos,uno);
-// printf("Tototal de restar  %d con %d es: %d", dos, uno, total); 
+{ 	 
+	JAVA.call1.info();
 
 
-printf("un for ");
-for (  i = 0; i < a; i++) {
-    printf("Número: %d" , i);
-}
-    
-for (  i = 10; i >= 0; i--) {
-     printf("Cuenta regresiva: %d" , i);
-}
+	// total = JAVA.call1.multiplicar(y,z);
+	// printf(">>: %d", total);
 
 
-printf("otro for: ");
- 
-for (  i = 1; i <= 10; i++) {
-    suma = suma + i;
-    printf("Suma acumulada: %d", suma);
-}
-
-printf("otro for: ");
-
-for (  i = 1; i <= 10; i++) {
-    a = 5*i;
-    printf("Multiplicación de 5 por %d es igual a %d" , i ,a);
-}
-
-
-
-
-
-
-
-
-
-
+	
+	
 }

@@ -29,7 +29,6 @@ com/wilsoncys/compi1/java/model/asbtracto/CreadorC3d.class
 com/wilsoncys/compi1/java/vistas/VistaGeneral.class
 com/wilsoncys/compi1/java/model/analisis/parser.class
 com/wilsoncys/compi1/java/model/sC3D/C3d_Java.class
-com/wilsoncys/compi1/java/model/poo/call_Objetcts.class
 com/wilsoncys/compi1/java/vistas/TextLineNumber.class
 com/wilsoncys/compi1/java/model/programa/Includes.class
 com/wilsoncys/compi1/java/vistas/prueba2.class
@@ -124,6 +123,7 @@ com/wilsoncys/compi1/java/vistas/SetColor.class
 com/wilsoncys/compi1/java/model/instruccionesPas/OneCasePas.class
 com/wilsoncys/compi1/java/model/expresiones/Access.class
 com/wilsoncys/compi1/java/model/expresiones/Nativo.class
+com/wilsoncys/compi1/java/model/asbtracto/Instruction$1.class
 com/wilsoncys/compi1/java/model/instruccionesPas/VectorsStatementPas.class
 com/wilsoncys/compi1/java/model/expresiones/Aritmeticas/Resta$1.class
 com/wilsoncys/compi1/java/model/expresiones/Enums/Relational_LogicalOperations.class

@@ -128,7 +128,7 @@ public class AssignmenttC extends Instruction{
         setPos(arbol);
         
         String armed = "";
-        C3d c =  arbol.getC3d();
+        C3d_Java c =  arbol.getJava();
         Simbolo sym = arbol.getSym("PROGRAMA" + id);            //pdt
         int dir = 0;
         
@@ -137,26 +137,22 @@ public class AssignmenttC extends Instruction{
                     "no existe la variable con id: " + this.id, line, col));
         }else{
             dir = sym.getDir();
-        }
-        
-        
-        if(expr instanceof Input inp){
-                inp.createC3D(arbol, anterior);
-                armed+= c.c3d_Input();          //new var  
-                armed+=c.c3d_asignVal("", dir);     //Entrada cin
-                c.varsParams = new LinkedList<>();  //limpiar despues de agregar
-             
-         }else if(this.expr instanceof Nativo){    //declaracion con valor nativo
-
-              this.expr.createC3D(arbol, anterior);
-              armed += c.c3d_asignVal("", dir);
-              
-        }else{   //create a la llamada
-                armed += expr.createC3D(arbol, anterior);
-                                                //realizar la asignacion
-                armed +=c.c3d_asignVal("", dir);
+            this.tipo = sym.getTipo();
             
         }
+        //verificar constante
+        
+        if(expr instanceof Input inp){
+//                inp.createC3D(arbol, anterior);
+//                armed+= c.c3d_Input();          //new var  
+//                armed+=c.c3d_asignVal("", dir);     //Entrada cin
+//                c.varsParams = new LinkedList<>();  //limpiar despues de agregar
+             
+         }else {    //declaracion con valor nativo
+               armed += this.expr.createC3D(arbol, anterior);
+              armed += c.c3d_asignVal(this.getTyStr(), anterior.getVars(), dir);
+         } 
+            
          
          
             armed +="\n";
