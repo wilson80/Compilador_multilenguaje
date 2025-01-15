@@ -42,11 +42,18 @@ public class ScanfC extends Instruction{
             arbol.addError(new Errores("semantic", 
                     "no existe la variable con id: " + this.id, line, col));
         }else{
+            //validacion TIPO   
+            if(this.tipo.getTipo() != sym.getTipo().getTipo()){
+                arbol.addError(new Errores("semantic", "tipo de la variable a asignar erroneo", line, col));
+            }
+            
+            
             dir = sym.getDir();
-            this.tipo = sym.getTipo();
             
         }
-        //verificar constante
+        
+        
+        
         if(sym.isConst()){
             arbol.addError(new Errores("semantic", 
                     "no puede asignar a una constante: " + this.id, line, col));
@@ -56,7 +63,12 @@ public class ScanfC extends Instruction{
         
         armed+= "//un cin\n\n\n\ncin>> " + c.varsParams.get(0) + ";\n";
         
-        c.varsParams.remove(0);
+        armed += c.c3d_asignVal(this.getTyStr(), anterior.getVars(), dir);
+
+        
+//        c.varsParams.remove(0);
+        
+        
         
         
         

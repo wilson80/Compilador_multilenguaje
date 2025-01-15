@@ -38,15 +38,18 @@ int int5;
 int int6;
 int int7;
 int int8;
-char char9;
-int int10;
-string string11;
+int int9;
+char char10;
+int int11;
 int int12;
-int int13;
+string string13;
 int int14;
-char char15;
+int int15;
 int int16;
-string string17;
+int int17;
+char char18;
+int int19;
+string string20;
 
 
 int0 = 10;
@@ -71,47 +74,56 @@ int7 = stackint[int6];
 
 
 cin>> int7;
+int8 = ptr + 0;
+stackint[int8] = int7;
+
 
 cout<<"Ingrese el primer valor charrrr";
-cout<<endl;int8 = ptr + 1;
-char9 = stackchar[int8];
+cout<<endl;int9 = ptr + 1;
+char10 = stackchar[int9];
 
 //un cin
 
 
 
-cin>> char9;
+cin>> char10;
+int11 = ptr + 1;
+stackchar[int11] = char10;
+
 
 cout<<"Ingrese el primer valor stringg";
-cout<<endl;int10 = ptr + 2;
-string11 = stackstring[int10];
+cout<<endl;int12 = ptr + 2;
+string13 = stackstring[int12];
 
 //un cin
 
 
 
-cin>> string11;
-int12 = ptr + 0;
-int13 = stackint[int12];
+cin>> string13;
+int14 = ptr + 2;
+stackstring[int14] = string13;
+
+int15 = ptr + 0;
+int16 = stackint[int15];
 
 
 cout<<" el  es char ";
 
-cout<<int13;
-cout<<endl;int14 = ptr + 1;
-char15 = stackchar[int14];
+cout<<int16;
+cout<<endl;int17 = ptr + 1;
+char18 = stackchar[int17];
 
 
 cout<<" el  es char ";
 
-cout<<char15;
-cout<<endl;int16 = ptr + 2;
-string17 = stackstring[int16];
+cout<<char18;
+cout<<endl;int19 = ptr + 2;
+string20 = stackstring[int19];
 
 
 cout<<" el  es char ";
 
-cout<<string17;
+cout<<string20;
 cout<<endl;
 labelReturn0:
 
