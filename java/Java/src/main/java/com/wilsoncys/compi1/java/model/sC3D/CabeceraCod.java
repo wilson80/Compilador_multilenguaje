@@ -16,6 +16,8 @@ public class CabeceraCod {
                             "using namespace std;\n" +
                             "\n" +
             
+//                                "#include <conio.h>" + 
+            
                                 "int stackint[10000];\n" +
                                 "string stackstring[10000];\n" +
                                 "float stackfloat[10000];\n" +

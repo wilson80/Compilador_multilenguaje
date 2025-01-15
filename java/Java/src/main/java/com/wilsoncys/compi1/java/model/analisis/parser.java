@@ -2940,7 +2940,10 @@ class CUP$parser$actions {
           case 40: // insC ::= CLRSCR PAR_OP PAR_CL SEMIC 
             {
               Instruction RESULT =null;
-
+		int aleft = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
+		int aright = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).right;
+		Object a = (Object)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-3)).value;
+		 RESULT = new Clr(aleft, aright); 
               CUP$parser$result = parser.getSymbolFactory().newSymbol("insC",72, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

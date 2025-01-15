@@ -5,6 +5,7 @@
 package com.wilsoncys.compi1.java.model.programa.instrucciones;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
+import com.wilsoncys.compi1.java.model.excepciones.Errores;
 import com.wilsoncys.compi1.java.model.expresiones.Nativo;
 import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
@@ -18,11 +19,15 @@ import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
  */
 public class getchC extends Instruction{
     boolean isInstruc;
+    private String tipoGetch;
 
     public getchC(boolean isInstruc, int linea, int col) {
         super(new Tipo(tipoDato.VOID), linea, col);
+        this.isInstruc = isInstruc;
     }
 
+    
+    
     @Override
     public Object interpretar(Arbol arbol, TablaSimbolos tabla) {
         return null; 
@@ -36,7 +41,7 @@ public class getchC extends Instruction{
     @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         String armed = "";
-        String gChar ="char getch() {\n" +
+        String gChar ="char getchchar() {\n" +
 "    struct termios oldt, newt;\n" +
 "    char ch;\n" +
 "    tcgetattr(STDIN_FILENO, &oldt);           // Guardar configuración actual del terminal\n" +
@@ -48,7 +53,7 @@ public class getchC extends Instruction{
 "    return ch;\n" +
 "}";
  
-        String getInt = "\nint getch() {\n" +
+        String gInt = "\nint getchint() {\n" +
 "    struct termios oldt, newt;\n" +
 "    char ch;\n" +
 "    tcgetattr(STDIN_FILENO, &oldt);           // Guardar configuración actual del terminal\n" +
@@ -61,20 +66,31 @@ public class getchC extends Instruction{
 "}\n";
         
         
-        if(isInstruc){
-            if(!arbol.isThereGetch()){
-                arbol.Print("\n" + gChar + "\n");
-                arbol.setThereGetch(true);
-            } 
-             armed = "\n// un getch";
-    //        armed += "\ncin.get();\n";
-            armed += "\ngetch();\n";
-        }else{
-            String idVar = "\nw" + arbol.getC3d().contador;
-            arbol.getC3d().contador++;
+        if(!isInstruc){
+            if(!(tipoGetch.equals("int") || tipoGetch.equals("char"))){
+                arbol.addError(new Errores("semantic", "getch solo para asignar a int y char", line, col));
+            }
             
-            armed += idVar + " = "+"getch();\n" ;
-            arbol.getC3d().varsParams.add(idVar);
+            if(!arbol.isThereGetchInt()){
+                arbol.Print("\n" + gInt + "\n");
+                arbol.setThereGetchInt(true);
+            }
+            if(!arbol.isThereGetchChar()){
+                arbol.Print("\n" + gChar + "\n");
+                arbol.setThereGetchChar(true);
+            }
+            armed += arbol.getJava().getch(tipoGetch, anterior.getVars());
+            
+            
+            
+        }else{
+            if(!arbol.isThereGetchInt()){
+                arbol.Print("\n" + gInt + "\n");
+                arbol.setThereGetchInt(true);
+            }
+            
+             armed += "\n// un getch";
+            armed += "\ngetchint();\n";
         }
 
         
@@ -85,6 +101,13 @@ public class getchC extends Instruction{
     public String generarast(Arbol arbol, String anterior) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    public void setTipoGetch(String tipoGetch) {
+        this.tipoGetch = tipoGetch;
+    }
+    
+    
+    
     
     
 }

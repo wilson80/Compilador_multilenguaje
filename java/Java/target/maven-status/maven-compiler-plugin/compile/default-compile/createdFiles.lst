@@ -83,6 +83,7 @@ com/wilsoncys/compi1/java/vistas/VistaGeneral$1.class
 com/wilsoncys/compi1/java/model/analisis/colorear2.class
 com/wilsoncys/compi1/java/model/programa/instrucciones/MatchC.class
 com/wilsoncys/compi1/java/model/expresiones/Enums/Relational_LogicalOperations.class
+com/wilsoncys/compi1/java/model/programa/instrucciones/Clr.class
 com/wilsoncys/compi1/java/model/simbolo/categoria.class
 com/wilsoncys/compi1/java/vistas/VistaGeneral$11.class
 com/wilsoncys/compi1/java/model/programa/instrucciones/IFC.class

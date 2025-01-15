@@ -142,11 +142,11 @@ public class AssignmenttC extends Instruction{
         }
         //verificar constante
         
-        if(expr instanceof Input inp){
-//                inp.createC3D(arbol, anterior);
-//                armed+= c.c3d_Input();          //new var  
-//                armed+=c.c3d_asignVal("", dir);     //Entrada cin
-//                c.varsParams = new LinkedList<>();  //limpiar despues de agregar
+        if(expr instanceof getchC gg){
+            gg.setTipoGetch(this.getTyStr());
+            armed += gg.createC3D(arbol, anterior);
+            armed += c.c3d_asignVal(this.getTyStr(), anterior.getVars(), dir);
+            
              
          }else {    //declaracion con valor nativo
                armed += this.expr.createC3D(arbol, anterior);

@@ -157,11 +157,7 @@ public class IFC extends Instruction{
         setPos(arbol);
         String armed = "";
         C3d_Java c= arbol.getJava();
-//        if(anterior.getLenguaje().equals("java")){
-//            c = arbol.getJava();
-//        }else{
-//            c = arbol.getC3d();
-//        }
+ 
         
         if(idIf.isEmpty()){
             idIf = "if" + c.contador;

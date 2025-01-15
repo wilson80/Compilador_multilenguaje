@@ -309,8 +309,17 @@ public class C3d_Java {
     }
     
     
-
+    public String callPas(String id){
+        return  id + "()" +  SEMIC;
+    }
     
+    
+    
+    public String getch(String tipo, LinkedList<String> vars){
+        String id = c3d_newVar(tipo, vars)  + ASSIG + "getch" + tipo +"()"+ SEMIC;
+        varsParams.add(tipo + (contador-1));
+        return id;
+    }
     
     
     

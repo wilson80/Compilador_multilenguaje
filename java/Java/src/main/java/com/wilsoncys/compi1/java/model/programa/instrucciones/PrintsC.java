@@ -55,31 +55,9 @@ public class PrintsC extends Instruction {
     
 @Override
     public String generarast(Arbol arbol, String anterior) {        // PRINTT -> PRINT ( EXP ) ;
-        String nodoPP = "n" + arbol.getCount();
-        String nodoP = "n" + arbol.getCount();
-        String nodoP1 = "n" + arbol.getCount();
-        String nodoExp = "n" + arbol.getCount();
-        String nodoP2 = "n" + arbol.getCount();
-        String nodoPC = "n" + arbol.getCount();
+       
 
-        String resultado = nodoPP + "[label=\"PRIN`T\"];\n";
-        resultado += anterior + " -> " + nodoPP + ";\n";
-
-        resultado += nodoP + "[label=\"println\"];\n";
-        resultado += nodoP1 + "[label=\"(\"];\n";
-        resultado += nodoExp + "[label=\"EXPRESION\"];\n";
-        resultado += nodoP2 + "[label=\")\"];\n";
-        resultado += nodoPC + "[label=\";\"];\n";
-
-        resultado += nodoPP + " -> " + nodoP + ";\n";
-        resultado += nodoPP + " -> " + nodoP1 + ";\n";
-        resultado += nodoPP + " -> " + nodoExp + ";\n";
-        resultado += nodoPP + " -> " + nodoP2 + ";\n";
-        resultado += nodoPP + " -> " + nodoPC + ";\n";
-
-//        resultado += this.expresion.generarast(arbol, nodoExp);
-
-        return resultado;
+        return "";
     }
 
     @Override

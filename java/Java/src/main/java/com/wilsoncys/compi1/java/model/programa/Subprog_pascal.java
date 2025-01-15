@@ -161,6 +161,9 @@ public class Subprog_pascal extends Instruction{
 
     @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
+        
+        
+        
         for (Instruction funs : funcionesPascal) {
              if(funs instanceof FunctionssPas){
                 var algo =funs.createC3D(arbol, anterior);
@@ -176,6 +179,9 @@ public class Subprog_pascal extends Instruction{
              }
         }
          
+        
+        
+        
         return null;
     }
     

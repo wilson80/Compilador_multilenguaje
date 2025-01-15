@@ -88,6 +88,7 @@
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/CaseMatchC.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/CiclicaForC.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/CiclicaWhileC.java
+/home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/Clr.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/IFC.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/IncreaseDecreaseC.java
 /home/jonwilson/Compilador_multilenguaje/java/Java/src/main/java/com/wilsoncys/compi1/java/model/programa/instrucciones/MatchC.java

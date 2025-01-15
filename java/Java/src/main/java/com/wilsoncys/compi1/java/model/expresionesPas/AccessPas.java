@@ -83,29 +83,28 @@ public class AccessPas extends Instruction{
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         setPos(arbol);
         String armed = "";
-        C3d c =  arbol.getC3d();
+        C3d_Java c =  arbol.getJava();
          
-//                    JOptionPane.showMessageDialog(null, "aquiiiiAcces: " + id);
-
         
         Simbolo sym = null;
 
         String armedId = arbol.getAmbito_asID()+ id;
         sym = arbol.getSymPas(armedId);
        
+        int dir = 0;
         if(sym==null){       
             arbol.addError(new Errores("semantic", "la variable con id: "
                     + id + " no existe", line, col));
+        }else{
+              dir = sym.getDir();
+              this.tipo = sym.getTipo();
         }
-        int dir = sym.getDir();
- 
-        armed+= c.c3d_acces("", sym.getDir());
+        
+        
+        armed+= c.c3d_accesParam(this.getTyStr(), anterior.getVars(), dir);
    
-
-        if(sym!=null){
-            this.tipo = sym.getTipo();
-        } 
-                 
+        
+        
         
         return armed;
     }

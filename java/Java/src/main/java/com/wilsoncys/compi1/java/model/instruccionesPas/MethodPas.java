@@ -151,12 +151,11 @@ public class MethodPas extends Instruction{
         String armed = "";
         C3d c = arbol.getC3d();
         
-        String devVars = "";
-        int iniVars = c.contador;
                         //ambito anterior
-        
         String idRetorno ="retorno" + c.contador;
         c.contador++;
+        String posPrepared = "" + this.cantParams;
+        this.ambitoContent = new AmbitoMetodo(posPrepared, idRetorno, this.ambito);
         
         arbol.setCurrentAmbit(this.ambito);
         String bodyMet = "";
@@ -165,8 +164,7 @@ public class MethodPas extends Instruction{
                 continue;
             }
 
-            String posPrepared = "" + this.cantParams;
-            this.ambitoContent = new AmbitoMetodo(posPrepared, idRetorno, this.ambito);
+
             var result =ins.createC3D(arbol, this.ambitoContent);
             if(result instanceof  Errores){
                 return result;
@@ -178,20 +176,17 @@ public class MethodPas extends Instruction{
         bodyMet += idRetorno + ":\n";
         bodyMet += "    cout<< \" \";";
         
-        int finVars = c.contador;
-
-        for (int i = iniVars; i < finVars; i++) {
-            devVars += "int w" + i+  ";\n";
-        }
-            
-        armed = devVars + "\n";
+ 
+        armed += this.ambitoContent.getDeclar();
         armed += bodyMet;
         
-        
-//        armed = c.c3d_metodo("java_" + arbol.getCurrentAmbit().get(1) +"_"+ id, armed);
-        armed = c.c3d_metodo(arbol.getAmbito_asID(), armed);
+        String llamada = getAmbito_asID();
+                
+        armed = c.c3d_metodo(llamada.toLowerCase(), armed);
         
      
+        
+        
         arbol.Print(armed);
  
      
@@ -224,7 +219,14 @@ public class MethodPas extends Instruction{
     public int getCantParams() {
         return cantParams;
     }
- 
+     public String getAmbito_asID(){
+        String ambi = "";
+        for (String st : this.ambito) {
+            ambi +=st;
+        }
+        return ambi; 
+        
+    }
     
 
     

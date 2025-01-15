@@ -126,17 +126,9 @@ public class CiclicaForC extends Instruction {
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         setPos(arbol);
         String armed = "";
-        
-//        C3d c = arbol.getC3d();   
+          
         C3d_Java c = arbol.getJava();
-//        if(anterior.getLenguaje().equals("java")){
-//            c = arbol.getJava();
-//        }else{
-//            c = arbol.getC3d();
-//        }
-        
-        
-//        C3d_Java c = arbol.getJava();
+ 
         String idLoop = "label_Loop" + c.contador;
         c.contador++;
         String idSalida = "salida" + c.contador;

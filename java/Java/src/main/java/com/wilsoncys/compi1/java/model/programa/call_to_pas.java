@@ -74,6 +74,7 @@ public class call_to_pas extends Instruction{
     
             @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
+        setPos(arbol);
         String armed = "";
         armed+= "\n\n//invocacion a subP de pascal, id: " + idMethod + "\n";
         C3d_Java c =  arbol.getJava();
@@ -83,25 +84,26 @@ public class call_to_pas extends Instruction{
         
         armed+=c.c3d_ptrTemp(anterior.getVars(), arbol.attbPrincipal + "");
 
+        LinkedList<String> tipos = new LinkedList<>();
+
                                             //extrayendo los params
         for (Instruction exps : parametersExp) {
-            if(exps instanceof Nativo n){               
-//                armed+=n.createC3D(arbol, anterior);
-                n.createC3D(arbol, anterior);
-                armedId += n.tipo.getTypeString();
-            }else if(exps instanceof AccessC cs){
-                    armed+=cs.createC3D(arbol, anterior);
-                armedId += cs.tipo.getTypeString();
-            }else{
                 armed += exps.createC3D(arbol, anterior);
-                armedId += exps.tipo.getTypeString();
-            }
+                  tipos.add(exps.tipo.getTypeString());
         }
            
+        for (String typs : tipos) {
+            armedId += typs;
+        } 
+        
+        
         
         Simbolo symMethod = arbol.getSym(armedId);
         if(symMethod == null){
+            
             return (new Errores("SEMANTIC", "no se encontro el proccedure/function de pascal: " + idMethod, line, col));
+        }else{
+            this.tipo = symMethod.getTipo();
         }
          
         int posIni = 0;
@@ -111,27 +113,29 @@ public class call_to_pas extends Instruction{
             posIni = 2;   
         }
          
+        int contador = 0; 
                                             //PREPARED params en el stack
         for (Instruction exps : parametersExp) {
-//                armed += c.c3d_asignVar("", posIni);
-                posIni++;
+                armed += c.c3d_asignVar(tipos.get(contador), c.getPtrTemp(), anterior.getVars(), posIni);
+                posIni++; contador++;
         }
         
         
         c.clearPtrTemp();   
                                             //crear la llamada
-//        armed+=c.c3d_moveToStack(true, arbol.attbPrincipal);
-//        armed+= c.callPas(symMethod.getAmbito_enID());
-//        armed+=c.c3d_moveToStack(false, arbol.attbPrincipal);
+        armed+=c.c3d_moveToStack(true, arbol.attbPrincipal + "");
+        armed+= c.callPas(armedId);
+        armed+=c.c3d_moveToStack(false, arbol.attbPrincipal + "");
+         
         
         //dejar el retorno
-        
-        //identi tipo del retorno
         if(symMethod.getCat().equals(categoria.FUNCTION) ){
           armed += c.c3d_ptrTemp(anterior.getVars(), arbol.attbPrincipal + "");
-//          armed += c.c3d_accesTemp(armed, 1);
+          armed += c.c3d_accesTemp(getTyStr(), anterior.getVars(), 1);
             
         }
+        
+        
         return armed;
     }   
     

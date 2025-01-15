@@ -57,7 +57,8 @@ public class Arbol {
     
     private int currentLine = 0;
     private int currentCol = 0;
-    private boolean thereGetch = false;
+    private boolean thereGetchInt = false;
+    private boolean thereGetchChar = false;
     
     
     
@@ -284,12 +285,23 @@ public class Arbol {
         return currentLine;
     }
 
-    public boolean isThereGetch() {
-        return thereGetch;
+    public boolean isThereGetchInt() {
+        return thereGetchInt;
     }
 
-    public void setThereGetch(boolean thereGetch) {
-        this.thereGetch = thereGetch;
+    public boolean isThereGetchChar() {
+        return thereGetchChar;
+    }
+
+    public void setThereGetchChar(boolean thereGetchChar) {
+        this.thereGetchChar = thereGetchChar;
+    }
+
+    
+    
+    
+    public void setThereGetchInt(boolean thereGetch) {
+        this.thereGetchInt = thereGetch;
     }
 
     public String getPrototipos() {

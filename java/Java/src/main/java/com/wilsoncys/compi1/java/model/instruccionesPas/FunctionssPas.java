@@ -152,15 +152,14 @@ public class FunctionssPas extends Instruction{
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         setPos(arbol);
         String armed = "";
-        C3d c = arbol.getC3d();
+        C3d_Java c = arbol.getJava();
         
-        String devVars = "";
-        int iniVars = c.contador;
                         //ambito anterior
-        
         String idRetorno ="retorno" + c.contador;
         c.contador++;
-        
+
+        String posPrepared = "" + this.cantParams;
+        this.ambitoContent = new AmbitoMetodo(posPrepared, idRetorno, this.ambito);
         arbol.setCurrentAmbit(this.ambito);
         String bodyMet = "";
         for (Instruction ins : instrucciones) {
@@ -168,8 +167,6 @@ public class FunctionssPas extends Instruction{
                 continue;
             }
 
-            String posPrepared = "" + this.cantParams;
-            this.ambitoContent = new AmbitoMetodo(posPrepared, idRetorno, this.ambito);
             var result =ins.createC3D(arbol, this.ambitoContent);
             if(result instanceof  Errores){
                 return result;
@@ -181,18 +178,12 @@ public class FunctionssPas extends Instruction{
         bodyMet += idRetorno + ":\n";
         bodyMet += "    cout<< \" \";";
         
-        int finVars = c.contador;
 
-        for (int i = iniVars; i < finVars; i++) {
-            devVars += "int w" + i+  ";\n";
-        }
-            
-        armed = devVars + "\n";
-        armed += bodyMet;
-        
-        
-//        armed = c.c3d_metodo("java_" + arbol.getCurrentAmbit().get(1) +"_"+ id, armed);
-        armed = c.c3d_metodo(arbol.getAmbito_asID(), armed);
+        armed = this.ambitoContent.getDeclar();
+        armed += "\n" + bodyMet;
+
+        String llamada = getAmbito_asID().toLowerCase();
+        armed = c.c3d_metodo(llamada, armed);
         
      
         arbol.Print(armed);
@@ -219,7 +210,14 @@ public class FunctionssPas extends Instruction{
     public void setAmbito(List<String> ambito) {
         this.ambito = ambito;
     }
-    
+        public String getAmbito_asID(){
+        String ambi = "";
+        for (String st : this.ambito) {
+            ambi +=st;
+        }
+        return ambi; 
+        
+    }
     
     
     

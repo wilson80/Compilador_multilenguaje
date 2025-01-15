@@ -11,6 +11,7 @@ import com.wilsoncys.compi1.java.model.expresiones.Input;
 import com.wilsoncys.compi1.java.model.expresiones.Nativo;
 import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.sC3D.C3d;
+import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
@@ -122,9 +123,10 @@ import java.util.LinkedList;
 
     @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
-        C3d c =  arbol.getC3d();
+        C3d_Java c =  arbol.getJava();
         setPos(arbol);
-        String varr = "";
+         
+        
         String armed = "";
         int dir  = 0;
         
@@ -136,30 +138,27 @@ import java.util.LinkedList;
             sym = arbol.getSymPas( arbol.getAmbito_asID());            //pdt
             if(sym != null){
                dir = 1;
+               this.tipo = sym.getTipo();
             }else{
                 arbol.addError(new Errores("semantic", "no existe la variable: " + this.id, line, col));
             }
         }else{
            dir = sym.getDir();
+           this.tipo = sym.getTipo();
         }
-        
         
         
          if(this.expression instanceof Input inp){
                 inp.createC3D(arbol, anterior);
                 armed+= c.c3d_Input();          //new var  
-                armed+=c.c3d_asignVal("", dir);     //Entrada cin
+//                armed+=c.c3d_asignVal("", dir);     //Entrada cin
                 c.varsParams = new LinkedList<>();  //limpiar despues de agregar
              
-         }else if(this.expression instanceof Nativo){    //declaracion con valor nativo
-
-              this.expression.createC3D(arbol, anterior);
-              armed += c.c3d_asignVal("", dir);
-              
-        }else{   //peude ser un acceso
+         }else  {    
+          //peude ser un acceso
                 armed += expression.createC3D(arbol, anterior);
                                                 //realizar la asignacion
-                armed +=c.c3d_asignVal("", dir);
+                armed+= c.c3d_asignVal(getTyStr(), anterior.getVars(), dir);
             
         }
          

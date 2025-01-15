@@ -77,10 +77,10 @@ public class PrintPass extends Instruction {
     @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         setPos(arbol);
-            String armed = "";
-            C3d c = arbol.getC3d();
-        
+        String armed = "";
+        C3d_Java c = arbol.getJava();
             
+        
         for (Instruction exp : expresioness) {
                 var algo  = exp.createC3D(arbol, anterior);
                 if(algo instanceof Errores){
