@@ -156,7 +156,8 @@ nonterminal Instruction pascalCode;
 
 nonterminal LinkedList<Instruction>  callsParametersC
         ,instancesC, cierreElseC, paramssC, insSwC
-        , declaracionC;
+        , declaracionC; 
+nonterminal Instruction decVecC;
 nonterminal LinkedList<CaseMatchC>  listCasesC;
 nonterminal CaseMatchC  caseC;
 nonterminal Tipo typeC;
@@ -288,7 +289,7 @@ includeJ::= INCLUDE JAVAUNO:id {: RESULT = id.toString(); :}
 
 
 decConstC::= CONST typeC:t ID:id ASSIGNMENT EXPRESIONCC:exp SEMIC
-  {: RESULT = new StatementC(id, exp, t, idleft, idright, false); :}    
+  {: RESULT = new StatementC(id, exp, t, idleft, idright, true); :}    
 ;
  
 decVarsC::= typeC:t ID:id ASSIGNMENT EXPRESIONCC:exp SEMIC
@@ -297,10 +298,15 @@ decVarsC::= typeC:t ID:id ASSIGNMENT EXPRESIONCC:exp SEMIC
   {: RESULT = new StatementC(id, t, idleft, idright, false); :}
 ;
 
-
-
-
 //vectores
+decVecC::=   typeC:t ID:id    BRACK_L  EXPRESIONCC:e1 BRACK_R  SEMIC
+                         {: RESULT = new VectorsStatementC(false, id, e1,  t,  tleft, tright); :}
+        | typeC:t ID:id  BRACK_L EXPRESIONCC:e1 BRACK_R BRACK_L EXPRESIONCC:e2 BRACK_R SEMIC
+                         {: RESULT = new VectorsStatementC(false, id, e1, e2, t, tleft, tright); :}
+        ;
+
+
+
 
 
 mainC::= VOID MAIN:a PAR_OP PAR_CL K_OP  instructionsC:ins  K_CL
@@ -311,6 +317,8 @@ mainC::= VOID MAIN:a PAR_OP PAR_CL K_OP  instructionsC:ins  K_CL
 declaracionC::= declaracionC:decs decConstC:dec 
         {: RESULT = decs; RESULT.add(dec);  :}
 | declaracionC:decs decVarsC:dec 
+        {: RESULT = decs; RESULT.add(dec);  :}
+| declaracionC:decs decVecC:dec 
         {: RESULT = decs; RESULT.add(dec);  :}
 | declaracionC:decs decObjetos:dec 
         {: RESULT = decs; RESULT.add(dec);  :}
@@ -341,10 +349,14 @@ varsPrintf::= COLON ID:id {: RESULT = new LinkedList<>();  RESULT.add(id);   :}
 ;
 
 
-scanf::= SCAN PAR_OP MASK_D:s COLON ANDSIMPLE ID PAR_CL SEMIC
-        |SCAN PAR_OP MASK_C COLON ANDSIMPLE ID PAR_CL SEMIC
-        |SCAN PAR_OP MASK_F COLON ANDSIMPLE ID PAR_CL SEMIC
-        |SCAN PAR_OP MASK_S COLON ANDSIMPLE ID PAR_CL SEMIC
+scanf::= SCAN:a PAR_OP MASK_D COLON ANDSIMPLE ID:id PAR_CL SEMIC 
+                {:RESULT = new ScanfC(id, new Tipo(tipoDato.ENTERO), aleft, aright ); ;:}
+        |SCAN:a PAR_OP MASK_C COLON ANDSIMPLE ID:id PAR_CL SEMIC
+                {:RESULT = new ScanfC(id, new Tipo(tipoDato.CARACTER), aleft, aright ); ;:}
+        |SCAN:a PAR_OP MASK_F COLON ANDSIMPLE ID:id PAR_CL SEMIC
+                {:RESULT = new ScanfC(id, new Tipo(tipoDato.DECIMAL), aleft, aright ); ;:}
+        |SCAN:a PAR_OP MASK_S COLON ANDSIMPLE ID:id PAR_CL SEMIC
+                {:RESULT = new ScanfC(id, new Tipo(tipoDato.CADENA), aleft, aright ); ;:}
 ;
 
 asignacionC::= ID:id ASSIGNMENT EXPRESIONCC:exp SEMIC
@@ -355,7 +367,7 @@ asignacionC::= ID:id ASSIGNMENT EXPRESIONCC:exp SEMIC
 insC::= PRINT PAR_OP PAR_CL SEMIC
 |CLRSCR:a PAR_OP  PAR_CL SEMIC {: RESULT = new Clr(aleft, aright); :}
 |GETCH:a PAR_OP PAR_CL SEMIC {:RESULT = new getchC(true, aleft, aright); :}
-| scanf
+| scanf:w {:RESULT = w; :}
 | asignacionC:c {: RESULT = c; :}
 | printf:c {: RESULT = c; :}
 |whileC:w {: RESULT = w; :}
@@ -537,7 +549,8 @@ EXPRESIONCC::= MINUS EXPRESIONCC:a             {:   RESULT = new Negacion(a, Ope
             | ID:a      {:   RESULT = new AccessC(a, aleft, aright);   :}
 //arrs
             | ID:a BRACK_L EXPRESIONCC:indx BRACK_R      {:   RESULT = new AccesVector(a, indx, aleft, aright);   :}
-            | ID:a BRACK_L EXPRESIONCC:indx1 BRACK_R BRACK_L  EXPRESIONCC:indx2 BRACK_R      {:   RESULT = new AccesVector(a, indx1, indx2, aleft, aright);   :}
+            | ID:a BRACK_L EXPRESIONCC:indx1 BRACK_R    BRACK_L  EXPRESIONCC:indx2 BRACK_R 
+             {:   RESULT = new AccesVector(a, indx1, indx2, aleft, aright);   :}
 
 
             | GETCH:a PAR_OP PAR_CL {:RESULT = new getchC(false,aleft, aright); :}   
@@ -678,13 +691,13 @@ EXPRESION::= MINUS EXPRESION:a             {:   RESULT = new Negacion(a, Operado
             | EXPRESION:a AND:log EXPRESION:b   {:   RESULT = new LogicalOperations(a, b, Relational_LogicalOperations.AND, aleft, aright);   :}
             | EXPRESION:a OR:log EXPRESION:b   {:   RESULT = new LogicalOperations(a, b, Relational_LogicalOperations.OR, aleft, aright);   :}
             | PAR_OP EXPRESION:a PAR_CL    {:   RESULT = a;   :}  
-            | ENTERO:a      {:   RESULT = new Nativo(Integer.parseInt(a), new Tipo(tipoDato.ENTERO), aleft, aright );   :}
             | DECIMAL:a     {:   RESULT = new Nativo(new Double(a), new Tipo(tipoDato.DECIMAL), aleft, aright );   :}
             | CADENA:a      {:   RESULT = new Nativo(a, new Tipo(tipoDato.CADENA), aleft, aright );   :}
             | CHARAC:a      {:   RESULT = new Nativo(a, new Tipo(tipoDato.CARACTER), aleft, aright );   :}
             | BOOL:a      {:   RESULT = new Nativo(a, new Tipo(tipoDato.BOOLEANO), aleft, aright );   :}
             | NULL:a      {:   RESULT = new Null(new Tipo(tipoDato.VOID), aleft, aright );   :}
             | ID:a      {:   RESULT = new Access(a, aleft, aright);   :}
+            | ENTERO:a      {:   RESULT = new Nativo(Integer.parseInt(a), new Tipo(tipoDato.ENTERO), aleft, aright );   :}
             | THIS DOT ID:a      {:   RESULT = new Access(a, true, aleft, aright);   :}
 
             | ID:a BRACK_L EXPRESION:indx BRACK_R      {:   RESULT = new AccesVector(a, indx, aleft, aright);   :}
@@ -877,6 +890,8 @@ declaracion::=   typeVar:t ID:string   SEMIC                     {: RESULT = new
 ;
 
 
+
+
 globalDec::=  modPriv  typeVar:t ID:string   SEMIC               
                {: RESULT = new Statement(string, t, tleft, tright, false); :}
             | modPriv  typeVar:t ID:string   ASSIGNMENT EXPRESION:exp SEMIC 
@@ -896,21 +911,27 @@ globalDec::=  modPriv  typeVar:t ID:string   SEMIC
 
 
 //public VectorsStatement(String identificador, boolean isConst, LinkedList<Instruction> valuesVect, LinkedList<LinkedList<Instruction>> valuesVect2D, Tipo tipo, int linea, int col) {
-declaracionEstructuraD::= mutabilidad:a ID:id POINTS typeVar:t BRACK_L BRACK_R ASSIGNMENT BRACK_L valoresVectorAlone:vals BRACK_R SEMIC
-                         {: RESULT = new VectorsStatement(id, a, vals, null, t, aleft, aright); :}
-        |mutabilidad:a ID:id POINTS typeVar:t BRACK_L BRACK_R BRACK_L BRACK_R ASSIGNMENT BRACK_L valoresVector2D:vals BRACK_R SEMIC
-                         {: RESULT = new VectorsStatement(id, a, null, vals, t, aleft, aright); :}
+
+// dimArr::= ID:a      {:   RESULT = new Access(a, aleft, aright);   :}
+//         | ENTERO:a      {:   RESULT = new Nativo(Integer.parseInt(a), new Tipo(tipoDato.ENTERO), aleft, aright );   :}
+
+// ;
+
+declaracionEstructuraD::= mutabilidad:a ID:id POINTS typeVar:t BRACK_L  EXPRESION:e1 BRACK_R  SEMIC
+                         {: RESULT = new VectorsStatement(a, id, e1,  t,  aleft, aright); :}
+                         |mutabilidad:a ID:id POINTS typeVar:t BRACK_L EXPRESION:e1 BRACK_R BRACK_L EXPRESION:e2 BRACK_R SEMIC
+                         {: RESULT = new VectorsStatement(a, id, e1, e2, t, aleft, aright); :}
         ;
 
     
-valoresVector2D::= BRACK_L valoresVectorAlone:vals BRACK_R {: RESULT = new LinkedList<>(); RESULT.add(vals); :}
-                | valoresVector2D:listaVals  COLON BRACK_L valoresVectorAlone:vals BRACK_R {: RESULT = listaVals; RESULT.add(vals); :}    
-;
+// valoresVector2D::= BRACK_L valoresVectorAlone:vals BRACK_R {: RESULT = new LinkedList<>(); RESULT.add(vals); :}
+//                 | valoresVector2D:listaVals  COLON BRACK_L valoresVectorAlone:vals BRACK_R {: RESULT = listaVals; RESULT.add(vals); :}    
+// ;
 
 
-valoresVectorAlone::= EXPRESION:exp {: RESULT = new LinkedList<>();  RESULT.add(exp);  :}   //aqui solo entra la primera o ultima vez
-                    |  valoresVectorAlone:valuess   COLON EXPRESION:exp     {: RESULT = valuess; RESULT.add(exp); :}
-;
+// valoresVectorAlone::= EXPRESION:exp {: RESULT = new LinkedList<>();  RESULT.add(exp);  :}   //aqui solo entra la primera o ultima vez
+//                     |  valoresVectorAlone:valuess   COLON EXPRESION:exp     {: RESULT = valuess; RESULT.add(exp); :}
+// ;
 
  
 

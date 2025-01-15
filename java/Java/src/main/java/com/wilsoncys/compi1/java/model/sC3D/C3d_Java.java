@@ -193,13 +193,7 @@ public class C3d_Java {
     }
     
     
-    private String c3d_newVar(String s, LinkedList<String> vars){
-        String id =   s + contador;
-        String dec = s +" "+ id + SEMIC;
-        contador++;
-        vars.add(dec);
-        return id;
-    } 
+
     
     
     
@@ -322,6 +316,35 @@ public class C3d_Java {
     }
     
     
+    
+
+    
+    private String c3d_newVar(String s, LinkedList<String> vars){
+        String id =   s + contador;
+        String dec = s +" "+ id + SEMIC;
+        contador++;
+        vars.add(dec);
+        return id;
+    } 
+    
+    
+    
+    public String vectorOneD(String tipo, LinkedList<String> vars, 
+                                        String val1, String val2){
+        String id = "";
+        
+        
+        
+        return id;
+    }
+    
+    private String c3d_newVarArr1D(String s, LinkedList<String> vars, String dim1){
+        String id =   s + contador;
+        String dec = s +" "+ id + "["+dim1 +"]"+  SEMIC;
+        contador++;
+        vars.add(dec);
+        return id;
+    } 
     
     
     

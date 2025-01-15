@@ -141,6 +141,13 @@ public class AssignmenttC extends Instruction{
             
         }
         //verificar constante
+        if(sym.isConst()){
+            arbol.addError(new Errores("semantic", 
+                    "no puede asignar a una constante: " + this.id, line, col));
+        }
+        
+        
+        
         
         if(expr instanceof getchC gg){
             gg.setTipoGetch(this.getTyStr());

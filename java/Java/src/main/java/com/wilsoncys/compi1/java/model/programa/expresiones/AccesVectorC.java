@@ -26,17 +26,17 @@ public class AccesVectorC extends Instruction{
     private Instruction requestIndex2 = null;
     
     //vectores 1D
-    public AccesVectorC(String identificador, Instruction requestIndex1, int linea, int col) {
+    public AccesVectorC(String identificador, Instruction index1, int linea, int col) {
         super(new Tipo(tipoDato.VOID), linea, col);
         this.identificador = identificador;
-        this.requestIndex1 = requestIndex1;
+        this.requestIndex1 = index1;
     }
     
-    public AccesVectorC(String identificador, Instruction requestIndex1, Instruction requestIndex2, int linea, int col) {
+    public AccesVectorC(String identificador, Instruction index1, Instruction index2, int linea, int col) {
         super(new Tipo(tipoDato.VOID), linea, col);
         this.identificador = identificador;
-        this.requestIndex1 = requestIndex1;
-        this.requestIndex2 = requestIndex2;
+        this.requestIndex1 = index1;
+        this.requestIndex2 = index2;
     }
     
     
@@ -161,7 +161,7 @@ public class AccesVectorC extends Instruction{
 
     @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
-        return anterior;
+        return "";
     }
     
     
