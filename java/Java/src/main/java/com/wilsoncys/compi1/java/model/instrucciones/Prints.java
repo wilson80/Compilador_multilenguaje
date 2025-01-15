@@ -92,8 +92,8 @@ public class Prints extends Instruction {
         for (Instruction exp : expresioness) {
                 armed+= exp.createC3D(arbol, anterior);
                 armed+=c.c3d_printVar();
-                c.clearVarParams();
         }   
+        
         
         if(ln){
             armed+= "cout<<endl;\n";

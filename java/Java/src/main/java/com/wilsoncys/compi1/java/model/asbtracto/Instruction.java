@@ -52,9 +52,10 @@ public abstract class Instruction {
                     return "float";
             case CARACTER:
                     return "char";
-                
+            case OBJECT:
+                    return "int";
             default:
-                    return "";
+                    return "int";
         }
         
         

@@ -495,53 +495,29 @@ public class OperateRelacionales extends Instruction {
          String armed = "";
         String op1 = "";
         String op2 = "";
-          
-//        C3d_Java c=  arbol.getJava();
-    
+ 
         C3d_Java c = arbol.getJava();
-//        }else{
-//            c = arbol.getC3d();
-//        }
-        
-          
-        if(operando1 instanceof Nativo){        
-            var result = operando1.createC3D(arbol, anterior);   //inser en la lista
-            if(result instanceof Errores){
-                return result;
-            }
-            op1 = c.varsParams.get(0);
-            c.varsParams.removeFirst();
-            
-        }else{
+ 
+  
             var res = operando1.createC3D(arbol, anterior);
             if(res instanceof Errores){
                 return res;
             }else{
                 armed +=res;  
             }
-            
             op1 = c.varsParams.get(0);
             c.varsParams.removeFirst();
-            
-        }
         
-        if(operando2 instanceof Nativo){            
-            var res = operando2.createC3D(arbol, anterior);   //inser en la lista
-            if(res instanceof Errores){
-                return res;
-            }
-            op2 = c.varsParams.get(0);
-            c.varsParams.removeFirst();
-        }else{
-            var res =operando2.createC3D(arbol, anterior);
-            if(res instanceof Errores){
-                return res;
+ 
+            var res2 =operando2.createC3D(arbol, anterior);
+            if(res2 instanceof Errores){
+                return res2;
             }else{
-                armed+= res;
+                armed+= res2;
             }
             op2 = c.varsParams.get(0    );
             c.varsParams.removeFirst();
-        }
+        
            
          switch (relacion) {
                             case MAYOR->{

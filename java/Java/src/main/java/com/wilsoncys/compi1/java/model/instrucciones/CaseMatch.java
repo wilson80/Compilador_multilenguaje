@@ -117,11 +117,9 @@ public class CaseMatch extends Instruction{
                 //exp del switch
             String op1 = valStringMatch;
                 //exp del case
-            if(this.expression instanceof Nativo) {
-                expression.createC3D(arbol, anterior) ;  
-            }else{
-                armed += expression.createC3D(arbol, anterior) ;  
-            } 
+         
+            armed += expression.createC3D(arbol, anterior) ;  
+           
             String op2 = c.varsParams.get(0);
             c.clearVarParams();
 

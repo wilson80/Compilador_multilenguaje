@@ -5,6 +5,11 @@
 package com.wilsoncys.compi1.java.model.simbolo;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
+import static com.wilsoncys.compi1.java.model.simbolo.tipoDato.CADENA;
+import static com.wilsoncys.compi1.java.model.simbolo.tipoDato.CARACTER;
+import static com.wilsoncys.compi1.java.model.simbolo.tipoDato.DECIMAL;
+import static com.wilsoncys.compi1.java.model.simbolo.tipoDato.ENTERO;
+import static com.wilsoncys.compi1.java.model.simbolo.tipoDato.OBJECT;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -194,8 +199,26 @@ public class Simbolo {
     public void setIsArr(boolean isArr) {
         this.isArr = isArr;
     }
+    
+    
+    public String getTySim() {
+        switch (tipo.getTipo()) {
+            case CADENA:
+                    return "string";
+            case ENTERO:
+                    return "int";
+            case DECIMAL:
+                    return "float";
+            case CARACTER:
+                    return "char";
+            case OBJECT:
+                    return "int";
+                
+            default:
+                    return "abtract intruction";
+        }
 
-      
+    }
     
             
     

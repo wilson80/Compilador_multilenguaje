@@ -200,27 +200,28 @@ public class Reference extends Instruction{
          
         
             @Override
-    public Object createC3D(Arbol arbol, AmbitoMetodo posTemp) {
+    public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         setPos(arbol);
         String armed = "";
         int posIniParam = 2;
-        
+        int cantAttbCurrent = arbol.attbClassJava;
+
         C3d_Java c = arbol.getJava();
         String id_constructor = "java" + this.id + this.id;
+        
                                             //extrayendo los params
+        LinkedList<String> tipos = new LinkedList<>();
+
         for (Instruction exps : parametersExp) {
-            if(exps instanceof Nativo n){             
-                n.createC3D(arbol, posTemp);
-                id_constructor += n.tipo.getTypeString();
-                
-            }else if(exps instanceof Access cs){
-                armed+=cs.createC3D(arbol, posTemp);
-                id_constructor += cs.tipo.getTypeString();
-            }else{
-                armed += exps.createC3D(arbol, posTemp);
-                id_constructor += exps.tipo.getTypeString();
-            }
+                armed += exps.createC3D(arbol, anterior);
+                tipos.add(exps.tipo.getTypeString());
         }
+        
+        for (String typs : tipos) {
+            id_constructor += typs;
+        }
+        
+        
         Simbolo symClass = arbol.getSym(id_constructor);
         if(symClass == null){
             arbol.addError(new Errores("semantic", "No existe la clase o parametros incorrectos", line, col));
@@ -231,23 +232,24 @@ public class Reference extends Instruction{
 //        arbol.getClasesJava().getclase(this.id).setId_constructor(id_constructor);
            
                                                     //stack temp
-//        armed+=c.c3d_ptrTemp(posTemp.getPosTemp());
+        armed+=c.c3d_ptrTemp(anterior.getVars(), anterior.getPosTemp());
 
                                                     //PREPARED params en el stack
+        int contador = 0; 
+                                            //PREPARED params en el stack
         for (Instruction exps : parametersExp) {
-//                armed += c.c3d_asignTemp("", posIniParam);
-                posIniParam++;
+            String tipo = verifiType(tipos.get(contador)); 
+                armed += c.c3d_asignVar(tipo, c.getPtrTemp(), anterior.getVars(), posIniParam);
+                posIniParam++; contador++;
         }
         
         
-        int cantAttbCurrent = arbol.attbClassJava;
         c.clearPtrTemp(); 
-
                                                 //ejecutar el metodo
-        armed+= c.c3d_moveToStack(true, posTemp.getPosTemp());
-//        armed+= c.callJava(this.id + "_" + this.id);
+                                                
+        armed+= c.c3d_moveToStack(true, anterior.getPosTemp());
         armed+= c.callJava(id_constructor);
-        armed+=c.c3d_moveToStack(false, posTemp.getPosTemp());
+        armed+=c.c3d_moveToStack(false, anterior.getPosTemp());
         
         
         c.clearVarParams();
@@ -255,13 +257,37 @@ public class Reference extends Instruction{
         
         arbol.setSizeHeap(cantAttbCurrent);
                                             //mover el ptrtemp Temporal
-//        armed+=c.c3d_ptrTemp(posTemp.getPosTemp());
+        armed+=c.c3d_ptrTemp(anterior.getVars(), anterior.getPosTemp());
                                             //obtener valor de la referencia
-//        armed+=c.c3d_accesTemp("", 0);
+        armed+=c.c3d_accesTemp("int", anterior.getVars(), 0);
         
  
         
         return armed;
+    }
+    
+    
+    
+    
+    
+    
+    
+        public String verifiType(String tipoo){
+        switch (tipoo) {
+            case "int":
+                return tipoo;
+            case "float":
+                return tipoo;
+            case "string":
+                return tipoo;
+            case "char":
+                return "int";
+            case "boolean":
+                return tipoo;
+            default:
+                return "int";
+        }
+                
     }
 }
 

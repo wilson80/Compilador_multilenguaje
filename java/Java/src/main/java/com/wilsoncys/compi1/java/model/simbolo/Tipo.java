@@ -32,7 +32,7 @@ public class Tipo {
             case ENTERO:
                 return "int";
             case DECIMAL:
-                return "double";    //podria ser real
+                return "float";    //podria ser real
                 
             case CARACTER:
                 return "char";

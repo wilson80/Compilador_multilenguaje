@@ -81,7 +81,7 @@ public class call_to_pas extends Instruction{
         String armedId = "pas"+idMethod.toLowerCase();
  
         
-        armed+=c.c3d_ptrTemp(anterior.getVars(), arbol.attbPrincipal);
+        armed+=c.c3d_ptrTemp(anterior.getVars(), arbol.attbPrincipal + "");
 
                                             //extrayendo los params
         for (Instruction exps : parametersExp) {
@@ -128,7 +128,7 @@ public class call_to_pas extends Instruction{
         
         //identi tipo del retorno
         if(symMethod.getCat().equals(categoria.FUNCTION) ){
-          armed += c.c3d_ptrTemp(anterior.getVars(), arbol.attbPrincipal);
+          armed += c.c3d_ptrTemp(anterior.getVars(), arbol.attbPrincipal + "");
 //          armed += c.c3d_accesTemp(armed, 1);
             
         }

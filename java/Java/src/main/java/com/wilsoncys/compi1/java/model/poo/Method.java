@@ -124,13 +124,11 @@ public class Method extends Instruction{
     
             @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
+        setPos(arbol);
         String armed = "";
         C3d_Java c = arbol.getJava();
-        
-        String devVars = "";
-        int iniVars = c.contador;
-                        //ambito anterior
-        
+//         C3d_Java c = new C3d_Java();
+
         String idRetorno ="retorno" + c.contador;
         c.contador++;
                                     //label de retorno
@@ -139,6 +137,8 @@ public class Method extends Instruction{
                         
         
         List<String> ambitoAntList = new ArrayList<>(arbol.getCurrentAmbit());
+        String posPrepared = "" + this.cantParams;
+        this.ambitoContent = new AmbitoMetodo(posPrepared, idRetorno, this.ambito);
         arbol.setCurrentAmbit(this.ambito);
 
         
@@ -148,29 +148,21 @@ public class Method extends Instruction{
                 continue;
             }
 
-            String posPrepared = "" + this.cantParams;
-            this.ambitoContent = new AmbitoMetodo(posPrepared, idRetorno, this.ambito);
             bodyMet +=  ins.createC3D(arbol, this.ambitoContent);
             arbol.setCurrentAmbit(this.getAmbito());
 
-        }
+        }       
         arbol.setCurrentAmbit(ambitoAntList);
         
         bodyMet += idRetorno + ":\n";
 //        bodyMet += arbol.getLabelRetorno() + ":\n";
         bodyMet += "    cout<< \" \";";
         
-        int finVars = c.contador;
-
-        for (int i = iniVars; i < finVars; i++) {
-            devVars += "int w" + i+  ";\n";
-        }
-            
-        armed = devVars + "\n";
+    
+        armed += this.ambitoContent.getDeclar();
         armed += bodyMet;
         
         
-//        armed = c.c3d_metodo("java_" + arbol.getCurrentAmbit().get(1) +"_"+ id, armed);
         armed = c.c3d_metodo(this.getAmbito_asID(), armed);
         arbol.addPrototipo(getAmbito_asID());
         

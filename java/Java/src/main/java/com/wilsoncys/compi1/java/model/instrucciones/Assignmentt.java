@@ -19,10 +19,7 @@ import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.java.model.simbolo.categoria;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
-import java.lang.annotation.Native;
-import java.util.HashMap;
-import java.util.LinkedList;
-import javax.swing.JOptionPane;
+ 
 
 /**
  *
@@ -135,14 +132,15 @@ public class Assignmentt extends Instruction{
         
             @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
+        
         setPos(arbol);
         String armed = "";
         C3d_Java c =  arbol.getJava();
-        
+        String tipoS = "";
         
         
         int dir = 0;
-        String varr = "";
+        String valorr = "";
         Simbolo sym = null;
         if(isThis){
                                                 //  buscar el sym solo en el ambito global
@@ -150,6 +148,7 @@ public class Assignmentt extends Instruction{
              armedId += arbol.getCurrentAmbit().get(1)+id;
              sym = arbol.getSym(armedId);
                 dir = sym.getDir();
+                tipoS = sym.getTySim();
                 
         }else{                  //buscando en el ambito local
             String armedId = "";
@@ -163,10 +162,11 @@ public class Assignmentt extends Instruction{
                     arbol.addError(new Errores(id, "no se ha encontrado la variable con id:  " + this.id, line, col));
                 }else{
                     dir = sym.getDir();
+                    tipoS = sym.getTySim();
                 }
             }else{
                 dir = sym.getDir();
-                
+                tipoS = sym.getTySim();
             }
             
 
@@ -180,42 +180,30 @@ public class Assignmentt extends Instruction{
 //                armed+=c.c3d_asignVal("", dir);     //Entrada cin
 //                c.varsParams = new LinkedList<>();  //limpiar despues de agregar
              
-         }else if(this.expr instanceof Nativo n){    //declaracion con valor vativo
-            n.createC3D(arbol, anterior);   
-            varr = c.varsParams.getFirst();
-            c.varsParams.removeFirst();
-        
- 
-//            
-        }else{
+         }else  {    //declaracion con valor vativo
             armed +=this.expr.createC3D(arbol, anterior);
-            varr = c.varsParams.getFirst();
+            valorr = c.varsParams.getFirst();
             c.varsParams.removeFirst();
-        }
+         }
          
          
           
-         
+         //verificar tipos
                                             //realizando la asignacion
         if(sym.getCat() == categoria.ATRIBUTO){
                                             //instance dir
             armed+= c.c3d_accesParam("int", anterior.getVars(), 0);            
                                                    //insert en heap
-            armed+= c.c3d_asignHeap(varr, dir);
+            armed+= c.c3d_asignHeap(tipoS, anterior.getVars(), valorr, dir);
          
         }else{
-                                            //instance dir
                                                    //insert en stack
-            armed+= c.c3d_asignAlone(varr);
-            
-            armed+= c.c3d_asignVal(sym.getInstruction().getTyStr(), anterior.getVars(), dir);
+            c.varsParams.add(valorr);
+            armed+= c.c3d_asignVal(tipoS, anterior.getVars(), dir);
 
         }
 
-               
-//        if(this.id.equals("objeto1")){
-//            JOptionPane.showMessageDialog(null, "dirObjetctVAR: "  + varr);
-//        } 
+ 
 //        //assig 
 //    tr6 = ptr + dir;
 //    stack[tr6] = var;

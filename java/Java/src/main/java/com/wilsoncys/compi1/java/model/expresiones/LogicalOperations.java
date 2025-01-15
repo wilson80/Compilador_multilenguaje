@@ -136,14 +136,7 @@ public class LogicalOperations extends Instruction{
         String ope1 = "";
         String ope2 = "";
         C3d_Java c = arbol.getJava();
-//        }else{
-//             c =  arbol.getC3d();
-//        } 
-        
-//        C3d_Java c=  arbol.getJava();
-//        c.varsParams = new LinkedList<>();
-        
-        //op1
+ 
         armed+=operando1.createC3D(arbol, anterior);
         op1 = c.varsParams.get(0);
         c.varsParams.removeFirst();

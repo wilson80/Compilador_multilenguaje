@@ -137,7 +137,8 @@ import javax.swing.JOptionPane;
                 
                 
                 if(!(tabla.addSsymbolPre(sym))){
-                    return new Errores("SEMANTIC", "El simbolo ya existe: " + mainn.id , mainn.line, mainn.col);
+                    arbol.addError(new Errores("SEMANTIC", "El simbolo ya existe: " 
+                            + mainn.id , mainn.line, mainn.col));
                 }
                 mainn.setAmbito(sym.getAmbito());
                 for (HashMap param : mainn.parameters) {          //syms de params
@@ -148,7 +149,7 @@ import javax.swing.JOptionPane;
                     symPar.setAmbito(mainn.getAmbito());
                     symPar.armarAmbito((String)param.get("id"));
                     tabla.addSsymbolPre(symPar);            //add symParam
-//                    sym.setInstruction(ins);
+                    symPar.setInstruction(ins);
                     contador++;
                 }
                 
@@ -291,9 +292,7 @@ import javax.swing.JOptionPane;
                                     constr.createC3D(arbol, anterior);
                                 }
                             }
-        
-//        arbol.getSym(id_constructor).getInstruction().createC3D(arbol, anterior);
-        
+     
 
 
         

@@ -1,0 +1,74 @@
+%%PASCAL
+%%JAVA
+public class sumar {
+  
+	// Simple objeto2;
+	int edad; 
+	public string nombre;
+	string inicial;
+	int total;
+
+	public sumar(string a ,int b ) {
+		this.edad = b;
+		this.nombre = a;
+	 
+		// info();
+	} 
+	public void info(){
+		 println("edad: ", edad); 
+		 println("nombre: ", nombre); 
+		 println("inicial: ", inicial); 
+		 println("totall: ", total); 
+		//    edad = 77;
+		//    nombre = 78;
+		   inicial = 79;
+		   total = 80;
+		//  int total = adicion(atri, varl, uno, varl2 ); 
+		 println("edad: ", edad); 
+		 println("nombre: ", nombre); 
+		 println("inicial: ", inicial); 
+		 println("totall: ", total); 
+ 
+	}
+
+	public int multiplicar(int a, int b){
+		return a*b;
+	}
+ 
+ 
+	// public int div(int a, int b){
+	// 	return a/b;
+	// }
+
+} 
+ //seguir probando
+
+ 
+
+ 
+
+
+%%PROGRAMA
+#include "JAVA.*"  
+int x = 12;
+int y = 6;
+int z = 9;
+string nombrec = "wilson";
+int edadc = 25;
+
+	JAVA.sumar call1(nombrec,edadc);
+	
+	
+void main()
+{ 	 
+	JAVA.call1.info();
+
+
+	// total = JAVA.call1.multiplicar(y,z);
+	// printf(">>: %d", total);
+
+
+	
+	
+}
+

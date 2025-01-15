@@ -164,55 +164,26 @@ public class Resta extends Instruction {
         
             @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {         
+                setPos(arbol);
         String armed = "";
         String op1 = "";
         String op2 = "";
           
         C3d_Java c= arbol.getJava();
-//        }else{
-//             c =  arbol.getC3d();
-//        }  
+        armed+=operando1.createC3D(arbol, anterior);
+        op1 = c.varsParams.get(0);
+        c.varsParams.removeFirst();
+       
+  
+        armed+=operando2.createC3D(arbol, anterior);
+        op2 = c.varsParams.get(0);
+        c.varsParams.removeFirst();
 
-//        C3d_Java c=  arbol.getJava();
-//        c.varsParams = new LinkedList<>();
-
-
-
-
-
-        
-        if(operando1 instanceof Nativo){        
-            operando1.createC3D(arbol, anterior);   //inser en la lista
-            op1 = c.varsParams.get(0);
-            c.varsParams.removeFirst();
-            armed+=c.c3d_asignAlone(op1);
-            op1 = c.varsParams.get(0);
-            c.varsParams.removeFirst();
             
-        }else{
-            armed+=operando1.createC3D(arbol, anterior);
-            op1 = c.varsParams.get(0);
-            c.varsParams.removeFirst();
-            
-        }
-        
-        if(operando2 instanceof Nativo){            
-            operando2.createC3D(arbol, anterior);   //inser en la lista
-            op2 = c.varsParams.get(0);
-            c.varsParams.removeFirst();
-            armed+=c.c3d_asignAlone(op2);
-            op2 = c.varsParams.get(0);
-            c.varsParams.removeFirst();
-        }else{
-            armed+=operando2.createC3D(arbol, anterior);
-            op2 = c.varsParams.get(0);
-            c.varsParams.removeFirst();
-        }
-        
         c.setOPRT("-");
-        armed+=c.c3d_operation(op1, op2);
-        c.varsParams.add("w"+(c.getContador()-1));  //guarda el id de la var q contiene el resultado
-
+        armed+=c.c3d_operation(this.operando1.tipo.getTypeString(),
+                anterior.getVars(), op1, op2); 
+ 
         return armed;
     }
     

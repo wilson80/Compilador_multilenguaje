@@ -153,35 +153,33 @@ public class Statement extends Instruction{
  
             @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
+        setPos(arbol);
         String armed = "";
         C3d_Java c =  arbol.getJava();
 //        int dir  = arbol.getSym(this.getAmbito_asID()).getDir();
         Simbolo sym = arbol.getSym(arbol.getAmbito_asID()+ id);
+        
         int dir  = arbol.getSym(arbol.getAmbito_asID()+ id) .getDir();
 
         
         
         
         if(whatConstruct == 0){
-//            c.varsParams.add("0");
-            //si el valor es un nativo
-            //-1 si es un objeto para marcar que esta nulo
-            //halar la ref
-                                    //pendiente de tipos
-            String valDefault = "0";
+            Nativo nativo = new Nativo(this.tipo, line, col);
+            String val = "";
+            val += nativo.createC3D(arbol, anterior);
             
-            if(sym.getTipo().getTipo() == tipoDato.OBJECT){
-                valDefault = "-1";
-            }
-            
-                                            //val por defecto asignar
             if(sym.getCat() == categoria.ATRIBUTO){
                                                             //dir ref
-//                armed += c.c3d_acces("ptr", 0);
-                armed += c.c3d_asignHeap(valDefault, dir);
+                armed += c.c3d_accesTemp("int", anterior.getVars(), 0);
+                armed += c.c3d_asignHeap(this.getTyStr(), 
+                                                anterior.getVars(), 
+                                                val, dir);
+                
             }else if(sym.getCat() == categoria.VARL){
-                armed += c.c3d_asignAlone(valDefault);
-//                armed += c.c3d_asignVal(id, dir);
+                armed += c.c3d_asignVal(getTyStr(),
+                                anterior.getVars(), dir);
+                
             }
             
             
@@ -189,31 +187,16 @@ public class Statement extends Instruction{
         }
         
         if(whatConstruct == 1){
-            
             if(exp instanceof Input inp){
-                    inp.createC3D(arbol, anterior);
-                    armed+= c.c3d_Input();  
+//                    inp.createC3D(arbol, anterior);
+//                    armed+= c.c3d_Input();  
 //                    armed+=c.c3d_asignVal("", dir);
-                    c.varsParams = new LinkedList<>();
-                
-            }else if(exp instanceof Nativo n){
-                 n.createC3D(arbol, anterior); //create exp
+            }else  {
+                armed +=exp.createC3D(arbol, anterior); //create exp
                                                             //asignacion
-//                armed+=c.c3d_asignVal("", dir);
-                c.varsParams = new LinkedList<>();
-                
-                
-            }else{
-                armed+=this.exp.createC3D(arbol, anterior); //create exp
-                                                            //asignacion
-//                armed+=c.c3d_asignVal(c.varsParams.get(0), dir);
-//                for (String vaa : c.varsParams) {
-//               }
-//                armed+=c.c3d_asignVal("", dir);
-                
-                c.varsParams = new LinkedList<>();
+                                                            //validacion de tipos
+                armed += c.c3d_asignVal(getTyStr(), anterior.getVars(), dir);
             }
-            
             
         }
          
@@ -222,12 +205,20 @@ public class Statement extends Instruction{
 
     
     
-        public void setAmbito(List<String> ambito) {
-            this.ambito = new LinkedList<>();
-            for (String st : ambito) {
-                this.ambito.add(st);
-            }
+    
+    
+    
+    
+    
+    
+    
+    
+    public void setAmbito(List<String> ambito) {
+        this.ambito = new LinkedList<>();
+        for (String st : ambito) {
+            this.ambito.add(st);
         }
+    }
 
     public List<String> getAmbito() {
         return ambito;

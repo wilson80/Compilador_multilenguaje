@@ -131,13 +131,11 @@ public class Match extends Instruction{
 
         
                                     //create a la expression
-        if(this.expression instanceof Nativo){
-            this.expression.createC3D(arbol, anterior);
-        }else{
-            armed += this.expression.createC3D(arbol, anterior);
-        }
+ 
+        armed += this.expression.createC3D(arbol, anterior);
+      
         String valMatch = c.varsParams.get(0);
-        c.clearVarParams();
+        c.varsParams.remove(0);
         
         
         

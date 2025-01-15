@@ -1,54 +1,141 @@
+ 
 %%PASCAL
 %%JAVA
-public class sumar {
-  
-	// Simple objeto2;
-	int edad; 
-	int nombre;
-	int inicial;
-	int total;
+ 
+public class Nodo { 
+	char contenido;
+	Nodo siguiente;
+	Nodo anterior;
 
-	public sumar(int a ,int b ) {
-		edad = a;
-		nombre = b;
-		// info();
+	public Nodo(char contenido) {
+		this.contenido = contenido;
+		this.siguiente = null;
+		this.anterior = null;
+	}
+
+	public char getContenido() {
+		return contenido;
+	}
+	
+	public Nodo getSiguiente() {
+		return siguiente;
+	}
+
+	public void setSiguiente(Nodo siguiente) {
+		this.siguiente = siguiente;
+	}
+	
+	public void setAnterior(Nodo anterior) {
+		this.anterior = anterior;
+	}
+
+	public Nodo getAnterior() {
+		return anterior;
+	}
+}
+
+public class ListaE {
+	Nodo primero;
+	Nodo ultimo;
+	int size;
+
+	public ListaE(){
+		primero = null;
+		ultimo = null;
+		size = 0;
+	}
+
+	public void agregar(char contenido) {
+		Nodo nuevoNodo = new Nodo(contenido);
+		if (primero == null) {
+			println("Agregando el primero");
+			primero = nuevoNodo;
+			ultimo = nuevoNodo;
+		} else {
+			println("Agregando el otro");
+			ultimo.setSiguiente(nuevoNodo); 
+			nuevoNodo.setAnterior(ultimo);
+			ultimo = nuevoNodo;
+		}
+		size++;
+	}
+
+	public int getSize(){
+		return size;
+	}
+
+	public void imprimirLista() {
+		Nodo actual = primero;
+		int i;
+		for(  i = 0; i < size; i++){
+			println("contenido: " + actual.getContenido());
+			actual = actual.getSiguiente();
+		}
+	}
+
+	public Nodo obtenerNodo(int index) {
+		Nodo actual = this.primero;
+		int i;
+		for (  i = 0; i < index; i++) {
+			actual = actual.getSiguiente();
+		}
+		return actual;
+	}
+
+	public void eliminarUltimo() {
+		Nodo penultimo;
+		Nodo otro = null;
+		if (primero == null) {
+			println("La lista está vacía");
+		} else {
+			if (size == 1) {
+				primero = null;
+				ultimo = null;
+			} else {
+				 penultimo = ultimo.getAnterior();
+				penultimo.setSiguiente(otro);
+				ultimo = penultimo;
+			}
+			size--;
+		}
+	}
+
+	public char getContent(int index) {
+		Nodo nodo1 = obtenerNodo(index); 
+		return nodo1.getContenido();
+	}
+}
+
+public class Sumar {
+	ListaE lista1; 
+
+	public Sumar() {
+		lista1 = null;
 	} 
-	public void info(){
-		 println("edad: ", edad); 
-		 println("nombre: ", nombre); 
-		 println("inicial: ", inicial); 
-		 println("totall: ", total); 
-		   edad = 77;
-		   nombre = 78;
-		   inicial = 79;
-		   total = 80;
-		//  int total = adicion(atri, varl, uno, varl2 );
-		 println("edad: ", edad); 
-		 println("nombre: ", nombre); 
-		 println("inicial: ", inicial); 
-		 println("totall: ", total); 
-		//  println("restar: ", restar(varl, uno) ); 
-		// println("varL: ", varl); 	
- 
+
+	public void iniciar(){
+		lista1 = new ListaE();
+
+		lista1.agregar('H');
+		lista1.agregar('O');
+		lista1.agregar('L');
+		lista1.agregar('A');
+		lista1.agregar('M');
+		lista1.agregar('U');
+		lista1.agregar('N');
+		lista1.imprimirLista();
+
+		println("Eliminando el último nodo:");
+		lista1.eliminarUltimo();
+		lista1.imprimirLista();
+		println("Tamaño de la lista: " , lista1.getSize());
+		println("Contenido en posición 2: " , lista1.getContent(2));
 	}
 
-	public int multiplicar(int a, int b){
-		return a*b;
-	}
- 
- 
-	// public int div(int a, int b){
-	// 	return a/b;
-	// }
 
-} 
- //seguir probando
+}
 
  
-
- 
-
-
 %%PROGRAMA
 #include "JAVA.*"  
 int x = 12;
@@ -56,18 +143,17 @@ int y = 6;
 int z = 9;
 int total = 88;
 
-	JAVA.sumar call1(x,total);
-	
-	
+	 JAVA.Sumar      call1();
+	 
+	  
 void main()
-{ 	 
-	JAVA.call1.info();
-
-
-	// total = JAVA.call1.multiplicar(y,z);
-	// printf(">>: %d", total);
-
-
-	
+{ 	   
+	JAVA.call1.iniciar();
+	 
+	 
+    
+    
 	
 }
+
+ 

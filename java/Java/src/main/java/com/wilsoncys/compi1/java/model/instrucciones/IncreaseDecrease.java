@@ -114,6 +114,9 @@ public class IncreaseDecrease extends Instruction{
         //crear la asignacion
         armed += assig.createC3D(arbol, anterior);
         
+        
+        
+        
         return armed;
     }
     

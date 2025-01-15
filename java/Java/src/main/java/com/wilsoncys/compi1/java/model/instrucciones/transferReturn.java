@@ -5,16 +5,12 @@
 package com.wilsoncys.compi1.java.model.instrucciones;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
-import com.wilsoncys.compi1.java.model.excepciones.Errores;
-import com.wilsoncys.compi1.java.model.expresiones.Nativo;
-import com.wilsoncys.compi1.java.model.sC3D.C3d;
+import com.wilsoncys.compi1.java.model.excepciones.Errores; 
 import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
-import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
-import java.util.ArrayList;
-import java.util.LinkedList;
+import com.wilsoncys.compi1.java.model.simbolo.tipoDato; 
 import javax.swing.JOptionPane;
 
 /**
@@ -64,18 +60,18 @@ public class transferReturn extends Instruction{
         C3d_Java c =  arbol.getJava();
         
         //create exp
-       if(this.expression instanceof Nativo n){
-            n.createC3D(arbol, ambito);
-       }else{
-            armed+=this.expression.createC3D(arbol, ambito);
-       }
-         
-       
+        armed+=this.expression.createC3D(arbol, ambito);
        //VALIdar el tipo del retorno
-       
+    
 //        c.varsParams.remove(0);
-//        JOptionPane.showMessageDialog(null, "");
-//        armed+=c.c3d_asignVal("", 1);
+        this.tipo = this.expression.tipo;
+
+ 
+        
+//        if(this.id.equals("getContenido")){
+//            JOptionPane.showMessageDialog(null, ">>>>>>> " + symMethod.getTySim() );
+//        }
+        armed+=c.c3d_asignVal(this.getTyStr(), ambito.getVars(), 1);
         
         armed += "goto " + ambito.getLabelReturn()+ ";\n";
          

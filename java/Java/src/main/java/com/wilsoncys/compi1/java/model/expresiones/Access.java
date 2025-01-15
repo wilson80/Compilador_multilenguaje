@@ -80,6 +80,8 @@ public class Access extends Instruction{
         String armed = "";
         C3d_Java c =  arbol.getJava();
         Simbolo sym = null;
+        int dir = 0; 
+
         if(this.isThis){
             String armedId = arbol.getCurrentAmbit().get(0);
             armedId += arbol.getCurrentAmbit().get(1) + id;
@@ -91,10 +93,7 @@ public class Access extends Instruction{
 
             String armedId = "";
             armedId= arbol.getAmbito_asID() + id;
-//            if(this.id.equals("nuevoNodo")){
-//                JOptionPane.showMessageDialog(null, "ambit asID: " + arbol.getAmbito_asID()
-//                    +"  \nID: "+this.id);
-//            }
+ 
       
             sym = arbol.getSym(armedId);    
 //            this.tipo = sym.getTipo();
@@ -117,15 +116,19 @@ public class Access extends Instruction{
 
         if(sym!=null){
             this.tipo = sym.getTipo();
+            dir= sym.getDir();
+        }else{
+            arbol.addError(new Errores(id, "no se ha encontrado la variable con id: " + this.id, line, col));
+
         }
         
-        int dir = sym.getDir();
         
         if(sym.getCat()==categoria.PARAM){  
             armed+= c.c3d_accesParam(this.getTyStr(), anterior.getVars(), dir);
         }else if(sym.getCat()==categoria.ATRIBUTO){ 
-                armed+= c.c3d_accesRef("", 0);
-                armed+= c.c3d_accesAttVarl("", dir);
+                armed+= c.c3d_accesRef(anterior.getVars(), 0);
+                
+                armed+= c.c3d_accesAttVarl(this.getTyStr(), anterior.getVars(), dir);
 
         }else if(sym.getCat()==categoria.VARL){
             armed+= c.c3d_accesParam(this.getTyStr(), anterior.getVars(), dir);

@@ -118,7 +118,7 @@ public class InstanceJava extends Instruction{
         
         
                                                             //stack temp
-        armed+=c.c3d_ptrTemp(anterior.getVars(), arbol.attbPrincipal);
+        armed+=c.c3d_ptrTemp(anterior.getVars(), arbol.attbPrincipal + "");
 
           
                                             //PREPARED params en el stack
@@ -144,7 +144,7 @@ public class InstanceJava extends Instruction{
 
         
 //                    mover el ptr temporal
-        armed+=c.c3d_ptrTemp(anterior.getVars(), arbol.attbPrincipal);
+        armed+=c.c3d_ptrTemp(anterior.getVars(), arbol.attbPrincipal+"");
 
             //obtener valor de la referencia
         armed+=c.c3d_accesTemp("int", anterior.getVars(), 0);

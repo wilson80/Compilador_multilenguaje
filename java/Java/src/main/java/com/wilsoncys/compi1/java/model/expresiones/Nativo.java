@@ -12,6 +12,7 @@ import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,6 +25,10 @@ public class Nativo extends Instruction{
     public Nativo(Object valor, Tipo tipo, int linea, int col) {
         super(tipo, linea, col);
         this.valor = valor;
+    }
+    public Nativo(Tipo tipo, int linea, int col) {
+        super(tipo, linea, col);
+        this.valor = null;
     }
 
     @Override
@@ -45,6 +50,11 @@ public class Nativo extends Instruction{
         
         @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
+        if(valor == null){
+            valor = valorDef(arbol, anterior);
+        }
+        
+        
         String armed = "";
             C3d_Java c=arbol.getJava();
 //        }else{
@@ -67,6 +77,29 @@ public class Nativo extends Instruction{
         return armed;
     }
     
+    
+    public Object valorDef(Arbol arbol, AmbitoMetodo anterior) {
+        switch (tipo.getTipo()) {
+            case ENTERO:
+                return "0";
+            case DECIMAL:
+                return "0.0";
+            case CARACTER:
+                return "0";
+            case CADENA:
+                return " ";
+            case BOOLEANO:
+                return "0";
+            case OBJECT:
+                return "-1";
+            default:
+                JOptionPane.showMessageDialog(null, "breack en defaul Nativ");
+                return "nativ";
+                
+                
+        }
+    }
+
     
     
 }

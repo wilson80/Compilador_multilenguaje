@@ -105,7 +105,7 @@ public class Mainn extends Instruction{
                 Simbolo sym = new Simbolo(st.tipo, st.id, "", false);
                 sym.setCat(categoria.VARL);
                 sym.setDir(cantParams);
-//                sym.setInstruction(ins);
+                sym.setInstruction(ins);
                 sym.setAmbito(ambito);
                 sym.armarAmbito(st.id);
                 if(!(tabla.addSsymbolPre(sym))){
@@ -126,19 +126,20 @@ public class Mainn extends Instruction{
         setPos(arbol);
         String armed = "";
         C3d_Java c = arbol.getJava();
-        
-         String devVars = "";
-        int iniVars = c.contador;
-        
+//        C3d_Java c = new C3d_Java();
+
+        String posPrepared = "" + this.cantParams;
+
+
         String idRetorno ="retorno" + c.contador;
         c.contador++;
                                     //label de retorno
-        arbol.setLabelRetorno(idRetorno);
+//        arbol.setLabelRetorno(idRetorno);
         
         
+         this.ambitoContent = new AmbitoMetodo(posPrepared, idRetorno, this.ambito);
         List<String> ambitoAntList = new ArrayList<>(arbol.getCurrentAmbit());
         arbol.setCurrentAmbit(this.ambito);
-//        arbol.setCurrentPos(this.cantParams);
 
         
         
@@ -146,10 +147,10 @@ public class Mainn extends Instruction{
 //        String ambitoAnt = arbol.getCurrentAmbit().get(1);
     
          //reservar el espacio en el  heap
-        bodyMet += c.c3d_reserveHeap(anterior.getVars(), arbol.getSizeHeap());
+        bodyMet += c.c3d_reserveHeap(ambitoContent.getVars(), arbol.getSizeHeap());
         
         //set a la referencia (stack[0])
-        bodyMet += c.c3d_asignVal("int", anterior.getVars(), 0);
+        bodyMet += c.c3d_asignVal("int", ambitoContent.getVars(), 0);
         
         
         
@@ -159,8 +160,6 @@ public class Mainn extends Instruction{
                     continue;
             }
 
-            String posPrepared = "" + this.cantParams;
-            this.ambitoContent = new AmbitoMetodo(posPrepared, idRetorno, this.ambito);
             bodyMet += ins.createC3D(arbol, this.ambitoContent);
             arbol.setAmbito(this.ambito);
 //            arbol.getCurrentAmbit().set(1, ambitoAnt);
@@ -172,13 +171,9 @@ public class Mainn extends Instruction{
         
          
                             //creando la declaracion de vars del ambito
-        int finVars = c.contador;
-        for (int i = iniVars; i < finVars; i++) {
-            devVars += "int w" + i+  ";\n";
-        }
-        armed = devVars + "\n";
+        armed += this.ambitoContent.getDeclar() + "\n";
         armed += bodyMet;
-        
+                
         armed = c.c3d_metodo(this.getAmbito_asID(), armed);
         arbol.addPrototipo(getAmbito_asID());
         

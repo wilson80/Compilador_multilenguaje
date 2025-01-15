@@ -19,8 +19,7 @@ import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.java.model.simbolo.categoria;
 import com.wilsoncys.compi1.java.model.simbolo.tipoDato;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.LinkedList;   
 import javax.swing.JOptionPane;
 
 /**
@@ -238,9 +237,7 @@ public class Call extends Instruction{
                                     // int uno = objeto1.getCui();  
                                     //encontrar el simbolo del objeto
         if(parametersExp == null){
-
-//            JOptionPane.showMessageDialog(null, "iniii: "
-//                        + arbol.getCurrentAmbit().get(1)); 
+ 
             
             C3d_Java c =  arbol.getJava();
             Simbolo sym0 = null;
@@ -270,10 +267,9 @@ public class Call extends Instruction{
         
             if(sym0.getCat() == categoria.ATRIBUTO){
                         //set a la referencia (stack[0]) 
-                armed+= c.c3d_accesRef("", 0);
-                armed+= c.c3d_accesAttVarl("", sym0.getDir());
+                armed+= c.c3d_accesRef(anterior.getVars(), 0);
+                armed+= c.c3d_accesAttVarl("int", anterior.getVars(), sym0.getDir());
             }else if(sym0.getCat() == categoria.PARAM || sym0.getCat()== categoria.VARL){
-//                armed+= c.c3d_acces("", sym0.getDir()); 
                 armed+= c.c3d_accesParam("int", anterior.getVars(), sym0.getDir()); 
              } 
              
@@ -281,6 +277,9 @@ public class Call extends Instruction{
             llamada.setCallObject(true);
             armed += llamada.createC3D(arbol, anterior);
 //            arbol.getCurrentAmbit().set(1, currentAmbit);
+            this.tipo = llamada.tipo;
+
+
         }
         
 
@@ -326,36 +325,30 @@ public class Call extends Instruction{
         }
         
                                             //extrayendo los params
+        LinkedList<String> tipos = new LinkedList<>();
+                                            //extrayendo los params
         for (Instruction exps : parametersExp) {
-            if(exps instanceof Nativo n){        
-
-//                armed+=n.createC3D(arbol, anterior);
-                n.createC3D(arbol, anterior);
-                id_Methodo += n.tipo.getTypeString(); 
-
-            }else if(exps instanceof Access cs){
-                armed+= cs.createC3D(arbol, anterior);
-                id_Methodo += cs.tipo.getTypeString();
-                
-            }else{
                 armed += exps.createC3D(arbol, anterior);
-                id_Methodo += exps.tipo.getTypeString();
-            }
+                  tipos.add(exps.tipo.getTypeString());
+            
+        }       
+         
+        for (String typs : tipos) {
+            id_Methodo += typs;
         }
-
+ 
         
-        if(arbol.getAmbito_asID().equals(id_Methodo)){
-            recursiva =true;
-        }
+//        if(this.id.equals("info")){
+//            JOptionPane.showMessageDialog(null, ">>>"+ id_Methodo);
+//        }
+
         
         
         symMethod = arbol.getSym(id_Methodo);
-        
-        
         if(symMethod == null){
 //                JOptionPane.showMessageDialog(null, "error en  simpleCall"
 //                    + "no se ha encontrado el symbolo: " + this.id );
-                arbol.addError(new Errores("semantic", "no se ha encontrado el symbolo: " + this.id , line, col));
+                arbol.addError(new Errores("semantic", "no se ha encontrado el metodo: " + this.id , line, col));
 //            return new Errores("SEMANTIC", "id no definido: " + this.id, line, col);
         } 
   
@@ -367,18 +360,18 @@ public class Call extends Instruction{
 
         
                 //para poner los parametros
-        int posIniParam = 0;
+        int posIni = 0;
         
-        if(symMethod.getInstruction() instanceof Functionss fu){
-            posIniParam = 3;
-        }else if(symMethod.getInstruction() instanceof Method me){
-            posIniParam = 2;
+        if(symMethod.getCat()==categoria.FUNCTION){
+            posIni = 3;
+        }else if(symMethod.getCat() == categoria.METHOD){
+            posIni = 2;
         }
           
  
         
                                         //stack temp
-//            armed+=c.c3d_ptrTemp(ptrTemp);
+            armed+=c.c3d_ptrTemp(anterior.getVars(), ptrTemp);
 
                                 //dando la direccion de referencia
         if(!callPoo){
@@ -395,13 +388,16 @@ public class Call extends Instruction{
  
         
         
-                   
+        int contador = 0; 
                                             //PREPARED params en el stack
         for (Instruction exps : parametersExp) {
-//                armed += c.c3d_asignVar(c.getPtrTemp(), posIniParam);
-//                armed += c.c3d_asignVar("", ref, vars, line)
-                posIniParam++;
+            String tipo = verifiType(tipos.get(contador)); 
+                armed += c.c3d_asignVar(tipo, c.getPtrTemp(), anterior.getVars(), posIni);
+                posIni++; contador++;
         }
+        
+        
+        
         c.clearPtrTemp();   
         
         
@@ -412,23 +408,16 @@ public class Call extends Instruction{
  
         armed+=c.c3d_moveToStack(false, ptrTemp);
         
+         
+        this.tipo = symMethod.getTipo();
         
-                                            //create al metodo/funcion
- 
-//        if(!recursiva ){
-//            if(symMethod.getCat().equals(categoria.FUNCTION) ){
-//                symMethod.getInstruction().createC3D(arbol, anterior);
-//            }else if(symMethod.getCat().equals(categoria.METHOD)){
-//                symMethod.getInstruction().createC3D(arbol, anterior);
-//            }
-//        }
- 
         
                                            //dejar el retorno
             if(symMethod.getCat() == categoria.FUNCTION  ){
                 armed += "\n//retorno\n";
-//                armed += c.c3d_ptrTemp(ptrTemp);
-//                armed += c.c3d_accesTemp("", 1);
+                armed += c.c3d_ptrTemp(anterior.getVars(), ptrTemp);
+
+                armed += c.c3d_accesTemp(symMethod.getTySim(), anterior.getVars(), 1);
                 armed += "\n//retorno\n";
 
             } 
@@ -467,7 +456,23 @@ public class Call extends Instruction{
         this.idVoid = idVoid;
     }
     
-
+    public String verifiType(String tipoo){
+        switch (tipoo) {
+            case "int":
+                return tipoo;
+            case "float":
+                return tipoo;
+            case "string":
+                return tipoo;
+            case "char":
+                return "int";
+            case "boolean":
+                return tipoo;
+            default:
+                return "int";
+        }
+                
+    }
     
     
     

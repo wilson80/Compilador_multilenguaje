@@ -216,9 +216,7 @@ public class Programa extends Instruction{
          
          
      
-          
-    
-        int iniVars = arbol.getC3d().contador;
+           
         
         for (Instruction ins : instrucciones) {
                if(ins instanceof StatementC stt){

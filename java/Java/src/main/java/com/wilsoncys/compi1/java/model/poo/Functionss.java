@@ -115,11 +115,10 @@ public class Functionss extends Instruction{
     
             @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
+        setPos(arbol);
         String armed = "";
         C3d_Java c = arbol.getJava();
         
-        String devVars = "";
-        int iniVars = c.contador;
         
         String idRetorno ="retorno" + c.contador;
         c.contador++;
@@ -128,10 +127,10 @@ public class Functionss extends Instruction{
         
         
         List<String> ambitoAntList = new ArrayList<>(arbol.getCurrentAmbit());
-        
+        this.ambitoContent = new AmbitoMetodo(this.cantParams + "", idRetorno, this.ambito);
         arbol.setCurrentAmbit(this.ambito);
+        
 
-        this.ambitoContent = new AmbitoMetodo(cantParams + "", idRetorno, this.ambito);
         String bodyMet = "";
         for (Instruction ins : instrucciones) {
             if(ins ==null){
@@ -151,15 +150,10 @@ public class Functionss extends Instruction{
         
         
          
-                            //creando la declaracion de vars del ambito
-        int finVars = c.contador;
-        for (int i = iniVars; i < finVars; i++) {
-            devVars += "int w" + i+  ";\n";
-        }
-        armed = devVars + "\n";
+//                            creando la declaracion de vars del ambito
+        armed += this.ambitoContent.getDeclar() + "\n";
         armed += bodyMet;
         
-//        armed = c.c3d_metodo("java_" + arbol.getCurrentAmbit().get(1) +"_"+ id, armed);
         armed = c.c3d_metodo(this.getAmbito_asID(), armed);
         arbol.addPrototipo(getAmbito_asID());
         
@@ -168,7 +162,7 @@ public class Functionss extends Instruction{
             arbol.Print(armed);       
             isCreate = true;
         }
-        
+//        c.clearCount();
         
             return "";
     }

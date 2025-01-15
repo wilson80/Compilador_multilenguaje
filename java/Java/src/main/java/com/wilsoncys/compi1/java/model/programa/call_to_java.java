@@ -5,21 +5,13 @@
 package com.wilsoncys.compi1.java.model.programa;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
-import com.wilsoncys.compi1.java.model.excepciones.Errores; 
-import com.wilsoncys.compi1.java.model.expresiones.Nativo;
-import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
-import com.wilsoncys.compi1.java.model.instrucciones.Statement;
-import com.wilsoncys.compi1.java.model.poo.Functionss;
-import com.wilsoncys.compi1.java.model.poo.Method;
-import com.wilsoncys.compi1.java.model.programa.expresiones.AccessC;
-import com.wilsoncys.compi1.java.model.sC3D.C3d;
+import com.wilsoncys.compi1.java.model.excepciones.Errores;  
+import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo; 
 import com.wilsoncys.compi1.java.model.sC3D.C3d_Java;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
-import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
-import com.wilsoncys.compi1.java.model.simbolo.Tipo;
-import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
+import com.wilsoncys.compi1.java.model.simbolo.Simbolo; 
 import com.wilsoncys.compi1.java.model.simbolo.TablaSimbolos;
 import com.wilsoncys.compi1.java.model.simbolo.Tipo;
 import com.wilsoncys.compi1.java.model.simbolo.categoria;
@@ -105,7 +97,7 @@ public class call_to_java extends Instruction{
 //        armed+= c.c3d_accesParam(armed, sym.getDir());
         armed+= c.c3d_accesParam("int", anterior.getVars(), sym.getDir());
 
-        armed+=c.c3d_ptrTemp(anterior.getVars(),arbol.attbPrincipal);
+        armed+=c.c3d_ptrTemp(anterior.getVars(),arbol.attbPrincipal + "");
 
         armed+= c.c3d_asignTemp("int", anterior.getVars(), 0);
             
@@ -121,12 +113,13 @@ public class call_to_java extends Instruction{
                   tipos.add(exps.tipo.getTypeString());
             
         }       
+         
         for (String typs : tipos) {
             id_Methodo += typs;
         }
         
                                                             //stack temp
-        armed+=c.c3d_ptrTemp(anterior.getVars(), arbol.attbPrincipal);
+        armed+=c.c3d_ptrTemp(anterior.getVars(), arbol.attbPrincipal + "");
   
                                     //create al metodo/funcion
         Simbolo symMethod = arbol.getSym(id_Methodo);
@@ -140,6 +133,8 @@ public class call_to_java extends Instruction{
         }else if(symMethod.getCat().equals(categoria.METHOD)){
             posIni = 2;   
         }
+        
+        
         int contador = 0; 
                                             //PREPARED params en el stack
         for (Instruction exps : parametersExp) {
@@ -155,7 +150,7 @@ public class call_to_java extends Instruction{
         
         //dejar el retorno
         if(symMethod.getCat().equals(categoria.FUNCTION) ){
-          armed += c.c3d_ptrTemp(anterior.getVars(), arbol.attbPrincipal);
+          armed += c.c3d_ptrTemp(anterior.getVars(), arbol.attbPrincipal + "");
           //tipo del retorno
           String tipoRe = "";
           if(sym.getTipo().getTipo() == tipoDato.OBJECT){
