@@ -17,9 +17,9 @@ void main()
  
 	printf("Ingrese el primer valor entero");
 	scanf("%d",&uno);
-	printf("Ingrese el primer valor charrrr");
+	printf("Ingrese el otro valor charrrr");
 	scanf("%c",&dos);
-	printf("Ingrese el primer valor stringg");
+	printf("Ingrese el otroooo valor stringg");
 	scanf("%s",&cuatro);
 	// printf("Ingrese el primer valor entero");
 	// scanf("%d",&Valor1);

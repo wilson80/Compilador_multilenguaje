@@ -43,13 +43,12 @@ public class AssignmenttC extends Instruction{
         this.whatConstruct = 0;
     }
 
-//    public AssignmenttC(boolean isThis, String id, Instruction expression, int linea, int col) {
-//        super(new Tipo(tipoDato.VOID), linea, col);
-//        this.id = id;
-//        this.expr = expression;
-//        this.whatConstruct = 1;
-//        this.isThis = isThis;
-//    }
+//        {: RESULT = new AssignmenttC(id, e1, e2,  val, idleft, idright); :}
+    public AssignmenttC(String id, Instruction e1, Instruction e2, Instruction val,  int linea, int col) {
+        super(new Tipo(tipoDato.VOID), linea, col);
+        this.id = id;
+        this.whatConstruct = 1;
+    }
 //    
 //    public AssignmenttC(String id,  String idField, String elseField, Instruction expression, int linea, int col) {
 //        super(new Tipo(tipoDato.VOID), linea, col);
@@ -126,6 +125,11 @@ public class AssignmenttC extends Instruction{
             @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
         setPos(arbol);
+        
+        if(whatConstruct == 1){
+            return "";
+        }
+        
         
         String armed = "";
         C3d_Java c =  arbol.getJava();

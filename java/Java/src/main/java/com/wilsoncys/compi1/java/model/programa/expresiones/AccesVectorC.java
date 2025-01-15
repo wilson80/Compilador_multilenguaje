@@ -6,6 +6,7 @@ package com.wilsoncys.compi1.java.model.programa.expresiones;
 
 import com.wilsoncys.compi1.java.model.asbtracto.Instruction;
 import com.wilsoncys.compi1.java.model.excepciones.Errores;
+import com.wilsoncys.compi1.java.model.expresiones.Nativo;
 import com.wilsoncys.compi1.java.model.instrucciones.AmbitoMetodo;
 import com.wilsoncys.compi1.java.model.simbolo.Arbol;
 import com.wilsoncys.compi1.java.model.simbolo.Simbolo;
@@ -161,7 +162,14 @@ public class AccesVectorC extends Instruction{
 
     @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
-        return "";
+        String armed = "";
+        Nativo nat = new Nativo(0 ,tipo, line, col);
+        
+        armed += nat.createC3D(arbol, anterior);
+        
+        
+        
+        return armed;
     }
     
     

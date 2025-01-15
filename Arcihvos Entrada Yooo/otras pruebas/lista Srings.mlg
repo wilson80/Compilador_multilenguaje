@@ -1,0 +1,159 @@
+ 
+%%PASCAL
+%%JAVA
+public class Nodo { 
+	String contenido;
+	Nodo siguiente;
+	Nodo anterior;
+
+	public Nodo(String contenido) {
+		this.contenido = null;
+		this.siguiente = null;
+		this.anterior = null;
+		this.contenido = contenido;
+	}
+ 
+	public String getContenido() {
+		return contenido;
+	}
+	
+	public Nodo getSiguiente() {
+		return siguiente;
+	}
+
+	public void setSiguiente(Nodo siguiente) {
+		this.siguiente = siguiente;
+	}
+	
+	public void setAnterior(Nodo anterior) {
+		this.anterior = anterior;
+	}
+
+	public Nodo getAnterior() {
+		return anterior;
+	}
+}
+
+public class ListaE {
+	Nodo primero;
+	Nodo ultimo;
+	int size;
+
+	public ListaE(){
+		primero =null;
+		ultimo =null;
+		size = 0;
+	}
+
+	public void agregar(String contenido) {
+		Nodo nuevoNodo = new Nodo(contenido);
+		if (primero ==null) {
+            println("Agrengado el primero");
+			primero = nuevoNodo;
+			ultimo = nuevoNodo;
+		} else {
+            println("Agrengado el otro");
+			ultimo.setSiguiente(nuevoNodo); 
+			nuevoNodo.setAnterior(ultimo);
+			ultimo = nuevoNodo;
+		}
+		size++;
+	}
+
+	public int getSize(){
+		return size;
+	}
+
+	public void imprimirLista() {
+		Nodo actual = primero;
+		int i;
+		for(  i = 0; i<size; i++){
+			println("contenido: " + actual.getContenido());
+			actual = actual.getSiguiente();
+		}
+	}
+
+	public Nodo obtenerNodo(int index) {
+		Nodo actual = this.primero;
+		int i;
+		for (  i = 0; i < index; i++) {
+			actual = actual.getSiguiente();
+		}
+		return actual;
+	}
+
+	public void eliminarUltimo() {
+		Nodo penultimo = null;
+		Nodo otro = null;
+		if (primero == null) {
+			println("La lista esta vacia");
+		} else {
+			if (size == 1) {
+				primero = null;
+				ultimo = null;
+			} else {
+				penultimo = ultimo.getAnterior();
+				penultimo.setSiguiente(otro);
+				ultimo = penultimo;
+			}
+			size--;
+		}
+	}
+
+	public String getContent(int index) {
+		Nodo nodo1 = obtenerNodo(index); 
+		return nodo1.getContenido();
+	}
+}
+
+public class Sumar {
+	ListaE lista1; 
+
+	public Sumar() {
+		lista1 = null;
+	} 
+
+	public void iniciar(){
+		lista1 = new ListaE();
+
+		lista1.agregar("Hola");
+		lista1.agregar("Mundo");
+		lista1.agregar("Java");
+		lista1.agregar("Listas");
+		lista1.agregar("Enlazadas");
+		lista1.agregar("wilsonnnnn");
+		lista1.agregar("Chayannnnd");
+		lista1.imprimirLista();
+
+		println("Eliminando el último nodo:");
+		lista1.eliminarUltimo();
+		lista1.imprimirLista();
+		println("Tamaño de la lista: " , lista1.getSize());
+		println("Contenido en posición 2: " , lista1.getContent(2));
+	}
+}
+ 
+
+
+ 
+%%PROGRAMA
+#include "JAVA.*"  
+int x = 12;
+int y = 6;
+int z = 9;
+int total = 88;
+
+	 JAVA.Sumar      call1();
+	 
+	  
+void main()
+{ 	   
+	JAVA.call1.iniciar();
+	 
+	 
+    
+    
+	
+}
+
+ 

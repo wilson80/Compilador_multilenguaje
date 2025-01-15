@@ -1,0 +1,110 @@
+%%PASCAL
+%%JAVA
+public class sumar {
+	//OBJETOS COMO PARAMETROS
+
+	Simple objeto1;
+	Simple objeto2;
+	int algo;
+	// Simpl 
+	public sumar() {
+ 
+		//instancia
+		objeto1 = darObjeto(); 		
+		objeto2 = darObjeto2(); 		
+		// iniciar();
+	} 
+	public void iniciar(){
+		println("antes: ");
+		objeto1.imprimirInfo();
+		// objeto2.imprimirInfo();
+		println("Despues: ");
+		
+	}
+ 
+	
+	//RETORNAR UN OBJETO
+	public Simple darObjeto(){
+		return new Simple(44,55,66,77);
+		// println("cuatro: ", obj.getCuatro());
+	}
+	public Simple darObjeto2(){
+		return new Simple(7,6,5,111);
+		// println("cuatro: ", obj.getCuatro());
+	}
+
+
+
+
+	//RETORNAR UN OBJETO
+	
+} 
+
+
+public class Simple {
+	int uno;
+	int dos;
+	int tres;
+	int cuatro;
+	public 	Simple(int a, int b, int c, int d){
+		this.uno = a;
+		this.dos = b;
+		this.tres = c;
+		this.cuatro = d;
+		// println("unoo: ", uno);		
+		// println("doss: ", dos);		
+		// imprimirInfo();
+	}
+
+	public void setUno(int a){
+		this.uno = a;
+	}	
+	public void setDos(int a){
+		this.dos = a;
+	}	
+	
+	public int getUno(){
+		return this.uno;
+	}	
+	public int getDos(){
+		return this.dos;
+	}	
+	public int getTres(){
+		return this.tres;
+	}	
+	public int getCuatro(){
+		return this.cuatro;
+	}	
+
+	public void imprimirInfo(){
+		println("unoo: ", uno);		
+		println("doss: ", dos);		
+		println("tresss: ", this.tres);
+		println("cuaa: ", cuatro);		
+	}
+
+
+}
+
+
+
+
+
+
+%%PROGRAMA
+#include "JAVA.*"  
+int x = 12;
+int y = 6;
+int z = 9;
+int total = 88;
+
+	JAVA.sumar call1();
+
+
+void main()
+{ 	 
+	JAVA.call1.setObjeto(JAVA.call1.darObjeto());
+	JAVA.call1.iniciar();
+	
+	
+}

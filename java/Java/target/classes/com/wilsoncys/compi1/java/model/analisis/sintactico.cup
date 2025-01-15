@@ -361,6 +361,8 @@ scanf::= SCAN:a PAR_OP MASK_D COLON ANDSIMPLE ID:id PAR_CL SEMIC
 
 asignacionC::= ID:id ASSIGNMENT EXPRESIONCC:exp SEMIC
         {: RESULT = new AssignmenttC(id, exp, idleft, idright); :}
+        | ID:id BRACK_L EXPRESIONCC:e1 BRACK_R BRACK_L EXPRESIONCC:e2 BRACK_R ASSIGNMENT EXPRESION:val SEMIC
+        {: RESULT = new AssignmenttC(id, e1, e2,  val, idleft, idright); :}
 ;
 
 

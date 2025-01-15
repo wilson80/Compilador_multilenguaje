@@ -1,0 +1,52 @@
+ 
+
+
+
+
+
+
+
+procedure hellow(dia, mes : integer);
+begin
+    println(dia);
+    println(mes);
+   
+end;
+
+
+%%JAVA
+
+%%PROGRAMA
+#include "JAVA.*"  
+#include "PASCAL"  
+int uno=10;
+int dos=20;
+
+char tres='s';
+char cuatro='r';
+
+float cinco=0.5;
+float seis =0.333;
+ 
+
+
+void main()
+{ 	   
+
+
+// uno = 99;
+// tres = 'g';
+// cinco = 44;
+// printf("print simple");
+// printf("print simple: %d", uno);
+// printf("print simple: %c", tres);
+// printf("print simple: %f", cinco);
+
+
+
+	 PASCAL.hellow(12,6);    
+ 
+
+
+
+}

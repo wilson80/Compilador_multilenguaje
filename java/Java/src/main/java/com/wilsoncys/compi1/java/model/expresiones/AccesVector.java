@@ -161,7 +161,14 @@ public class AccesVector extends Instruction{
 
     @Override
     public Object createC3D(Arbol arbol, AmbitoMetodo anterior) {
-        return "";
+                String armed = "";
+        Nativo nat = new Nativo(0 ,tipo, line, col);
+        
+        armed += nat.createC3D(arbol, anterior);
+        
+        
+        
+        return armed;
     }
     
     
