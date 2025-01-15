@@ -58,6 +58,7 @@ com/wilsoncys/compi1/java/vistas/controlColores$1.class
 com/wilsoncys/compi1/java/vistas/TextLineNumber.class
 com/wilsoncys/compi1/java/model/programa/expresiones/NegacionC.class
 com/wilsoncys/compi1/java/model/programa/Includes.class
+com/wilsoncys/compi1/java/model/programa/instrucciones/ScanfC.class
 com/wilsoncys/compi1/java/model/expresiones/Aritmeticas/Suma.class
 com/wilsoncys/compi1/java/vistas/prueba2.class
 com/wilsoncys/compi1/java/model/programa/instrucciones/AssignmentVectoresC.class
